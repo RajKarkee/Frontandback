@@ -1,0 +1,316 @@
+/* Chartered Insights Brand Design System */
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* RKACA Brand Design System - All colors, gradients, fonts, etc defined here. */
+
+@theme {
+    --font-sans: 'Lato', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif;
+
+    /* RKACA Brand Colors */
+    --color-deep-chartered-blue: #015A77;      /* Deep Chartered Blue #015A77 */
+    --color-fresh-teal: #00BFB2;               /* Fresh Teal #00BFB2 */
+    --color-crisp-white: #FFFFFF;              /* Crisp White #FFFFFF */
+    --color-report-black: #1E1E1E;             /* Report Black #1E1E1E */
+    --color-audit-grey: #F5F5F5;               /* Audit Grey #F5F5F5 */
+    --color-alert-red: #BE3232;                /* Alert Red #BE3232 */
+}
+
+/* Custom CSS Classes */
+@layer components {
+  /* Font Family Definitions */
+  .font-montserrat {
+    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .font-lato {
+    font-family: 'Lato', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Brand Color Classes */
+  .text-deep-chartered-blue { color: #015A77; }
+  .text-fresh-teal { color: #00BFB2; }
+  .text-crisp-white { color: #FFFFFF; }
+  .text-report-black { color: #1E1E1E; }
+  .text-audit-grey { color: #F5F5F5; }
+  .text-alert-red { color: #BE3232; }
+
+  .bg-deep-chartered-blue { background-color: #015A77; }
+  .bg-fresh-teal { background-color: #00BFB2; }
+  .bg-crisp-white { background-color: #FFFFFF; }
+  .bg-report-black { background-color: #1E1E1E; }
+  .bg-audit-grey { background-color: #F5F5F5; }
+  .bg-alert-red { background-color: #BE3232; }
+
+  .border-deep-chartered-blue { border-color: #015A77; }
+  .border-fresh-teal { border-color: #00BFB2; }
+  .border-audit-grey { border-color: #F5F5F5; }
+  .border-alert-red { border-color: #BE3232; }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center px-6 py-3 bg-fresh-teal text-crisp-white font-montserrat font-semibold rounded-lg
+           hover:bg-fresh-teal/90 focus:outline-none focus:ring-2 focus:ring-fresh-teal focus:ring-offset-2
+           transition duration-200 ease-in-out;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-6 py-3 border-2 border-fresh-teal text-fresh-teal font-montserrat font-semibold
+           rounded-lg hover:bg-fresh-teal hover:text-crisp-white focus:outline-none focus:ring-2 focus:ring-fresh-teal
+           focus:ring-offset-2 transition duration-200 ease-in-out;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center px-6 py-3 border border-deep-chartered-blue text-deep-chartered-blue
+           font-montserrat font-medium rounded-lg hover:bg-deep-chartered-blue hover:text-crisp-white
+           focus:outline-none focus:ring-2 focus:ring-deep-chartered-blue focus:ring-offset-2
+           transition duration-200 ease-in-out;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply text-crisp-white hover:text-fresh-teal font-lato font-medium transition-colors duration-200
+           px-3 py-2 rounded-md text-sm;
+  }
+
+  .nav-link.active {
+    @apply text-fresh-teal;
+  }
+
+  .mobile-nav-link {
+    @apply text-crisp-white hover:text-fresh-teal hover:bg-white/10
+           block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200;
+  }
+
+  .mobile-nav-link.active {
+    @apply text-fresh-teal bg-white/10;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-crisp-white rounded-lg p-6 shadow-lg border border-audit-grey;
+  }
+
+  .card-header {
+    @apply mb-4;
+  }
+
+  .card-title {
+    @apply text-xl font-montserrat font-semibold text-deep-chartered-blue mb-2;
+  }
+
+  .card-content {
+    @apply text-report-black;
+  }
+
+  /* Form Styles */
+  .form-input {
+    @apply w-full px-4 py-3 bg-audit-grey border border-audit-grey rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-fresh-teal focus:border-fresh-teal
+           transition duration-200 ease-in-out;
+  }
+
+  .form-input.error {
+    @apply border-alert-red focus:ring-alert-red focus:border-alert-red;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-report-black mb-2;
+  }
+
+  .form-error {
+    @apply text-alert-red text-sm mt-1;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    @apply relative text-crisp-white py-20 lg:py-32;
+    background: linear-gradient(135deg, #015A77 0%, #00BFB2 100%);
+  }
+
+  .hero-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10;
+  }
+
+  .hero-title {
+    @apply text-4xl lg:text-6xl font-montserrat font-bold mb-6;
+  }
+
+  .hero-subtitle {
+    @apply text-xl lg:text-2xl font-lato mb-8 max-w-3xl;
+  }
+
+  /* Section Styles */
+  .section {
+    @apply py-16 lg:py-24;
+  }
+
+  .section-header {
+    @apply text-center mb-12;
+  }
+
+  .section-title {
+    @apply text-3xl lg:text-4xl font-montserrat font-bold text-deep-chartered-blue mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-report-black max-w-3xl mx-auto;
+  }
+
+  /* Service Cards */
+  .service-card {
+    @apply bg-crisp-white rounded-lg p-8 shadow-lg border border-audit-grey
+           hover:shadow-xl hover:border-fresh-teal transition duration-300 ease-in-out;
+  }
+
+  .service-icon {
+    @apply w-12 h-12 text-fresh-teal mb-4;
+  }
+
+  .service-title {
+    @apply text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3;
+  }
+
+  .service-description {
+    @apply text-report-black mb-4;
+  }
+
+  /* Statistics */
+  .stat-item {
+    @apply text-center;
+  }
+
+  .stat-number {
+    @apply text-4xl lg:text-5xl font-montserrat font-bold text-fresh-teal mb-2;
+  }
+
+  .stat-label {
+    @apply text-lg font-lato text-report-black;
+  }
+
+  /* Team Member Cards */
+  .team-card {
+    @apply bg-crisp-white rounded-lg overflow-hidden shadow-lg border border-audit-grey
+           hover:shadow-xl transition duration-300 ease-in-out;
+  }
+
+  .team-image {
+    @apply w-full h-64 object-cover;
+  }
+
+  .team-info {
+    @apply p-6;
+  }
+
+  .team-name {
+    @apply text-xl font-montserrat font-semibold text-deep-chartered-blue mb-1;
+  }
+
+  .team-role {
+    @apply text-fresh-teal font-lato mb-3;
+  }
+
+  .team-bio {
+    @apply text-report-black text-sm;
+  }
+
+  /* Testimonials */
+  .testimonial {
+    @apply bg-crisp-white rounded-lg p-8 shadow-lg border border-audit-grey;
+  }
+
+  .testimonial-content {
+    @apply text-report-black mb-6 italic;
+  }
+
+  .testimonial-author {
+    @apply text-deep-chartered-blue font-montserrat font-semibold;
+  }
+
+  .testimonial-company {
+    @apply text-fresh-teal text-sm;
+  }
+
+  /* Blog Cards */
+  .blog-card {
+    @apply bg-crisp-white rounded-lg overflow-hidden shadow-lg border border-audit-grey
+           hover:shadow-xl transition duration-300 ease-in-out;
+  }
+
+  .blog-image {
+    @apply w-full h-48 object-cover;
+  }
+
+  .blog-content {
+    @apply p-6;
+  }
+
+  .blog-title {
+    @apply text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3
+           hover:text-fresh-teal transition-colors duration-200;
+  }
+
+  .blog-excerpt {
+    @apply text-report-black mb-4;
+  }
+
+  .blog-meta {
+    @apply text-sm text-audit-grey;
+  }
+
+  /* Responsive utilities */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Animations */
+  .fade-in {
+    @apply opacity-0 translate-y-4;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .fade-in-delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  .fade-in-delay-2 {
+    animation-delay: 0.2s;
+  }
+
+  .fade-in-delay-3 {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00BFB2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #015A77;
+}
