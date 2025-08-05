@@ -5,13 +5,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-content">
-        <div class="text-center">
-            <h1 class="hero-title">Our Services</h1>
-            <p class="hero-subtitle max-w-4xl mx-auto">
-                Comprehensive chartered accountancy services designed to drive your business forward with precision, integrity, and strategic insight.
-            </p>
+<section class="hero-section relative overflow-x-hidden p-0 m-0">
+    <div class="relative w-full p-0 m-0">
+        <div class="relative w-full h-[60vh] min-h-[60vh] overflow-hidden">
+            <div class="absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-crisp-white px-4 md:px-12">
+                <h1 class="hero-title">Our Services</h1>
+                <p class="hero-subtitle max-w-4xl mx-auto">
+                    Comprehensive chartered accountancy services designed to drive your business forward with precision, integrity, and strategic insight.
+                </p>
+            </div>
         </div>
     </div>
 </section>

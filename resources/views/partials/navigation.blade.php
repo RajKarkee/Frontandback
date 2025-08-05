@@ -39,7 +39,7 @@
             <div class="hidden lg:flex items-center space-x-2">
                 @foreach ($navItems as $item)
                     <a href="{{ route($item['route']) }}"
-                        class="relative px-4 py-2 rounded-md text-sm font-lato transition-all duration-300 nav-link{{ Request::routeIs($item['route']) ? ' active bg-fresh-teal text-crisp-white' : '' }}">
+                        class="relative px-4 py-2 rounded-md text-md font-semibold font-lato transition-all duration-300 nav-link{{ Request::routeIs($item['route']) ? ' active bg-fresh-teal text-crisp-white' : '' }}">
                         {{ $item['name'] }}
                         @if (Request::routeIs($item['route']))
                             <span
