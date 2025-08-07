@@ -149,146 +149,206 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Blog Post 1 -->
-            <article class="blog-post-card fade-in">
-                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
-                     alt="Tax compliance updates"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Tax Updates</span>
-                    <h3 class="post-title">
-                        <a href="#">Nepal Tax Law Updates: What Businesses Need to Know for 2024</a>
+            <article class="blog-post-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
+                         alt="Tax compliance updates"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">TAX UPDATES</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Nepal Tax Law Updates: What Businesses Need to Know for 2024
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">TAX UPDATES</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Nepal Tax Law Updates: What Businesses Need to Know for 2024
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Comprehensive overview of the latest changes in Nepal's tax regulations and their impact on businesses across different sectors.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b494?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Sunita Karki</span>
-                        </div>
-                        <div class="post-date">Jan 15, 2024</div>
-                    </div>
                 </div>
             </article>
 
             <!-- Blog Post 2 -->
-            <article class="blog-post-card fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1554224154-26032fced8bd?q=80&w=800&auto=format&fit=crop"
-                     alt="Financial reporting"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Audit & Assurance</span>
-                    <h3 class="post-title">
-                        <a href="#">5 Key Audit Preparation Tips for Small and Medium Enterprises</a>
+            <article class="blog-post-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1554224154-26032fced8bd?q=80&w=800&auto=format&fit=crop"
+                         alt="Financial reporting"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">AUDIT & ASSURANCE</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        5 Key Audit Preparation Tips for Small and Medium Enterprises
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">AUDIT & ASSURANCE</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            5 Key Audit Preparation Tips for Small and Medium Enterprises
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Essential steps to prepare for your annual audit and ensure a smooth, efficient process that adds value to your business.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Rajesh Sharma</span>
-                        </div>
-                        <div class="post-date">Jan 12, 2024</div>
-                    </div>
                 </div>
             </article>
 
             <!-- Blog Post 3 -->
-            <article class="blog-post-card fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
-                     alt="Business analytics"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Business Strategy</span>
-                    <h3 class="post-title">
-                        <a href="#">Cash Flow Management Strategies for Growing Businesses</a>
+            <article class="blog-post-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
+                         alt="Business analytics"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">BUSINESS STRATEGY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Cash Flow Management Strategies for Growing Businesses
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">BUSINESS STRATEGY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Cash Flow Management Strategies for Growing Businesses
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Practical approaches to maintain healthy cash flow during periods of rapid growth and economic uncertainty.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Priya Thapa</span>
-                        </div>
-                        <div class="post-date">Jan 10, 2024</div>
-                    </div>
                 </div>
             </article>
 
             <!-- Blog Post 4 -->
-            <article class="blog-post-card fade-in">
-                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
-                     alt="Cybersecurity"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Technology</span>
-                    <h3 class="post-title">
-                        <a href="#">Protecting Financial Data: Cybersecurity Best Practices for Businesses</a>
+            <article class="blog-post-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
+                         alt="Cybersecurity"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">TECHNOLOGY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Protecting Financial Data: Cybersecurity Best Practices for Businesses
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">TECHNOLOGY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Protecting Financial Data: Cybersecurity Best Practices for Businesses
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Essential cybersecurity measures to protect sensitive financial information and maintain client trust in the digital age.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Amit Gurung</span>
-                        </div>
-                        <div class="post-date">Jan 8, 2024</div>
-                    </div>
                 </div>
             </article>
 
             <!-- Blog Post 5 -->
-            <article class="blog-post-card fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
-                     alt="ESG reporting"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Industry News</span>
-                    <h3 class="post-title">
-                        <a href="#">ESG Reporting: The Growing Importance of Sustainability Metrics</a>
+            <article class="blog-post-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
+                         alt="ESG reporting"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">INDUSTRY NEWS</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        ESG Reporting: The Growing Importance of Sustainability Metrics
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">INDUSTRY NEWS</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            ESG Reporting: The Growing Importance of Sustainability Metrics
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Understanding Environmental, Social, and Governance reporting requirements and their impact on business valuation.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Sita Rai</span>
-                        </div>
-                        <div class="post-date">Jan 5, 2024</div>
-                    </div>
                 </div>
             </article>
 
             <!-- Blog Post 6 -->
-            <article class="blog-post-card fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop"
-                     alt="Economic outlook"
-                     class="post-image">
-                <div class="post-content">
-                    <span class="post-category">Business Strategy</span>
-                    <h3 class="post-title">
-                        <a href="#">Nepal Economic Outlook 2024: Opportunities and Challenges</a>
+            <article class="blog-post-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop"
+                         alt="Economic outlook"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">BUSINESS STRATEGY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Nepal Economic Outlook 2024: Opportunities and Challenges
                     </h3>
-                    <p class="post-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">BUSINESS STRATEGY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Nepal Economic Outlook 2024: Opportunities and Challenges
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Analysis of Nepal's economic prospects for 2024 and strategic considerations for businesses planning growth.
                     </p>
-                    <div class="post-footer">
-                        <div class="author-meta">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=50&auto=format&fit=crop"
-                                 alt="Author" class="author-small-avatar">
-                            <span class="author-small-name">Rajesh Sharma</span>
-                        </div>
-                        <div class="post-date">Jan 3, 2024</div>
-                    </div>
                 </div>
             </article>
         </div>
@@ -657,6 +717,62 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+/* Modern Blog Card Component with Overlay Animation */
+.blog-post-card {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Card hover state - scale up with enhanced shadow */
+.blog-post-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Image zoom and darken animation */
+.blog-post-card img {
+    will-change: transform, filter;
+    backface-visibility: hidden;
+}
+
+/* Smooth overlay transitions */
+.blog-post-card .absolute {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance optimizations */
+.blog-post-card * {
+    transform-origin: center;
+}
+
+/* Enhanced link hover effect */
+.blog-post-card a:hover {
+    transform: translateX(2px);
+    transition: all 0.3s ease;
+}
+
+/* Card focus state for accessibility */
+.blog-post-card:focus-within {
+    outline: 2px solid #0891b2;
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog-post-card:hover {
+        transform: scale(1.01); /* Reduced scale on mobile */
+    }
+
+    .blog-post-card {
+        height: 280px; /* Smaller height on mobile */
+    }
+}
+
+/* Enhanced gradient overlay */
+.blog-post-card .bg-gradient-to-t {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
 }
 </style>
 @endpush

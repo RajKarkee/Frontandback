@@ -216,56 +216,95 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article class="blog-card bg-crisp-white fade-in">
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=800&auto=format&fit=crop"
-                     alt="Healthcare industry trends"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3">Healthcare</span>
-                    <h3 class="blog-title">
-                        <a href="#">Digital Health Revolution: Financial Implications</a>
-                    </h3>
-                    <p class="blog-excerpt">
-                        How telemedicine and digital health platforms are transforming healthcare finance and what providers need to know.
-                    </p>
-                    <div class="blog-meta">
-                        <span>January 12, 2024</span> • <span>6 min read</span>
+            <article class="blog-card group relative overflow-hidden rounded-lg shadow-lg cursor-pointer fade-in">
+                <div class="relative h-64 w-full">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                         style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop');">
+                    </div>
+
+                    <!-- Always visible gradient and title (hidden on hover) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white group-hover:opacity-0 transition-opacity duration-300">
+                        <h3 class="text-xl font-semibold mb-2">
+                            Digital Health Revolution: Financial Implications
+                        </h3>
+                    </div>
+
+                    <!-- Hover overlay with full content -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3 w-fit">Healthcare</span>
+                        <h3 class="text-xl font-semibold mb-2">
+                            Digital Health Revolution: Financial Implications
+                        </h3>
+                        <p class="text-sm text-gray-200 mb-4">
+                            How telemedicine and digital health platforms are transforming healthcare finance and what providers need to know.
+                        </p>
+                        <div class="text-xs text-gray-300">
+                            <span>January 12, 2024</span> • <span>6 min read</span>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <article class="blog-card bg-crisp-white fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=800&auto=format&fit=crop"
-                     alt="Manufacturing efficiency"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3">Manufacturing</span>
-                    <h3 class="blog-title">
-                        <a href="#">Industry 4.0: Cost Accounting for Smart Manufacturing</a>
-                    </h3>
-                    <p class="blog-excerpt">
-                        Understanding the financial impact of automation and IoT integration in modern manufacturing operations.
-                    </p>
-                    <div class="blog-meta">
-                        <span>January 8, 2024</span> • <span>7 min read</span>
+            <article class="blog-card group relative overflow-hidden rounded-lg shadow-lg cursor-pointer fade-in fade-in-delay-1">
+                <div class="relative h-64 w-full">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                         style="background-image: url('https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=800&auto=format&fit=crop');">
+                    </div>
+
+                    <!-- Always visible gradient and title (hidden on hover) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white group-hover:opacity-0 transition-opacity duration-300">
+                        <h3 class="text-xl font-semibold mb-2">
+                            Industry 4.0: Cost Accounting for Smart Manufacturing
+                        </h3>
+                    </div>
+
+                    <!-- Hover overlay with full content -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3 w-fit">Manufacturing</span>
+                        <h3 class="text-xl font-semibold mb-2">
+                            Industry 4.0: Cost Accounting for Smart Manufacturing
+                        </h3>
+                        <p class="text-sm text-gray-200 mb-4">
+                            Understanding the financial impact of automation and IoT integration in modern manufacturing operations.
+                        </p>
+                        <div class="text-xs text-gray-300">
+                            <span>January 8, 2024</span> • <span>7 min read</span>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <article class="blog-card bg-crisp-white fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800&auto=format&fit=crop"
-                     alt="Technology sector analysis"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3">Technology</span>
-                    <h3 class="blog-title">
-                        <a href="#">Startup Valuations in Nepal's Tech Ecosystem</a>
-                    </h3>
-                    <p class="blog-excerpt">
-                        Analysis of valuation methodologies and financial planning strategies for Nepal's growing tech startup scene.
-                    </p>
-                    <div class="blog-meta">
-                        <span>January 5, 2024</span> • <span>8 min read</span>
+            <article class="blog-card group relative overflow-hidden rounded-lg shadow-lg cursor-pointer fade-in fade-in-delay-2">
+                <div class="relative h-64 w-full">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                         style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800&auto=format&fit=crop');">
+                    </div>
+
+                    <!-- Always visible gradient and title (hidden on hover) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white group-hover:opacity-0 transition-opacity duration-300">
+                        <h3 class="text-xl font-semibold mb-2">
+                            Startup Valuations in Nepal's Tech Ecosystem
+                        </h3>
+                    </div>
+
+                    <!-- Hover overlay with full content -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3 w-fit">Technology</span>
+                        <h3 class="text-xl font-semibold mb-2">
+                            Startup Valuations in Nepal's Tech Ecosystem
+                        </h3>
+                        <p class="text-sm text-gray-200 mb-4">
+                            Analysis of valuation methodologies and financial planning strategies for Nepal's growing tech startup scene.
+                        </p>
+                        <div class="text-xs text-gray-300">
+                            <span>January 5, 2024</span> • <span>8 min read</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -396,6 +435,28 @@
 
 .industry-card:hover {
     transform: translateY(-4px);
+}
+
+/* Blog Card Overlay Animation Styles */
+.blog-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .blog-card .absolute.inset-0.flex {
+        transform: translateY(0);
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .blog-card .absolute.inset-0.bg-gradient-to-t {
+        opacity: 1;
+    }
 }
 </style>
 @endpush

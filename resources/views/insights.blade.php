@@ -59,39 +59,69 @@
 
         <!-- Secondary Featured Articles -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <article class="blog-card fade-in">
-                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
-                     alt="Tax compliance strategies"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3">Tax Advisory</span>
-                    <h3 class="blog-title">
-                        <a href="#">Strategic Tax Planning for Growing Businesses in Nepal</a>
+            <article class="blog-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
+                         alt="Tax compliance strategies"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">TAX ADVISORY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Strategic Tax Planning for Growing Businesses in Nepal
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">TAX ADVISORY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Strategic Tax Planning for Growing Businesses in Nepal
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Essential tax strategies and compliance considerations for businesses expanding in Nepal's evolving regulatory landscape.
                     </p>
-                    <div class="blog-meta">
-                        <span>January 10, 2024</span> • <span>6 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
-                     alt="Risk management insights"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-3">Risk Management</span>
-                    <h3 class="blog-title">
-                        <a href="#">Building Resilient Risk Management Frameworks</a>
+            <article class="blog-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
+                         alt="Risk management insights"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">RISK MANAGEMENT</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Building Resilient Risk Management Frameworks
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">RISK MANAGEMENT</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Building Resilient Risk Management Frameworks
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         How businesses can build robust risk management frameworks to navigate economic volatility and operational challenges.
                     </p>
-                    <div class="blog-meta">
-                        <span>January 5, 2024</span> • <span>7 min read</span>
-                    </div>
                 </div>
             </article>
         </div>
@@ -171,114 +201,275 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article class="blog-card fade-in">
-                <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=800&auto=format&fit=crop"
-                     alt="Financial reporting standards"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Financial Reporting</span>
-                    <h3 class="blog-title">
-                        <a href="#">NFRS Updates: What Businesses Need to Know</a>
+            <article class="blog-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=800&auto=format&fit=crop"
+                         alt="Financial reporting standards"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">FINANCIAL REPORTING</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        NFRS Updates: What Businesses Need to Know
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">FINANCIAL REPORTING</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            NFRS Updates: What Businesses Need to Know
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Latest updates to Nepal Financial Reporting Standards and their impact on business financial reporting requirements.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 28, 2023</span> • <span>5 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
-                     alt="ESG reporting"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Sustainability</span>
-                    <h3 class="blog-title">
-                        <a href="#">ESG Reporting: A Growing Imperative for Businesses</a>
+            <article class="blog-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
+                         alt="ESG reporting"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">SUSTAINABILITY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        ESG Reporting: A Growing Imperative for Businesses
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">SUSTAINABILITY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            ESG Reporting: A Growing Imperative for Businesses
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Understanding Environmental, Social, and Governance reporting requirements and best practices for sustainable business operations.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 22, 2023</span> • <span>7 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
-                     alt="Business analytics"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Analytics</span>
-                    <h3 class="blog-title">
-                        <a href="#">Leveraging Data Analytics for Better Financial Decisions</a>
+            <article class="blog-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
+                         alt="Business analytics"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">ANALYTICS</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Leveraging Data Analytics for Better Financial Decisions
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">ANALYTICS</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Leveraging Data Analytics for Better Financial Decisions
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         How advanced analytics and business intelligence tools are transforming financial decision-making processes.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 18, 2023</span> • <span>6 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in">
-                <img src="https://images.unsplash.com/photo-1554224154-26032fced8bd?q=80&w=800&auto=format&fit=crop"
-                     alt="Corporate governance"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Governance</span>
-                    <h3 class="blog-title">
-                        <a href="#">Strengthening Corporate Governance in Family Businesses</a>
+            <article class="blog-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop"
+                         alt="Corporate governance"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">GOVERNANCE</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Strengthening Corporate Governance in Family Businesses
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">GOVERNANCE</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Strengthening Corporate Governance in Family Businesses
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Best practices for implementing effective governance structures in family-owned enterprises to ensure long-term success.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 15, 2023</span> • <span>8 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
-                     alt="Cyber security"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Security</span>
-                    <h3 class="blog-title">
-                        <a href="#">Cybersecurity Considerations for Financial Data</a>
+            <article class="blog-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
+                         alt="Cyber security"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">SECURITY</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Cybersecurity Considerations for Financial Data
                     </h3>
-                    <p class="blog-excerpt">
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">SECURITY</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Cybersecurity Considerations for Financial Data
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
                         Essential cybersecurity measures to protect sensitive financial information and maintain data integrity.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 12, 2023</span> • <span>5 min read</span>
-                    </div>
                 </div>
             </article>
 
-            <article class="blog-card fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop"
-                     alt="Economic outlook"
-                     class="blog-image">
-                <div class="blog-content">
-                    <span class="inline-block px-3 py-1 bg-deep-chartered-blue text-crisp-white text-sm rounded-full mb-3">Economic Outlook</span>
-                    <h3 class="blog-title">
-                        <a href="#">Nepal's Economic Outlook 2024: Opportunities and Challenges</a>
+            <article class="blog-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop"
+                         alt="Economic outlook"
+                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                </div>
+
+                <!-- Dark overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                <!-- Non-hover content - Bottom overlay -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">ECONOMIC OUTLOOK</span>
+                    <h3 class="text-xl font-semibold text-white mt-1">
+                        Nepal's Economic Outlook: Opportunities and Challenges
                     </h3>
-                    <p class="blog-excerpt">
-                        Analysis of Nepal's economic landscape, emerging opportunities, and key challenges facing businesses in 2024.
+                </div>
+
+                <!-- Hover content - Center content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">ECONOMIC OUTLOOK</span>
+                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                            Nepal's Economic Outlook: Opportunities and Challenges
+                        </a>
+                    </h3>
+                    <p class="text-white/90 text-base leading-relaxed">
+                        An analysis of Nepal's current economic landscape and strategic insights for businesses navigating market dynamics.
                     </p>
-                    <div class="blog-meta">
-                        <span>December 8, 2023</span> • <span>9 min read</span>
-                    </div>
                 </div>
             </article>
         </div>
+
+        <div class="text-center mt-12 fade-in">
+            <a href="{{ route('blogs') }}" class="btn-outline">
+                View All Articles
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+@push('styles')
+<style>
+/* Modern Blog Card Component with Overlay Animation */
+.blog-card {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Card hover state - scale up with enhanced shadow */
+.blog-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Image zoom and darken animation */
+.blog-card img {
+    will-change: transform, filter;
+    backface-visibility: hidden;
+}
+
+/* Smooth overlay transitions */
+.blog-card .absolute {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance optimizations */
+.blog-card * {
+    transform-origin: center;
+}
+
+/* Enhanced link hover effect */
+.blog-card a:hover {
+    transform: translateX(2px);
+    transition: all 0.3s ease;
+}
+
+/* Card focus state for accessibility */
+.blog-card:focus-within {
+    outline: 2px solid #0891b2;
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog-card:hover {
+        transform: scale(1.01); /* Reduced scale on mobile */
+    }
+
+    .blog-card {
+        height: 280px; /* Smaller height on mobile */
+    }
+}
+
+/* Enhanced gradient overlay */
+.blog-card .bg-gradient-to-t {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+}
+</style>
+@endpush
 
         <!-- Load More Button -->
         <div class="text-center mt-12 fade-in">
