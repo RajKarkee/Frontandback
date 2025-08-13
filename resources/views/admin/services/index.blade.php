@@ -43,9 +43,7 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($service->icon)
-                                            <i class="{{ $service->icon }} me-2"></i>
-                                        @endif
+
                                         <div>
                                             <strong>{{ $service->title }}</strong>
                                             <br>

@@ -42,9 +42,6 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($industry->icon)
-                                            <i class="{{ $industry->icon }} me-2"></i>
-                                        @endif
                                         <div>
                                             <strong>{{ $industry->name }}</strong>
                                             <br>

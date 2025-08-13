@@ -43,9 +43,6 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($insight->featured_image)
-                                            <img src="{{ asset('storage/' . $insight->featured_image) }}" alt="{{ $insight->title }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                                        @endif
                                         <div>
                                             <strong>{{ $insight->title }}</strong>
                                             <br>
