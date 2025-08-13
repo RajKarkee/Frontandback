@@ -32,20 +32,69 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <!-- Main Featured Article -->
-            <article class="blog-card lg:col-span-2 fade-in">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
-                         alt="Digital transformation in accounting"
-                         class="blog-image lg:h-full">
-                    <div class="blog-content lg:flex lg:flex-col lg:justify-center">
+            <article class="blog-card lg:col-span-2 fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative min-h-[400px]">
+                <!-- Mobile: Overlay Style (default on small screens) -->
+                <div class="lg:hidden">
+                    <!-- Background Image -->
+                    <div class="absolute inset-0 w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
+                             alt="Digital transformation in accounting"
+                             class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
+                    </div>
+
+                    <!-- Dark overlay on hover -->
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
+
+                    <!-- Non-hover content - Bottom overlay -->
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
                         <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-4">Featured</span>
-                        <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-deep-chartered-blue mb-4 hover:text-fresh-teal transition-colors duration-200">
-                            <a href="#">Digital Transformation in Modern Accounting Practices</a>
+                        <h3 class="text-2xl font-semibold text-white">
+                            Digital Transformation in Modern Accounting Practices
                         </h3>
-                        <p class="blog-excerpt text-lg mb-4">
+                    </div>
+
+                    <!-- Hover content - Center content -->
+                    <div class="absolute inset-0 flex flex-col justify-center items-center p-8 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
+                        <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-4">Featured</span>
+                        <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
+                            <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                                Digital Transformation in Modern Accounting Practices
+                            </a>
+                        </h3>
+                        <p class="text-white/90 text-lg leading-relaxed max-w-2xl">
                             Exploring how technology is reshaping the accounting landscape and what it means for businesses in Nepal. From cloud-based solutions to AI-powered analytics, discover the future of financial management.
                         </p>
-                        <div class="blog-meta flex items-center text-sm text-audit-grey">
+                        <div class="blog-meta flex items-center text-sm text-white/70 mt-4">
+                            <span>January 15, 2024</span>
+                            <span class="mx-2">•</span>
+                            <span>8 min read</span>
+                            <span class="mx-2">•</span>
+                            <span>Technology</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop: Traditional Side-by-Side Layout -->
+                <div class="hidden lg:grid lg:grid-cols-2 h-full">
+                    <!-- Image Side -->
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
+                             alt="Digital transformation in accounting"
+                             class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110">
+                    </div>
+
+                    <!-- Content Side -->
+                    <div class="p-8 flex flex-col justify-center bg-white">
+                        <span class="inline-block px-3 py-1 bg-fresh-teal text-crisp-white text-sm rounded-full mb-4 w-fit">Featured</span>
+                        <h3 class="text-3xl font-bold text-deep-chartered-blue mb-4 leading-tight">
+                            <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
+                                Digital Transformation in Modern Accounting Practices
+                            </a>
+                        </h3>
+                        <p class="text-report-black text-lg leading-relaxed mb-6">
+                            Exploring how technology is reshaping the accounting landscape and what it means for businesses in Nepal. From cloud-based solutions to AI-powered analytics, discover the future of financial management.
+                        </p>
+                        <div class="blog-meta flex items-center text-sm text-report-black/70">
                             <span>January 15, 2024</span>
                             <span class="mx-2">•</span>
                             <span>8 min read</span>
