@@ -147,5 +147,8 @@ class DatabaseSeeder extends Seeder
 
         // Create insights
         Insight::factory(15)->create();
+
+        // Create jumbotrons
+        $this->call(JumbotronSeeder::class);
     }
 }

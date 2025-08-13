@@ -53,6 +53,22 @@
             </a>
         </li>
 
+        <!-- Website Design Section -->
+        <li class="nav-item">
+            <h6 class="sidebar-heading">
+                <i class="fas fa-paint-brush me-2"></i>Website Design
+            </h6>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.jumbotrons.*') ? 'active' : '' }}"
+               href="{{ route('admin.jumbotrons.index') }}">
+                <i class="fas fa-image"></i>
+                <span>Jumbotrons</span>
+                <span class="badge bg-purple ms-auto">{{ \App\Models\Jumbotron::count() }}</span>
+            </a>
+        </li>
+
         <!-- Business Section -->
         <li class="nav-item">
             <h6 class="sidebar-heading">

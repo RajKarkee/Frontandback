@@ -4,92 +4,15 @@
 @section('meta_description', 'Leading Chartered Accountancy firm in Nepal providing comprehensive audit, tax, risk advisory, and business consulting services that drive sustainable growth.')
 
 @section('content')
-<!-- Hero Section -->
-<section class="hero-section relative overflow-x-hidden p-0 m-0">
-    <div class="relative w-full p-0 m-0">
-        <div class="relative w-full h-[80vh] min-h-[80vh] overflow-hidden">
-            {{-- Slides --}}
-            <div class="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out" id="hero-slider">
-                {{-- Slide 1 --}}
-                <div class="slide absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out opacity-100 z-10"
-                    style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1600&auto=format&fit=crop');">
-                    <div class="absolute inset-0 bg-black/40"></div>
-                    <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-crisp-white px-4 md:px-12">
-                        <h1 class="font-montserrat text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
-                            Chartered Excellence, Trusted Results
-                        </h1>
-                        <p class="font-lato text-lg md:text-2xl max-w-2xl mx-auto mb-8 drop-shadow">
-                            Leading Chartered Accountancy firm in Nepal providing audit, tax, risk advisory, and business consulting services.
-                        </p>
-                        <a href="{{ route('contact') }}" class="btn-primary inline-flex items-center">
-                            Get Started
-                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- Slide 2 --}}
-                <div class="slide absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out opacity-0 pointer-events-none z-0"
-                    style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1600&auto=format&fit=crop');">
-                    <div class="absolute inset-0 bg-black/40"></div>
-                    <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-crisp-white px-4 md:px-12">
-                        <h1 class="font-montserrat text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
-                            Empowering Business Growth
-                        </h1>
-                        <p class="font-lato text-lg md:text-2xl max-w-2xl mx-auto mb-8 drop-shadow">
-                            Transform your business with strategic insights and expert guidance from Nepal's trusted CA professionals.
-                        </p>
-                        <a href="{{ route('services') }}" class="btn-primary inline-flex items-center">
-                            Our Services
-                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- Slide 3 --}}
-                <div class="slide absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out opacity-0 pointer-events-none z-0"
-                    style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1600&auto=format&fit=crop');">
-                    <div class="absolute inset-0 bg-black/40"></div>
-                    <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-crisp-white px-4 md:px-12">
-                        <h1 class="font-montserrat text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">
-                            Precision. Integrity. Results.
-                        </h1>
-                        <p class="font-lato text-lg md:text-2xl max-w-2xl mx-auto mb-8 drop-shadow">
-                            Experience the difference with a partner-led approach and technology-enabled solutions.
-                        </p>
-                        <a href="{{ route('insights') }}" class="btn-primary inline-flex items-center">
-                            Read Insights
-                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {{-- Arrow Navigation --}}
-            <button id="hero-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-all duration-200">
-                {{-- Lucide: chevron-left --}}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
-            </button>
-            <button id="hero-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-all duration-200">
-                {{-- Lucide: chevron-right --}}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-            </button>
-            {{-- Carousel Indicators --}}
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
-                <button class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all duration-200"></button>
-                <button class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all duration-200"></button>
-                <button class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all duration-200"></button>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Dynamic Hero Section -->
+<x-jumbotron page-slug="home" height="80vh" min-height="80vh">
+    {{-- <a href="{{ route('contact') }}" class="btn-primary inline-flex items-center">
+        Get Started
+        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+    </a> --}}
+</x-jumbotron>
 
 <!-- Key Statistics -->
 <section class="section bg-audit-grey">

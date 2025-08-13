@@ -21,12 +21,15 @@ use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\IndustryAdminController;
 use App\Http\Controllers\Admin\OfficeAdminController;
 use App\Http\Controllers\Admin\InsightAdminController;
+use App\Http\Controllers\Admin\JumbotronController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
@@ -128,6 +131,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'update' => 'insights.update',
         'destroy' => 'insights.destroy',
     ]);
+
+    Route::resource('jumbotrons', JumbotronController::class)->names([
+        'index' => 'jumbotrons.index',
+        'create' => 'jumbotrons.create',
+        'store' => 'jumbotrons.store',
+        'show' => 'jumbotrons.show',
+        'edit' => 'jumbotrons.edit',
+        'update' => 'jumbotrons.update',
+        'destroy' => 'jumbotrons.destroy',
+    ]);
+
+    // Additional jumbotron routes
+    Route::post('jumbotrons/{jumbotron}/toggle-status', [JumbotronController::class, 'toggleStatus'])->name('jumbotrons.toggle-status');
+    Route::post('jumbotrons/reorder-slides', [JumbotronController::class, 'reorderSlides'])->name('jumbotrons.reorder-slides');
 });
 
 // Frontend Routes

@@ -143,6 +143,10 @@
             margin-left: auto;
         }
 
+        .badge.bg-purple {
+            background-color: #8b5cf6 !important;
+        }
+
         .main-content {
             margin-left: 0;
             transition: margin-left 0.3s ease;
