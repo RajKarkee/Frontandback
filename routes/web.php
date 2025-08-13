@@ -1,49 +1,165 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\InsightController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PageAdminController;
+use App\Http\Controllers\Admin\BlogAdminController;
+use App\Http\Controllers\Admin\EventAdminController;
+use App\Http\Controllers\Admin\CareerAdminController;
+use App\Http\Controllers\Admin\ContactAdminController;
+use App\Http\Controllers\Admin\ServiceAdminController;
+use App\Http\Controllers\Admin\IndustryAdminController;
+use App\Http\Controllers\Admin\OfficeAdminController;
+use App\Http\Controllers\Admin\InsightAdminController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Authentication Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-Route::get('/services', function () {
-    return view('services');
-})->name('services');
+// Admin Routes (Protected by auth middleware)
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    // Admin Dashboard
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-Route::get('/industries', function () {
-    return view('industries');
-})->name('industries');
+    // Admin CRUD Routes
+    Route::resource('pages', PageAdminController::class)->names([
+        'index' => 'pages.index',
+        'create' => 'pages.create',
+        'store' => 'pages.store',
+        'show' => 'pages.show',
+        'edit' => 'pages.edit',
+        'update' => 'pages.update',
+        'destroy' => 'pages.destroy',
+    ]);
 
-Route::get('/insights', function () {
-    return view('insights');
-})->name('insights');
+    Route::resource('blogs', BlogAdminController::class)->names([
+        'index' => 'blogs.index',
+        'create' => 'blogs.create',
+        'store' => 'blogs.store',
+        'show' => 'blogs.show',
+        'edit' => 'blogs.edit',
+        'update' => 'blogs.update',
+        'destroy' => 'blogs.destroy',
+    ]);
 
-Route::get('/events', function () {
-    return view('events');
-})->name('events');
+    Route::resource('events', EventAdminController::class)->names([
+        'index' => 'events.index',
+        'create' => 'events.create',
+        'store' => 'events.store',
+        'show' => 'events.show',
+        'edit' => 'events.edit',
+        'update' => 'events.update',
+        'destroy' => 'events.destroy',
+    ]);
 
-Route::get('/offices', function () {
-    return view('offices');
-})->name('offices');
+    Route::resource('careers', CareerAdminController::class)->names([
+        'index' => 'careers.index',
+        'create' => 'careers.create',
+        'store' => 'careers.store',
+        'show' => 'careers.show',
+        'edit' => 'careers.edit',
+        'update' => 'careers.update',
+        'destroy' => 'careers.destroy',
+    ]);
 
-Route::get('/careers', function () {
-    return view('careers');
-})->name('careers');
+    Route::resource('contacts', ContactAdminController::class)->names([
+        'index' => 'contacts.index',
+        'create' => 'contacts.create',
+        'store' => 'contacts.store',
+        'show' => 'contacts.show',
+        'edit' => 'contacts.edit',
+        'update' => 'contacts.update',
+        'destroy' => 'contacts.destroy',
+    ]);
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+    Route::resource('services', ServiceAdminController::class)->names([
+        'index' => 'services.index',
+        'create' => 'services.create',
+        'store' => 'services.store',
+        'show' => 'services.show',
+        'edit' => 'services.edit',
+        'update' => 'services.update',
+        'destroy' => 'services.destroy',
+    ]);
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+    Route::resource('industries', IndustryAdminController::class)->names([
+        'index' => 'industries.index',
+        'create' => 'industries.create',
+        'store' => 'industries.store',
+        'show' => 'industries.show',
+        'edit' => 'industries.edit',
+        'update' => 'industries.update',
+        'destroy' => 'industries.destroy',
+    ]);
 
-Route::get('/blogs', function () {
-    return view('blogs');
-})->name('blogs');
+    Route::resource('offices', OfficeAdminController::class)->names([
+        'index' => 'offices.index',
+        'create' => 'offices.create',
+        'store' => 'offices.store',
+        'show' => 'offices.show',
+        'edit' => 'offices.edit',
+        'update' => 'offices.update',
+        'destroy' => 'offices.destroy',
+    ]);
 
-Route::post('/contact', function () {
-    // Handle contact form submission
-    // You can add form validation and email sending logic here
-    return redirect()->route('contact')->with('success', 'Thank you for your message. We will get back to you soon!');
-})->name('contact.submit');
+    Route::resource('insights', InsightAdminController::class)->names([
+        'index' => 'insights.index',
+        'create' => 'insights.create',
+        'store' => 'insights.store',
+        'show' => 'insights.show',
+        'edit' => 'insights.edit',
+        'update' => 'insights.update',
+        'destroy' => 'insights.destroy',
+    ]);
+});
+
+// Frontend Routes
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
+
+Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
+Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
+
+Route::get('/insights', [InsightController::class, 'index'])->name('insights');
+Route::get('/insights/{slug}', [InsightController::class, 'show'])->name('insights.show');
+
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
+Route::get('/offices/{slug}', [OfficeController::class, 'show'])->name('offices.show');
+
+Route::get('/careers', [CareerController::class, 'index'])->name('careers');
+Route::get('/careers/{slug}', [CareerController::class, 'show'])->name('careers.show');
+
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+
+// Dynamic page routes (should be last)
+Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
+
+
+
