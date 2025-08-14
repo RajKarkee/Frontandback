@@ -39,30 +39,29 @@
                         </thead>
                         <tbody>
                             @foreach($industries as $industry)
-                            <tr>
+                                                        <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div>
-                                            <strong>{{ $industry->name }}</strong>
+                                            <strong>{{ $industry->title ?: $industry->name }}</strong>
                                             <br>
                                             <small class="text-muted">{{ Str::limit($industry->description, 50) }}</small>
+                                            @if($industry->category)
+                                                <br><span class="badge bg-secondary">{{ $industry->category }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    @if($industry->status === 'active')
-                                        <span class="badge bg-success">Active</span>
-                                    @else
-                                        <span class="badge bg-danger">Inactive</span>
-                                    @endif
+                                    <span class="badge bg-{{ $industry->status === 'active' ? 'success' : 'secondary' }}">
+                                        {{ ucfirst($industry->status) }}
+                                    </span>
                                 </td>
                                 <td>
                                     @if($industry->is_featured)
-                                        <span class="badge bg-primary">
-                                            <i class="fas fa-star"></i> Featured
-                                        </span>
+                                        <span class="badge bg-warning">Featured</span>
                                     @else
-                                        <span class="text-muted">No</span>
+                                        <span class="text-muted">—</span>
                                     @endif
                                 </td>
                                 <td>

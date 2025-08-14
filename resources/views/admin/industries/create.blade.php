@@ -22,9 +22,19 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="mb-3">
-                                <label for="title" class="form-label">Industry Title <span class="text-danger">*</span></label>
+                                <label for="name" class="form-label">Industry Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                       id="name" name="name" value="{{ old('name') }}" required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Display Title</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                       id="title" name="title" value="{{ old('title') }}" required>
+                                       id="title" name="title" value="{{ old('title') }}">
+                                <div class="form-text">Optional display title (uses name if empty)</div>
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -34,7 +44,7 @@
                                 <label for="slug" class="form-label">Slug</label>
                                 <input type="text" class="form-control @error('slug') is-invalid @enderror"
                                        id="slug" name="slug" value="{{ old('slug') }}">
-                                <div class="form-text">Leave empty to auto-generate from title</div>
+                                <div class="form-text">Leave empty to auto-generate from name</div>
                                 @error('slug')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -43,58 +53,59 @@
                             <div class="mb-3">
                                 <label for="description" class="form-label">Industry Description <span class="text-danger">*</span></label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
-                                          id="description" name="description" rows="8" required>{{ old('description') }}</textarea>
+                                          id="description" name="description" rows="6" required>{{ old('description') }}</textarea>
+                                <div class="form-text">Brief description for industry cards</div>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="overview" class="form-label">Industry Overview</label>
-                                <textarea class="form-control @error('overview') is-invalid @enderror"
-                                          id="overview" name="overview" rows="6">{{ old('overview') }}</textarea>
-                                <div class="form-text">Brief overview for previews and summaries</div>
-                                @error('overview')
+                                <label for="content" class="form-label">Detailed Content</label>
+                                <textarea class="form-control @error('content') is-invalid @enderror"
+                                          id="content" name="content" rows="10">{{ old('content') }}</textarea>
+                                <div class="form-text">Detailed information about the industry</div>
+                                @error('content')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="challenges" class="form-label">Industry Challenges</label>
-                                <textarea class="form-control @error('challenges') is-invalid @enderror"
-                                          id="challenges" name="challenges" rows="6">{{ old('challenges') }}</textarea>
-                                <div class="form-text">Key challenges faced by this industry</div>
-                                @error('challenges')
+                                <label for="features" class="form-label">Key Features</label>
+                                <div id="features-container">
+                                    @if(old('features'))
+                                        @foreach(old('features') as $index => $feature)
+                                            <div class="input-group mb-2">
+                                                <input type="text" class="form-control" name="features[]" value="{{ $feature }}" placeholder="Enter a feature">
+                                                <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addFeature()">
+                                    <i class="fas fa-plus"></i> Add Feature
+                                </button>
+                                <div class="form-text">List the main features/services for this industry</div>
+                                @error('features')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="solutions" class="form-label">Our Solutions</label>
-                                <textarea class="form-control @error('solutions') is-invalid @enderror"
-                                          id="solutions" name="solutions" rows="6">{{ old('solutions') }}</textarea>
-                                <div class="form-text">How we help solve industry challenges</div>
-                                @error('solutions')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="case_studies" class="form-label">Case Studies</label>
-                                <textarea class="form-control @error('case_studies') is-invalid @enderror"
-                                          id="case_studies" name="case_studies" rows="6">{{ old('case_studies') }}</textarea>
-                                <div class="form-text">Relevant case studies and success stories</div>
-                                @error('case_studies')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="key_services" class="form-label">Key Services</label>
-                                <textarea class="form-control @error('key_services') is-invalid @enderror"
-                                          id="key_services" name="key_services" rows="4">{{ old('key_services') }}</textarea>
-                                <div class="form-text">Main services offered for this industry</div>
-                                @error('key_services')
+                                <label for="svg_icon" class="form-label">SVG Icon</label>
+                                <textarea class="form-control @error('svg_icon') is-invalid @enderror"
+                                          id="svg_icon" name="svg_icon" rows="4" placeholder="Enter SVG path content">{{ old('svg_icon') }}</textarea>
+                                <div class="form-text">SVG path content for industry icons (e.g., from Heroicons)</div>
+                                @error('svg_icon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -104,9 +115,8 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select class="form-select @error('status') is-invalid @enderror" id="status" name="status">
-                                    <option value="draft" {{ old('status') === 'draft' ? 'selected' : '' }}>Draft</option>
-                                    <option value="published" {{ old('status') === 'published' ? 'selected' : '' }}>Published</option>
-                                    <option value="archived" {{ old('status') === 'archived' ? 'selected' : '' }}>Archived</option>
+                                    <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
                                 </select>
                                 @error('status')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -117,59 +127,18 @@
                                 <label for="category" class="form-label">Industry Category</label>
                                 <select class="form-select @error('category') is-invalid @enderror" id="category" name="category">
                                     <option value="">Select Category</option>
-                                    <option value="technology" {{ old('category') === 'technology' ? 'selected' : '' }}>Technology</option>
-                                    <option value="healthcare" {{ old('category') === 'healthcare' ? 'selected' : '' }}>Healthcare</option>
-                                    <option value="finance" {{ old('category') === 'finance' ? 'selected' : '' }}>Finance</option>
-                                    <option value="manufacturing" {{ old('category') === 'manufacturing' ? 'selected' : '' }}>Manufacturing</option>
-                                    <option value="retail" {{ old('category') === 'retail' ? 'selected' : '' }}>Retail</option>
-                                    <option value="education" {{ old('category') === 'education' ? 'selected' : '' }}>Education</option>
-                                    <option value="energy" {{ old('category') === 'energy' ? 'selected' : '' }}>Energy</option>
-                                    <option value="automotive" {{ old('category') === 'automotive' ? 'selected' : '' }}>Automotive</option>
-                                    <option value="real-estate" {{ old('category') === 'real-estate' ? 'selected' : '' }}>Real Estate</option>
-                                    <option value="telecommunications" {{ old('category') === 'telecommunications' ? 'selected' : '' }}>Telecommunications</option>
-                                    <option value="government" {{ old('category') === 'government' ? 'selected' : '' }}>Government</option>
-                                    <option value="non-profit" {{ old('category') === 'non-profit' ? 'selected' : '' }}>Non-Profit</option>
-                                    <option value="other" {{ old('category') === 'other' ? 'selected' : '' }}>Other</option>
+                                    <option value="Healthcare" {{ old('category') === 'Healthcare' ? 'selected' : '' }}>Healthcare</option>
+                                    <option value="Manufacturing" {{ old('category') === 'Manufacturing' ? 'selected' : '' }}>Manufacturing</option>
+                                    <option value="Technology" {{ old('category') === 'Technology' ? 'selected' : '' }}>Technology</option>
+                                    <option value="Financial" {{ old('category') === 'Financial' ? 'selected' : '' }}>Financial</option>
+                                    <option value="Real Estate" {{ old('category') === 'Real Estate' ? 'selected' : '' }}>Real Estate</option>
+                                    <option value="Non-Profit" {{ old('category') === 'Non-Profit' ? 'selected' : '' }}>Non-Profit</option>
+                                    <option value="Hospitality" {{ old('category') === 'Hospitality' ? 'selected' : '' }}>Hospitality</option>
+                                    <option value="Education" {{ old('category') === 'Education' ? 'selected' : '' }}>Education</option>
+                                    <option value="Retail" {{ old('category') === 'Retail' ? 'selected' : '' }}>Retail</option>
+                                    <option value="Other" {{ old('category') === 'Other' ? 'selected' : '' }}>Other</option>
                                 </select>
                                 @error('category')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="market_size" class="form-label">Market Size</label>
-                                <input type="text" class="form-control @error('market_size') is-invalid @enderror"
-                                       id="market_size" name="market_size" value="{{ old('market_size') }}" placeholder="e.g., $50 billion">
-                                @error('market_size')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="growth_rate" class="form-label">Growth Rate</label>
-                                <input type="text" class="form-control @error('growth_rate') is-invalid @enderror"
-                                       id="growth_rate" name="growth_rate" value="{{ old('growth_rate') }}" placeholder="e.g., 15% annually">
-                                @error('growth_rate')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="key_players" class="form-label">Key Players</label>
-                                <textarea class="form-control @error('key_players') is-invalid @enderror"
-                                          id="key_players" name="key_players" rows="4">{{ old('key_players') }}</textarea>
-                                <div class="form-text">Major companies in this industry</div>
-                                @error('key_players')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="trends" class="form-label">Industry Trends</label>
-                                <textarea class="form-control @error('trends') is-invalid @enderror"
-                                          id="trends" name="trends" rows="4">{{ old('trends') }}</textarea>
-                                <div class="form-text">Current and emerging trends</div>
-                                @error('trends')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -194,10 +163,43 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="icon" class="form-label">Industry Icon</label>
-                                <input type="file" class="form-control @error('icon') is-invalid @enderror"
-                                       id="icon" name="icon" accept="image/*">
-                                <div class="form-text">Small icon representing this industry</div>
+                                <label for="icon" class="form-label">Font Awesome Icon</label>
+                                <input type="text" class="form-control @error('icon') is-invalid @enderror"
+                                       id="icon" name="icon" value="{{ old('icon') }}" placeholder="e.g., fas fa-industry">
+                                <div class="form-text">Font Awesome icon class (fallback if no SVG)</div>
+                                @error('icon')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="is_featured"
+                                           name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="is_featured">
+                                        Featured Industry
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="meta_title" class="form-label">Meta Title</label>
+                                <input type="text" class="form-control @error('meta_title') is-invalid @enderror"
+                                       id="meta_title" name="meta_title" value="{{ old('meta_title') }}">
+                                @error('meta_title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="meta_description" class="form-label">Meta Description</label>
+                                <textarea class="form-control @error('meta_description') is-invalid @enderror"
+                                          id="meta_description" name="meta_description" rows="3">{{ old('meta_description') }}</textarea>
+                                @error('meta_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                                 @error('icon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -255,15 +257,36 @@
 
 @push('scripts')
 <script>
-// Auto-generate slug from title
-document.getElementById('title').addEventListener('input', function() {
-    const title = this.value;
-    const slug = title.toLowerCase()
+// Auto-generate slug from name
+document.getElementById('name').addEventListener('input', function() {
+    const name = this.value;
+    const slug = name.toLowerCase()
         .replace(/[^a-z0-9 -]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .trim('-');
     document.getElementById('slug').value = slug;
 });
+
+// Features management
+function addFeature() {
+    const container = document.getElementById('features-container');
+    const newFeature = document.createElement('div');
+    newFeature.className = 'input-group mb-2';
+    newFeature.innerHTML = `
+        <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+        <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    container.appendChild(newFeature);
+}
+
+function removeFeature(button) {
+    const container = document.getElementById('features-container');
+    if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
 </script>
 @endpush

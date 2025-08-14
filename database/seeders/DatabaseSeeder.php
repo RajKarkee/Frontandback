@@ -80,29 +80,6 @@ class DatabaseSeeder extends Seeder
 
         Event::factory(5)->create();
 
-        // Create industries
-        if (!Industry::where('slug', 'technology')->exists()) {
-            Industry::factory()->create([
-                'name' => 'Technology',
-                'slug' => 'technology',
-                'description' => 'Cutting-edge technology solutions for modern businesses',
-                'status' => 'active',
-                'sort_order' => 1,
-            ]);
-        }
-
-        if (!Industry::where('slug', 'healthcare')->exists()) {
-            Industry::factory()->create([
-                'name' => 'Healthcare',
-                'slug' => 'healthcare',
-                'description' => 'Digital transformation solutions for healthcare providers',
-                'status' => 'active',
-                'sort_order' => 2,
-            ]);
-        }
-
-        Industry::factory(4)->create();
-
         // Create offices
         if (!Office::where('slug', 'new-york-headquarters')->exists()) {
             Office::factory()->create([
@@ -129,6 +106,7 @@ class DatabaseSeeder extends Seeder
             JumbotronSeeder::class,
             ServiceSeeder::class,
             ServiceProcessSeeder::class,
+            IndustrySeeder::class,
         ]);
     }
 }
