@@ -60,28 +60,6 @@ class DatabaseSeeder extends Seeder
         // Create blogs
         Blog::factory(20)->create();
 
-        // Create services
-        if (!Service::where('slug', 'web-development')->exists()) {
-            Service::factory()->create([
-                'title' => 'Web Development',
-                'slug' => 'web-development',
-                'description' => 'Professional web development services',
-                'status' => 'active',
-                'sort_order' => 1,
-            ]);
-        }
-
-        if (!Service::where('slug', 'mobile-development')->exists()) {
-            Service::factory()->create([
-                'title' => 'Mobile Development',
-                'slug' => 'mobile-development',
-                'description' => 'Native and cross-platform mobile app development',
-                'status' => 'active',
-                'sort_order' => 2,
-            ]);
-        }
-
-        // Create careers
         Career::factory(15)->create();
 
         // Create sample contacts
