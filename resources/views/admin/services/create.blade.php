@@ -50,6 +50,16 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="detailed_description" class="form-label">Detailed Description</label>
+                                <textarea class="form-control @error('detailed_description') is-invalid @enderror"
+                                          id="detailed_description" name="detailed_description" rows="8">{{ old('detailed_description') }}</textarea>
+                                <div class="form-text">More detailed description for the service detail sections</div>
+                                @error('detailed_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="content" class="form-label">Detailed Content</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror"
                                           id="content" name="content" rows="10">{{ old('content') }}</textarea>
@@ -93,6 +103,43 @@
                                 </button>
                                 <div class="form-text">Benefits clients get from this service</div>
                                 @error('benefits')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Sub Services Section -->
+                            <div class="mb-4">
+                                <label class="form-label">Sub Services</label>
+                                <div id="sub-services-container">
+                                    <div class="card mb-3 sub-service-group">
+                                        <div class="card-header">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control sub-service-title" placeholder="Sub Service Category (e.g., Statutory Audits)" name="sub_service_titles[]">
+                                                <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceGroup(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="sub-service-items">
+                                                <div class="input-group mb-2">
+                                                    <input type="text" class="form-control" placeholder="Sub service item" name="sub_service_items[0][]">
+                                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeSubServiceItem(this)">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addSubServiceItem(this)">
+                                                <i class="fas fa-plus"></i> Add Item
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSubServiceGroup()">
+                                    <i class="fas fa-plus"></i> Add Sub Service Category
+                                </button>
+                                <div class="form-text">Organize services into categories with specific items</div>
+                                @error('sub_services')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -153,6 +200,16 @@
                                        id="sort_order" name="sort_order" value="{{ old('sort_order', 0) }}" min="0">
                                 <div class="form-text">Higher numbers appear first</div>
                                 @error('sort_order')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="svg_icon" class="form-label">SVG Icon</label>
+                                <textarea class="form-control @error('svg_icon') is-invalid @enderror"
+                                          id="svg_icon" name="svg_icon" rows="4" placeholder="Enter SVG path content">{{ old('svg_icon') }}</textarea>
+                                <div class="form-text">SVG path content for service icons (e.g., from Heroicons)</div>
+                                @error('svg_icon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -277,6 +334,72 @@ function addBenefit() {
 function removeBenefit(button) {
     const container = document.getElementById('benefits-container');
     if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
+
+// Sub Services management
+let subServiceGroupCount = 0;
+
+function addSubServiceGroup() {
+    const container = document.getElementById('sub-services-container');
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'card mb-3 sub-service-group';
+    subServiceGroupCount++;
+
+    groupDiv.innerHTML = `
+        <div class="card-header">
+            <div class="input-group">
+                <input type="text" class="form-control sub-service-title" placeholder="Sub Service Category (e.g., Statutory Audits)" name="sub_service_titles[]">
+                <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceGroup(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="sub-service-items">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Sub service item" name="sub_service_items[${subServiceGroupCount}][]">
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeSubServiceItem(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addSubServiceItem(this)">
+                <i class="fas fa-plus"></i> Add Item
+            </button>
+        </div>
+    `;
+
+    container.appendChild(groupDiv);
+}
+
+function removeSubServiceGroup(button) {
+    const container = document.getElementById('sub-services-container');
+    if (container.children.length > 1) {
+        button.closest('.sub-service-group').remove();
+    }
+}
+
+function addSubServiceItem(button) {
+    const itemsContainer = button.previousElementSibling;
+    const groupIndex = Array.from(document.querySelectorAll('.sub-service-group')).indexOf(button.closest('.sub-service-group'));
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'input-group mb-2';
+    itemDiv.innerHTML = `
+        <input type="text" class="form-control" placeholder="Sub service item" name="sub_service_items[${groupIndex}][]">
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeSubServiceItem(this)">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+
+    itemsContainer.appendChild(itemDiv);
+}
+
+function removeSubServiceItem(button) {
+    const itemsContainer = button.closest('.sub-service-items');
+    if (itemsContainer.children.length > 1) {
         button.parentElement.remove();
     }
 }

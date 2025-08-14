@@ -36,7 +36,11 @@ class ServiceAdminController extends Controller
             'features.*' => 'string|max:255',
             'benefits' => 'nullable|array',
             'benefits.*' => 'string|max:255',
-            'sub_services' => 'nullable|array',
+            'sub_service_titles' => 'nullable|array',
+            'sub_service_titles.*' => 'string|max:255',
+            'sub_service_items' => 'nullable|array',
+            'sub_service_items.*' => 'nullable|array',
+            'sub_service_items.*.*' => 'string|max:255',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'svg_icon' => 'nullable|string',
             'icon' => 'nullable|string|max:255',
@@ -57,6 +61,20 @@ class ServiceAdminController extends Controller
         }
         if ($request->has('benefits') && is_array($request->benefits)) {
             $data['benefits'] = array_filter($request->benefits);
+        }
+
+        // Handle sub-services
+        if ($request->has('sub_service_titles') && $request->has('sub_service_items')) {
+            $subServices = [];
+            $titles = array_filter($request->sub_service_titles);
+            $items = $request->sub_service_items ?? [];
+
+            foreach ($titles as $index => $title) {
+                if (!empty($title) && isset($items[$index]) && is_array($items[$index])) {
+                    $subServices[$title] = array_filter($items[$index]);
+                }
+            }
+            $data['sub_services'] = $subServices;
         }
 
         // Handle file upload
@@ -95,7 +113,11 @@ class ServiceAdminController extends Controller
             'features.*' => 'string|max:255',
             'benefits' => 'nullable|array',
             'benefits.*' => 'string|max:255',
-            'sub_services' => 'nullable|array',
+            'sub_service_titles' => 'nullable|array',
+            'sub_service_titles.*' => 'string|max:255',
+            'sub_service_items' => 'nullable|array',
+            'sub_service_items.*' => 'nullable|array',
+            'sub_service_items.*.*' => 'string|max:255',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'svg_icon' => 'nullable|string',
             'icon' => 'nullable|string|max:255',
@@ -116,6 +138,20 @@ class ServiceAdminController extends Controller
         }
         if ($request->has('benefits') && is_array($request->benefits)) {
             $data['benefits'] = array_filter($request->benefits);
+        }
+
+        // Handle sub-services
+        if ($request->has('sub_service_titles') && $request->has('sub_service_items')) {
+            $subServices = [];
+            $titles = array_filter($request->sub_service_titles);
+            $items = $request->sub_service_items ?? [];
+
+            foreach ($titles as $index => $title) {
+                if (!empty($title) && isset($items[$index]) && is_array($items[$index])) {
+                    $subServices[$title] = array_filter($items[$index]);
+                }
+            }
+            $data['sub_services'] = $subServices;
         }
 
         // Handle file upload

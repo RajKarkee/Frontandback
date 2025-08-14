@@ -51,6 +51,16 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="detailed_description" class="form-label">Detailed Description</label>
+                                <textarea class="form-control @error('detailed_description') is-invalid @enderror"
+                                          id="detailed_description" name="detailed_description" rows="8">{{ old('detailed_description', $service->detailed_description) }}</textarea>
+                                <div class="form-text">More detailed description for the service detail sections</div>
+                                @error('detailed_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="content" class="form-label">Detailed Content</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror"
                                           id="content" name="content" rows="10">{{ old('content', $service->content) }}</textarea>
@@ -62,8 +72,28 @@
 
                             <div class="mb-3">
                                 <label for="features" class="form-label">Key Features</label>
-                                <textarea class="form-control @error('features') is-invalid @enderror"
-                                          id="features" name="features" rows="5">{{ old('features', $service->features ?? '') }}</textarea>
+                                <div id="features-container">
+                                    @if($service->features && is_array($service->features))
+                                        @foreach($service->features as $index => $feature)
+                                            <div class="input-group mb-2">
+                                                <input type="text" class="form-control" name="features[]" value="{{ $feature }}" placeholder="Enter a feature">
+                                                <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addFeature()">
+                                    <i class="fas fa-plus"></i> Add Feature
+                                </button>
                                 <div class="form-text">List the main features of this service</div>
                                 @error('features')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -72,10 +102,106 @@
 
                             <div class="mb-3">
                                 <label for="benefits" class="form-label">Benefits</label>
-                                <textarea class="form-control @error('benefits') is-invalid @enderror"
-                                          id="benefits" name="benefits" rows="5">{{ old('benefits', $service->benefits ?? '') }}</textarea>
+                                <div id="benefits-container">
+                                    @if($service->benefits && is_array($service->benefits))
+                                        @foreach($service->benefits as $index => $benefit)
+                                            <div class="input-group mb-2">
+                                                <input type="text" class="form-control" name="benefits[]" value="{{ $benefit }}" placeholder="Enter a benefit">
+                                                <button type="button" class="btn btn-outline-danger" onclick="removeBenefit(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" name="benefits[]" placeholder="Enter a benefit">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeBenefit(this)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addBenefit()">
+                                    <i class="fas fa-plus"></i> Add Benefit
+                                </button>
                                 <div class="form-text">Benefits clients get from this service</div>
                                 @error('benefits')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Sub-Services</label>
+                                <div id="sub-services-container">
+                                    @if($service->sub_services && is_array($service->sub_services))
+                                        @foreach($service->sub_services as $title => $items)
+                                            <div class="card mb-3 sub-service-group">
+                                                <div class="card-header">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h6 class="mb-0">Sub-Service Category</h6>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeSubServiceGroup(this)">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <input type="text" class="form-control" name="sub_service_titles[]" value="{{ $title }}" placeholder="Enter category title (e.g., Statutory Audits)" required>
+                                                    </div>
+                                                    <div class="sub-service-items">
+                                                        @foreach($items as $item)
+                                                            <div class="input-group mb-2">
+                                                                <input type="text" class="form-control" name="sub_service_items[{{ $loop->parent->index }}][]" value="{{ $item }}" placeholder="Enter sub-service item">
+                                                                <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceItem(this)">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSubServiceItem(this)">
+                                                        <i class="fas fa-plus"></i> Add Item
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    @if(!$service->sub_services || empty($service->sub_services))
+                                        <div class="card mb-3 sub-service-group">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">Sub-Service Category</h6>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeSubServiceGroup(this)">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" name="sub_service_titles[]" placeholder="Enter category title (e.g., Statutory Audits)">
+                                                </div>
+                                                <div class="sub-service-items">
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" class="form-control" name="sub_service_items[0][]" placeholder="Enter sub-service item">
+                                                        <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceItem(this)">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSubServiceItem(this)">
+                                                    <i class="fas fa-plus"></i> Add Item
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="addSubServiceGroup()">
+                                    <i class="fas fa-plus"></i> Add Sub-Service Category
+                                </button>
+                                <div class="form-text">Group sub-services into categories with specific items under each category</div>
+                                @error('sub_service_titles')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                @error('sub_service_items')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -136,6 +262,16 @@
                                        id="sort_order" name="sort_order" value="{{ old('sort_order', $service->sort_order) }}" min="0">
                                 <div class="form-text">Higher numbers appear first</div>
                                 @error('sort_order')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="svg_icon" class="form-label">SVG Icon</label>
+                                <textarea class="form-control @error('svg_icon') is-invalid @enderror"
+                                          id="svg_icon" name="svg_icon" rows="4" placeholder="Enter SVG path content">{{ old('svg_icon', $service->svg_icon) }}</textarea>
+                                <div class="form-text">SVG path content for service icons (e.g., from Heroicons)</div>
+                                @error('svg_icon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -233,5 +369,125 @@ document.getElementById('title').addEventListener('input', function() {
         .trim('-');
     document.getElementById('slug').value = slug;
 });
+
+// Features management
+function addFeature() {
+    const container = document.getElementById('features-container');
+    const newFeature = document.createElement('div');
+    newFeature.className = 'input-group mb-2';
+    newFeature.innerHTML = `
+        <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+        <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    container.appendChild(newFeature);
+}
+
+function removeFeature(button) {
+    const container = document.getElementById('features-container');
+    if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
+
+// Benefits management
+function addBenefit() {
+    const container = document.getElementById('benefits-container');
+    const newBenefit = document.createElement('div');
+    newBenefit.className = 'input-group mb-2';
+    newBenefit.innerHTML = `
+        <input type="text" class="form-control" name="benefits[]" placeholder="Enter a benefit">
+        <button type="button" class="btn btn-outline-danger" onclick="removeBenefit(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    container.appendChild(newBenefit);
+}
+
+function removeBenefit(button) {
+    const container = document.getElementById('benefits-container');
+    if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
+
+// Sub-services management
+function addSubServiceGroup() {
+    const container = document.getElementById('sub-services-container');
+    const groupIndex = container.children.length;
+
+    const newGroup = document.createElement('div');
+    newGroup.className = 'card mb-3 sub-service-group';
+    newGroup.innerHTML = `
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">Sub-Service Category</h6>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeSubServiceGroup(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="sub_service_titles[]" placeholder="Enter category title (e.g., Statutory Audits)">
+            </div>
+            <div class="sub-service-items">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="sub_service_items[${groupIndex}][]" placeholder="Enter sub-service item">
+                    <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceItem(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary" onclick="addSubServiceItem(this)">
+                <i class="fas fa-plus"></i> Add Item
+            </button>
+        </div>
+    `;
+    container.appendChild(newGroup);
+    updateSubServiceIndices();
+}
+
+function removeSubServiceGroup(button) {
+    const container = document.getElementById('sub-services-container');
+    if (container.children.length > 1) {
+        button.closest('.sub-service-group').remove();
+        updateSubServiceIndices();
+    }
+}
+
+function addSubServiceItem(button) {
+    const itemsContainer = button.parentElement.querySelector('.sub-service-items');
+    const groupIndex = Array.from(document.querySelectorAll('.sub-service-group')).indexOf(button.closest('.sub-service-group'));
+
+    const newItem = document.createElement('div');
+    newItem.className = 'input-group mb-2';
+    newItem.innerHTML = `
+        <input type="text" class="form-control" name="sub_service_items[${groupIndex}][]" placeholder="Enter sub-service item">
+        <button type="button" class="btn btn-outline-danger" onclick="removeSubServiceItem(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    itemsContainer.appendChild(newItem);
+}
+
+function removeSubServiceItem(button) {
+    const itemsContainer = button.closest('.sub-service-items');
+    if (itemsContainer.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
+
+function updateSubServiceIndices() {
+    const groups = document.querySelectorAll('.sub-service-group');
+    groups.forEach((group, groupIndex) => {
+        const items = group.querySelectorAll('.sub-service-items input');
+        items.forEach(item => {
+            const name = item.getAttribute('name');
+            item.setAttribute('name', name.replace(/\[\d+\]/, `[${groupIndex}]`));
+        });
+    });
+}
 </script>
 @endpush
