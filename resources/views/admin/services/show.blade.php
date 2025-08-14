@@ -49,20 +49,46 @@
                             </div>
                         @endif
 
-                        @if($service->features ?? false)
+                        @if($service->features && is_array($service->features))
                             <div class="mb-4">
                                 <h6 class="text-muted mb-2">Key Features</h6>
                                 <div class="border rounded p-3" style="background-color: #f0f8ff;">
-                                    {!! nl2br(e($service->features)) !!}
+                                    <ul class="mb-0">
+                                        @foreach($service->features as $feature)
+                                            <li>{{ $feature }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         @endif
 
-                        @if($service->benefits ?? false)
+                        @if($service->sub_services && is_array($service->sub_services))
+                            <div class="mb-4">
+                                <h6 class="text-muted mb-2">Sub Services</h6>
+                                <div class="border rounded p-3" style="background-color: #f8f9ff;">
+                                    @foreach($service->sub_services as $subServiceTitle => $subServiceItems)
+                                        <div class="mb-3">
+                                            <h6 class="text-primary">{{ $subServiceTitle }}</h6>
+                                            <ul class="mb-0">
+                                                @foreach($subServiceItems as $item)
+                                                    <li>{{ $item }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($service->benefits && is_array($service->benefits))
                             <div class="mb-4">
                                 <h6 class="text-muted mb-2">Benefits</h6>
                                 <div class="border rounded p-3" style="background-color: #f5f5f5;">
-                                    {!! nl2br(e($service->benefits)) !!}
+                                    <ul class="mb-0">
+                                        @foreach($service->benefits as $benefit)
+                                            <li>{{ $benefit }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         @endif

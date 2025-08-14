@@ -81,8 +81,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Service::factory(8)->create();
-
         // Create careers
         Career::factory(15)->create();
 
@@ -149,6 +147,10 @@ class DatabaseSeeder extends Seeder
         Insight::factory(15)->create();
 
         // Create jumbotrons
-        $this->call(JumbotronSeeder::class);
+        $this->call([
+            JumbotronSeeder::class,
+            ServiceSeeder::class,
+            ServiceProcessSeeder::class,
+        ]);
     }
 }

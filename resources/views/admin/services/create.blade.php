@@ -61,8 +61,17 @@
 
                             <div class="mb-3">
                                 <label for="features" class="form-label">Key Features</label>
-                                <textarea class="form-control @error('features') is-invalid @enderror"
-                                          id="features" name="features" rows="5">{{ old('features') }}</textarea>
+                                <div id="features-container">
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+                                        <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addFeature()">
+                                    <i class="fas fa-plus"></i> Add Feature
+                                </button>
                                 <div class="form-text">List the main features of this service</div>
                                 @error('features')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -71,8 +80,17 @@
 
                             <div class="mb-3">
                                 <label for="benefits" class="form-label">Benefits</label>
-                                <textarea class="form-control @error('benefits') is-invalid @enderror"
-                                          id="benefits" name="benefits" rows="5">{{ old('benefits') }}</textarea>
+                                <div id="benefits-container">
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" name="benefits[]" placeholder="Enter a benefit">
+                                        <button type="button" class="btn btn-outline-danger" onclick="removeBenefit(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addBenefit()">
+                                    <i class="fas fa-plus"></i> Add Benefit
+                                </button>
                                 <div class="form-text">Benefits clients get from this service</div>
                                 @error('benefits')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -220,5 +238,47 @@ document.getElementById('title').addEventListener('input', function() {
         .trim('-');
     document.getElementById('slug').value = slug;
 });
+
+// Features management
+function addFeature() {
+    const container = document.getElementById('features-container');
+    const div = document.createElement('div');
+    div.className = 'input-group mb-2';
+    div.innerHTML = `
+        <input type="text" class="form-control" name="features[]" placeholder="Enter a feature">
+        <button type="button" class="btn btn-outline-danger" onclick="removeFeature(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    container.appendChild(div);
+}
+
+function removeFeature(button) {
+    const container = document.getElementById('features-container');
+    if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
+
+// Benefits management
+function addBenefit() {
+    const container = document.getElementById('benefits-container');
+    const div = document.createElement('div');
+    div.className = 'input-group mb-2';
+    div.innerHTML = `
+        <input type="text" class="form-control" name="benefits[]" placeholder="Enter a benefit">
+        <button type="button" class="btn btn-outline-danger" onclick="removeBenefit(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    container.appendChild(div);
+}
+
+function removeBenefit(button) {
+    const container = document.getElementById('benefits-container');
+    if (container.children.length > 1) {
+        button.parentElement.remove();
+    }
+}
 </script>
 @endpush

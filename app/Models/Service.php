@@ -15,12 +15,15 @@ class Service extends Model
         'description',
         'content',
         'category',
-        'price',
-        'duration',
+        'detailed_description',
         'features',
         'benefits',
+        'sub_services',
+        'price',
+        'duration',
         'featured_image',
         'icon',
+        'svg_icon',
         'status',
         'sort_order',
         'is_featured',
@@ -29,8 +32,12 @@ class Service extends Model
     ];
 
     protected $casts = [
+        'features' => 'array',
+        'benefits' => 'array',
+        'sub_services' => 'array',
         'sort_order' => 'integer',
         'is_featured' => 'boolean',
+        'price' => 'decimal:2',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

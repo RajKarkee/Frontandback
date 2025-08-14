@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\IndustryAdminController;
 use App\Http\Controllers\Admin\OfficeAdminController;
 use App\Http\Controllers\Admin\InsightAdminController;
 use App\Http\Controllers\Admin\JumbotronController;
+use App\Http\Controllers\Admin\ServiceProcessController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -100,6 +101,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'edit' => 'services.edit',
         'update' => 'services.update',
         'destroy' => 'services.destroy',
+    ]);
+
+    Route::resource('service-processes', ServiceProcessController::class)->names([
+        'index' => 'service-processes.index',
+        'create' => 'service-processes.create',
+        'store' => 'service-processes.store',
+        'show' => 'service-processes.show',
+        'edit' => 'service-processes.edit',
+        'update' => 'service-processes.update',
+        'destroy' => 'service-processes.destroy',
     ]);
 
     Route::resource('industries', IndustryAdminController::class)->names([

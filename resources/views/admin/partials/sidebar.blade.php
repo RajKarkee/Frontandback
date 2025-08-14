@@ -83,6 +83,11 @@
                 <span>Services</span>
                 <span class="badge bg-secondary ms-auto">{{ \App\Models\Service::count() }}</span>
             </a>
+            <a class="nav-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}"
+               href="{{ route('admin.service-processes.index') }}">
+                <i class="fas fa-cogs"></i>
+                <span>Services Process</span>
+            </a>
         </li>
 
         <li class="nav-item">

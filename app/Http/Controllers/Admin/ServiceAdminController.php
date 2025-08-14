@@ -27,13 +27,18 @@ class ServiceAdminController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:services',
             'description' => 'required|string',
+            'detailed_description' => 'nullable|string',
             'content' => 'nullable|string',
             'category' => 'nullable|string|max:100',
             'price' => 'nullable|string|max:100',
             'duration' => 'nullable|string|max:100',
-            'features' => 'nullable|string',
-            'benefits' => 'nullable|string',
+            'features' => 'nullable|array',
+            'features.*' => 'string|max:255',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string|max:255',
+            'sub_services' => 'nullable|array',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'svg_icon' => 'nullable|string',
             'icon' => 'nullable|string|max:255',
             'status' => 'required|in:active,inactive',
             'sort_order' => 'nullable|integer',
@@ -45,6 +50,14 @@ class ServiceAdminController extends Controller
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
+
+        // Handle arrays
+        if ($request->has('features') && is_array($request->features)) {
+            $data['features'] = array_filter($request->features);
+        }
+        if ($request->has('benefits') && is_array($request->benefits)) {
+            $data['benefits'] = array_filter($request->benefits);
+        }
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {
@@ -73,13 +86,18 @@ class ServiceAdminController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:services,slug,' . $service->id,
             'description' => 'required|string',
+            'detailed_description' => 'nullable|string',
             'content' => 'nullable|string',
             'category' => 'nullable|string|max:100',
             'price' => 'nullable|string|max:100',
             'duration' => 'nullable|string|max:100',
-            'features' => 'nullable|string',
-            'benefits' => 'nullable|string',
+            'features' => 'nullable|array',
+            'features.*' => 'string|max:255',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string|max:255',
+            'sub_services' => 'nullable|array',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'svg_icon' => 'nullable|string',
             'icon' => 'nullable|string|max:255',
             'status' => 'required|in:active,inactive',
             'sort_order' => 'nullable|integer',
@@ -91,6 +109,14 @@ class ServiceAdminController extends Controller
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
+
+        // Handle arrays
+        if ($request->has('features') && is_array($request->features)) {
+            $data['features'] = array_filter($request->features);
+        }
+        if ($request->has('benefits') && is_array($request->benefits)) {
+            $data['benefits'] = array_filter($request->benefits);
+        }
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {
