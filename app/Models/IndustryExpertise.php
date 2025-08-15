@@ -10,6 +10,7 @@ class IndustryExpertise extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'title',
         'description',
         'svg_icon',

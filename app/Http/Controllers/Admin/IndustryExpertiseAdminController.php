@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\IndustryExpertise;
 use Illuminate\Http\Request;
@@ -36,20 +37,21 @@ class IndustryExpertiseAdminController extends Controller
         $validated['sort_order'] = $validated['sort_order'] ?? 0;
 
         IndustryExpertise::create($validated);
+        $this->render();
 
         return redirect()->route('admin.industry-expertise.index')
             ->with('success', 'Industry expertise created successfully.');
     }
 
-    public function show(IndustryExpertise $expertise)
+    public function show(IndustryExpertise $industryExpertise)
     {
-
-        return view('admin.industry-expertise.show', compact('expertise'));
+        return view('admin.industry-expertise.show', compact('industryExpertise'));
     }
 
-    public function edit(IndustryExpertise $expertise)
+    public function edit(IndustryExpertise $industryExpertise)
     {
-        return view('admin.industry-expertise.edit', compact('expertise'));
+        // dd($industryExpertise);
+        return view('admin.industry-expertise.edit', compact('industryExpertise'));
     }
 
     public function update(Request $request, IndustryExpertise $industryExpertise)
@@ -69,6 +71,7 @@ class IndustryExpertiseAdminController extends Controller
         $validated['sort_order'] = $validated['sort_order'] ?? 0;
 
         $industryExpertise->update($validated);
+        $this->render();
 
         return redirect()->route('admin.industry-expertise.index')
             ->with('success', 'Industry expertise updated successfully.');
@@ -77,8 +80,14 @@ class IndustryExpertiseAdminController extends Controller
     public function destroy(IndustryExpertise $industryExpertise)
     {
         $industryExpertise->delete();
-
+        $this->render();
         return redirect()->route('admin.industry-expertise.index')
             ->with('success', 'Industry expertise deleted successfully.');
+    }
+
+    public function render()
+    {
+        $expertises = IndustryExpertise::active()->featured()->ordered()->get();
+        Helper::putCache('industries.expertises', view('admin.template.industries.expertises', compact('expertises'))->render());
     }
 }

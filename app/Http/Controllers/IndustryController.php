@@ -10,10 +10,7 @@ class IndustryController extends Controller
 {
     public function index()
     {
-        $industries = Industry::active()->ordered()->get();
-        $expertises = IndustryExpertise::active()->featured()->ordered()->get();
-
-        return view('industries', compact('industries', 'expertises'));
+        return view('industries');
     }
 
     public function show($slug)

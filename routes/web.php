@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\BlogAdminController;
 use App\Http\Controllers\Admin\EventAdminController;
 use App\Http\Controllers\Admin\CareerAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
+use App\Http\Controllers\Admin\ContactInformationAdminController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\IndustryAdminController;
 use App\Http\Controllers\Admin\IndustryExpertiseAdminController;
@@ -92,6 +93,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'edit' => 'contacts.edit',
         'update' => 'contacts.update',
         'destroy' => 'contacts.destroy',
+    ]);
+
+    Route::resource('contact-information', ContactInformationAdminController::class)->names([
+        'index' => 'contact-information.index',
+        'create' => 'contact-information.create',
+        'store' => 'contact-information.store',
+        'show' => 'contact-information.show',
+        'edit' => 'contact-information.edit',
+        'update' => 'contact-information.update',
+        'destroy' => 'contact-information.destroy',
     ]);
 
     Route::resource('services', ServiceAdminController::class)->names([

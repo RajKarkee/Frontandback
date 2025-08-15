@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Industry;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ class IndustryAdminController extends Controller
         }
 
         Industry::create($data);
+        $this->render();
 
         return redirect()->route('admin.industries.index')
             ->with('success', 'Industry created successfully.');
@@ -111,6 +113,7 @@ class IndustryAdminController extends Controller
         }
 
         $industry->update($data);
+        $this->render();
 
         return redirect()->route('admin.industries.index')
             ->with('success', 'Industry updated successfully.');
@@ -127,8 +130,13 @@ class IndustryAdminController extends Controller
         }
 
         $industry->delete();
-
+        $this->render();
         return redirect()->route('admin.industries.index')
             ->with('success', 'Industry deleted successfully.');
+    }
+
+     public function render(){
+       $industries = Industry::active()->ordered()->get();
+        Helper::putCache('industries.index', view('admin.template.industries.index', compact('industries'))->render());
     }
 }

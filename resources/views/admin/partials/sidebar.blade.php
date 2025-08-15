@@ -141,6 +141,15 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.contact-information.*') ? 'active' : '' }}"
+               href="{{ route('admin.contact-information.index') }}">
+                <i class="fas fa-address-card"></i>
+                <span>Contact Information</span>
+                <span class="badge bg-info ms-auto">{{ \App\Models\ContactInformation::count() }}</span>
+            </a>
+        </li>
+
         <!-- Quick Actions -->
         <li class="nav-item">
             <h6 class="sidebar-heading">
