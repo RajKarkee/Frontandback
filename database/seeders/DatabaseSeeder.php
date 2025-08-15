@@ -103,6 +103,7 @@ class DatabaseSeeder extends Seeder
             IndustrySeeder::class,
             AboutSeeder::class,
             InsightSeeder::class,
+            CareerSeeder::class,
         ]);
     }
 }

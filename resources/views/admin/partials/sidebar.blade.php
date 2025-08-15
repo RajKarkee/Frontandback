@@ -117,12 +117,49 @@
             </a>
         </li>
 
+        <!-- Careers Section -->
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.careers.*') ? 'active' : '' }}"
-               href="{{ route('admin.careers.index') }}">
-                <i class="fas fa-user-tie"></i>
-                <span>Careers</span>
-                <span class="badge bg-primary ms-auto">{{ \App\Models\Career::count() }}</span>
+            <h6 class="sidebar-heading">
+                <i class="fas fa-user-tie me-2"></i>Careers Management
+            </h6>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.careers.benefits*') ? 'active' : '' }}"
+               href="{{ route('admin.careers.benefits') }}">
+                <i class="fas fa-star"></i>
+                <span>Career Benefits</span>
+                <span class="badge bg-success ms-auto">{{ \App\Models\CareerBenefit::count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.careers.jobs*') ? 'active' : '' }}"
+               href="{{ route('admin.careers.jobs') }}">
+                <i class="fas fa-briefcase"></i>
+                <span>Job Openings</span>
+                <span class="badge bg-primary ms-auto">{{ \App\Models\JobOpening::count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.careers.testimonials*') ? 'active' : '' }}"
+               href="{{ route('admin.careers.testimonials') }}">
+                <i class="fas fa-quote-left"></i>
+                <span>Employee Testimonials</span>
+                <span class="badge bg-info ms-auto">{{ \App\Models\CareerTestimonial::count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.careers.applications*') ? 'active' : '' }}"
+               href="{{ route('admin.careers.applications') }}">
+                <i class="fas fa-file-user"></i>
+                <span>Job Applications</span>
+                @php $newApplications = \App\Models\JobApplication::where('status', 'pending')->count(); @endphp
+                <span class="badge bg-{{ $newApplications > 0 ? 'warning' : 'secondary' }} ms-auto">
+                    {{ $newApplications }}
+                </span>
             </a>
         </li>
 

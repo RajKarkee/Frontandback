@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\IndustryController;
@@ -76,15 +77,40 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'destroy' => 'events.destroy',
     ]);
 
-    Route::resource('careers', CareerAdminController::class)->names([
-        'index' => 'careers.index',
-        'create' => 'careers.create',
-        'store' => 'careers.store',
-        'show' => 'careers.show',
-        'edit' => 'careers.edit',
-        'update' => 'careers.update',
-        'destroy' => 'careers.destroy',
-    ]);
+    Route::resource('careers', CareerAdminController::class)->except(['create', 'store', 'show', 'edit', 'update', 'destroy']);
+    
+    // Redirect careers index to benefits page (main careers management)
+    Route::get('careers', function() {
+        return redirect()->route('admin.careers.benefits');
+    })->name('careers.index');
+
+    // Career Benefits Management
+    Route::get('careers/benefits', [CareerAdminController::class, 'benefits'])->name('careers.benefits');
+    Route::post('careers/benefits', [CareerAdminController::class, 'storeBenefit'])->name('careers.benefits.store');
+    Route::put('careers/benefits/{benefit}', [CareerAdminController::class, 'updateBenefit'])->name('careers.benefits.update');
+    Route::delete('careers/benefits/{benefit}', [CareerAdminController::class, 'destroyBenefit'])->name('careers.benefits.destroy');
+    Route::post('careers/benefits/{benefit}/toggle-status', [CareerAdminController::class, 'toggleBenefitStatus'])->name('careers.benefits.toggle-status');
+
+    // Job Openings Management
+    Route::get('careers/jobs', [CareerAdminController::class, 'jobs'])->name('careers.jobs');
+    Route::get('careers/jobs/create', [CareerAdminController::class, 'createJob'])->name('careers.jobs.create');
+    Route::post('careers/jobs', [CareerAdminController::class, 'storeJob'])->name('careers.jobs.store');
+    Route::get('careers/jobs/{job}/edit', [CareerAdminController::class, 'editJob'])->name('careers.jobs.edit');
+    Route::put('careers/jobs/{job}', [CareerAdminController::class, 'updateJob'])->name('careers.jobs.update');
+    Route::delete('careers/jobs/{job}', [CareerAdminController::class, 'destroyJob'])->name('careers.jobs.destroy');
+    Route::post('careers/jobs/{job}/toggle-featured', [CareerAdminController::class, 'toggleJobFeatured'])->name('careers.jobs.toggle-featured');
+
+    // Career Testimonials Management
+    Route::get('careers/testimonials', [CareerAdminController::class, 'testimonials'])->name('careers.testimonials');
+    Route::post('careers/testimonials', [CareerAdminController::class, 'storeTestimonial'])->name('careers.testimonials.store');
+    Route::put('careers/testimonials/{testimonial}', [CareerAdminController::class, 'updateTestimonial'])->name('careers.testimonials.update');
+    Route::delete('careers/testimonials/{testimonial}', [CareerAdminController::class, 'destroyTestimonial'])->name('careers.testimonials.destroy');
+    Route::post('careers/testimonials/{testimonial}/toggle-status', [CareerAdminController::class, 'toggleTestimonialStatus'])->name('careers.testimonials.toggle-status');
+
+    // Job Applications Management
+    Route::get('careers/applications', [CareerAdminController::class, 'applications'])->name('careers.applications');
+    Route::get('careers/applications/{application}', [CareerAdminController::class, 'showApplication'])->name('careers.applications.show');
+    Route::put('careers/applications/{application}/status', [CareerAdminController::class, 'updateApplicationStatus'])->name('careers.applications.update-status');
 
     Route::resource('contacts', ContactAdminController::class)->names([
         'index' => 'contacts.index',
@@ -236,7 +262,14 @@ Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 Route::get('/offices/{slug}', [OfficeController::class, 'show'])->name('offices.show');
 
 Route::get('/careers', [CareerController::class, 'index'])->name('careers');
+Route::get('/careers/jobs/{id}', [CareerController::class, 'showJob'])->name('careers.jobs.detail');
+Route::get('/careers/jobs-by-category', [CareerController::class, 'getJobsByCategory'])->name('careers.jobs.by-category');
 Route::get('/careers/{slug}', [CareerController::class, 'show'])->name('careers.show');
+
+// Job Application Routes
+Route::get('/apply', [JobApplicationController::class, 'generalApplication'])->name('careers.apply.general');
+Route::get('/apply/{jobId}', [JobApplicationController::class, 'create'])->name('careers.apply');
+Route::post('/apply', [JobApplicationController::class, 'store'])->name('careers.apply.submit');
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
