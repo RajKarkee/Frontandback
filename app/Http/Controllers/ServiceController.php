@@ -10,14 +10,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::active()->ordered()->get();
-        $serviceProcesses = ServiceProcess::active()->ordered()->get();
-        return view('services', compact('services', 'serviceProcesses'));
+        return view('services');
     }
 
-    public function show($slug)
-    {
-        $service = Service::where('slug', $slug)->active()->firstOrFail();
-        return view('service-detail', compact('service'));
-    }
 }

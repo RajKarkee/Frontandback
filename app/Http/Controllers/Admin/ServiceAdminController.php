@@ -84,7 +84,7 @@ class ServiceAdminController extends Controller
         }
 
         Service::create($data);
-
+        $this->render();
         return redirect()->route('admin.services.index')
             ->with('success', 'Service created successfully.');
     }
@@ -112,8 +112,6 @@ class ServiceAdminController extends Controller
             'duration' => 'nullable|string|max:100',
             'features' => 'nullable|array',
             'features.*' => 'string|max:255',
-            'benefits' => 'nullable|array',
-            'benefits.*' => 'string|max:255',
             'sub_service_titles' => 'nullable|array',
             'sub_service_titles.*' => 'string|max:255',
             'sub_service_items' => 'nullable|array',
@@ -178,13 +176,13 @@ class ServiceAdminController extends Controller
         }
 
         $service->delete();
-
+        $this->render();
         return redirect()->route('admin.services.index')
             ->with('success', 'Service deleted successfully.');
     }
 
     public function render(){
-        $services = Service::all();
+        $services = Service::active()->ordered()->get();
         Helper::putCache('services.index', view('admin.template.services.index', compact('services'))->render());
     }
 }

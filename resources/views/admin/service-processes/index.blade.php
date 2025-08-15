@@ -71,10 +71,6 @@
                                 <td>{{ $process->sort_order }}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.service-processes.show', $process) }}"
-                                           class="btn btn-sm btn-outline-info">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
                                         <a href="{{ route('admin.service-processes.edit', $process) }}"
                                            class="btn btn-sm btn-outline-primary">
                                             <i class="fas fa-edit"></i>

@@ -108,7 +108,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'index' => 'service-processes.index',
         'create' => 'service-processes.create',
         'store' => 'service-processes.store',
-        'show' => 'service-processes.show',
         'edit' => 'service-processes.edit',
         'update' => 'service-processes.update',
         'destroy' => 'service-processes.destroy',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceProcess;
 use Illuminate\Http\Request;
@@ -36,15 +37,11 @@ class ServiceProcessController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? $data['step_number'];
 
         ServiceProcess::create($data);
-
+        $this->render();
         return redirect()->route('admin.service-processes.index')
             ->with('success', 'Service process step created successfully.');
     }
 
-    public function show(ServiceProcess $serviceProcess)
-    {
-        return view('admin.service-processes.show', compact('serviceProcess'));
-    }
 
     public function edit(ServiceProcess $serviceProcess)
     {
@@ -59,7 +56,6 @@ class ServiceProcessController extends Controller
             'description' => 'required|string',
             'icon' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:7',
-            'is_active' => 'boolean',
             'sort_order' => 'nullable|integer',
         ]);
 
@@ -68,7 +64,7 @@ class ServiceProcessController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? $data['step_number'];
 
         $serviceProcess->update($data);
-
+        $this->render();
         return redirect()->route('admin.service-processes.index')
             ->with('success', 'Service process step updated successfully.');
     }
@@ -76,8 +72,14 @@ class ServiceProcessController extends Controller
     public function destroy(ServiceProcess $serviceProcess)
     {
         $serviceProcess->delete();
-
+        $this->render();
         return redirect()->route('admin.service-processes.index')
             ->with('success', 'Service process step deleted successfully.');
+    }
+
+    public function render()
+    {
+        $serviceProcesses = ServiceProcess::active()->ordered()->get();
+        Helper::putCache('services.process', view('admin.template.services.process', compact('serviceProcesses')));
     }
 }
