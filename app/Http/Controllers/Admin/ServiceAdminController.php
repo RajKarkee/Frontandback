@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -164,7 +165,7 @@ class ServiceAdminController extends Controller
         }
 
         $service->update($data);
-
+        $this->render();
         return redirect()->route('admin.services.index')
             ->with('success', 'Service updated successfully.');
     }
@@ -180,5 +181,10 @@ class ServiceAdminController extends Controller
 
         return redirect()->route('admin.services.index')
             ->with('success', 'Service deleted successfully.');
+    }
+
+    public function render(){
+        $services = Service::all();
+        Helper::putCache('services.index', view('admin.template.services.index', compact('services'))->render());
     }
 }

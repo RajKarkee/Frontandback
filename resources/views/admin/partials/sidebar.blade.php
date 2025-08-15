@@ -97,6 +97,11 @@
                 <span>Industries</span>
                 <span class="badge bg-dark ms-auto">{{ \App\Models\Industry::count() }}</span>
             </a>
+              <a class="nav-link " href="{{ route('admin.industry-expertise.index') }}">
+                <i class="fas fa-industry"></i>
+                <span>Industry Expertise</span>
+                <span class="badge bg-dark ms-auto">{{ \App\Models\IndustryExpertise::count() }}</span>
+            </a>
         </li>
 
         <li class="nav-item">

@@ -3,6 +3,27 @@
 @section('title', 'Industries We Serve - Chartered Insights')
 @section('meta_description', 'Discover how Chartered Insights provides specialized accounting, audit, and advisory services across diverse industries including healthcare, manufacturing, technology, real estate, and more.')
 
+@push('styles')
+<style>
+.expertise-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.expertise-icon-container svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    color: white !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+}
+</style>
+@endpush
+
 @section('content')
 <!-- Dynamic Hero Section -->
 <x-jumbotron page-slug="industries" />
@@ -186,53 +207,28 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center fade-in">
-                <div class="w-16 h-16 bg-fresh-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-crisp-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+            @foreach($expertises as $index => $expertise)
+            <div class="text-center fade-in {{ $index > 0 ? 'fade-in-delay-' . $index : '' }}">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                     style="background-color: {{ $expertise->color_theme ?? '#10b981' }};">
+                    @if($expertise->svg_icon)
+                        <div class="expertise-icon-container text-crisp-white">
+                            {!! $expertise->svg_icon !!}
+                        </div>
+                    @elseif($expertise->icon_class)
+                        <i class="{{ $expertise->icon_class }} text-crisp-white text-2xl"></i>
+                    @else
+                        <svg class="w-8 h-8 text-crisp-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    @endif
                 </div>
-                <h3 class="text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3">Specialized Knowledge</h3>
+                <h3 class="text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3">{{ $expertise->title }}</h3>
                 <p class="text-report-black">
-                    Our teams have deep expertise in industry-specific regulations, standards, and best practices.
+                    {{ $expertise->description }}
                 </p>
             </div>
-
-            <div class="text-center fade-in fade-in-delay-1">
-                <div class="w-16 h-16 bg-fresh-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-crisp-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3">Proven Results</h3>
-                <p class="text-report-black">
-                    Track record of delivering measurable improvements in financial performance across industries.
-                </p>
-            </div>
-
-            <div class="text-center fade-in fade-in-delay-2">
-                <div class="w-16 h-16 bg-fresh-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-crisp-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3">Collaborative Approach</h3>
-                <p class="text-report-black">
-                    We work closely with your teams to ensure solutions align with operational realities.
-                </p>
-            </div>
-
-            <div class="text-center fade-in">
-                <div class="w-16 h-16 bg-fresh-teal rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-crisp-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-montserrat font-semibold text-deep-chartered-blue mb-3">Innovation Focus</h3>
-                <p class="text-report-black">
-                    We leverage the latest technology and methodologies to drive efficiency and insights.
-                </p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

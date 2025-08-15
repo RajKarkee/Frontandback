@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Industry;
+use App\Models\IndustryExpertise;
 use Illuminate\Http\Request;
 
 class IndustryController extends Controller
@@ -10,7 +11,9 @@ class IndustryController extends Controller
     public function index()
     {
         $industries = Industry::active()->ordered()->get();
-        return view('industries', compact('industries'));
+        $expertises = IndustryExpertise::active()->featured()->ordered()->get();
+
+        return view('industries', compact('industries', 'expertises'));
     }
 
     public function show($slug)

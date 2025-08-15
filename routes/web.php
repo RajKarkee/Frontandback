@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\CareerAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\IndustryAdminController;
+use App\Http\Controllers\Admin\IndustryExpertiseAdminController;
 use App\Http\Controllers\Admin\OfficeAdminController;
 use App\Http\Controllers\Admin\InsightAdminController;
 use App\Http\Controllers\Admin\JumbotronController;
@@ -121,6 +122,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'edit' => 'industries.edit',
         'update' => 'industries.update',
         'destroy' => 'industries.destroy',
+    ]);
+
+    Route::resource('industry-expertise', IndustryExpertiseAdminController::class)->names([
+        'index' => 'industry-expertise.index',
+        'create' => 'industry-expertise.create',
+        'store' => 'industry-expertise.store',
+        'show' => 'industry-expertise.show',
+        'edit' => 'industry-expertise.edit',
+        'update' => 'industry-expertise.update',
+        'destroy' => 'industry-expertise.destroy',
     ]);
 
     Route::resource('offices', OfficeAdminController::class)->names([
