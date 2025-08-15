@@ -107,6 +107,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             ServiceProcessSeeder::class,
             IndustrySeeder::class,
+            AboutSeeder::class,
         ]);
     }
 }

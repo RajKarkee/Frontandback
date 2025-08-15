@@ -16,7 +16,24 @@ class PageController extends Controller
     public function about()
     {
         $page = Page::where('slug', 'about')->active()->first();
-        return view('about', compact('page'));
+
+        // Get About page content with all related data
+        $about = \App\Models\About::with([
+            'coreValues' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'teamMembers' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'expertiseAreas' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'whyChooseUsItems' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }
+        ])->where('is_active', true)->first();
+
+        return view('about', compact('page', 'about'));
     }
 
     public function show($slug)

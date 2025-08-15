@@ -27,6 +27,19 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}"
+               href="{{ route('admin.about.index') }}">
+                <i class="fas fa-users"></i>
+                <span>About Page</span>
+                @if(\App\Models\About::count() > 0)
+                    <span class="badge bg-success ms-auto">Active</span>
+                @else
+                    <span class="badge bg-warning ms-auto">Setup</span>
+                @endif
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}"
                href="{{ route('admin.blogs.index') }}">
                 <i class="fas fa-blog"></i>
@@ -143,10 +156,14 @@
 
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.contact-information.*') ? 'active' : '' }}"
-               href="{{ route('admin.contact-information.index') }}">
-                <i class="fas fa-address-card"></i>
-                <span>Contact Information</span>
-                <span class="badge bg-info ms-auto">{{ \App\Models\ContactInformation::count() }}</span>
+               href="{{ route('admin.contact-information.settings') }}">
+                <i class="fas fa-cog"></i>
+                <span>Contact Settings</span>
+                @if(\App\Models\ContactInformation::count() > 0)
+                    <span class="badge bg-success ms-auto">Configured</span>
+                @else
+                    <span class="badge bg-warning ms-auto">Setup</span>
+                @endif
             </a>
         </li>
 

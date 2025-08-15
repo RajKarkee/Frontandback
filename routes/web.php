@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\OfficeAdminController;
 use App\Http\Controllers\Admin\InsightAdminController;
 use App\Http\Controllers\Admin\JumbotronController;
 use App\Http\Controllers\Admin\ServiceProcessController;
+use App\Http\Controllers\AboutAdminController;
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -95,15 +96,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'destroy' => 'contacts.destroy',
     ]);
 
-    Route::resource('contact-information', ContactInformationAdminController::class)->names([
-        'index' => 'contact-information.index',
-        'create' => 'contact-information.create',
-        'store' => 'contact-information.store',
-        'show' => 'contact-information.show',
-        'edit' => 'contact-information.edit',
-        'update' => 'contact-information.update',
-        'destroy' => 'contact-information.destroy',
-    ]);
+    // Contact Information Settings (simplified)
+    Route::get('contact-information/settings', [ContactInformationAdminController::class, 'settings'])
+        ->name('contact-information.settings');
+    Route::post('contact-information/settings', [ContactInformationAdminController::class, 'saveSettings'])
+        ->name('contact-information.settings.save');
 
     Route::resource('services', ServiceAdminController::class)->names([
         'index' => 'services.index',
@@ -177,6 +174,34 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // Additional jumbotron routes
     Route::post('jumbotrons/{jumbotron}/toggle-status', [JumbotronController::class, 'toggleStatus'])->name('jumbotrons.toggle-status');
     Route::post('jumbotrons/reorder-slides', [JumbotronController::class, 'reorderSlides'])->name('jumbotrons.reorder-slides');
+
+    // About Page Management Routes
+    Route::get('about', [AboutAdminController::class, 'index'])->name('about.index');
+    Route::post('about', [AboutAdminController::class, 'store'])->name('about.store');
+
+    // Core Values Routes
+    Route::post('about/core-values', [AboutAdminController::class, 'storeCoreValue'])->name('about.core-values.store');
+    Route::put('about/core-values/{id}', [AboutAdminController::class, 'updateCoreValue'])->name('about.core-values.update');
+    Route::delete('about/core-values/{id}', [AboutAdminController::class, 'deleteCoreValue'])->name('about.core-values.delete');
+    Route::get('about/core-values/{id}/toggle', [AboutAdminController::class, 'toggleCoreValueStatus'])->name('about.core-values.toggle');
+
+    // Team Members Routes
+    Route::post('about/team-members', [AboutAdminController::class, 'storeTeamMember'])->name('about.team-members.store');
+    Route::put('about/team-members/{id}', [AboutAdminController::class, 'updateTeamMember'])->name('about.team-members.update');
+    Route::delete('about/team-members/{id}', [AboutAdminController::class, 'deleteTeamMember'])->name('about.team-members.delete');
+    Route::get('about/team-members/{id}/toggle', [AboutAdminController::class, 'toggleTeamMemberStatus'])->name('about.team-members.toggle');
+
+    // Expertise Areas Routes
+    Route::post('about/expertise-areas', [AboutAdminController::class, 'storeExpertiseArea'])->name('about.expertise-areas.store');
+    Route::put('about/expertise-areas/{id}', [AboutAdminController::class, 'updateExpertiseArea'])->name('about.expertise-areas.update');
+    Route::delete('about/expertise-areas/{id}', [AboutAdminController::class, 'deleteExpertiseArea'])->name('about.expertise-areas.delete');
+    Route::get('about/expertise-areas/{id}/toggle', [AboutAdminController::class, 'toggleExpertiseAreaStatus'])->name('about.expertise-areas.toggle');
+
+    // Why Choose Us Routes
+    Route::post('about/why-choose-us', [AboutAdminController::class, 'storeWhyChooseUs'])->name('about.why-choose-us.store');
+    Route::put('about/why-choose-us/{id}', [AboutAdminController::class, 'updateWhyChooseUs'])->name('about.why-choose-us.update');
+    Route::delete('about/why-choose-us/{id}', [AboutAdminController::class, 'deleteWhyChooseUs'])->name('about.why-choose-us.delete');
+    Route::get('about/why-choose-us/{id}/toggle', [AboutAdminController::class, 'toggleWhyChooseUsStatus'])->name('about.why-choose-us.toggle');
 });
 
 // Frontend Routes
@@ -209,6 +234,3 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.subm
 
 // Dynamic page routes (should be last)
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
-
-
-
