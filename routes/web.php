@@ -161,6 +161,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'destroy' => 'insights.destroy',
     ]);
 
+    // Additional Insight Routes
+    Route::post('insights/{insight}/toggle-status', [InsightAdminController::class, 'toggleStatus'])->name('insights.toggle-status');
+    Route::post('insights/{insight}/toggle-featured', [InsightAdminController::class, 'toggleFeatured'])->name('insights.toggle-featured');
+
+    // Insight Categories Routes
+    Route::get('insights-categories', [InsightAdminController::class, 'categories'])->name('insights.categories');
+    Route::post('insights-categories', [InsightAdminController::class, 'storeCategory'])->name('insights.categories.store');
+    Route::put('insights-categories/{category}', [InsightAdminController::class, 'updateCategory'])->name('insights.categories.update');
+    Route::delete('insights-categories/{category}', [InsightAdminController::class, 'destroyCategory'])->name('insights.categories.destroy');
+    Route::post('insights-categories/{category}/toggle-status', [InsightAdminController::class, 'toggleCategoryStatus'])->name('insights.categories.toggle-status');
+
     Route::resource('jumbotrons', JumbotronController::class)->names([
         'index' => 'jumbotrons.index',
         'create' => 'jumbotrons.create',
@@ -214,8 +225,9 @@ Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('servic
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
 
-Route::get('/insights', [InsightController::class, 'index'])->name('insights');
-Route::get('/insights/{slug}', [InsightController::class, 'show'])->name('insights.show');
+Route::get('/insights', [PageController::class, 'insights'])->name('insights');
+Route::get('/insights/category/{categorySlug}', [PageController::class, 'insightsByCategory'])->name('insights.category');
+Route::get('/insights/{slug}', [PageController::class, 'insightDetail'])->name('insights.detail');
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');

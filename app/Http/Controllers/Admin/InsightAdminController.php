@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Insight;
+use App\Models\InsightCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -12,13 +13,20 @@ class InsightAdminController extends Controller
 {
     public function index()
     {
-        $insights = Insight::latest()->paginate(15);
-        return view('admin.insights.index', compact('insights'));
+        $insights = Insight::with('insightCategory')
+                          ->orderBy('sort_order')
+                          ->orderBy('created_at', 'desc')
+                          ->paginate(20);
+
+        $categories = InsightCategory::active()->orderBy('sort_order')->get();
+
+        return view('admin.insights.index', compact('insights', 'categories'));
     }
 
     public function create()
     {
-        return view('admin.insights.create');
+        $categories = InsightCategory::active()->orderBy('sort_order')->get();
+        return view('admin.insights.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -26,26 +34,40 @@ class InsightAdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:insights',
+            'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'summary' => 'nullable|string',
-            'key_takeaways' => 'nullable|string',
-            'references' => 'nullable|string',
+            'category_slug' => 'nullable|string|exists:insight_categories,slug',
             'author' => 'nullable|string|max:255',
-            'category' => 'nullable|string|max:100',
-            'type' => 'nullable|string|max:50',
-            'reading_time' => 'nullable|string|max:50',
-            'tags' => 'nullable|string',
             'published_at' => 'nullable|date',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published,archived',
             'is_featured' => 'boolean',
-            'meta_title' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
+            'sort_order' => 'nullable|integer|min:0',
+            'read_time' => 'nullable|integer|min:1',
             'meta_description' => 'nullable|string|max:500',
+            'tags' => 'nullable|string',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
+        $data['is_active'] = $request->has('is_active') ? true : false;
+
+        // Set default values
+        if (!isset($data['is_active'])) {
+            $data['is_active'] = true;
+        }
+        if (!isset($data['sort_order'])) {
+            $data['sort_order'] = Insight::max('sort_order') + 1;
+        }
+
+        // Convert tags string to array
+        if ($data['tags']) {
+            $data['tags'] = array_map('trim', explode(',', $data['tags']));
+        } else {
+            $data['tags'] = null;
+        }
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {
@@ -65,7 +87,8 @@ class InsightAdminController extends Controller
 
     public function edit(Insight $insight)
     {
-        return view('admin.insights.edit', compact('insight'));
+        $categories = InsightCategory::active()->orderBy('sort_order')->get();
+        return view('admin.insights.edit', compact('insight', 'categories'));
     }
 
     public function update(Request $request, Insight $insight)
@@ -73,26 +96,32 @@ class InsightAdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:insights,slug,' . $insight->id,
+            'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'summary' => 'nullable|string',
-            'key_takeaways' => 'nullable|string',
-            'references' => 'nullable|string',
+            'category_slug' => 'nullable|string|exists:insight_categories,slug',
             'author' => 'nullable|string|max:255',
-            'category' => 'nullable|string|max:100',
-            'type' => 'nullable|string|max:50',
-            'reading_time' => 'nullable|string|max:50',
-            'tags' => 'nullable|string',
             'published_at' => 'nullable|date',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published,archived',
             'is_featured' => 'boolean',
-            'meta_title' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
+            'sort_order' => 'nullable|integer|min:0',
+            'read_time' => 'nullable|integer|min:1',
             'meta_description' => 'nullable|string|max:500',
+            'tags' => 'nullable|string',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
+        $data['is_active'] = $request->has('is_active') ? true : false;
+
+        // Convert tags string to array
+        if ($data['tags']) {
+            $data['tags'] = array_map('trim', explode(',', $data['tags']));
+        } else {
+            $data['tags'] = null;
+        }
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {
@@ -119,5 +148,90 @@ class InsightAdminController extends Controller
 
         return redirect()->route('admin.insights.index')
             ->with('success', 'Insight deleted successfully.');
+    }
+
+    // Category Management Methods
+    public function categories()
+    {
+        $categories = InsightCategory::orderBy('sort_order')->get();
+        return view('admin.insights.categories', compact('categories'));
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:insight_categories',
+            'description' => 'nullable|string',
+            'icon' => 'nullable|string',
+            'sort_order' => 'nullable|integer|min:0',
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+        $data['is_active'] = $request->has('is_active');
+
+        InsightCategory::create($data);
+
+        return redirect()->route('admin.insights.categories')
+            ->with('success', 'Category created successfully.');
+    }
+
+    public function updateCategory(Request $request, InsightCategory $category)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:insight_categories,slug,' . $category->id,
+            'description' => 'nullable|string',
+            'icon' => 'nullable|string',
+            'sort_order' => 'nullable|integer|min:0',
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+        $data['is_active'] = $request->has('is_active');
+
+        $category->update($data);
+
+        return redirect()->route('admin.insights.categories')
+            ->with('success', 'Category updated successfully.');
+    }
+
+    public function destroyCategory(InsightCategory $category)
+    {
+        // Check if category has insights
+        if ($category->insights()->count() > 0) {
+            return redirect()->route('admin.insights.categories')
+                ->with('error', 'Cannot delete category that has insights associated with it.');
+        }
+
+        $category->delete();
+
+        return redirect()->route('admin.insights.categories')
+            ->with('success', 'Category deleted successfully.');
+    }
+
+    public function toggleCategoryStatus(InsightCategory $category)
+    {
+        $category->update(['is_active' => !$category->is_active]);
+
+        return redirect()->route('admin.insights.categories')
+            ->with('success', 'Category status updated successfully.');
+    }
+
+    public function toggleStatus(Insight $insight)
+    {
+        $insight->update(['is_active' => !$insight->is_active]);
+
+        return redirect()->route('admin.insights.index')
+            ->with('success', 'Insight status updated successfully.');
+    }
+
+    public function toggleFeatured(Insight $insight)
+    {
+        $insight->update(['is_featured' => !$insight->is_featured]);
+
+        return redirect()->route('admin.insights.index')
+            ->with('success', 'Insight featured status updated successfully.');
     }
 }

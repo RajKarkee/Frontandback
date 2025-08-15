@@ -146,17 +146,15 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label for="tags" class="form-label">Tags</label>
-                                <input type="text" class="form-control @error('tags') is-invalid @enderror"
-                                       id="tags" name="tags" value="{{ old('tags', $insight->tags) }}" placeholder="tag1, tag2, tag3">
-                                <div class="form-text">Separate tags with commas</div>
-                                @error('tags')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
+            <div class="mb-3">
+                <label for="tags" class="form-label">Tags</label>
+                <input type="text" class="form-control @error('tags') is-invalid @enderror"
+                       id="tags" name="tags" value="{{ old('tags', is_array($insight->tags) ? implode(', ', $insight->tags) : $insight->tags) }}" placeholder="tag1, tag2, tag3">
+                <div class="form-text">Separate tags with commas</div>
+                @error('tags')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>                            <div class="mb-3">
                                 <label for="published_at" class="form-label">Published Date</label>
                                 <input type="datetime-local" class="form-control @error('published_at') is-invalid @enderror"
                                        id="published_at" name="published_at" value="{{ old('published_at', $insight->published_at ? $insight->published_at->format('Y-m-d\TH:i') : '') }}">

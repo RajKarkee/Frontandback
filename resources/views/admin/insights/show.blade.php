@@ -104,8 +104,8 @@
                                     <tr>
                                         <td><strong>Tags:</strong></td>
                                         <td>
-                                            @if($insight->tags)
-                                                @foreach(explode(',', $insight->tags) as $tag)
+                                            @if($insight->tags && count($insight->tags) > 0)
+                                                @foreach($insight->tags as $tag)
                                                     <span class="badge bg-light text-dark me-1">{{ trim($tag) }}</span>
                                                 @endforeach
                                             @else

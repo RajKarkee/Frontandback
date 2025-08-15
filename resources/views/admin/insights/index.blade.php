@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Insights')
+@section('title', 'Insights Management')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -12,10 +12,15 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">All Insights</h5>
-                <a href="{{ route('admin.insights.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Add New Insight
-                </a>
+                <h5 class="card-title mb-0">Insights Management</h5>
+                <div>
+                    <a href="{{ route('admin.insights.categories') }}" class="btn btn-info btn-sm me-2">
+                        <i class="fas fa-tags"></i> Manage Categories
+                    </a>
+                    <a href="{{ route('admin.insights.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Insight
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 @if(session('success'))
@@ -24,30 +29,51 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
 
                 <div class="table-responsive">
                     <table class="table table-striped" id="insightsTable">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Title</th>
-                                <th>Author</th>
                                 <th>Category</th>
+                                <th>Author</th>
                                 <th>Status</th>
                                 <th>Featured</th>
-                                <th>Published Date</th>
+                                <th>Published</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($insights as $insight)
+                            @forelse($insights as $insight)
                             <tr>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <strong>{{ $insight->title }}</strong>
-                                            <br>
-                                            <small class="text-muted">{{ Str::limit($insight->summary, 50) }}</small>
+                                    @if($insight->featured_image)
+                                        <img src="{{ Storage::url($insight->featured_image) }}"
+                                             alt="{{ $insight->title }}"
+                                             class="img-thumbnail"
+                                             style="width: 60px; height: 40px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light d-flex align-items-center justify-content-center"
+                                             style="width: 60px; height: 40px;">
+                                            <i class="fas fa-image text-muted"></i>
                                         </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div>
+                                        <strong>{{ $insight->title }}</strong>
+                                        @if($insight->read_time)
+                                            <br><small class="text-muted">{{ $insight->read_time_text }}</small>
+                                        @endif
+                                    </div>
+                                </td>
                                     </div>
                                 </td>
                                 <td>{{ $insight->author }}</td>
@@ -110,7 +136,6 @@
     </div>
 </div>
 @endsection
-
 @push('scripts')
 <script>
 $(document).ready(function() {
@@ -124,3 +149,4 @@ $(document).ready(function() {
 });
 </script>
 @endpush
+

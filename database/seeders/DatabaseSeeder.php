@@ -62,9 +62,6 @@ class DatabaseSeeder extends Seeder
 
         Career::factory(15)->create();
 
-        // Create sample contacts
-        Contact::factory(25)->create();
-
         // Create events
         if (!Event::where('slug', 'annual-tech-conference-2025')->exists()) {
             Event::factory()->create([
@@ -98,9 +95,6 @@ class DatabaseSeeder extends Seeder
 
         Office::factory(2)->create();
 
-        // Create insights
-        Insight::factory(15)->create();
-
         // Create jumbotrons
         $this->call([
             JumbotronSeeder::class,
@@ -108,6 +102,7 @@ class DatabaseSeeder extends Seeder
             ServiceProcessSeeder::class,
             IndustrySeeder::class,
             AboutSeeder::class,
+            InsightSeeder::class,
         ]);
     }
 }
