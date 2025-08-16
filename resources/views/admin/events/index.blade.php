@@ -114,9 +114,9 @@
 $(document).ready(function() {
     $('#eventsTable').DataTable({
         responsive: true,
-        order: [[3, 'desc']], // Sort by event date
+        order: [[3, 'desc']],
         columnDefs: [
-            { orderable: false, targets: [5] } // Disable sorting on actions column
+            { orderable: false, targets: [5] }
         ]
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Office;
 use Illuminate\Http\Request;
@@ -25,7 +26,6 @@ class OfficeAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type' => 'required|in:head_office,branch_office',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'address' => 'required|string',
             'city' => 'required|string|max:100',
@@ -49,14 +49,14 @@ class OfficeAdminController extends Controller
         $data = $request->all();
         $data['is_headquarters'] = $request->has('is_headquarters');
         $data['slug'] = Str::slug($request->name);
-
+        $data['type'] = 'head_office';
         // Handle file upload
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('offices', 'public');
         }
 
         Office::create($data);
-
+        $this->render();
         return redirect()->route('admin.offices.index')
             ->with('success', 'Office created successfully.');
     }
@@ -109,7 +109,7 @@ class OfficeAdminController extends Controller
         }
 
         $office->update($data);
-
+        $this->render();
         return redirect()->route('admin.offices.index')
             ->with('success', 'Office updated successfully.');
     }
@@ -122,8 +122,14 @@ class OfficeAdminController extends Controller
         }
 
         $office->delete();
-
+        $this->render();
         return redirect()->route('admin.offices.index')
             ->with('success', 'Office deleted successfully.');
+    }
+
+    public function render()
+    {
+        $offices = Office::active()->get();
+        Helper::putCache('office.index', view('admin.template.office.index', compact('offices'))->render());
     }
 }

@@ -9,8 +9,7 @@ class OfficeController extends Controller
 {
     public function index()
     {
-        $offices = Office::active()->get();
-        return view('offices', compact('offices'));
+        return view('offices');
     }
 
     public function show($slug)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -58,7 +59,7 @@ class EventAdminController extends Controller
         }
 
         Event::create($data);
-
+        $this->render();
         return redirect()->route('admin.events.index')
             ->with('success', 'Event created successfully.');
     }
@@ -114,6 +115,7 @@ class EventAdminController extends Controller
         }
 
         $event->update($data);
+        $this->render();
 
         return redirect()->route('admin.events.index')
             ->with('success', 'Event updated successfully.');
@@ -127,8 +129,45 @@ class EventAdminController extends Controller
         }
 
         $event->delete();
-
+        $this->render();
         return redirect()->route('admin.events.index')
             ->with('success', 'Event deleted successfully.');
+    }
+
+
+    public function render()
+    {
+        // Get featured upcoming event
+        $featuredEvent = Event::where('status', 'active')
+            ->where('is_featured', true)
+            ->first();
+
+        // Get other upcoming events (excluding featured)
+        $upcomingEventsQuery = Event::active()
+            ->upcoming()
+            ->latest();
+
+        if ($featuredEvent) {
+            $upcomingEventsQuery->where('id', '!=', $featuredEvent->id);
+        }
+
+        $upcomingEvents = $upcomingEventsQuery->take(6)->get();
+
+        // Get past events with recordings
+        $pastEvents = Event::active()
+            ->past()
+            ->whereNotNull('recording_link')
+            ->latest()
+            ->take(6)
+            ->get();
+
+        // Get event types for filters
+        $eventTypes = Event::active()->distinct()->pluck('type');
+        Helper::putCache('events.index', view('admin.template.events.index', compact(
+            'featuredEvent',
+            'upcomingEvents',
+            'pastEvents',
+            'eventTypes'
+        ))->render());
     }
 }

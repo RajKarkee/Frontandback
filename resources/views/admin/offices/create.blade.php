@@ -17,8 +17,6 @@
                 <div class="card-body">
                     <form action="{{ route('admin.offices.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
-                        <!-- Basic Information -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -27,23 +25,6 @@
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         id="name" name="name" value="{{ old('name') }}" required>
                                     @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="type" class="form-label">Office Type <span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-select @error('type') is-invalid @enderror" id="type"
-                                        name="type" required>
-                                        <option value="">Select Office Type</option>
-                                        <option value="head_office" {{ old('type') == 'head_office' ? 'selected' : '' }}>
-                                            Head Office</option>
-                                        <option value="branch_office"
-                                            {{ old('type') == 'branch_office' ? 'selected' : '' }}>Branch Office</option>
-                                    </select>
-                                    @error('type')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

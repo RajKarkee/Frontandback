@@ -9,44 +9,7 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
-        // Get featured upcoming event
-        $featuredEvent = Event::where('status', 'active')
-            ->where('is_featured', true)
-            ->first();
-
-        // Get other upcoming events (excluding featured)
-        $upcomingEventsQuery = Event::active()
-            ->upcoming()
-            ->latest();
-
-        if ($featuredEvent) {
-            $upcomingEventsQuery->where('id', '!=', $featuredEvent->id);
-        }
-
-        // Filter by type if provided
-        if ($request->has('type') && $request->type !== 'all') {
-            $upcomingEventsQuery->byType($request->type);
-        }
-
-        $upcomingEvents = $upcomingEventsQuery->take(6)->get();
-
-        // Get past events with recordings
-        $pastEvents = Event::active()
-            ->past()
-            ->whereNotNull('recording_link')
-            ->latest()
-            ->take(6)
-            ->get();
-
-        // Get event types for filters
-        $eventTypes = Event::active()->distinct()->pluck('type');
-
-        return view('events', compact(
-            'featuredEvent',
-            'upcomingEvents',
-            'pastEvents',
-            'eventTypes'
-        ));
+        return view('events');
     }
 
     public function show($slug)
