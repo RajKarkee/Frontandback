@@ -33,7 +33,7 @@
 
                             <div class="mb-3">
                                 <strong class="text-dark d-block mb-1">Status:</strong>
-                                <span class="badge bg-{{ $event->status === 'published' ? 'success' : ($event->status === 'draft' ? 'warning' : 'danger') }} px-3 py-2">
+                                <span class="badge bg-{{ $event->status === 'active' ? 'success' : ($event->status === 'draft' ? 'warning' : 'danger') }} px-3 py-2">
                                     {{ ucfirst($event->status) }}
                                 </span>
                             </div>

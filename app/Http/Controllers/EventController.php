@@ -10,10 +10,8 @@ class EventController extends Controller
     public function index(Request $request)
     {
         // Get featured upcoming event
-        $featuredEvent = Event::active()
-            ->upcoming()
-            ->featured()
-            ->latest()
+        $featuredEvent = Event::where('status', 'active')
+            ->where('is_featured', true)
             ->first();
 
         // Get other upcoming events (excluding featured)

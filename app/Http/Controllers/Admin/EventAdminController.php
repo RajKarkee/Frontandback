@@ -42,7 +42,7 @@ class EventAdminController extends Controller
             'resources_link' => 'nullable|url',
             'max_participants' => 'nullable|integer|min:1',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive,draft,completed',
+            'status' => 'required|in:active,inactive,draft',
             'is_featured' => 'boolean',
             'is_free' => 'boolean',
         ]);
@@ -94,7 +94,7 @@ class EventAdminController extends Controller
             'resources_link' => 'nullable|url',
             'max_participants' => 'nullable|integer|min:1',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive,draft,completed',
+            'status' => 'required|in:active,inactive,draft',
             'is_featured' => 'boolean',
             'is_free' => 'boolean',
         ]);

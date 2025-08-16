@@ -98,7 +98,6 @@
             </div>
             @endif
 
-            <!-- Regular Events -->
             @foreach($upcomingEvents as $event)
             <div class="event-card fade-in fade-in-delay-1" data-category="{{ $event->type }}">
                 <img src="{{ $event->image_url ?: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=800&auto=format&fit=crop' }}"

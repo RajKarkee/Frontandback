@@ -64,8 +64,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($event->status === 'published')
-                                        <span class="badge bg-success">Published</span>
+                                    @if($event->status === 'active')
+                                        <span class="badge bg-success">Active</span>
                                     @elseif($event->status === 'draft')
                                         <span class="badge bg-warning">Draft</span>
                                     @else
