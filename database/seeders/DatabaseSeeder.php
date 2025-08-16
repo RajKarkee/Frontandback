@@ -31,8 +31,6 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
             ]);
         }
-
-        // Create regular users
         User::factory(10)->create();
 
         // Create main pages
@@ -54,46 +52,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Create additional pages
-        Page::factory(5)->create();
-
-        // Create blogs
         Blog::factory(20)->create();
-
-        Career::factory(15)->create();
-
-        // Create events
-        if (!Event::where('slug', 'annual-tech-conference-2025')->exists()) {
-            Event::factory()->create([
-                'title' => 'Annual Tech Conference 2025',
-                'slug' => 'annual-tech-conference-2025',
-                'description' => 'Join us for our annual technology conference featuring industry leaders.',
-                'location' => 'New York Convention Center',
-                'start_date' => now()->addMonths(2),
-                'end_date' => now()->addMonths(2)->addDays(3),
-                'status' => 'active',
-            ]);
-        }
-
-        Event::factory(5)->create();
-
-        // Create offices
-        if (!Office::where('slug', 'new-york-headquarters')->exists()) {
-            Office::factory()->create([
-                'name' => 'New York Headquarters',
-                'slug' => 'new-york-headquarters',
-                'address' => '123 Business Ave',
-                'city' => 'New York',
-                'state' => 'NY',
-                'country' => 'USA',
-                'postal_code' => '10001',
-                'phone' => '+1 (555) 123-4567',
-                'email' => 'newyork@example.com',
-                'status' => 'active',
-            ]);
-        }
-
-        Office::factory(2)->create();
 
         // Create jumbotrons
         $this->call([
