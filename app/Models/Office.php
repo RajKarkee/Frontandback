@@ -12,6 +12,8 @@ class Office extends Model
     protected $fillable = [
         'name',
         'slug',
+        'type',
+        'image',
         'address',
         'city',
         'state',
@@ -19,14 +21,22 @@ class Office extends Model
         'postal_code',
         'phone',
         'email',
+        'office_hours',
         'latitude',
         'longitude',
+        'map_link',
+        'transportation',
+        'directions',
+        'parking_info',
+        'appointment_link',
+        'is_headquarters',
         'status',
     ];
 
     protected $casts = [
         'latitude' => 'decimal:8',
         'longitude' => 'decimal:8',
+        'is_headquarters' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -34,5 +44,23 @@ class Office extends Model
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
+    }
+
+    public function scopeHeadquarters($query)
+    {
+        return $query->where('is_headquarters', true);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        return asset('images/default-office.jpg');
+    }
+
+    public function getTypeDisplayAttribute()
+    {
+        return ucwords(str_replace('_', ' ', $this->type));
     }
 }

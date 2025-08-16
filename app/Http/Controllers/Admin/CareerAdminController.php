@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Career;
 use App\Models\CareerBenefit;
 use App\Models\JobOpening;
 use App\Models\CareerTestimonial;
 use App\Models\JobApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\TextUI\Help;
 
 class CareerAdminController extends Controller
 {
@@ -37,6 +40,7 @@ class CareerAdminController extends Controller
         ]);
 
         CareerBenefit::create($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.benefits')->with('success', 'Benefit added successfully!');
     }
@@ -53,6 +57,7 @@ class CareerAdminController extends Controller
         ]);
 
         $benefit->update($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.benefits')->with('success', 'Benefit updated successfully!');
     }
@@ -60,6 +65,8 @@ class CareerAdminController extends Controller
     public function destroyBenefit(CareerBenefit $benefit)
     {
         $benefit->delete();
+        $this->render();
+
         return redirect()->route('admin.careers.benefits')->with('success', 'Benefit deleted successfully!');
     }
 
@@ -116,6 +123,7 @@ class CareerAdminController extends Controller
         }
 
         JobOpening::create($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.jobs')->with('success', 'Job opening created successfully!');
     }
@@ -167,6 +175,7 @@ class CareerAdminController extends Controller
         }
 
         $job->update($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.jobs')->with('success', 'Job opening updated successfully!');
     }
@@ -174,6 +183,8 @@ class CareerAdminController extends Controller
     public function destroyJob(JobOpening $job)
     {
         $job->delete();
+        $this->render();
+
         return redirect()->route('admin.careers.jobs')->with('success', 'Job opening deleted successfully!');
     }
 
@@ -201,6 +212,7 @@ class CareerAdminController extends Controller
         }
 
         CareerTestimonial::create($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.testimonials')->with('success', 'Testimonial added successfully!');
     }
@@ -226,6 +238,7 @@ class CareerAdminController extends Controller
         }
 
         $testimonial->update($validated);
+        $this->render();
 
         return redirect()->route('admin.careers.testimonials')->with('success', 'Testimonial updated successfully!');
     }
@@ -236,6 +249,7 @@ class CareerAdminController extends Controller
             Storage::disk('public')->delete($testimonial->photo);
         }
         $testimonial->delete();
+        $this->render();
         return redirect()->route('admin.careers.testimonials')->with('success', 'Testimonial deleted successfully!');
     }
 
@@ -283,5 +297,19 @@ class CareerAdminController extends Controller
     {
         $job->update(['is_featured' => !$job->is_featured]);
         return redirect()->back()->with('success', 'Job featured status updated successfully!');
+    }
+
+    public function render(){
+        $careers = Career::active()->latest()->paginate(10);
+        $benefits = CareerBenefit::active()->ordered()->get();
+        $jobOpenings = JobOpening::active()->ordered()->get();
+        $testimonials = CareerTestimonial::active()->ordered()->get();
+
+        // Group job openings by category
+        $jobsByCategory = $jobOpenings->groupBy('category');
+
+        Helper::putCache('careers.benefits', view('admin.template.careers.benefits', compact('benefits'))->render());
+        Helper::putCache('careers.testimonials', view('admin.template.careers.testimonials', compact('testimonials'))->render());
+        Helper::putCache('careers.job_openings', view('admin.template.careers.job_openings', compact('jobOpenings','jobsByCategory'))->render());
     }
 }

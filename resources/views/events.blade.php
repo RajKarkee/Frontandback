@@ -12,10 +12,9 @@
     <div class="container-custom">
         <div class="flex flex-wrap justify-center gap-4 mb-8 fade-in">
             <button class="event-filter-btn active" data-filter="all">All Events</button>
-            <button class="event-filter-btn" data-filter="webinar">Webinars</button>
-            <button class="event-filter-btn" data-filter="workshop">Workshops</button>
-            <button class="event-filter-btn" data-filter="conference">Conferences</button>
-            <button class="event-filter-btn" data-filter="training">Training</button>
+            @foreach(['webinar', 'workshop', 'conference', 'training'] as $type)
+                <button class="event-filter-btn" data-filter="{{ $type }}">{{ ucfirst($type) }}s</button>
+            @endforeach
         </div>
     </div>
 </section>
@@ -30,200 +29,132 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[400px]">
+            @if($featuredEvent)
             <!-- Featured Event -->
-            <div class="event-card featured lg:col-span-2 fade-in" data-category="conference">
+            <div class="event-card featured lg:col-span-2 fade-in" data-category="{{ $featuredEvent->type }}">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop"
-                         alt="Annual Accounting Conference"
-                         class="event-image lg:h-full">
-                    <div class="event-content lg:flex lg:flex-col lg:justify-center">
-                        <div class="event-date">
-                            <span class="date-day">15</span>
-                            <span class="date-month">MAR</span>
+                    <div class="relative lg:h-full">
+                        <img src="{{ $featuredEvent->image_url ?: 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop' }}"
+                             alt="{{ $featuredEvent->title }}"
+                             class="w-full h-full object-cover event-image">
+                        <div class="featured-event-date">
+                            <span class="date-day">{{ $featuredEvent->start_date->format('j') }}</span>
+                            <span class="date-month">{{ $featuredEvent->start_date->format('M') }}</span>
                         </div>
-                        <span class="event-type conference">Conference</span>
+                    </div>
+                    <div class="event-content lg:flex lg:flex-col lg:justify-center">
+                        <span class="event-type {{ $featuredEvent->type }}">{{ ucfirst($featuredEvent->type) }}</span>
                         <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-deep-chartered-blue mb-4 hover:text-fresh-teal transition-colors duration-200">
-                            Annual Accounting & Finance Conference 2024
+                            {{ $featuredEvent->title }}
                         </h3>
                         <p class="event-description text-lg mb-4">
-                            Join Nepal's premier gathering of accounting and finance professionals for a full day of insights, networking, and knowledge sharing. Features keynote speakers, panel discussions, and workshops on the latest industry trends.
+                            {{ $featuredEvent->short_description }}
                         </p>
                         <div class="event-details mb-4">
+                            @if($featuredEvent->location)
                             <div class="flex items-center mb-2">
                                 <svg class="w-5 h-5 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                Hotel Annapurna, Kathmandu
+                                {{ $featuredEvent->location }}
                             </div>
+                            @endif
+                            @if($featuredEvent->formatted_time)
                             <div class="flex items-center mb-2">
                                 <svg class="w-5 h-5 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                9:00 AM - 5:00 PM
+                                {{ $featuredEvent->formatted_time }}
                             </div>
+                            @endif
+                            @if($featuredEvent->display_price)
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                NPR 2,500 (Early Bird: NPR 2,000)
+                                {{ $featuredEvent->display_price }}
                             </div>
+                            @endif
                         </div>
+                        @if($featuredEvent->registration_link)
+                        <a href="{{ $featuredEvent->registration_link }}" target="_blank" class="btn-primary">
+                            Register Now
+                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                        @else
                         <button class="btn-primary" onclick="alert('Registration functionality will be implemented!')">
                             Register Now
                             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
+                        @endif
                     </div>
                 </div>
             </div>
+            @endif
 
             <!-- Regular Events -->
-            <div class="event-card fade-in fade-in-delay-1" data-category="webinar">
-                <img src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=800&auto=format&fit=crop"
-                     alt="Tax compliance webinar"
+            @foreach($upcomingEvents as $event)
+            <div class="event-card fade-in fade-in-delay-1" data-category="{{ $event->type }}">
+                <img src="{{ $event->image_url ?: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=800&auto=format&fit=crop' }}"
+                     alt="{{ $event->title }}"
                      class="event-image">
                 <div class="event-content">
                     <div class="event-date">
-                        <span class="date-day">22</span>
-                        <span class="date-month">FEB</span>
+                        <span class="date-day">{{ $event->start_date->format('j') }}</span>
+                        <span class="date-month">{{ $event->start_date->format('M') }}</span>
                     </div>
-                    <span class="event-type webinar">Webinar</span>
+                    <span class="event-type {{ $event->type }}">{{ ucfirst($event->type) }}</span>
                     <h3 class="event-title">
-                        Tax Compliance Updates for FY 2023/24
+                        {{ $event->title }}
                     </h3>
                     <p class="event-description">
-                        Stay updated with the latest changes in tax regulations and compliance requirements. Essential for all business owners and finance professionals.
+                        {{ $event->short_description }}
                     </p>
                     <div class="event-details">
+                        @if($event->formatted_time)
                         <div class="flex items-center mb-2">
                             <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            2:00 PM - 3:30 PM
+                            {{ $event->formatted_time }}
                         </div>
+                        @endif
+                        @if($event->location)
                         <div class="flex items-center mb-4">
-                            <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Online (Zoom)
-                        </div>
-                    </div>
-                    <button class="btn-outline w-full" onclick="alert('Registration functionality will be implemented!')">
-                        Join Webinar (Free)
-                    </button>
-                </div>
-            </div>
-
-            <div class="event-card fade-in fade-in-delay-2" data-category="workshop">
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800&auto=format&fit=crop"
-                     alt="Financial planning workshop"
-                     class="event-image">
-                <div class="event-content">
-                    <div class="event-date">
-                        <span class="date-day">28</span>
-                        <span class="date-month">FEB</span>
-                    </div>
-                    <span class="event-type workshop">Workshop</span>
-                    <h3 class="event-title">
-                        Strategic Financial Planning for SMEs
-                    </h3>
-                    <p class="event-description">
-                        Interactive workshop covering budgeting, forecasting, and financial strategy for small and medium enterprises. Includes practical exercises and case studies.
-                    </p>
-                    <div class="event-details">
-                        <div class="flex items-center mb-2">
                             <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            CI Training Center
+                            {{ $event->location }}
                         </div>
+                        @endif
+                        @if($event->display_price && !$event->is_free)
                         <div class="flex items-center mb-4">
                             <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            NPR 1,500
+                            {{ $event->display_price }}
                         </div>
+                        @endif
                     </div>
+                    @if($event->registration_link)
+                    <a href="{{ $event->registration_link }}" target="_blank" class="btn-outline w-full">
+                        {{ $event->is_free ? 'Join ' . ucfirst($event->type) . ' (Free)' : 'Register Now' }}
+                    </a>
+                    @else
                     <button class="btn-outline w-full" onclick="alert('Registration functionality will be implemented!')">
-                        Register (Limited Seats)
+                        {{ $event->is_free ? 'Join ' . ucfirst($event->type) . ' (Free)' : 'Register Now' }}
                     </button>
+                    @endif
                 </div>
             </div>
-
-            <div class="event-card fade-in" data-category="training">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
-                     alt="Software training"
-                     class="event-image">
-                <div class="event-content">
-                    <div class="event-date">
-                        <span class="date-day">05</span>
-                        <span class="date-month">MAR</span>
-                    </div>
-                    <span class="event-type training">Training</span>
-                    <h3 class="event-title">
-                        Advanced Excel for Financial Analysis
-                    </h3>
-                    <p class="event-description">
-                        Master advanced Excel functions, pivot tables, and financial modeling techniques. Perfect for accounting professionals and analysts.
-                    </p>
-                    <div class="event-details">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            10:00 AM - 4:00 PM
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            NPR 3,000
-                        </div>
-                    </div>
-                    <button class="btn-outline w-full" onclick="alert('Registration functionality will be implemented!')">
-                        Register Now
-                    </button>
-                </div>
-            </div>
-
-            <div class="event-card fade-in fade-in-delay-1" data-category="webinar">
-                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
-                     alt="Risk management webinar"
-                     class="event-image">
-                <div class="event-content">
-                    <div class="event-date">
-                        <span class="date-day">12</span>
-                        <span class="date-month">MAR</span>
-                    </div>
-                    <span class="event-type webinar">Webinar</span>
-                    <h3 class="event-title">
-                        Enterprise Risk Management in Uncertain Times
-                    </h3>
-                    <p class="event-description">
-                        Learn how to identify, assess, and mitigate business risks in today's volatile economic environment. Expert insights and practical frameworks.
-                    </p>
-                    <div class="event-details">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            3:00 PM - 4:30 PM
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <svg class="w-4 h-4 text-fresh-teal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Online (Teams)
-                        </div>
-                    </div>
-                    <button class="btn-outline w-full" onclick="alert('Registration functionality will be implemented!')">
-                        Join Webinar (Free)
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -239,68 +170,40 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($pastEvents as $event)
             <div class="past-event-card bg-crisp-white fade-in">
-                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
-                     alt="Digital transformation seminar"
+                <img src="{{ $event->image_url ?: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop' }}"
+                     alt="{{ $event->title }}"
                      class="past-event-image">
                 <div class="past-event-content">
-                    <span class="past-event-date">January 25, 2024</span>
-                    <h3 class="past-event-title">Digital Transformation in Accounting</h3>
+                    <span class="past-event-date">{{ $event->start_date->format('F j, Y') }}</span>
+                    <h3 class="past-event-title">{{ $event->title }}</h3>
                     <p class="past-event-description">
-                        Explored automation tools, cloud accounting, and AI applications in modern accounting practices.
+                        {{ $event->short_description }}
                     </p>
                     <div class="flex gap-2 mt-4">
+                        @if($event->recording_link)
+                        <a href="{{ $event->recording_link }}" target="_blank" class="btn-outline text-sm">
+                            View Recording
+                        </a>
+                        @else
                         <button class="btn-outline text-sm" onclick="alert('Recording access will be implemented!')">
                             View Recording
                         </button>
+                        @endif
+                        @if($event->resources_link)
+                        <a href="{{ $event->resources_link }}" target="_blank" class="btn-outline text-sm">
+                            Download Resources
+                        </a>
+                        @else
                         <button class="btn-outline text-sm" onclick="alert('Resources download will be implemented!')">
                             Download Resources
                         </button>
+                        @endif
                     </div>
                 </div>
             </div>
-
-            <div class="past-event-card bg-crisp-white fade-in fade-in-delay-1">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop"
-                     alt="Audit best practices workshop"
-                     class="past-event-image">
-                <div class="past-event-content">
-                    <span class="past-event-date">January 18, 2024</span>
-                    <h3 class="past-event-title">Internal Audit Best Practices Workshop</h3>
-                    <p class="past-event-description">
-                        Comprehensive training on risk-based auditing, compliance frameworks, and audit technology.
-                    </p>
-                    <div class="flex gap-2 mt-4">
-                        <button class="btn-outline text-sm" onclick="alert('Recording access will be implemented!')">
-                            View Recording
-                        </button>
-                        <button class="btn-outline text-sm" onclick="alert('Resources download will be implemented!')">
-                            Download Resources
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="past-event-card bg-crisp-white fade-in fade-in-delay-2">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop"
-                     alt="Business valuation seminar"
-                     class="past-event-image">
-                <div class="past-event-content">
-                    <span class="past-event-date">January 10, 2024</span>
-                    <h3 class="past-event-title">Business Valuation Methodologies</h3>
-                    <p class="past-event-description">
-                        In-depth look at different valuation approaches, market multiples, and DCF modeling techniques.
-                    </p>
-                    <div class="flex gap-2 mt-4">
-                        <button class="btn-outline text-sm" onclick="alert('Recording access will be implemented!')">
-                            View Recording
-                        </button>
-                        <button class="btn-outline text-sm" onclick="alert('Resources download will be implemented!')">
-                            Download Resources
-                        </button>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -316,11 +219,13 @@
                 Subscribe to our event newsletter and be the first to know about upcoming webinars, workshops, and exclusive training opportunities.
             </p>
 
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Enter your email address"
+            <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                @csrf
+                <input type="email" name="email" placeholder="Enter your email address" required
                        class="flex-1 px-4 py-3 rounded-lg text-report-black focus:outline-none focus:ring-2 focus:ring-fresh-teal">
+                <input type="hidden" name="subscription_type" value="events">
                 <button type="submit" class="btn-primary bg-fresh-teal hover:bg-opacity-90 whitespace-nowrap">
-                    Subscribe
+                    <span class="button-text">Subscribe</span>
                     <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -330,6 +235,8 @@
             <p class="text-sm text-audit-grey mt-4">
                 Get event notifications, exclusive content, and early bird pricing.
             </p>
+
+            <div id="newsletter-message" class="mt-4 hidden"></div>
         </div>
     </div>
 </section>
@@ -384,6 +291,7 @@
         </div>
     </div>
 </section>
+
 @endsection
 
 @push('styles')
@@ -442,6 +350,34 @@
     border-radius: 0.5rem;
     text-align: center;
     min-width: 60px;
+}
+
+.featured-event-date {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: #015A77;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    min-width: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.featured-event-date .date-day {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.featured-event-date .date-month {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-top: 2px;
 }
 
 .date-day {
@@ -573,6 +509,69 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.style.display = 'none';
                 }
             });
+        });
+    });
+
+    // Newsletter subscription
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterMessage = document.getElementById('newsletter-message');
+
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const button = this.querySelector('button[type="submit"]');
+        const buttonText = button.querySelector('.button-text');
+        const originalText = buttonText.textContent;
+
+        // Disable button and show loading
+        button.disabled = true;
+        buttonText.textContent = 'Subscribing...';
+
+        fetch('{{ route("newsletter.subscribe") }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                newsletterMessage.innerHTML = `
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                        ${data.message}
+                    </div>
+                `;
+                newsletterForm.reset();
+            } else {
+                newsletterMessage.innerHTML = `
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                        ${data.message}
+                    </div>
+                `;
+            }
+
+            newsletterMessage.classList.remove('hidden');
+
+            // Auto-hide message after 5 seconds
+            setTimeout(() => {
+                newsletterMessage.classList.add('hidden');
+            }, 5000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            newsletterMessage.innerHTML = `
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    An error occurred. Please try again later.
+                </div>
+            `;
+            newsletterMessage.classList.remove('hidden');
+        })
+        .finally(() => {
+            // Re-enable button
+            button.disabled = false;
+            buttonText.textContent = originalText;
         });
     });
 });

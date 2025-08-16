@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Office;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OfficeAdminController extends Controller
 {
@@ -24,35 +25,30 @@ class OfficeAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'services' => 'nullable|string',
-            'facilities' => 'nullable|string',
-            'directions' => 'nullable|string',
-            'business_hours' => 'nullable|string',
-            'address_line_1' => 'nullable|string|max:255',
-            'address_line_2' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:100',
+            'type' => 'required|in:head_office,branch_office',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'required|string',
+            'city' => 'required|string|max:100',
             'state' => 'nullable|string|max:100',
+            'country' => 'required|string|max:100',
             'postal_code' => 'nullable|string|max:20',
-            'country' => 'nullable|string|max:100',
-            'phone' => 'nullable|string|max:20',
-            'fax' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'website' => 'nullable|url|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'office_hours' => 'nullable|string',
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
-            'type' => 'nullable|string|max:50',
-            'region' => 'nullable|string|max:100',
-            'timezone' => 'nullable|string|max:50',
-            'languages' => 'nullable|string|max:255',
-            'sort_order' => 'nullable|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive,opening-soon,temporarily-closed',
+            'map_link' => 'nullable|url',
+            'transportation' => 'nullable|string',
+            'directions' => 'nullable|string',
+            'parking_info' => 'nullable|string',
+            'appointment_link' => 'nullable|url',
             'is_headquarters' => 'boolean',
+            'status' => 'required|in:active,inactive',
         ]);
 
         $data = $request->all();
         $data['is_headquarters'] = $request->has('is_headquarters');
+        $data['slug'] = Str::slug($request->name);
 
         // Handle file upload
         if ($request->hasFile('image')) {
@@ -79,35 +75,30 @@ class OfficeAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'services' => 'nullable|string',
-            'facilities' => 'nullable|string',
-            'directions' => 'nullable|string',
-            'business_hours' => 'nullable|string',
-            'address_line_1' => 'nullable|string|max:255',
-            'address_line_2' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:100',
+            'type' => 'required|in:head_office,branch_office',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'required|string',
+            'city' => 'required|string|max:100',
             'state' => 'nullable|string|max:100',
+            'country' => 'required|string|max:100',
             'postal_code' => 'nullable|string|max:20',
-            'country' => 'nullable|string|max:100',
-            'phone' => 'nullable|string|max:20',
-            'fax' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'website' => 'nullable|url|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'office_hours' => 'nullable|string',
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
-            'type' => 'nullable|string|max:50',
-            'region' => 'nullable|string|max:100',
-            'timezone' => 'nullable|string|max:50',
-            'languages' => 'nullable|string|max:255',
-            'sort_order' => 'nullable|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive,opening-soon,temporarily-closed',
+            'map_link' => 'nullable|url',
+            'transportation' => 'nullable|string',
+            'directions' => 'nullable|string',
+            'parking_info' => 'nullable|string',
+            'appointment_link' => 'nullable|url',
             'is_headquarters' => 'boolean',
+            'status' => 'required|in:active,inactive',
         ]);
 
         $data = $request->all();
         $data['is_headquarters'] = $request->has('is_headquarters');
+        $data['slug'] = Str::slug($request->name);
 
         // Handle file upload
         if ($request->hasFile('image')) {

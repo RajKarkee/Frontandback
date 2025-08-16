@@ -256,6 +256,7 @@ Route::get('/insights/category/{categorySlug}', [PageController::class, 'insight
 Route::get('/insights/{slug}', [PageController::class, 'insightDetail'])->name('insights.detail');
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/events/filter', [EventController::class, 'filter'])->name('events.filter');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
@@ -276,6 +277,10 @@ Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show')
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+
+// Newsletter subscription routes
+Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('/newsletter/unsubscribe', [App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
 // Dynamic page routes (should be last)
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');

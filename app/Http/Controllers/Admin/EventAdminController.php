@@ -26,31 +26,31 @@ class EventAdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:events',
+            'type' => 'required|in:webinar,workshop,conference,training',
             'description' => 'required|string',
-            'summary' => 'nullable|string',
+            'short_description' => 'nullable|string|max:500',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
+            'start_time' => 'nullable|date_format:H:i',
+            'end_time' => 'nullable|date_format:H:i',
             'location' => 'nullable|string|max:255',
-            'venue' => 'nullable|string|max:255',
-            'type' => 'nullable|string|max:50',
-            'max_attendees' => 'nullable|integer|min:1',
+            'venue_type' => 'nullable|in:online,physical,hybrid',
             'price' => 'nullable|numeric|min:0',
-            'registration_url' => 'nullable|url',
-            'contact_email' => 'nullable|email',
-            'agenda' => 'nullable|string',
-            'speakers' => 'nullable|string',
+            'early_bird_price' => 'nullable|numeric|min:0',
+            'registration_link' => 'nullable|url',
+            'recording_link' => 'nullable|url',
+            'resources_link' => 'nullable|url',
+            'max_participants' => 'nullable|integer|min:1',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:draft,published,cancelled,completed',
+            'status' => 'required|in:active,inactive,draft,completed',
             'is_featured' => 'boolean',
-            'is_virtual' => 'boolean',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string|max:500',
+            'is_free' => 'boolean',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
-        $data['is_virtual'] = $request->has('is_virtual');
+        $data['is_free'] = $request->has('is_free');
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {
@@ -78,31 +78,31 @@ class EventAdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:events,slug,' . $event->id,
+            'type' => 'required|in:webinar,workshop,conference,training',
             'description' => 'required|string',
-            'summary' => 'nullable|string',
+            'short_description' => 'nullable|string|max:500',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
+            'start_time' => 'nullable|date_format:H:i',
+            'end_time' => 'nullable|date_format:H:i',
             'location' => 'nullable|string|max:255',
-            'venue' => 'nullable|string|max:255',
-            'type' => 'nullable|string|max:50',
-            'max_attendees' => 'nullable|integer|min:1',
+            'venue_type' => 'nullable|in:online,physical,hybrid',
             'price' => 'nullable|numeric|min:0',
-            'registration_url' => 'nullable|url',
-            'contact_email' => 'nullable|email',
-            'agenda' => 'nullable|string',
-            'speakers' => 'nullable|string',
+            'early_bird_price' => 'nullable|numeric|min:0',
+            'registration_link' => 'nullable|url',
+            'recording_link' => 'nullable|url',
+            'resources_link' => 'nullable|url',
+            'max_participants' => 'nullable|integer|min:1',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:draft,published,cancelled,completed',
+            'status' => 'required|in:active,inactive,draft,completed',
             'is_featured' => 'boolean',
-            'is_virtual' => 'boolean',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string|max:500',
+            'is_free' => 'boolean',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
         $data['is_featured'] = $request->has('is_featured');
-        $data['is_virtual'] = $request->has('is_virtual');
+        $data['is_free'] = $request->has('is_free');
 
         // Handle file upload
         if ($request->hasFile('featured_image')) {

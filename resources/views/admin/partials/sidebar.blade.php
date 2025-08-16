@@ -117,6 +117,22 @@
             </a>
         </li>
 
+        <!-- Company Information Section -->
+        <li class="nav-item">
+            <h6 class="sidebar-heading">
+                <i class="fas fa-building me-2"></i>Company Information
+            </h6>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.offices.*') ? 'active' : '' }}"
+               href="{{ route('admin.offices.index') }}">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Office Locations</span>
+                <span class="badge bg-info ms-auto">{{ \App\Models\Office::count() }}</span>
+            </a>
+        </li>
+
         <!-- Careers Section -->
         <li class="nav-item">
             <h6 class="sidebar-heading">
@@ -160,15 +176,6 @@
                 <span class="badge bg-{{ $newApplications > 0 ? 'warning' : 'secondary' }} ms-auto">
                     {{ $newApplications }}
                 </span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.offices.*') ? 'active' : '' }}"
-               href="{{ route('admin.offices.index') }}">
-                <i class="fas fa-building"></i>
-                <span>Offices</span>
-                <span class="badge bg-info ms-auto">{{ \App\Models\Office::count() }}</span>
             </a>
         </li>
 

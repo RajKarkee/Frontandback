@@ -13,17 +13,9 @@ class CareerController extends Controller
     public function index()
     {
         // Get careers from existing Career model (for individual career posts)
-        $careers = Career::active()->latest()->paginate(10);
-        
-        // Get data for comprehensive careers page
-        $benefits = CareerBenefit::active()->ordered()->get();
-        $jobOpenings = JobOpening::active()->ordered()->get();
-        $testimonials = CareerTestimonial::active()->ordered()->get();
 
-        // Group job openings by category
-        $jobsByCategory = $jobOpenings->groupBy('category');
 
-        return view('careers', compact('careers', 'benefits', 'jobOpenings', 'testimonials', 'jobsByCategory'));
+        return view('careers');
     }
 
     public function show($slug)
@@ -41,15 +33,15 @@ class CareerController extends Controller
     public function getJobsByCategory(Request $request)
     {
         $category = $request->get('category', 'all');
-        
+
         $query = JobOpening::active()->ordered();
-        
+
         if ($category !== 'all') {
             $query->byCategory($category);
         }
-        
+
         $jobs = $query->get();
-        
+
         return response()->json([
             'jobs' => $jobs->map(function($job) {
                 return [

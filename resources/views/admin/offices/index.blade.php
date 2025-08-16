@@ -29,12 +29,12 @@
                     <table class="table table-striped" id="officesTable">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Name</th>
-                                <th>City</th>
-                                <th>Country</th>
                                 <th>Type</th>
+                                <th>Location</th>
+                                <th>Contact</th>
                                 <th>Status</th>
-                                <th>Phone</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -42,23 +42,39 @@
                             @foreach($offices as $office)
                             <tr>
                                 <td>
+                                    @if($office->image)
+                                        <img src="{{ asset('storage/' . $office->image) }}" alt="{{ $office->name }}" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                            <i class="fas fa-building text-muted"></i>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>
                                     <div>
                                         <strong>{{ $office->name }}</strong>
-                                        <br>
-                                        <small class="text-muted">
-                                            @if($office->address)
-                                                <i class="fas fa-map-marker-alt"></i> {{ Str::limit($office->address, 30) }}
-                                            @endif
-                                        </small>
+                                        @if($office->is_headquarters)
+                                            <span class="badge bg-primary ms-1">HQ</span>
+                                        @endif
                                     </div>
                                 </td>
-                                <td>{{ $office->city }}</td>
-                                <td>{{ $office->country }}</td>
                                 <td>
-                                    @if($office->office_type)
-                                        <span class="badge bg-info">{{ ucfirst($office->office_type) }}</span>
-                                    @else
-                                        <span class="text-muted">No type</span>
+                                    <span class="badge bg-secondary">{{ $office->type_display }}</span>
+                                </td>
+                                <td>
+                                    <div>
+                                        <small>{{ $office->city }}, {{ $office->country }}</small>
+                                        @if($office->address)
+                                            <br><small class="text-muted">{{ Str::limit($office->address, 40) }}</small>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td>
+                                    @if($office->phone)
+                                        <div><i class="fas fa-phone"></i> {{ $office->phone }}</div>
+                                    @endif
+                                    @if($office->email)
+                                        <div><i class="fas fa-envelope"></i> {{ $office->email }}</div>
                                     @endif
                                 </td>
                                 <td>
@@ -66,13 +82,6 @@
                                         <span class="badge bg-success">Active</span>
                                     @else
                                         <span class="badge bg-danger">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($office->phone)
-                                        <a href="tel:{{ $office->phone }}">{{ $office->phone }}</a>
-                                    @else
-                                        <span class="text-muted">No phone</span>
                                     @endif
                                 </td>
                                 <td>
@@ -88,6 +97,10 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
                                                 <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                                             </button>
                                         </form>
                                     </div>
