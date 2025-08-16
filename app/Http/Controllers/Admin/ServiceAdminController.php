@@ -185,5 +185,6 @@ class ServiceAdminController extends Controller
         $services = Service::active()->ordered()->get();
         Helper::putCache('services.index', view('admin.template.services.index', compact('services'))->render());
         Helper::putCache('offices.services', view('admin.template.offices.services', compact('services'))->render());
+        Helper::putCache('home.services', view('admin.template.home.services', compact('services'))->render());
     }
 }

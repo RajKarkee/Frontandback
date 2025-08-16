@@ -6,12 +6,7 @@
 @section('content')
 <!-- Dynamic Hero Section -->
 <x-jumbotron page-slug="home" height="80vh" min-height="80vh">
-    {{-- <a href="{{ route('contact') }}" class="btn-primary inline-flex items-center">
-        Get Started
-        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-    </a> --}}
+
 </x-jumbotron>
 
 <!-- Key Statistics -->
@@ -26,7 +21,7 @@
                 <div class="stat-number" data-target="15">0</div>
                 <div class="stat-label">Years Experience</div>
             </div>
-            <div class="stat-item fade-in fade-in-delay-2">
+            <div class="stat-item fade-in fade-in-delay-2">`
                 <div class="stat-number" data-target="500">0</div>
                 <div class="stat-label">Projects Completed</div>
             </div>
@@ -39,7 +34,7 @@
 </section>
 
 <!-- Services Overview -->
-<section class="section">
+{{-- <section class="section">
     <div class="container-custom">
         <div class="section-header fade-in">
             <h2 class="section-title">Our Core Services</h2>
@@ -137,8 +132,9 @@
             </a>
         </div>
     </div>
-</section>
+</section> --}}
 
+@includeIf('front.cache.home.services')
 <!-- Industries We Serve -->
 <section class="section bg-audit-grey">
     <div class="container-custom">

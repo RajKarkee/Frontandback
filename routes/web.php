@@ -246,7 +246,7 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
-Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
+// Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
 Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
