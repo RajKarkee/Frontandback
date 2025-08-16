@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Insight;
 use App\Models\InsightCategory;
@@ -75,6 +76,7 @@ class InsightAdminController extends Controller
         }
 
         Insight::create($data);
+        $this->renderInsights();
 
         return redirect()->route('admin.insights.index')
             ->with('success', 'Insight created successfully.');
@@ -132,6 +134,7 @@ class InsightAdminController extends Controller
         }
 
         $insight->update($data);
+        $this->renderInsights();
 
         return redirect()->route('admin.insights.index')
             ->with('success', 'Insight updated successfully.');
@@ -145,6 +148,7 @@ class InsightAdminController extends Controller
         }
 
         $insight->delete();
+        $this->renderInsights();
 
         return redirect()->route('admin.insights.index')
             ->with('success', 'Insight deleted successfully.');
@@ -172,6 +176,7 @@ class InsightAdminController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         InsightCategory::create($data);
+$this->renderCategories();
 
         return redirect()->route('admin.insights.categories')
             ->with('success', 'Category created successfully.');
@@ -192,6 +197,7 @@ class InsightAdminController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         $category->update($data);
+$this->renderCategories();
 
         return redirect()->route('admin.insights.categories')
             ->with('success', 'Category updated successfully.');
@@ -206,6 +212,7 @@ class InsightAdminController extends Controller
         }
 
         $category->delete();
+$this->renderCategories();
 
         return redirect()->route('admin.insights.categories')
             ->with('success', 'Category deleted successfully.');
@@ -233,5 +240,33 @@ class InsightAdminController extends Controller
 
         return redirect()->route('admin.insights.index')
             ->with('success', 'Insight featured status updated successfully.');
+    }
+        public function renderInsights()
+    {
+        $featuredInsights = Insight::where('is_featured', true)
+            ->where('status', 'published')
+            ->take(3)
+            ->get();
+        $recentInsights = Insight::where('is_featured', false)
+            ->orderBy('published_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        Helper::putCache('insights.featured', view('admin.template.insights.featured', compact('featuredInsights'))->render());
+        Helper::putCache('insights.recent', view('admin.template.insights.recent', compact('recentInsights'))->render());
+    }
+
+    public function renderCategories()
+    {
+        $categories = InsightCategory::active()
+            ->orderBy('sort_order')
+            ->get()
+            ->map(function ($category) {
+                $category->insights_count = Insight::published()
+                    ->byCategory($category->slug)
+                    ->count();
+                return $category;
+            });
+        Helper::putCache('insights.categories', view('admin.template.insights.categories', compact('categories'))->render());
     }
 }

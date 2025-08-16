@@ -25,49 +25,22 @@ class PageController extends Controller
     public function insights()
     {
         $page = Page::where('slug', 'insights')->active()->first();
-
-        // Get featured insights (limit to 3 for the main section)
-        $featuredInsights = Insight::published()
-                                  ->featured()
-                                  ->orderBy('sort_order')
-                                  ->orderBy('published_at', 'desc')
-                                  ->limit(3)
-                                  ->get();
-
-        // Get recent insights (limit to 6 for the recent section)
-        $recentInsights = Insight::published()
-                                ->orderBy('published_at', 'desc')
-                                ->limit(6)
-                                ->get();
-
-                                dd($recentInsights);
-        // Get active categories with insights count
-        $categories = InsightCategory::active()
-                                   ->orderBy('sort_order')
-                                   ->get()
-                                   ->map(function ($category) {
-                                       $category->insights_count = Insight::published()
-                                                                         ->byCategory($category->slug)
-                                                                         ->count();
-                                       return $category;
-                                   });
-
-        return view('insights', compact('page', 'featuredInsights', 'recentInsights', 'categories'));
+        return view('insights', compact('page'));
     }
 
     public function insightDetail($slug)
     {
         $insight = Insight::where('slug', $slug)
-                         ->published()
-                         ->with('insightCategory')
-                         ->firstOrFail();
+            ->published()
+            ->with('insightCategory')
+            ->firstOrFail();
 
         // Get related insights (same category, exclude current)
         $relatedInsights = Insight::published()
-                                 ->byCategory($insight->category_slug)
-                                 ->where('id', '!=', $insight->id)
-                                 ->limit(3)
-                                 ->get();
+            ->byCategory($insight->category_slug)
+            ->where('id', '!=', $insight->id)
+            ->limit(3)
+            ->get();
 
         return view('insight-detail', compact('insight', 'relatedInsights'));
     }
@@ -75,13 +48,13 @@ class PageController extends Controller
     public function insightsByCategory($categorySlug)
     {
         $category = InsightCategory::where('slug', $categorySlug)
-                                  ->active()
-                                  ->firstOrFail();
+            ->active()
+            ->firstOrFail();
 
         $insights = Insight::published()
-                          ->byCategory($categorySlug)
-                          ->orderBy('published_at', 'desc')
-                          ->paginate(12);
+            ->byCategory($categorySlug)
+            ->orderBy('published_at', 'desc')
+            ->paginate(12);
 
         return view('insights-category', compact('category', 'insights'));
     }
