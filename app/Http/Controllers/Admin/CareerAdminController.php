@@ -66,10 +66,7 @@ class CareerAdminController extends Controller
     // Job Openings Management
     public function jobs()
     {
-        $jobs = JobOpening::orderBy('is_featured', 'desc')
-                          ->orderBy('sort_order')
-                          ->orderBy('created_at', 'desc')
-                          ->get();
+        $jobs = JobOpening::all();
         return view('admin.careers.jobs', compact('jobs'));
     }
 
@@ -84,19 +81,39 @@ class CareerAdminController extends Controller
             'title' => 'required|string|max:255',
             'department' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'job_type' => 'required|in:full-time,part-time,contract,internship',
-            'overview' => 'required|string',
-            'responsibilities' => 'required|string',
-            'requirements' => 'required|string',
-            'benefits' => 'nullable|string',
-            'category' => 'required|string|max:100',
+            'type' => 'required|in:full_time,part_time,contract,internship',
+            'experience_level' => 'required|in:entry,mid,senior,lead,executive',
+            'description' => 'required|string',
+            'responsibilities' => 'nullable|array',
+            'responsibilities.*' => 'nullable|string',
+            'requirements' => 'nullable|array',
+            'requirements.*' => 'nullable|string',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'nullable|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
             'application_deadline' => 'nullable|date',
-            'status' => 'required|in:active,paused,closed',
+            'positions_available' => 'nullable|integer|min:1',
             'is_featured' => 'boolean',
-            'sort_order' => 'nullable|integer',
+            'is_active' => 'boolean',
         ]);
+
+        // Filter out empty strings from arrays
+        if (isset($validated['responsibilities'])) {
+            $validated['responsibilities'] = array_filter($validated['responsibilities'], function($item) {
+                return !empty(trim($item));
+            });
+        }
+        if (isset($validated['requirements'])) {
+            $validated['requirements'] = array_filter($validated['requirements'], function($item) {
+                return !empty(trim($item));
+            });
+        }
+        if (isset($validated['benefits'])) {
+            $validated['benefits'] = array_filter($validated['benefits'], function($item) {
+                return !empty(trim($item));
+            });
+        }
 
         JobOpening::create($validated);
 
@@ -105,6 +122,7 @@ class CareerAdminController extends Controller
 
     public function editJob(JobOpening $job)
     {
+        // dd($job);
         return view('admin.careers.jobs-edit', compact('job'));
     }
 
@@ -114,19 +132,39 @@ class CareerAdminController extends Controller
             'title' => 'required|string|max:255',
             'department' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'job_type' => 'required|in:full-time,part-time,contract,internship',
-            'overview' => 'required|string',
-            'responsibilities' => 'required|string',
-            'requirements' => 'required|string',
-            'benefits' => 'nullable|string',
-            'category' => 'required|string|max:100',
+            'type' => 'required|in:full_time,part_time,contract,internship',
+            'experience_level' => 'required|in:entry,mid,senior,lead,executive',
+            'description' => 'required|string',
+            'responsibilities' => 'nullable|array',
+            'responsibilities.*' => 'nullable|string',
+            'requirements' => 'nullable|array',
+            'requirements.*' => 'nullable|string',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'nullable|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
             'application_deadline' => 'nullable|date',
-            'status' => 'required|in:active,paused,closed',
+            'positions_available' => 'nullable|integer|min:1',
             'is_featured' => 'boolean',
-            'sort_order' => 'nullable|integer',
+            'is_active' => 'boolean',
         ]);
+
+        // Filter out empty strings from arrays
+        if (isset($validated['responsibilities'])) {
+            $validated['responsibilities'] = array_filter($validated['responsibilities'], function($item) {
+                return !empty(trim($item));
+            });
+        }
+        if (isset($validated['requirements'])) {
+            $validated['requirements'] = array_filter($validated['requirements'], function($item) {
+                return !empty(trim($item));
+            });
+        }
+        if (isset($validated['benefits'])) {
+            $validated['benefits'] = array_filter($validated['benefits'], function($item) {
+                return !empty(trim($item));
+            });
+        }
 
         $job->update($validated);
 

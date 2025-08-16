@@ -200,11 +200,6 @@
                             </a>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('admin.careers.create') }}" class="btn btn-outline-warning w-100 py-2">
-                                <i class="fas fa-briefcase me-2"></i>New Career
-                            </a>
-                        </div>
-                        <div class="col-md-6">
                             <a href="{{ route('admin.industries.create') }}" class="btn btn-outline-dark w-100 py-2">
                                 <i class="fas fa-industry me-2"></i>New Industry
                             </a>

@@ -19,23 +19,7 @@ class PageController extends Controller
     {
         $page = Page::where('slug', 'about')->active()->first();
 
-        // Get About page content with all related data
-        $about = \App\Models\About::with([
-            'coreValues' => function($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            },
-            'teamMembers' => function($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            },
-            'expertiseAreas' => function($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            },
-            'whyChooseUsItems' => function($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            }
-        ])->where('is_active', true)->first();
-
-        return view('about', compact('page', 'about'));
+        return view('about', compact('page'));
     }
 
     public function insights()
@@ -56,6 +40,7 @@ class PageController extends Controller
                                 ->limit(6)
                                 ->get();
 
+                                dd($recentInsights);
         // Get active categories with insights count
         $categories = InsightCategory::active()
                                    ->orderBy('sort_order')

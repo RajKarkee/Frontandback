@@ -78,7 +78,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     ]);
 
     Route::resource('careers', CareerAdminController::class)->except(['create', 'store', 'show', 'edit', 'update', 'destroy']);
-    
+
     // Redirect careers index to benefits page (main careers management)
     Route::get('careers', function() {
         return redirect()->route('admin.careers.benefits');

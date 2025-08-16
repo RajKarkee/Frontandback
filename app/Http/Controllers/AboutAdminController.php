@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper;
 use App\Models\About;
 use App\Models\AboutCoreValue;
 use App\Models\AboutTeamMember;
@@ -47,6 +48,7 @@ class AboutAdminController extends Controller
         }
 
         $about = About::updateOrCreate(['id' => 1], $data);
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'About page content updated successfully!');
     }
@@ -64,6 +66,7 @@ class AboutAdminController extends Controller
         $about = About::firstOrCreate(['id' => 1]);
 
         $about->coreValues()->create($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Core value added successfully!');
     }
@@ -79,6 +82,7 @@ class AboutAdminController extends Controller
 
         $coreValue = AboutCoreValue::findOrFail($id);
         $coreValue->update($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Core value updated successfully!');
     }
@@ -86,6 +90,8 @@ class AboutAdminController extends Controller
     public function deleteCoreValue($id)
     {
         AboutCoreValue::findOrFail($id)->delete();
+        $this->renderAboutMainContent();
+
         return redirect()->back()->with('success', 'Core value deleted successfully!');
     }
 
@@ -112,6 +118,7 @@ class AboutAdminController extends Controller
         }
 
         $about->teamMembers()->create($data);
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Team member added successfully!');
     }
@@ -140,6 +147,7 @@ class AboutAdminController extends Controller
         }
 
         $teamMember->update($data);
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Team member updated successfully!');
     }
@@ -151,6 +159,8 @@ class AboutAdminController extends Controller
             Storage::disk('public')->delete($teamMember->image);
         }
         $teamMember->delete();
+        $this->renderAboutMainContent();
+
         return redirect()->back()->with('success', 'Team member deleted successfully!');
     }
 
@@ -166,6 +176,7 @@ class AboutAdminController extends Controller
 
         $about = About::firstOrCreate(['id' => 1]);
         $about->expertiseAreas()->create($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Expertise area added successfully!');
     }
@@ -181,6 +192,7 @@ class AboutAdminController extends Controller
 
         $expertiseArea = AboutExpertiseArea::findOrFail($id);
         $expertiseArea->update($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Expertise area updated successfully!');
     }
@@ -188,6 +200,8 @@ class AboutAdminController extends Controller
     public function deleteExpertiseArea($id)
     {
         AboutExpertiseArea::findOrFail($id)->delete();
+        $this->renderAboutMainContent();
+
         return redirect()->back()->with('success', 'Expertise area deleted successfully!');
     }
 
@@ -203,6 +217,7 @@ class AboutAdminController extends Controller
 
         $about = About::firstOrCreate(['id' => 1]);
         $about->whyChooseUsItems()->create($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Why choose us item added successfully!');
     }
@@ -218,6 +233,7 @@ class AboutAdminController extends Controller
 
         $whyChooseUs = AboutWhyChooseUs::findOrFail($id);
         $whyChooseUs->update($request->all());
+        $this->renderAboutMainContent();
 
         return redirect()->back()->with('success', 'Why choose us item updated successfully!');
     }
@@ -225,6 +241,7 @@ class AboutAdminController extends Controller
     public function deleteWhyChooseUs($id)
     {
         AboutWhyChooseUs::findOrFail($id)->delete();
+        $this->renderAboutMainContent();
         return redirect()->back()->with('success', 'Why choose us item deleted successfully!');
     }
 
@@ -256,4 +273,23 @@ class AboutAdminController extends Controller
         $whyChooseUs->update(['is_active' => !$whyChooseUs->is_active]);
         return redirect()->back()->with('success', 'Why choose us item status updated!');
     }
+
+    public function renderAboutMainContent(){
+             $about = \App\Models\About::with([
+            'coreValues' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'teamMembers' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'expertiseAreas' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            },
+            'whyChooseUsItems' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }
+        ])->where('is_active', true)->first();
+        Helper::putCache('about.index',view('admin.template.about.main',compact('about')));
+    }
+
 }

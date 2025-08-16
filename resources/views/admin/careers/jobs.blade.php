@@ -66,21 +66,21 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.careers.applications') }}?job_opening_id={{ $job->id }}" 
+                                            <a href="{{ route('admin.careers.applications') }}?job_opening_id={{ $job->id }}"
                                                class="badge bg-primary text-decoration-none">
                                                 {{ $job->applications_count ?? 0 }} Applications
                                             </a>
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('admin.careers.jobs.edit', $job) }}" 
+                                                <a href="{{ route('admin.careers.jobs.edit', $job) }}"
                                                    class="btn btn-sm btn-outline-primary">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('admin.careers.jobs.destroy', $job) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
                                                             onclick="return confirm('Are you sure you want to delete this job opening?')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>

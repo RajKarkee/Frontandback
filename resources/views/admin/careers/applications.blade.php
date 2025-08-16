@@ -67,7 +67,7 @@
                                         <td>{{ $application->created_at->format('M d, Y') }}</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-sm btn-{{ $application->status_color }} dropdown-toggle" 
+                                                <button class="btn btn-sm btn-{{ $application->status_color }} dropdown-toggle"
                                                         type="button" data-bs-toggle="dropdown">
                                                     {{ ucfirst($application->status) }}
                                                 </button>
@@ -89,7 +89,7 @@
                                         </td>
                                         <td>
                                             @if($application->resume_path)
-                                                <a href="{{ asset('storage/' . $application->resume_path) }}" 
+                                                <a href="{{ asset('storage/' . $application->resume_path) }}"
                                                    class="btn btn-sm btn-outline-primary" target="_blank">
                                                     <i class="fas fa-file-pdf"></i> View Resume
                                                 </a>
@@ -99,7 +99,7 @@
                                         </td>
                                         <td>
                                             @if($application->cover_letter)
-                                                <button type="button" class="btn btn-sm btn-outline-info" 
+                                                <button type="button" class="btn btn-sm btn-outline-info"
                                                         onclick="showCoverLetter('{{ addslashes($application->cover_letter) }}')">
                                                     <i class="fas fa-eye"></i> View Letter
                                                 </button>
@@ -108,7 +108,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-primary" 
+                                            <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="showApplicationDetails({{ $application->id }})">
                                                 <i class="fas fa-eye"></i> View Details
                                             </button>

@@ -58,14 +58,14 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-primary" 
+                                            <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="editBenefit({{ $benefit->id }}, '{{ $benefit->title }}', '{{ $benefit->description }}', '{{ $benefit->icon }}', '{{ $benefit->color_class }}', {{ $benefit->sort_order }}, {{ $benefit->is_active ? 'true' : 'false' }})">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <form action="{{ route('admin.careers.benefits.destroy', $benefit) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"
                                                         onclick="return confirm('Are you sure you want to delete this benefit?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -109,7 +109,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="color_class" class="form-label">Color Class</label>
-                                <input type="text" class="form-control" id="color_class" name="color_class" 
+                                <input type="text" class="form-control" id="color_class" name="color_class"
                                        placeholder="e.g., text-primary, text-success">
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="icon" class="form-label">Icon (SVG or HTML)</label>
-                        <textarea class="form-control" id="icon" name="icon" rows="4" 
+                        <textarea class="form-control" id="icon" name="icon" rows="4"
                                   placeholder="Paste SVG code or HTML icon here..."></textarea>
                     </div>
                     <div class="row">
@@ -237,9 +237,9 @@ function editBenefit(id, title, description, icon, colorClass, sortOrder, isActi
     document.getElementById('edit_color_class').value = colorClass;
     document.getElementById('edit_sort_order').value = sortOrder;
     document.getElementById('edit_is_active').checked = isActive;
-    
+
     document.getElementById('editBenefitForm').action = '/admin/careers/benefits/' + id;
-    
+
     const editModal = new bootstrap.Modal(document.getElementById('editBenefitModal'));
     editModal.show();
 }
