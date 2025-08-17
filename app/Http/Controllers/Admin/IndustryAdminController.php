@@ -138,5 +138,6 @@ class IndustryAdminController extends Controller
      public function render(){
        $industries = Industry::active()->ordered()->get();
         Helper::putCache('industries.index', view('admin.template.industries.index', compact('industries'))->render());
+        Helper::putCache('services.industries', view('admin.template.services.industries', compact('industries'))->render());
     }
 }
