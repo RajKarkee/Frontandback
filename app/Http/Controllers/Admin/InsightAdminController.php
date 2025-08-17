@@ -254,7 +254,9 @@ $this->renderCategories();
 
         Helper::putCache('insights.featured', view('admin.template.insights.featured', compact('featuredInsights'))->render());
         Helper::putCache('insights.recent', view('admin.template.insights.recent', compact('recentInsights'))->render());
+        Helper::putCache('home.insights', view('admin.template.home.insights', compact('recentInsights'))->render());
     }
+
 
     public function renderCategories()
     {
