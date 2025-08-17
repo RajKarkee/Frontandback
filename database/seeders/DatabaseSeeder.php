@@ -10,6 +10,7 @@ use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Industry;
+use App\Models\IndustryExpertise;
 use App\Models\Office;
 use App\Models\Insight;
 use Illuminate\Database\Seeder;
@@ -63,6 +64,10 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             InsightSeeder::class,
             CareerSeeder::class,
+            OfficeSeeder::class,
+            SettingsSeeder::class,
+            IndustryExpertiseSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }
