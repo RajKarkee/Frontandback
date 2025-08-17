@@ -74,6 +74,32 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.home-settings.*') ? 'active' : '' }}"
+               href="{{ route('admin.home-settings.index') }}">
+                <i class="fas fa-home"></i>
+                <span>Home Settings</span>
+                @if(\App\Models\HomeSetting::count() > 0)
+                    <span class="badge bg-success ms-auto">Configured</span>
+                @else
+                    <span class="badge bg-warning ms-auto">Setup</span>
+                @endif
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.footer-settings.*') ? 'active' : '' }}"
+               href="{{ route('admin.footer-settings.index') }}">
+                <i class="fas fa-window-minimize"></i>
+                <span>Footer Settings</span>
+                @if(\App\Models\FooterSetting::count() > 0)
+                    <span class="badge bg-success ms-auto">Configured</span>
+                @else
+                    <span class="badge bg-warning ms-auto">Setup</span>
+                @endif
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.jumbotrons.*') ? 'active' : '' }}"
                href="{{ route('admin.jumbotrons.index') }}">
                 <i class="fas fa-image"></i>

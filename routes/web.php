@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\OfficeAdminController;
 use App\Http\Controllers\Admin\InsightAdminController;
 use App\Http\Controllers\Admin\JumbotronController;
 use App\Http\Controllers\Admin\ServiceProcessController;
+use App\Http\Controllers\Admin\HomeSettingAdminController;
+use App\Http\Controllers\Admin\FooterSettingAdminController;
 use App\Http\Controllers\AboutAdminController;
 
 // Authentication Routes
@@ -211,6 +213,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // Additional jumbotron routes
     Route::post('jumbotrons/{jumbotron}/toggle-status', [JumbotronController::class, 'toggleStatus'])->name('jumbotrons.toggle-status');
     Route::post('jumbotrons/reorder-slides', [JumbotronController::class, 'reorderSlides'])->name('jumbotrons.reorder-slides');
+
+    // Home Settings Management Routes
+    Route::get('home-settings', [HomeSettingAdminController::class, 'index'])->name('home-settings.index');
+    Route::get('home-settings/edit', [HomeSettingAdminController::class, 'edit'])->name('home-settings.edit');
+    Route::put('home-settings', [HomeSettingAdminController::class, 'update'])->name('home-settings.update');
+
+    // Footer Settings Management Routes
+    Route::get('footer-settings', [FooterSettingAdminController::class, 'index'])->name('footer-settings.index');
+    Route::get('footer-settings/edit', [FooterSettingAdminController::class, 'edit'])->name('footer-settings.edit');
+    Route::put('footer-settings', [FooterSettingAdminController::class, 'update'])->name('footer-settings.update');
 
     // About Page Management Routes
     Route::get('about', [AboutAdminController::class, 'index'])->name('about.index');

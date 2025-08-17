@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Insight;
 use App\Models\InsightCategory;
+use App\Models\HomeSetting;
+use App\Models\FooterSetting;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -12,7 +14,11 @@ class PageController extends Controller
     public function home()
     {
         $page = Page::where('slug', 'home')->active()->first();
-        return view('home', compact('page'));
+        $homeSetting = HomeSetting::getInstance();
+        $footerSetting = FooterSetting::getInstance();
+
+        // dd($homeSetting, $footerSetting);
+        return view('home', compact('page', 'homeSetting', 'footerSetting'));
     }
 
     public function about()
