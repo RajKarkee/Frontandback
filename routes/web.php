@@ -28,6 +28,9 @@ use App\Http\Controllers\Admin\JumbotronController;
 use App\Http\Controllers\Admin\ServiceProcessController;
 use App\Http\Controllers\Admin\HomeSettingAdminController;
 use App\Http\Controllers\Admin\FooterSettingAdminController;
+use App\Http\Controllers\Admin\PostAdminController;
+use App\Http\Controllers\Admin\CategoryAdminController;
+use App\Http\Controllers\Admin\TagAdminController;
 use App\Http\Controllers\AboutAdminController;
 
 // Authentication Routes
@@ -68,6 +71,40 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'update' => 'blogs.update',
         'destroy' => 'blogs.destroy',
     ]);
+
+    // New Blog System Routes
+    Route::resource('posts', PostAdminController::class)->names([
+        'index' => 'posts.index',
+        'create' => 'posts.create',
+        'store' => 'posts.store',
+        'show' => 'posts.show',
+        'edit' => 'posts.edit',
+        'update' => 'posts.update',
+        'destroy' => 'posts.destroy',
+    ]);
+
+    Route::resource('categories', CategoryAdminController::class)->names([
+        'index' => 'categories.index',
+        'create' => 'categories.create',
+        'store' => 'categories.store',
+        'show' => 'categories.show',
+        'edit' => 'categories.edit',
+        'update' => 'categories.update',
+        'destroy' => 'categories.destroy',
+    ]);
+
+    Route::resource('tags', TagAdminController::class)->names([
+        'index' => 'tags.index',
+        'create' => 'tags.create',
+        'store' => 'tags.store',
+        'show' => 'tags.show',
+        'edit' => 'tags.edit',
+        'update' => 'tags.update',
+        'destroy' => 'tags.destroy',
+    ]);
+
+    // Tag bulk operations
+    Route::delete('tags/bulk-destroy', [TagAdminController::class, 'bulkDestroy'])->name('tags.bulk-destroy');
 
     Route::resource('events', EventAdminController::class)->names([
         'index' => 'events.index',
@@ -284,8 +321,12 @@ Route::get('/apply', [JobApplicationController::class, 'generalApplication'])->n
 Route::get('/apply/{jobId}', [JobApplicationController::class, 'create'])->name('careers.apply');
 Route::post('/apply', [JobApplicationController::class, 'store'])->name('careers.apply.submit');
 
+// Blog routes
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
-Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blogs/load-more', [BlogController::class, 'loadMore'])->name('blogs.load-more');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/tag/{slug}', [BlogController::class, 'tag'])->name('blog.tag');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');

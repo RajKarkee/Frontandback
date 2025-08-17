@@ -39,12 +39,37 @@
             </a>
         </li>
 
+        <!-- Blog System Section -->
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}"
-               href="{{ route('admin.blogs.index') }}">
-                <i class="fas fa-blog"></i>
-                <span>Blog Posts</span>
-                <span class="badge bg-info ms-auto">{{ \App\Models\Blog::count() }}</span>
+            <h6 class="sidebar-heading">
+                <i class="fas fa-blog me-2"></i>Blog System
+            </h6>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}"
+               href="{{ route('admin.posts.index') }}">
+                <i class="fas fa-file-alt"></i>
+                <span>Posts</span>
+                <span class="badge bg-primary ms-auto">{{ \App\Models\Post::count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"
+               href="{{ route('admin.categories.index') }}">
+                <i class="fas fa-folder"></i>
+                <span>Categories</span>
+                <span class="badge bg-info ms-auto">{{ \App\Models\Category::count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.tags.*') ? 'active' : '' }}"
+               href="{{ route('admin.tags.index') }}">
+                <i class="fas fa-tags"></i>
+                <span>Tags</span>
+                <span class="badge bg-secondary ms-auto">{{ \App\Models\Tag::count() }}</span>
             </a>
         </li>
 

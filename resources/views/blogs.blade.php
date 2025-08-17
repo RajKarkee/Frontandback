@@ -8,47 +8,49 @@
 <x-jumbotron page-slug="blogs" />
 
 <!-- Featured Post -->
+@if($featuredPost)
 <section class="section">
     <div class="container-custom">
         <div class="featured-post-card fade-in">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
-                     alt="Digital transformation in accounting"
+                <img src="{{ $featuredPost->thumbnail_url }}"
+                     alt="{{ $featuredPost->title }}"
                      class="featured-image">
                 <div class="featured-content">
                     <span class="featured-badge">Featured Article</span>
                     <h2 class="featured-title">
-                        The Future of Accounting: How Technology is Transforming the Profession
+                        {{ $featuredPost->title }}
                     </h2>
                     <p class="featured-excerpt">
-                        Explore how artificial intelligence, automation, and cloud computing are reshaping the accounting landscape. From automated bookkeeping to predictive analytics, discover what these changes mean for businesses and accounting professionals in Nepal.
+                        {{ $featuredPost->excerpt }}
                     </p>
                     <div class="featured-meta">
                         <div class="author-info">
                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop&ixlib=rb-4.0.3"
-                                 alt="Author" class="author-avatar">
+                                 alt="{{ $featuredPost->author->name }}" class="author-avatar">
                             <div>
-                                <p class="author-name">Rajesh Sharma, CA</p>
-                                <p class="author-title">Senior Partner</p>
+                                <p class="author-name">{{ $featuredPost->author->name }}</p>
+                                <p class="author-title">{{ $featuredPost->category->name }}</p>
                             </div>
                         </div>
                         <div class="post-meta">
-                            <span>January 20, 2024</span>
+                            <span>{{ $featuredPost->formatted_date }}</span>
                             <span>•</span>
-                            <span>8 min read</span>
+                            <span>{{ $featuredPost->category->name }}</span>
                         </div>
                     </div>
-                    <button class="btn-primary mt-6" onclick="alert('Blog post will be implemented!')">
+                    <a href="{{ $featuredPost->url }}" class="btn-primary mt-6">
                         Read Full Article
                         <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <!-- Blog Categories -->
 <section class="section bg-audit-grey">
@@ -61,65 +63,21 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div class="category-card text-center fade-in">
+            @foreach($categories as $index => $category)
+            <a href="{{ $category->url }}" class="category-card text-center fade-in @if($index > 2) fade-in-delay-{{ ($index - 2) }} @endif">
                 <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+                    @if($category->icon_url)
+                        <img src="{{ $category->icon_url }}" alt="{{ $category->name }}" class="w-8 h-8 mx-auto text-fresh-teal">
+                    @else
+                        <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v8m0 0V9a2 2 0 012-2h2M7 12h6m-6 4h4m1-8h.01" />
+                        </svg>
+                    @endif
                 </div>
-                <h4 class="category-title">Audit & Assurance</h4>
-                <p class="category-count">12 Posts</p>
-            </div>
-
-            <div class="category-card text-center fade-in fade-in-delay-1">
-                <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                    </svg>
-                </div>
-                <h4 class="category-title">Tax Updates</h4>
-                <p class="category-count">18 Posts</p>
-            </div>
-
-            <div class="category-card text-center fade-in fade-in-delay-2">
-                <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                </div>
-                <h4 class="category-title">Business Strategy</h4>
-                <p class="category-count">15 Posts</p>
-            </div>
-
-            <div class="category-card text-center fade-in">
-                <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <h4 class="category-title">Technology</h4>
-                <p class="category-count">8 Posts</p>
-            </div>
-
-            <div class="category-card text-center fade-in fade-in-delay-1">
-                <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                </div>
-                <h4 class="category-title">Risk Management</h4>
-                <p class="category-count">10 Posts</p>
-            </div>
-
-            <div class="category-card text-center fade-in fade-in-delay-2">
-                <div class="category-icon">
-                    <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h4 class="category-title">Industry News</h4>
-                <p class="category-count">22 Posts</p>
-            </div>
+                <h4 class="category-title">{{ $category->name }}</h4>
+                <p class="category-count">{{ $category->published_posts_count }} Posts</p>
+            </a>
+            @endforeach
         </div>
     </div>
 </section>
@@ -134,252 +92,33 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Blog Post 1 -->
-            <article class="blog-post-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop"
-                         alt="Tax compliance updates"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">TAX UPDATES</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        Nepal Tax Law Updates: What Businesses Need to Know for 2024
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">TAX UPDATES</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            Nepal Tax Law Updates: What Businesses Need to Know for 2024
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Comprehensive overview of the latest changes in Nepal's tax regulations and their impact on businesses across different sectors.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Blog Post 2 -->
-            <article class="blog-post-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop"
-                         alt="Financial reporting"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">AUDIT & ASSURANCE</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        5 Key Audit Preparation Tips for Small and Medium Enterprises
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">AUDIT & ASSURANCE</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            5 Key Audit Preparation Tips for Small and Medium Enterprises
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Essential steps to prepare for your annual audit and ensure a smooth, efficient process that adds value to your business.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Blog Post 3 -->
-            <article class="blog-post-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
-                         alt="Business analytics"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">BUSINESS STRATEGY</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        Cash Flow Management Strategies for Growing Businesses
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">BUSINESS STRATEGY</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            Cash Flow Management Strategies for Growing Businesses
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Practical approaches to maintain healthy cash flow during periods of rapid growth and economic uncertainty.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Blog Post 4 -->
-            <article class="blog-post-card fade-in group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
-                         alt="Cybersecurity"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">TECHNOLOGY</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        Protecting Financial Data: Cybersecurity Best Practices for Businesses
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">TECHNOLOGY</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            Protecting Financial Data: Cybersecurity Best Practices for Businesses
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Essential cybersecurity measures to protect sensitive financial information and maintain client trust in the digital age.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Blog Post 5 -->
-            <article class="blog-post-card fade-in fade-in-delay-1 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
-                         alt="ESG reporting"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">INDUSTRY NEWS</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        ESG Reporting: The Growing Importance of Sustainability Metrics
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">INDUSTRY NEWS</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            ESG Reporting: The Growing Importance of Sustainability Metrics
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Understanding Environmental, Social, and Governance reporting requirements and their impact on business valuation.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Blog Post 6 -->
-            <article class="blog-post-card fade-in fade-in-delay-2 group cursor-pointer overflow-hidden rounded-lg bg-white shadow-md hover:shadow-2xl transform transition-all duration-500 ease-out hover:scale-[1.02] relative h-80">
-                <!-- Background Image -->
-                <div class="absolute inset-0 w-full h-full">
-                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop"
-                         alt="Economic outlook"
-                         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-50">
-                </div>
-
-                <!-- Dark overlay on hover -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-500 ease-out"></div>
-
-                <!-- Non-hover content - Bottom overlay -->
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500">
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-wide">BUSINESS STRATEGY</span>
-                    <h3 class="text-xl font-semibold text-white mt-1">
-                        Nepal Economic Outlook 2024: Opportunities and Challenges
-                    </h3>
-                </div>
-
-                <!-- Hover content - Center content -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out transform translate-y-4 group-hover:translate-y-0">
-                    <span class="text-sm font-semibold text-white/90 uppercase tracking-wide mb-3">BUSINESS STRATEGY</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 leading-tight">
-                        <a href="#" class="hover:text-fresh-teal transition-colors duration-300">
-                            Nepal Economic Outlook 2024: Opportunities and Challenges
-                        </a>
-                    </h3>
-                    <p class="text-white/90 text-base leading-relaxed">
-                        Analysis of Nepal's economic prospects for 2024 and strategic considerations for businesses planning growth.
-                    </p>
-                </div>
-            </article>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-container">
+            @include('partials.blog-cards', ['posts' => $posts])
         </div>
 
+        @if($posts->hasMorePages())
         <!-- Load More Button -->
         <div class="text-center mt-12 fade-in">
-            <button class="btn-outline" onclick="alert('Load more functionality will be implemented!')">
+            <button id="load-more-btn" class="btn-outline" data-next-page="{{ $posts->currentPage() + 1 }}">
                 Load More Posts
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
             </button>
-        </div>
-    </div>
-</section>
-
-<!-- Newsletter Signup -->
-<section class="section bg-deep-chartered-blue text-crisp-white">
-    <div class="container-custom">
-        <div class="text-center fade-in">
-            <h2 class="text-3xl lg:text-4xl font-montserrat font-bold mb-6">
-                Subscribe to Our Newsletter
-            </h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">
-                Get the latest blog posts, industry updates, and exclusive insights delivered directly to your inbox every week.
-            </p>
-
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Enter your email address"
-                       class="flex-1 px-4 py-3 rounded-lg text-report-black focus:outline-none focus:ring-2 focus:ring-fresh-teal">
-                <button type="submit" class="btn-primary bg-fresh-teal hover:bg-opacity-90 whitespace-nowrap">
-                    Subscribe
-                    <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <div id="loading" class="hidden text-center mt-4">
+                <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-fresh-teal transition ease-in-out duration-150 cursor-not-allowed">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                </button>
-            </form>
-
-            <p class="text-sm text-audit-grey mt-4">
-                Join 2,500+ professionals who trust our insights. Unsubscribe anytime.
-            </p>
+                    Loading...
+                </div>
+            </div>
         </div>
+        @endif
     </div>
 </section>
+
 
 <!-- Popular Tags -->
 <section class="section">
@@ -392,21 +131,14 @@
         </div>
 
         <div class="flex flex-wrap gap-3 justify-center fade-in">
-            <span class="tag">Accounting Standards</span>
-            <span class="tag">Tax Planning</span>
-            <span class="tag">Business Valuation</span>
-            <span class="tag">Internal Controls</span>
-            <span class="tag">Financial Reporting</span>
-            <span class="tag">Risk Assessment</span>
-            <span class="tag">Compliance</span>
-            <span class="tag">Digital Transformation</span>
-            <span class="tag">Cash Flow Management</span>
-            <span class="tag">Corporate Governance</span>
-            <span class="tag">Audit Procedures</span>
-            <span class="tag">Small Business</span>
-            <span class="tag">IFRS Updates</span>
-            <span class="tag">VAT Regulations</span>
-            <span class="tag">Business Strategy</span>
+            @foreach($popularTags as $tag)
+            <a href="{{ $tag->url }}" class="tag">
+                {{ $tag->name }}
+                @if($tag->published_posts_count > 0)
+                    ({{ $tag->published_posts_count }})
+                @endif
+            </a>
+            @endforeach
         </div>
     </div>
 </section>
@@ -761,5 +493,123 @@
 .blog-post-card .bg-gradient-to-t {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
 }
+
+/* Additional styles for blog cards */
+.category-badge {
+    background: #00BFB2;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.featured-badge-sm {
+    background: #ff6b35;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.tag-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.btn-primary-sm {
+    background: #00BFB2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-sm:hover {
+    background: #00a599;
+    transform: translateY(-1px);
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 </style>
+@endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const postsContainer = document.getElementById('posts-container');
+    const loading = document.getElementById('loading');
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            const nextPage = this.getAttribute('data-next-page');
+            const currentUrl = new URL(window.location);
+
+            // Show loading state
+            loadMoreBtn.style.display = 'none';
+            loading.classList.remove('hidden');
+
+            // Build the request URL with current filters
+            const loadMoreUrl = new URL('{{ route("blogs.load-more") }}');
+            loadMoreUrl.searchParams.set('page', nextPage);
+
+            // Preserve existing filters
+            if (currentUrl.searchParams.has('category')) {
+                loadMoreUrl.searchParams.set('category', currentUrl.searchParams.get('category'));
+            }
+            if (currentUrl.searchParams.has('tag')) {
+                loadMoreUrl.searchParams.set('tag', currentUrl.searchParams.get('tag'));
+            }
+
+            fetch(loadMoreUrl.toString())
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html) {
+                        // Append new posts to the container
+                        postsContainer.insertAdjacentHTML('beforeend', data.html);
+
+                        // Update button for next page or hide if no more pages
+                        if (data.hasMore) {
+                            loadMoreBtn.setAttribute('data-next-page', parseInt(nextPage) + 1);
+                            loadMoreBtn.style.display = 'inline-flex';
+                        }
+                    }
+
+                    // Hide loading state
+                    loading.classList.add('hidden');
+                })
+                .catch(error => {
+                    console.error('Error loading more posts:', error);
+                    loadMoreBtn.style.display = 'inline-flex';
+                    loading.classList.add('hidden');
+                });
+        });
+    }
+});
+</script>
 @endpush

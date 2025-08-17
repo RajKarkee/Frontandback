@@ -15,6 +15,7 @@ use App\Models\Office;
 use App\Models\Insight;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\EventSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,10 +53,6 @@ class DatabaseSeeder extends Seeder
                 'status' => 'active',
             ]);
         }
-
-        Blog::factory(20)->create();
-
-        // Create jumbotrons
         $this->call([
             JumbotronSeeder::class,
             ServiceSeeder::class,
@@ -67,7 +64,9 @@ class DatabaseSeeder extends Seeder
             OfficeSeeder::class,
             SettingsSeeder::class,
             IndustryExpertiseSeeder::class,
-            EventSeeder::class,
+            CategorySeeder::class,
+            TagSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }
