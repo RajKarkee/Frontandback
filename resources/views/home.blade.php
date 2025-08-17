@@ -21,7 +21,7 @@
                 <div class="stat-number" data-target="15">0</div>
                 <div class="stat-label">Years Experience</div>
             </div>
-            <div class="stat-item fade-in fade-in-delay-2">`
+            <div class="stat-item fade-in fade-in-delay-2">
                 <div class="stat-number" data-target="500">0</div>
                 <div class="stat-label">Projects Completed</div>
             </div>
