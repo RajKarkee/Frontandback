@@ -260,16 +260,33 @@
 
             // Add Quick Link
             document.getElementById('add-quick-link').addEventListener('click', function() {
-                const template = document.getElementById('quick-link-template');
-                const clone = template.content.cloneNode(true);
+                const quickLinksContainer = document.getElementById('quick-links-container');
 
-                // Update indices
-                clone.querySelector('.quick-link-item').setAttribute('data-index', quickLinkIndex);
-                clone.querySelectorAll('input').forEach(input => {
-                    input.name = input.name.replace('[]', `[${quickLinkIndex}]`);
-                });
+                const quickLinkHtml = `
+                    <div class="quick-link-item border rounded p-3 mb-3" data-index="${quickLinkIndex}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control"
+                                       name="quick_links[${quickLinkIndex}][label]"
+                                       placeholder="e.g., About Us">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">URL</label>
+                                <input type="text" class="form-control"
+                                       name="quick_links[${quickLinkIndex}][url]"
+                                       placeholder="/about">
+                            </div>
+                        </div>
+                        <div class="text-end mt-2">
+                            <button type="button" class="btn btn-sm btn-danger remove-quick-link">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
 
-                document.getElementById('quick-links-container').appendChild(clone);
+                quickLinksContainer.insertAdjacentHTML('beforeend', quickLinkHtml);
                 quickLinkIndex++;
             });
 

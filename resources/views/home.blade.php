@@ -70,9 +70,15 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div class="fade-in">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
-                     alt="Professional team collaboration"
-                     class="rounded-lg shadow-xl w-full h-auto">
+                @if($homeSetting && $homeSetting->why_choose_us_image)
+                    <img src="{{ asset('storage/' . $homeSetting->why_choose_us_image) }}"
+                         alt="{{ $homeSetting->why_choose_us_image_alt ?? 'Professional team collaboration' }}"
+                         class="rounded-lg shadow-xl w-full h-auto">
+                @else
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
+                         alt="Professional team collaboration"
+                         class="rounded-lg shadow-xl w-full h-auto">
+                @endif
             </div>
 
             <div class="space-y-6">

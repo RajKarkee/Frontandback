@@ -61,7 +61,30 @@
                             <div class="col-md-6">
                                 <p><strong>Section Title:</strong> {{ $homeSetting->why_choose_us_title ?? 'Not set' }}</p>
                             </div>
+                            <div class="col-md-6">
+                                <p><strong>Image:</strong>
+                                    @if($homeSetting->why_choose_us_image)
+                                        <span class="text-success">Uploaded</span>
+                                        <small class="text-muted d-block">{{ $homeSetting->why_choose_us_image }}</small>
+                                    @else
+                                        <span class="text-muted">Not set</span>
+                                    @endif
+                                </p>
+                                <p><strong>Image Alt Text:</strong> {{ $homeSetting->why_choose_us_image_alt ?? 'Not set' }}</p>
+                            </div>
                         </div>
+                        @if($homeSetting->why_choose_us_image)
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img src="{{ asset('storage/' . $homeSetting->why_choose_us_image) }}" class="card-img-top" alt="{{ $homeSetting->why_choose_us_image_alt }}" style="height: 200px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <small class="text-muted">Current section image</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="row">
                             @if($homeSetting->features && is_array($homeSetting->features))
                                 @foreach($homeSetting->features as $index => $feature)

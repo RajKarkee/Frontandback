@@ -15,6 +15,8 @@ class HomeSetting extends Model
         'statistics',
         'why_choose_us_title',
         'why_choose_us_subtitle',
+        'why_choose_us_image',
+        'why_choose_us_image_alt',
         'features',
     ];
 
@@ -35,6 +37,8 @@ class HomeSetting extends Model
             'key_statistics_subtitle' => 'Our achievements and milestones that demonstrate our commitment to excellence.',
             'why_choose_us_title' => 'Why Choose Chartered Insights',
             'why_choose_us_subtitle' => 'Partner with a firm that combines deep expertise, proven methodologies, and unwavering commitment to your success.',
+            'why_choose_us_image' => null, // Will be set when user uploads an image
+            'why_choose_us_image_alt' => 'Professional team collaboration',
             'statistics' => [
                 ['label' => 'Happy Clients', 'value' => '100', 'icon' => 'users'],
                 ['label' => 'Years Experience', 'value' => '15', 'icon' => 'calendar'],
