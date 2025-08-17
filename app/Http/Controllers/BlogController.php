@@ -33,14 +33,14 @@ class BlogController extends Controller
             ->first();
 
         // Get categories with post counts
-        $categories = Category::withCount(['publishedPosts'])
-            ->having('published_posts_count', '>', 0)
+        $categories = Category::withCount('publishedPosts')
+            ->whereHas('publishedPosts')
             ->orderBy('name')
             ->get();
 
         // Get popular tags
-        $popularTags = Tag::withCount(['publishedPosts'])
-            ->having('published_posts_count', '>', 0)
+        $popularTags = Tag::withCount('publishedPosts')
+            ->whereHas('publishedPosts')
             ->orderBy('published_posts_count', 'desc')
             ->limit(10)
             ->get();
@@ -83,7 +83,7 @@ class BlogController extends Controller
             ->latest('published_at')
             ->paginate(9);
 
-        return view('blog-category', compact('posts', 'category'));
+        return view('blogs', compact('posts', 'category'));
     }
 
     public function tag($slug)
@@ -98,7 +98,7 @@ class BlogController extends Controller
             ->latest('published_at')
             ->paginate(9);
 
-        return view('blog-tag', compact('posts', 'tag'));
+        return view('blogs', compact('posts', 'tag'));
     }
 
     public function loadMore(Request $request)
