@@ -15,7 +15,7 @@ class AuthorAdminController extends Controller
      */
     public function index()
     {
-        $authors = User::where('role', 'admin')
+        $authors = User::where('role', 'user')
             ->orWhere('role', 'author')
             ->orderBy('created_at', 'desc')
             ->paginate(15);
