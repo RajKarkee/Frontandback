@@ -77,11 +77,11 @@
                                     <td>{{ $author->created_at->format('M j, Y') }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.authors.show', $author) }}" 
+                                            <a href="{{ route('admin.authors.show', $author) }}"
                                                class="btn btn-sm btn-outline-info">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('admin.authors.edit', $author) }}" 
+                                            <a href="{{ route('admin.authors.edit', $author) }}"
                                                class="btn btn-sm btn-outline-primary">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -91,7 +91,7 @@
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             @else
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                                <button type="button" class="btn btn-sm btn-outline-secondary"
                                                         title="Cannot delete author with posts" disabled>
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -167,7 +167,7 @@
 function deleteAuthor(authorId, authorName) {
     document.getElementById('authorName').textContent = authorName;
     document.getElementById('deleteForm').action = '{{ route("admin.authors.index") }}/' + authorId;
-    
+
     const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
     modal.show();
 }

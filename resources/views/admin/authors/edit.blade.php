@@ -28,12 +28,12 @@
                     <form action="{{ route('admin.authors.update', $author) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
                                            id="name" name="name" value="{{ old('name', $author->name) }}" required>
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
                                            id="email" name="email" value="{{ old('email', $author->email) }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -56,7 +56,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="password" class="form-label">New Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
                                            id="password" name="password">
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="password_confirmation" class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" 
+                                    <input type="password" class="form-control"
                                            id="password_confirmation" name="password_confirmation">
                                     <div class="form-text">Required only if changing password</div>
                                 </div>
@@ -92,8 +92,8 @@
 
                         <div class="mb-3">
                             <label for="bio" class="form-label">Bio</label>
-                            <textarea class="form-control @error('bio') is-invalid @enderror" 
-                                      id="bio" name="bio" rows="4" 
+                            <textarea class="form-control @error('bio') is-invalid @enderror"
+                                      id="bio" name="bio" rows="4"
                                       placeholder="Brief description about the author...">{{ old('bio', $author->bio) }}</textarea>
                             @error('bio')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -128,9 +128,9 @@
                     <span class="badge bg-{{ $author->role === 'admin' ? 'danger' : 'info' }}">
                         {{ ucfirst($author->role) }}
                     </span>
-                    
+
                     <hr>
-                    
+
                     <div class="row text-center">
                         <div class="col-6">
                             <h4 class="text-primary">{{ $author->posts()->count() }}</h4>
@@ -161,7 +161,7 @@
                         <strong>Status:</strong>
                         <span class="badge bg-success">Active</span>
                     </div>
-                    
+
                     @if($author->posts()->count() > 0)
                         <hr>
                         <div class="alert alert-info">

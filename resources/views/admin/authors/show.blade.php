@@ -32,7 +32,7 @@
                     <span class="badge bg-{{ $author->role === 'admin' ? 'danger' : 'info' }} mb-3">
                         {{ ucfirst($author->role) }}
                     </span>
-                    
+
                     @if($author->bio)
                         <div class="mt-3">
                             <h6 class="text-primary">Bio</h6>
@@ -147,12 +147,12 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="{{ route('admin.posts.show', $post) }}" 
+                                                    <a href="{{ route('admin.posts.show', $post) }}"
                                                        class="btn btn-outline-info">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     @if(auth()->user()->id === $author->id || auth()->user()->role === 'admin')
-                                                        <a href="{{ route('admin.posts.edit', $post) }}" 
+                                                        <a href="{{ route('admin.posts.edit', $post) }}"
                                                            class="btn btn-outline-primary">
                                                             <i class="fas fa-edit"></i>
                                                         </a>

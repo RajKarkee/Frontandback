@@ -48,8 +48,8 @@
                                         <label for="home_logo" class="form-label">Home Logo</label>
                                         @if($homeSetting->home_logo)
                                             <div class="mb-2">
-                                                <img src="{{ asset('storage/' . $homeSetting->home_logo) }}" 
-                                                     alt="Current home logo" 
+                                                <img src="{{ asset('storage/' . $homeSetting->home_logo) }}"
+                                                     alt="Current home logo"
                                                      class="img-thumbnail" style="max-width: 150px;">
                                                 <div class="form-text">Current home logo</div>
                                             </div>
@@ -79,13 +79,13 @@
                                 <label for="hero_image" class="form-label">Hero Image</label>
                                 @if($homeSetting->hero_image)
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $homeSetting->hero_image) }}" 
-                                             alt="Current hero image" 
+                                        <img src="{{ asset('storage/' . $homeSetting->hero_image) }}"
+                                             alt="Current hero image"
                                              class="img-thumbnail" style="max-width: 200px;">
                                         <div class="form-text">Current hero image</div>
                                     </div>
                                 @endif
-                                <input type="file" 
+                                <input type="file"
                                     class="form-control @error('hero_image') is-invalid @enderror"
                                     id="hero_image" name="hero_image" accept="image/*">
                                 @error('hero_image')

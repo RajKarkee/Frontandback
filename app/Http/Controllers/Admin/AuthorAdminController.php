@@ -63,7 +63,7 @@ class AuthorAdminController extends Controller
     {
         // Get the author's posts
         $posts = $author->posts()->with('category')->latest()->paginate(10);
-        
+
         return view('admin.authors.show', compact('author', 'posts'));
     }
 
