@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Category;
@@ -31,7 +32,7 @@ class PostAdminController extends Controller
         if ($request->has('search') && $request->search !== '') {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('content', 'like', '%' . $request->search . '%');
+                    ->orWhere('content', 'like', '%' . $request->search . '%');
             });
         }
 
@@ -89,6 +90,7 @@ class PostAdminController extends Controller
         if ($request->has('tags')) {
             $post->tags()->attach($request->tags);
         }
+        $this->render();
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Post created successfully!');
@@ -150,6 +152,7 @@ class PostAdminController extends Controller
 
         // Sync tags
         $post->tags()->sync($request->tags ?? []);
+        $this->render();
 
         return redirect()->route('admin.posts.show', $post)
             ->with('success', 'Post updated successfully!');
@@ -167,8 +170,26 @@ class PostAdminController extends Controller
 
         // Delete post
         $post->delete();
-
+        $this->render();
         return redirect()->route('admin.posts.index')
             ->with('success', 'Post deleted successfully!');
+    }
+
+    public function render()
+    {
+        $query = Post::with(['author', 'category', 'tags'])->published();
+        $posts = $query->latest('published_at')->paginate(9);
+        $featuredPost = Post::with(['author', 'category', 'tags'])
+            ->published()
+            ->featured()
+            ->latest('published_at')
+            ->first();
+        $recentPosts = Post::with(['author', 'category'])
+            ->published()
+            ->latest('published_at')
+            ->limit(5)
+            ->get();
+        Helper::putCache('blog.featured', view('admin.template.blog.featured', compact('featuredPost')));
+        Helper::putCache('blog.recent', view('admin.template.blog.recent', compact('recentPosts','posts')));
     }
 }

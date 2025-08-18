@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -45,6 +46,7 @@ class CategoryAdminController extends Controller
         }
 
         Category::create($data);
+        $this->render();
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category created successfully!');
@@ -80,6 +82,7 @@ class CategoryAdminController extends Controller
         }
 
         $category->update($data);
+        $this->render();
 
         return redirect()->route('admin.categories.show', $category)
             ->with('success', 'Category updated successfully!');
@@ -94,8 +97,17 @@ class CategoryAdminController extends Controller
         }
 
         $category->delete();
-
+        $this->render();
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully!');
+    }
+
+    public function render()
+    {
+        $categories = Category::withCount('publishedPosts')
+            ->whereHas('publishedPosts')
+            ->orderBy('name')
+            ->get();
+        Helper::putCache('blog.categories', view('admin.template.blog.categories', compact('categories')));
     }
 }

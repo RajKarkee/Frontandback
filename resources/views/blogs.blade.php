@@ -8,140 +8,18 @@
 <x-jumbotron page-slug="blogs" />
 
 <!-- Featured Post -->
-@if($featuredPost)
-<section class="section">
-    <div class="container-custom">
-        <div class="featured-post-card fade-in">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <img src="{{ $featuredPost->thumbnail_url }}"
-                     alt="{{ $featuredPost->title }}"
-                     class="featured-image">
-                <div class="featured-content">
-                    <span class="featured-badge">Featured Article</span>
-                    <h2 class="featured-title">
-                        {{ $featuredPost->title }}
-                    </h2>
-                    <p class="featured-excerpt">
-                        {{ $featuredPost->excerpt }}
-                    </p>
-                    <div class="featured-meta">
-                        <div class="author-info">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop&ixlib=rb-4.0.3"
-                                 alt="{{ $featuredPost->author->name }}" class="author-avatar">
-                            <div>
-                                <p class="author-name">{{ $featuredPost->author->name }}</p>
-                                <p class="author-title">{{ $featuredPost->category->name }}</p>
-                            </div>
-                        </div>
-                        <div class="post-meta">
-                            <span>{{ $featuredPost->formatted_date }}</span>
-                            <span>•</span>
-                            <span>{{ $featuredPost->category->name }}</span>
-                        </div>
-                    </div>
-                    <a href="{{ $featuredPost->url }}" class="btn-primary mt-6">
-                        Read Full Article
-                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
+@includeIf('front.cache.blog.featured')
 
 <!-- Blog Categories -->
-<section class="section bg-audit-grey">
-    <div class="container-custom">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Browse by Category</h2>
-            <p class="section-subtitle">
-                Explore our content organized by topics that matter to your business.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            @foreach($categories as $index => $category)
-            <a href="{{ $category->url }}" class="category-card text-center fade-in @if($index > 2) fade-in-delay-{{ ($index - 2) }} @endif">
-                <div class="category-icon">
-                    @if($category->icon_url)
-                        <img src="{{ $category->icon_url }}" alt="{{ $category->name }}" class="w-8 h-8 mx-auto text-fresh-teal">
-                    @else
-                        <svg class="w-8 h-8 text-fresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3v8m0 0V9a2 2 0 012-2h2M7 12h6m-6 4h4m1-8h.01" />
-                        </svg>
-                    @endif
-                </div>
-                <h4 class="category-title">{{ $category->name }}</h4>
-                <p class="category-count">{{ $category->published_posts_count }} Posts</p>
-            </a>
-            @endforeach
-        </div>
-    </div>
-</section>
+@includeIf('front.cache.blog.categories')
 
 <!-- Recent Posts -->
-<section class="section">
-    <div class="container-custom">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Recent Posts</h2>
-            <p class="section-subtitle">
-                Stay updated with our latest articles and insights.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-container">
-            @include('partials.blog-cards', ['posts' => $posts])
-        </div>
-
-        @if($posts->hasMorePages())
-        <!-- Load More Button -->
-        <div class="text-center mt-12 fade-in">
-            <button id="load-more-btn" class="btn-outline" data-next-page="{{ $posts->currentPage() + 1 }}">
-                Load More Posts
-                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-            </button>
-            <div id="loading" class="hidden text-center mt-4">
-                <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-fresh-teal transition ease-in-out duration-150 cursor-not-allowed">
-                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Loading...
-                </div>
-            </div>
-        </div>
-        @endif
-    </div>
-</section>
+@includeIf('front.cache.blog.recent')
 
 
 <!-- Popular Tags -->
-<section class="section">
-    <div class="container-custom">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Popular Topics</h2>
-            <p class="section-subtitle">
-                Explore our most discussed topics and trending subjects.
-            </p>
-        </div>
+@includeIf('front.cache.blog.tags')
 
-        <div class="flex flex-wrap gap-3 justify-center fade-in">
-            @foreach($popularTags as $tag)
-            <a href="{{ $tag->url }}" class="tag">
-                {{ $tag->name }}
-                @if($tag->published_posts_count > 0)
-                    ({{ $tag->published_posts_count }})
-                @endif
-            </a>
-            @endforeach
-        </div>
-    </div>
-</section>
 
 <!-- Contact for Contributions -->
 <section class="section bg-audit-grey">

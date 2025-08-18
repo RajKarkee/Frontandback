@@ -109,7 +109,7 @@
                     <div class="mt-4">
                         <h6 class="text-primary fw-bold mb-3">Excerpt</h6>
                         <div class="p-3 bg-light rounded border">
-                            {!! nl2br(e($blog->excerpt)) !!}
+                            {!! $blog->excerpt !!}
                         </div>
                     </div>
                     @endif
@@ -118,7 +118,7 @@
                     <div class="mt-4">
                         <h6 class="text-primary fw-bold mb-3">Content</h6>
                         <div class="p-3 bg-light rounded border" style="max-height: 400px; overflow-y: auto;">
-                            {!! nl2br(e($blog->content)) !!}
+                            {!! $blog->content !!}
                         </div>
                     </div>
                     @endif

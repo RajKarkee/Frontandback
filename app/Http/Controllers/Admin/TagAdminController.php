@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -44,6 +45,7 @@ class TagAdminController extends Controller
         }
 
         Tag::create($data);
+        $this->render();
 
         return redirect()->route('admin.tags.index')
             ->with('success', 'Tag created successfully!');
@@ -78,6 +80,7 @@ class TagAdminController extends Controller
         }
 
         $tag->update($data);
+        $this->render();
 
         return redirect()->route('admin.tags.show', $tag)
             ->with('success', 'Tag updated successfully!');
@@ -92,6 +95,7 @@ class TagAdminController extends Controller
         }
 
         $tag->delete();
+        $this->render();
 
         return redirect()->route('admin.tags.index')
             ->with('success', 'Tag deleted successfully!');
@@ -122,7 +126,17 @@ class TagAdminController extends Controller
             $message .= " and skipped {$skippedCount} tag(s) that have posts";
         }
         $message .= ".";
-
+        $this->render();
         return redirect()->route('admin.tags.index')->with('success', $message);
+    }
+
+    public function render()
+    {
+        $popularTags = Tag::withCount('publishedPosts')
+            ->whereHas('publishedPosts')
+            ->orderBy('published_posts_count', 'desc')
+            ->limit(10)
+            ->get();
+        Helper::putCache('blog.tags', view('admin.template.blog.tags', compact('popularTags')));
     }
 }

@@ -11,48 +11,7 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Post::with(['author', 'category', 'tags'])->published();
-
-        // Filter by category if provided
-        if ($request->has('category')) {
-            $query->byCategory($request->category);
-        }
-
-        // Filter by tag if provided
-        if ($request->has('tag')) {
-            $query->byTag($request->tag);
-        }
-
-        $posts = $query->latest('published_at')->paginate(9);
-
-        // Get featured post
-        $featuredPost = Post::with(['author', 'category', 'tags'])
-            ->published()
-            ->featured()
-            ->latest('published_at')
-            ->first();
-
-        // Get categories with post counts
-        $categories = Category::withCount('publishedPosts')
-            ->whereHas('publishedPosts')
-            ->orderBy('name')
-            ->get();
-
-        // Get popular tags
-        $popularTags = Tag::withCount('publishedPosts')
-            ->whereHas('publishedPosts')
-            ->orderBy('published_posts_count', 'desc')
-            ->limit(10)
-            ->get();
-
-        // Get recent posts
-        $recentPosts = Post::with(['author', 'category'])
-            ->published()
-            ->latest('published_at')
-            ->limit(5)
-            ->get();
-
-        return view('blogs', compact('posts', 'featuredPost', 'categories', 'popularTags', 'recentPosts'));
+        return view('blogs');
     }
 
     public function show($slug)

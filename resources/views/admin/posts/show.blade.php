@@ -36,12 +36,12 @@
                 @if($post->excerpt)
                 <div class="mb-4">
                     <h6 class="text-muted">Excerpt:</h6>
-                    <p class="lead">{{ $post->excerpt }}</p>
+                    <p class="lead">{!! $post->excerpt !!}</p>
                 </div>
                 @endif
 
                 <div class="post-content">
-                    {!! nl2br(e($post->content)) !!}
+                    {!! $post->content !!}
                 </div>
             </div>
         </div>
