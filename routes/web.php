@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\FooterSettingAdminController;
 use App\Http\Controllers\Admin\PostAdminController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\TagAdminController;
+use App\Http\Controllers\Admin\AuthorAdminController;
 use App\Http\Controllers\AboutAdminController;
 
 // Authentication Routes
@@ -105,6 +106,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Tag bulk operations
     Route::delete('tags/bulk-destroy', [TagAdminController::class, 'bulkDestroy'])->name('tags.bulk-destroy');
+
+    // Authors Management Routes
+    Route::resource('authors', AuthorAdminController::class)->names([
+        'index' => 'authors.index',
+        'create' => 'authors.create',
+        'store' => 'authors.store',
+        'show' => 'authors.show',
+        'edit' => 'authors.edit',
+        'update' => 'authors.update',
+        'destroy' => 'authors.destroy',
+    ]);
 
     Route::resource('events', EventAdminController::class)->names([
         'index' => 'events.index',

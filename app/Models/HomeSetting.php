@@ -18,6 +18,10 @@ class HomeSetting extends Model
         'why_choose_us_image',
         'why_choose_us_image_alt',
         'features',
+        'home_logo',
+        'hero_title',
+        'hero_subtitle',
+        'hero_image',
     ];
 
     protected $casts = [

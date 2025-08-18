@@ -31,6 +31,10 @@ class HomeSettingAdminController extends Controller
             'why_choose_us_subtitle' => 'nullable|string',
             'why_choose_us_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'why_choose_us_image_alt' => 'nullable|string|max:255',
+            'home_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'hero_title' => 'nullable|string|max:255',
+            'hero_subtitle' => 'nullable|string',
+            'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'statistics' => 'nullable|array',
             'statistics.*.label' => 'required|string|max:255',
             'statistics.*.number' => 'required|string|max:255',
@@ -42,7 +46,7 @@ class HomeSettingAdminController extends Controller
 
         $homeSetting = HomeSetting::getInstance();
 
-        // Handle image upload
+        // Handle image uploads
         $imagePath = $homeSetting->why_choose_us_image; // Keep existing image if no new upload
         if ($request->hasFile('why_choose_us_image')) {
             // Delete old image if it exists
@@ -52,6 +56,28 @@ class HomeSettingAdminController extends Controller
 
             // Store new image
             $imagePath = $request->file('why_choose_us_image')->store('home-settings', 'public');
+        }
+
+        $heroImagePath = $homeSetting->hero_image; // Keep existing hero image if no new upload
+        if ($request->hasFile('hero_image')) {
+            // Delete old hero image if it exists
+            if ($homeSetting->hero_image && Storage::disk('public')->exists($homeSetting->hero_image)) {
+                Storage::disk('public')->delete($homeSetting->hero_image);
+            }
+
+            // Store new hero image
+            $heroImagePath = $request->file('hero_image')->store('home-settings', 'public');
+        }
+
+        $logoPath = $homeSetting->home_logo; // Keep existing logo if no new upload
+        if ($request->hasFile('home_logo')) {
+            // Delete old logo if it exists
+            if ($homeSetting->home_logo && Storage::disk('public')->exists($homeSetting->home_logo)) {
+                Storage::disk('public')->delete($homeSetting->home_logo);
+            }
+
+            // Store new logo
+            $logoPath = $request->file('home_logo')->store('home-settings', 'public');
         }
 
         // Process statistics
@@ -88,6 +114,10 @@ class HomeSettingAdminController extends Controller
             'why_choose_us_subtitle' => $request->why_choose_us_subtitle,
             'why_choose_us_image' => $imagePath,
             'why_choose_us_image_alt' => $request->why_choose_us_image_alt,
+            'home_logo' => $logoPath,
+            'hero_title' => $request->hero_title,
+            'hero_subtitle' => $request->hero_subtitle,
+            'hero_image' => $heroImagePath,
             'statistics' => $statistics,
             'features' => $features,
         ]);

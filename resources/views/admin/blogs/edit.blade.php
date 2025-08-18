@@ -1,7 +1,13 @@
 @extends('admin.layouts.app')
 
 @section('title', 'Edit Blog Post')
-@section('page-title', 'Edit Blog Post')
+                                <label for="excerpt" class="form-label fw-semibold">Excerpt</label>
+                                <textarea class="form-control @error('excerpt') is-invalid @enderror"
+                                          id="excerpt" name="excerpt" rows="3"
+                                          placeholder="Brief summary of the blog post...">{!! old('excerpt', $blog->excerpt) !!}</textarea>
+                                @error('excerpt')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderrorn('page-title', 'Edit Blog Post')
 
 @section('page-actions')
     <a href="{{ route('admin.blogs.show', $blog) }}" class="btn btn-info">
@@ -78,7 +84,7 @@
                                 <label for="content" class="form-label fw-semibold">Content *</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror"
                                           id="content" name="content" rows="15" required
-                                          placeholder="Write your blog post content here...">{{ old('content', $blog->content) }}</textarea>
+                                          placeholder="Write your blog post content here...">{!! old('content', $blog->content) !!}</textarea>
                                 @error('content')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

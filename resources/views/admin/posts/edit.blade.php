@@ -53,7 +53,7 @@
                                 <div class="mb-3">
                                     <label for="excerpt" class="form-label">Excerpt</label>
                                     <textarea class="form-control @error('excerpt') is-invalid @enderror" id="excerpt" name="excerpt" rows="3"
-                                        placeholder="Brief description of the post...">{{ old('excerpt', $post->excerpt) }}</textarea>
+                                    placeholder="Brief description of the post...">{!! old('excerpt', $post->excerpt) !!}</textarea>
                                     @error('excerpt')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -62,8 +62,7 @@
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Content <span
                                             class="text-danger">*</span></label>
-                                    <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="15"
-                                        required>{{ old('content', $post->content) }}</textarea>
+                                    <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="15" required>{!! old('content', $post->content) !!}</textarea>
                                     @error('content')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

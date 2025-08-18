@@ -69,7 +69,6 @@ class PostAdminController extends Controller
         ]);
 
         $data = $request->all();
-
         // Generate slug if not provided
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);

@@ -74,6 +74,15 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.authors.*') ? 'active' : '' }}"
+               href="{{ route('admin.authors.index') }}">
+                <i class="fas fa-users"></i>
+                <span>Authors</span>
+                <span class="badge bg-primary ms-auto">{{ \App\Models\User::whereIn('role', ['admin', 'author'])->count() }}</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.insights.*') ? 'active' : '' }}"
                href="{{ route('admin.insights.index') }}">
                 <i class="fas fa-lightbulb"></i>

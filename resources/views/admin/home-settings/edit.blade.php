@@ -22,6 +22,83 @@
             @method('PUT')
 
             <div class="row">
+                <!-- Hero Section -->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Hero Section</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="hero_title" class="form-label">Hero Title</label>
+                                        <input type="text"
+                                            class="form-control @error('hero_title') is-invalid @enderror"
+                                            id="hero_title" name="hero_title"
+                                            value="{{ old('hero_title', $homeSetting->hero_title) }}"
+                                            placeholder="e.g., Welcome to Our Company">
+                                        @error('hero_title')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="home_logo" class="form-label">Home Logo</label>
+                                        @if($homeSetting->home_logo)
+                                            <div class="mb-2">
+                                                <img src="{{ asset('storage/' . $homeSetting->home_logo) }}" 
+                                                     alt="Current home logo" 
+                                                     class="img-thumbnail" style="max-width: 150px;">
+                                                <div class="form-text">Current home logo</div>
+                                            </div>
+                                        @endif
+                                        <input type="file"
+                                            class="form-control @error('home_logo') is-invalid @enderror"
+                                            id="home_logo" name="home_logo" accept="image/*">
+                                        @error('home_logo')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="form-text">Upload company logo (JPEG, PNG, JPG, GIF, WebP, SVG). Max size: 2MB</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="hero_subtitle" class="form-label">Hero Subtitle</label>
+                                <textarea class="form-control @error('hero_subtitle') is-invalid @enderror"
+                                    id="hero_subtitle" name="hero_subtitle" rows="3"
+                                    placeholder="Enter hero subtitle description...">{{ old('hero_subtitle', $homeSetting->hero_subtitle) }}</textarea>
+                                @error('hero_subtitle')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="hero_image" class="form-label">Hero Image</label>
+                                @if($homeSetting->hero_image)
+                                    <div class="mb-2">
+                                        <img src="{{ asset('storage/' . $homeSetting->hero_image) }}" 
+                                             alt="Current hero image" 
+                                             class="img-thumbnail" style="max-width: 200px;">
+                                        <div class="form-text">Current hero image</div>
+                                    </div>
+                                @endif
+                                <input type="file" 
+                                    class="form-control @error('hero_image') is-invalid @enderror"
+                                    id="hero_image" name="hero_image" accept="image/*">
+                                @error('hero_image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text">Upload a new image to replace the current one (JPEG, PNG, JPG, GIF, WebP). Max size: 2MB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <!-- Key Statistics Section -->
                 <div class="col-lg-6">
                     <div class="card">

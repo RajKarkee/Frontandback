@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'bio',
     ];
 
     /**
@@ -55,6 +56,11 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role === 'user';
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(\App\Models\Post::class, 'author_id');
     }
 }
 
