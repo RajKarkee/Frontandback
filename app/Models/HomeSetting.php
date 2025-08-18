@@ -49,22 +49,22 @@ class HomeSetting extends Model
                 [
                     'title' => 'Partner-Led Engagements',
                     'description' => 'Every assignment is directly supervised by a partner or senior professional to ensure quality, accountability, and strategic insight.',
-                    'icon' => 'check'
+                    'icon' => 'fa-solid fa-check'
                 ],
                 [
                     'title' => 'Deep Industry Expertise',
                     'description' => 'Specialized knowledge across multiple sectors, ensuring tailored solutions that address your industry-specific challenges.',
-                    'icon' => 'check'
+                    'icon' => 'fa-solid fa-check'
                 ],
                 [
                     'title' => 'Technology-Enabled Solutions',
                     'description' => 'Leveraging cutting-edge technology and digital tools to deliver efficient, accurate, and timely results.',
-                    'icon' => 'check'
+                    'icon' => 'fa-solid fa-check'
                 ],
                 [
                     'title' => 'Client-Centric Approach',
                     'description' => 'Building long-term partnerships through exceptional service, clear communication, and measurable results.',
-                    'icon' => 'check'
+                    'icon' => 'fa-solid fa-check'
                 ],
             ]
         ]);
