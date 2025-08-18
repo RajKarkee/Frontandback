@@ -38,12 +38,6 @@
 
         <p class="text-audit-grey text-sm mb-6 line-clamp-3">{{ $post->excerpt }}</p>
 
-        <div class="flex flex-wrap gap-2 mb-6">
-            @foreach($post->tags->take(3) as $tag)
-            <span class="tag-badge">{{ $tag->name }}</span>
-            @endforeach
-        </div>
-
         <div class="flex items-center justify-between w-full text-audit-grey text-sm mb-4">
             <span>{{ $post->author->name }}</span>
             <span>{{ $post->formatted_date }}</span>
