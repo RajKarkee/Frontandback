@@ -1,0 +1,529 @@
+
+
+        :root {
+            --primary: #00213f;
+            --secondary: #0090d4;
+            --accent: #00b4f2;
+            --light: #f8fcff;
+            --lighter: #e8f0fc;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --shadow: rgba(0, 33, 63, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .rka-scope {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--gray);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .rka-scope h1, .rka-scope h2, .rka-scope h3, .rka-scope h4 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.3px;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .about-hero-section {
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 33, 63, 0.8), rgba(0, 144, 212, 0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920&h=1080') center/cover;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .about-hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0, 180, 242, 0.15) 0%, transparent 60%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" opacity="0.1"><circle cx="10" cy="10" r="2" fill="white"/><circle cx="40" cy="10" r="2" fill="white"/><circle cx="70" cy="10" r="2" fill="white"/><circle cx="10" cy="40" r="2" fill="white"/><circle cx="40" cy="40" r="2" fill="white"/><circle cx="70" cy="40" r="2" fill="white"/><circle cx="10" cy="70" r="2" fill="white"/><circle cx="40" cy="70" r="2" fill="white"/><circle cx="70" cy="70" r="2" fill="white"/></svg>') repeat;
+            animation: wave 10s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+
+        .about-hero-content {
+           text-align: center;
+    max-width: 800px;
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3rem;
+    color: var(--white);
+    background: rgba(0, 33, 63, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
+        }
+
+        .about-hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--white), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero-content p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .story-section, .values-section, .expertise-section, .why-choose-section {
+            padding: 7rem 0;
+            background: var(--light);
+            margin-right: 5rem;
+        }
+
+        .leadership-section, .cta-section {
+            padding: 5rem 0;
+            background: var(--light);
+            margin-right: 5rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+        }
+
+        .story-section h2, .values-section h2, .leadership-section h2, .expertise-section h2, .why-choose-section h2, .cta-section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+        }
+
+        .story-section .lead, .values-section .lead, .leadership-section .lead, .expertise-section .lead, .why-choose-section .lead, .cta-section .lead {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--gray);
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .cta-section .lead {
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            color: var(--white);
+        }
+
+        /* Story Section Layout */
+        .story-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .story-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px var(--shadow);
+            border: 1px solid var(--lighter);
+        }
+
+        .story-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .story-text p {
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .value-card, .leader-card, .expertise-card, .reason-card {
+            background: linear-gradient(135deg, var(--white), var(--light));
+            border: 1px solid var(--lighter);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+            
+        }
+
+        .value-card, .reason-card {
+            min-height: 320px;
+        }
+
+        .expertise-card {
+            min-height: 360px;
+        }
+
+        .leader-card {
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .value-card:hover, .leader-card:hover, .expertise-card:hover, .reason-card:hover {
+            transform: scale(1.06);
+            box-shadow: 0 12px 30px rgba(0, 33, 63, 0.2);
+        }
+
+        .value-card .content, .leader-card .content, .expertise-card .content, .reason-card .content {
+            padding: 1.6rem;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .value-card .content, .expertise-card .content, .reason-card .content {
+            padding-top: 2.2rem;
+        }
+
+        .value-card i, .expertise-card i, .reason-card i {
+            font-size: 2.4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .value-card:hover i, .expertise-card:hover i, .reason-card:hover i {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .leader-card img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 0.8rem;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 33, 63, 0.2);
+        }
+
+        .value-card h3, .leader-card h3, .expertise-card h3, .reason-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .value-card h3:hover, .leader-card h3:hover, .expertise-card h3:hover, .reason-card h3:hover {
+            color: var(--accent);
+        }
+
+        .value-card h3::after, .leader-card h3::after, .expertise-card h3::after, .reason-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .value-card h3:hover::after, .leader-card h3:hover::after, .expertise-card h3::after:hover, .reason-card h3::after:hover {
+            width: 50%;
+        }
+
+        .leader-card .title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .value-card p, .leader-card p, .expertise-card p, .reason-card p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        /* CTA Button */
+        .btn-cta-filled {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 6px 20px rgba(0, 144, 212, 0.3);
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-cta-filled:hover {
+            background: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 144, 212, 0.3);
+        }
+
+        .btn-cta-filled i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+
+        .btn-cta-filled:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Responsive */
+        @media (min-width: 1400px) {
+            .section-container {
+                max-width: 1400px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .about-hero-section {
+                height: 80vh;
+                min-height: 500px;
+            }
+            .about-hero-content h1 {
+                font-size: 3.2rem;
+            }
+            .about-hero-content p {
+                font-size: 1rem;
+            }
+            .story-section, .values-section, .expertise-section, .why-choose-section {
+                padding: 5rem 0;
+            }
+            .leadership-section, .cta-section {
+                padding: 4rem 0;
+            }
+            .story-section h2, .values-section h2, .leadership-section h2, .expertise-section h2, .why-choose-section h2, .cta-section h2 {
+                font-size: 2.6rem;
+            }
+            .story-section .lead, .values-section .lead, .leadership-section .lead, .expertise-section .lead, .why-choose-section .lead, .cta-section .lead {
+                font-size: 1.2rem;
+            }
+            .story-text p {
+                font-size: 0.95rem;
+            }
+            .story-image {
+                height: 320px;
+                max-width: 100%;
+            }
+            .story-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .value-card, .reason-card {
+                min-height: 300px;
+            }
+            .expertise-card {
+                min-height: 340px;
+            }
+            .leader-card {
+                min-height: 360px;
+            }
+            .value-card .content, .leader-card .content, .expertise-card .content, .reason-card .content {
+                padding: 1.4rem;
+            }
+            .value-card .content, .expertise-card .content, .reason-card .content {
+                padding-top: 2rem;
+            }
+            .value-card h3, .leader-card h3, .expertise-card h3, .reason-card h3 {
+                font-size: 1.5rem;
+            }
+            .leader-card .title {
+                font-size: 1rem;
+            }
+            .value-card p, .leader-card p, .expertise-card p, .reason-card p {
+                font-size: 0.95rem;
+            }
+            .leader-card img {
+                width: 80px;
+                height: 80px;
+            }
+            .value-card i, .expertise-card i, .reason-card i {
+                font-size: 2.2rem;
+            }
+            .btn-cta-filled {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .about-hero-section {
+                height: 70vh;
+                min-height: 450px;
+            }
+            .about-hero-content {
+                padding: 1.5rem;
+            }
+            .about-hero-content h1 {
+                font-size: 2.6rem;
+            }
+            .about-hero-content p {
+                font-size: 0.95rem;
+            }
+            .story-section, .values-section, .expertise-section, .why-choose-section {
+                padding: 4rem 0;
+            }
+            .leadership-section, .cta-section {
+                padding: 3.5rem 0;
+            }
+            .story-section h2, .values-section h2, .leadership-section h2, .expertise-section h2, .why-choose-section h2, .cta-section h2 {
+                font-size: 2.3rem;
+            }
+            .story-section .lead, .values-section .lead, .leadership-section .lead, .expertise-section .lead, .why-choose-section .lead, .cta-section .lead {
+                font-size: 1rem;
+            }
+            .story-text p {
+                font-size: 0.9rem;
+            }
+            .story-image {
+                height: 280px;
+            }
+            .value-card, .reason-card {
+                min-height: 280px;
+            }
+            .expertise-card {
+                min-height: 320px;
+            }
+            .leader-card {
+                min-height: 340px;
+            }
+            .value-card .content, .leader-card .content, .expertise-card .content, .reason-card .content {
+                padding: 1.2rem;
+            }
+            .value-card .content, .expertise-card .content, .reason-card .content {
+                padding-top: 1.8rem;
+            }
+            .value-card h3, .leader-card h3, .expertise-card h3, .reason-card h3 {
+                font-size: 1.4rem;
+            }
+            .leader-card .title {
+                font-size: 0.95rem;
+            }
+            .value-card p, .leader-card p, .expertise-card p, .reason-card p {
+                font-size: 0.9rem;
+            }
+            .leader-card img {
+                width: 70px;
+                height: 70px;
+            }
+            .value-card i, .expertise-card i, .reason-card i {
+                font-size: 2rem;
+            }
+            .btn-cta-filled {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+                width: 100%;
+                max-width: 260px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-hero-section {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .about-hero-content {
+                padding: 1rem;
+            }
+            .about-hero-content h1 {
+                font-size: 2rem;
+            }
+            .about-hero-content p {
+                font-size: 0.9rem;
+            }
+            .story-section, .values-section, .expertise-section, .why-choose-section {
+                padding: 3rem 0;
+            }
+            .leadership-section, .cta-section {
+                padding: 3rem 0;
+            }
+            .story-section h2, .values-section h2, .leadership-section h2, .expertise-section h2, .why-choose-section h2, .cta-section h2 {
+                font-size: 2rem;
+            }
+            .story-section .lead, .values-section .lead, .leadership-section .lead, .expertise-section .lead, .why-choose-section .lead, .cta-section .lead {
+                font-size: 0.95rem;
+            }
+            .story-text p {
+                font-size: 0.85rem;
+            }
+            .story-image {
+                height: 240px;
+            }
+            .value-card, .reason-card {
+                min-height: 260px;
+            }
+            .expertise-card {
+                min-height: 300px;
+            }
+            .leader-card {
+                min-height: 320px;
+            }
+            .value-card .content, .leader-card .content, .expertise-card .content, .reason-card .content {
+                padding: 1rem;
+            }
+            .value-card .content, .expertise-card .content, .reason-card .content {
+                padding-top: 1.6rem;
+            }
+            .value-card h3, .leader-card h3, .expertise-card h3, .reason-card h3 {
+                font-size: 1.3rem;
+            }
+            .leader-card .title {
+                font-size: 0.9rem;
+            }
+            .value-card p, .leader-card p, .expertise-card p, .reason-card p {
+                font-size: 0.85rem;
+            }
+            .leader-card img {
+                width: 60px;
+                height: 60px;
+            }
+            .value-card i, .expertise-card i, .reason-card i {
+                font-size: 1.8rem;
+            }
+            .btn-cta-filled {
+                padding: 0.6rem 1.6rem;
+                font-size: 0.85rem;
+                max-width: 240px;
+            }
+            .section-container {
+                padding: 0 16px;
+            }
+        }

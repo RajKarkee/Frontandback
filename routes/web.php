@@ -33,13 +33,20 @@ use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\TagAdminController;
 use App\Http\Controllers\Admin\AuthorAdminController;
 use App\Http\Controllers\AboutAdminController;
-
+use App\Http\Controllers\Front\ServiceController as FrontServiceController;
+use App\Http\Controllers\Front\IndustryController as FrontIndustryController;
+use App\Http\Controllers\Front\InsightsController as FrontInsightsController;
+use App\Http\Controllers\Front\AboutController as FrontAboutController;
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-
+Route::get('/services',[FrontServiceController::class,'index'])->name('services');
+Route::get('/services/all', [FrontServiceController::class, 'getAll'])->name('services.all');
+Route::get('/industries', [FrontIndustryController::class, 'index'])->name('industries');
+Route::get('/insights', [FrontInsightsController::class, 'index'])->name('insights');
+Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
@@ -304,15 +311,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
 // Frontend Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/about', [PageController::class, 'about'])->name('about');
+// Route::get('/about', [PageController::class, 'about'])->name('about');
 
-Route::get('/services', [ServiceController::class, 'index'])->name('services');
+// Route::get('/services', [ServiceController::class, 'index'])->name('services');
 // Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
-Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
+// Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
 
-Route::get('/insights', [PageController::class, 'insights'])->name('insights');
+// Route::get('/insights', [PageController::class, 'insights'])->name('insights');
 Route::get('/insights/category/{categorySlug}', [PageController::class, 'insightsByCategory'])->name('insights.category');
 Route::get('/insights/{slug}', [PageController::class, 'insightDetail'])->name('insights.detail');
 
