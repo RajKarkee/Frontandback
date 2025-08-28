@@ -37,9 +37,13 @@ use App\Http\Controllers\Front\ServiceController as FrontServiceController;
 use App\Http\Controllers\Front\IndustryController as FrontIndustryController;
 use App\Http\Controllers\Front\InsightsController as FrontInsightsController;
 use App\Http\Controllers\Front\AboutController as FrontAboutController;
+use App\Http\Controllers\Front\ContactController as FrontContactController;
+use App\Http\Controllers\Front\HomeController as FrontHomeController;
 //not finished
 use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
+use App\Http\Controllers\Front\BlogController as FrontBlogController;
+use App\Http\Controllers\Front\CareerController as FrontCareerController;
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -49,8 +53,13 @@ Route::get('/services',[FrontServiceController::class,'index'])->name('services'
 Route::get('/services/all', [FrontServiceController::class, 'getAll'])->name('services.all');
 Route::get('/industries', [FrontIndustryController::class, 'index'])->name('industries');
 Route::get('/insights', [FrontInsightsController::class, 'index'])->name('insights');
+Route::get('/events',[FrontEventController::class,'index'])->name('events');
 Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
 Route::get('/offices', [FrontOfficeController::class,'index'])->name('offices');
+Route::get('/blogs', [FrontBlogController::class, 'index'])->name('blogs');
+Route::get('/careers', [FrontCareerController::class, 'index'])->name('careers');
+Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
+Route::get('/', [FrontHomeController::class, 'home'])->name('home');
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -315,7 +324,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 });
 
 // Frontend Routes
-Route::get('/', [PageController::class, 'home'])->name('home');
+// Route::get('/', [PageController::class, 'home'])->name('home');
 // Route::get('/about', [PageController::class, 'about'])->name('about');
 
 // Route::get('/services', [ServiceController::class, 'index'])->name('services');
@@ -335,7 +344,7 @@ Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.sho
 // Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 Route::get('/offices/{slug}', [OfficeController::class, 'show'])->name('offices.show');
 
-Route::get('/careers', [CareerController::class, 'index'])->name('careers');
+// Route::get('/careers', [CareerController::class, 'index'])->name('careers');
 Route::get('/careers/jobs/{id}', [CareerController::class, 'showJob'])->name('careers.jobs.detail');
 Route::get('/careers/jobs-by-category', [CareerController::class, 'getJobsByCategory'])->name('careers.jobs.by-category');
 Route::get('/careers/{slug}', [CareerController::class, 'show'])->name('careers.show');
@@ -346,13 +355,13 @@ Route::get('/apply/{jobId}', [JobApplicationController::class, 'create'])->name(
 Route::post('/apply', [JobApplicationController::class, 'store'])->name('careers.apply.submit');
 
 // Blog routes
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+// Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/load-more', [BlogController::class, 'loadMore'])->name('blogs.load-more');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/tag/{slug}', [BlogController::class, 'tag'])->name('blog.tag');
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
 
 // Newsletter subscription routes

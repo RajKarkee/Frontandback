@@ -2,7 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/blogs.css') }}">
-    @include('layouts.links')
+    @include('new.layouts.links')
 @endsection
 
 @section('content')
@@ -102,6 +102,7 @@
             </section>
         </main>
     </div>
+     @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')

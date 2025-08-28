@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-    <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
-        <main style="margin: 0; padding: 0; width: 100vw;">
+    <div class="rka-scope">
+        <main>
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-slider">
@@ -54,7 +54,7 @@
                     <p class="lead gsap-animate">Explore our comprehensive service offerings and discover how we can support your business goals.</p>
                     <div class="row g-4" id="servicesGrid">
                         @foreach($services->take(6) as $service)
-                        <div class="col-md-6 col-lg-4 gsap-animate" data-delay="{{ $loop->index * 0.2 }}">
+                        <div class="col-md-6 col-lg-4 gsap-animate" data-delay="{{ $loop->index * 0.1 }}">
                             <div class="service-card">
                                 <h3>{{ $service->title }}</h3>
                                 <p>{{ $service->description }}</p>
@@ -83,7 +83,7 @@
                     <h2 class="gsap-animate">Service Details</h2>
                     <div class="row g-4" id="serviceDetails">
                         @foreach($services->take(6) as $service)
-                        <div class="col-12 gsap-animate" id="service-{{ $service->id }}" data-delay="{{ $loop->index * 0.2 }}">
+                        <div class="col-12 gsap-animate" id="service-{{ $service->id }}" data-delay="{{ $loop->index * 0.15 }}">
                             <div class="detail-card">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 detail-content">
@@ -137,6 +137,7 @@
             </section>
         </main>
     </div>
+     @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')
@@ -156,7 +157,7 @@
         // Slick slider initialization
         $(document).ready(function(){
             $('.hero-slider').slick({
-                dots: true,
+                dots: false,
                 infinite: true,
                 speed: 800,
                 fade: true,

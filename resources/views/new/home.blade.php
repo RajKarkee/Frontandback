@@ -2,7 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    @include('layouts.links')
+    @include('new.layouts.links')
       <!-- Slick Slider CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
@@ -230,6 +230,9 @@
             </section>
         </main>
     </div>
+    @include('new.layouts.contactusform')
+    @endsection
+    @section('scripts')
 
     <!-- jQuery (required for Slick Slider) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -240,7 +243,7 @@
     <script>
         $(document).ready(function(){
             $('.hero-slider').slick({
-                dots: true,
+                dots: false,
                 infinite: true,
                 speed: 800,
                 fade: true,

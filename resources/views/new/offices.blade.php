@@ -2,7 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/offices.css') }}">
-    @include('layouts.links') 
+    @include('new.layouts.links') 
 
 @endsection
 
@@ -187,6 +187,7 @@
             </section>
         </main>
     </div>
+     @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')

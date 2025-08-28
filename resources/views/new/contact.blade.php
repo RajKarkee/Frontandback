@@ -2,7 +2,7 @@
 
 @section('styles')
     <link href="{{ asset('css/contactus.css') }}" rel="stylesheet">
-     @include('layouts.links')
+     @include('new.layouts.links')
     
 @endsection
 
@@ -28,7 +28,7 @@
                     <p class="lead gsap-animate">Ready to discuss your business needs? Fill out the form below and one of our experts will get back to you within 24 hours.</p>
                     <div class="row g-4">
                         <div class="col-lg-6 gsap-animate">
-                            <form class="contact-form" action="#" method="POST">
+                            <form class="contact-form" action="{{ route('contact.submit') }}" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -154,6 +154,7 @@
             </section>
         </main>
     </div>
+   
 @endsection
 
 @section('scripts')

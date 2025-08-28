@@ -220,6 +220,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: var(--transition);
+            align-items: center;
         }
 
         .rka-footer-scope .newsletter form:hover {
@@ -229,7 +230,7 @@
         }
 
         .rka-footer-scope .newsletter input {
-            padding: 1.25rem 1.5rem;
+            padding: 0.75rem 1.5rem;
             border: none;
             background: transparent;
             color: var(--white);
@@ -237,6 +238,7 @@
             width: 70%;
             outline: none;
             font-weight: 400;
+            height: 100%;
         }
 
         .rka-footer-scope .newsletter input::placeholder {
@@ -245,9 +247,11 @@
         }
 
         .rka-footer-scope .newsletter button {
-            padding: 1.25rem 2rem;
+            padding: 0.75rem 1.5rem;
             border: none;
             background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            background-size: 200% 100%;
+            background-position: 40% 0;
             color: var(--white);
             font-size: 0.9rem;
             font-weight: 600;
@@ -256,6 +260,10 @@
             position: relative;
             overflow: hidden;
             letter-spacing: 0.025em;
+            height: 80%;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            text-indent: -5px;
         }
 
         .rka-footer-scope .newsletter button::before {
@@ -361,15 +369,20 @@
                 justify-content: center;
             }
             .rka-footer-scope .newsletter form {
-                flex-direction: column;
+                flex-direction: row;
                 max-width: 100%;
+                align-items: center;
             }
             .rka-footer-scope .newsletter input {
-                width: 100%;
-                border-radius: 12px 12px 0 0;
+                width: 60%;
+                border-radius: 8px;
+                padding: 0.75rem 1rem;
             }
             .rka-footer-scope .newsletter button {
-                border-radius: 0 0 12px 12px;
+                border-radius: 8px;
+                padding: 0.75rem 1rem;
+                height: 80%;
+                margin: 0 0.5rem;
             }
         }
 
@@ -387,6 +400,20 @@
                 width: 44px;
                 height: 44px;
                 font-size: 1rem;
+            }
+            .rka-footer-scope .newsletter form {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .rka-footer-scope .newsletter input {
+                width: 100%;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
+            .rka-footer-scope .newsletter button {
+                width: auto;
+                padding: 0.6rem 1.2rem;
             }
         }
 

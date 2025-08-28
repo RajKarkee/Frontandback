@@ -198,6 +198,7 @@
             </div>
         </main>
     </div>
+     @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')

@@ -1518,6 +1518,7 @@
             <!-- Other modals would follow similar structure -->
         </main>
     </div>
+     @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')
