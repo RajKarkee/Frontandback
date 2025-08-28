@@ -2,7 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/event.css') }}">
-    @include('layouts.links')
+    @include('new.layouts.links')
 @endsection    
 
 @section('content')

@@ -37,6 +37,9 @@ use App\Http\Controllers\Front\ServiceController as FrontServiceController;
 use App\Http\Controllers\Front\IndustryController as FrontIndustryController;
 use App\Http\Controllers\Front\InsightsController as FrontInsightsController;
 use App\Http\Controllers\Front\AboutController as FrontAboutController;
+//not finished
+use App\Http\Controllers\Front\EventController as FrontEventController;
+use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -47,6 +50,8 @@ Route::get('/services/all', [FrontServiceController::class, 'getAll'])->name('se
 Route::get('/industries', [FrontIndustryController::class, 'index'])->name('industries');
 Route::get('/insights', [FrontInsightsController::class, 'index'])->name('insights');
 Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
+Route::get('/offices', [FrontOfficeController::class,'index'])->name('offices');
+
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
@@ -323,11 +328,11 @@ Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('ind
 Route::get('/insights/category/{categorySlug}', [PageController::class, 'insightsByCategory'])->name('insights.category');
 Route::get('/insights/{slug}', [PageController::class, 'insightDetail'])->name('insights.detail');
 
-Route::get('/events', [EventController::class, 'index'])->name('events');
+// Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/events/filter', [EventController::class, 'filter'])->name('events.filter');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 
-Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
+// Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 Route::get('/offices/{slug}', [OfficeController::class, 'show'])->name('offices.show');
 
 Route::get('/careers', [CareerController::class, 'index'])->name('careers');
