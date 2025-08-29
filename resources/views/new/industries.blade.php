@@ -39,8 +39,8 @@
                         <div class="col-12 col-md-6 col-lg-4 gsap-animate">
                             <div class="industry-card">
                                 @if($industry->svg_icon)
-                                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $industry->svg_icon }}" />
+                                    <svg class="service-icon" width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="{{ $industry->svg_icon }}" />
                                     </svg>
                                 @elseif($industry->icon)
                                     <i class="{{ $industry->icon }} service-icon"></i>
