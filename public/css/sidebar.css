@@ -1,0 +1,493 @@
+.rka-scope {
+    --primary: #002b4a;
+    --secondary: #0080c0;
+    --accent: #00a3e0;
+    --light: #f7fbff;
+    --lighter: #eef4fc;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --shadow: rgba(0, 43, 74, 0.15);
+    --shadow-lg: rgba(0, 43, 74, 0.25);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
+    color: var(--primary);
+}
+
+.rka-scope * {
+    box-sizing: border-box;
+}
+
+.rka-scope .slogan {
+    flex-grow: 1;
+    text-align: center;
+    font-style: italic;
+    font-family: "Lora", serif;
+    position: relative;
+    display: inline-block;
+}
+
+.rka-scope .slogan::before {
+    content: "\f10d";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.rka-scope h1 {
+    font-family: "Lora", serif;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+}
+
+.rka-scope .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    z-index: 50;
+    box-shadow: 0 4px 15px rgba(0, 59, 92, 0.15);
+}
+
+.rka-scope .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.rka-scope .header .logo {
+    transition: transform 0.5s ease;
+}
+
+.rka-scope .header .logo:hover {
+    transform: rotate(360deg);
+}
+
+.rka-scope .search-bar {
+    position: relative;
+    width: 280px;
+    display: flex;
+    align-items: center;
+}
+
+.rka-scope .search-bar input {
+    width: 100%;
+    padding: 8px 36px 8px 12px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    transition: all 0.2s ease;
+}
+
+.rka-scope .search-bar input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.rka-scope .search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.rka-scope .search-bar i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--white);
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rka-scope .search-bar i:hover {
+    color: var(--lighter);
+}
+
+.rka-scope .search-icon {
+    display: none;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.rka-scope .search-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.rka-scope .mobile-search {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    padding: 8px 16px;
+    background: var(--primary);
+    z-index: 50;
+}
+
+.rka-scope .mobile-search input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+}
+
+.rka-scope .mobile-search input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.rka-scope .mobile-search input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.rka-scope .menu-btn {
+    display: none;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.rka-scope .menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.rka-sidebar-scope {
+    --primary: #002b4a;
+    --secondary: #0080c0;
+    --accent: #00a3e0;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --shadow: rgba(0, 43, 74, 0.15);
+    --shadow-lg: rgba(0, 43, 74, 0.25);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
+    color: var(--primary);
+}
+
+.rka-sidebar-scope * {
+    box-sizing: border-box;
+}
+
+.rka-sidebar-scope .sidebar {
+    width: 80px;
+    background: linear-gradient(180deg, #ffffff, #f0f6ff);
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, width 0.2s ease-in-out;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    bottom: 0;
+    /* overflow-x: hidden;
+    overflow-y: auto; */
+    z-index: 1000;
+    box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
+}
+/* .rka-sidebar-scope .sidebar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+} */
+/* .rka-sidebar-scope .sidebar li {
+    margin: 1px 0;
+    padding: 1px 0;
+    list-style: none;
+}
+
+.rka-sidebar-scope .sidebar.active {
+    transform: translateX(0);
+    width: 40%;
+    max-width: 480px;
+} */
+
+.rka-sidebar-scope .sidebar a {
+    text-decoration: none;
+    color: var(--primary);
+    margin: 8px 0;
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transform: scale(1);
+    cursor: pointer;
+}
+
+.rka-sidebar-scope .sidebar a:hover {
+    background: linear-gradient(90deg, #b8d7f0, #80c0f0);
+    color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 59, 92, 0.1);
+}
+
+.rka-sidebar-scope .sidebar.active a {
+    font-size: 13px;
+    padding: 8px 16px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.rka-sidebar-scope .sidebar a i {
+    font-size: 16px;
+    color: var(--primary);
+    margin-bottom: 3px;
+    transition: color 0.2s ease;
+}
+
+.rka-sidebar-scope .sidebar a:hover i {
+    color: var(--accent);
+}
+
+.rka-sidebar-scope .sidebar .separator-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 43, 74, 0.3);
+    margin: 10px 0;
+}
+
+.rka-sidebar-scope .sidebar .text-item {
+    text-decoration: none;
+    color: var(--primary);
+    margin: 3px 0;
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+.rka-sidebar-scope .sidebar.active .text-item {
+    font-size: 13px;
+    padding: 4px 16px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.rka-sidebar-scope .sidebar .text-item:hover {
+    color: var(--accent);
+    transform: scale(1.02);
+}
+
+.rka-sidebar-scope .page-preview {
+    position: fixed;
+    top: 20px;
+    left: 80px;
+    width: 40vw;
+    max-width: 50vw;
+    height: 79vh;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 43, 74, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(30px);
+}
+
+.rka-sidebar-scope .sidebar.active .page-preview {
+    left: 480px;
+}
+
+.rka-sidebar-scope .page-preview.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.rka-sidebar-scope .page-preview img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--lighter);
+}
+
+.rka-sidebar-scope .page-preview h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.rka-sidebar-scope .page-preview p {
+    font-size: 1.15rem;
+    color: var(--gray);
+    line-height: 1.7;
+    flex-grow: 1;
+}
+
+.rka-sidebar-scope .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+.rka-sidebar-scope .overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.rka-content-scope {
+    margin-top: 5.2%;
+    transition: margin-left 0.2s ease-in-out;
+}
+
+.rka-content-scope.active {
+    margin-left: 480px;
+}
+
+@media (max-width: 1024px) {
+    .rka-content-scope {
+        margin-left: 0;
+    }
+    .rka-content-scope.active {
+        margin-left: 480px;
+    }
+    .rka-sidebar-scope .page-preview,
+    .rka-sidebar-scope .overlay {
+        display: none;
+    }
+}
+
+@media (min-width: 1025px) {
+    .rka-sidebar-scope .sidebar {
+        transform: translateX(0) !important;
+        width: 80px;
+    }
+    .rka-sidebar-scope .sidebar.active {
+        width: 40%;
+        max-width: 480px;
+    }
+    .rka-scope .menu-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .rka-sidebar-scope .sidebar {
+        transform: translateX(-100%);
+        width: 40%;
+        max-width: 480px;
+        box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
+    }
+    .rka-sidebar-scope .sidebar.active {
+        transform: translateX(0);
+    }
+    .rka-scope .header {
+        padding: 0 16px;
+    }
+    .rka-scope .search-bar {
+        width: 200px;
+    }
+    .rka-scope .menu-btn {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .rka-scope .search-bar {
+        display: none;
+    }
+    .rka-scope .search-icon {
+        display: block;
+    }
+    .rka-scope .header-content {
+        gap: 8px;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 18px;
+    }
+    .rka-scope .header-content p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .rka-scope .header {
+        padding: 0 12px;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 16px;
+    }
+    .rka-scope .header-content p {
+        font-size: 10px;
+    }
+    .rka-scope .mobile-search input {
+        font-size: 12px;
+        padding: 6px;
+    }
+    .rka-sidebar-scope .sidebar a {
+        margin: 6px 0;
+        padding: 6px 0;
+        font-size: 9px;
+    }
+    .rka-sidebar-scope .sidebar a i {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+    .rka-sidebar-scope .sidebar .separator-bar {
+        margin: 6px 0;
+    }
+    .rka-sidebar-scope .sidebar .text-item {
+        font-size: 9px;
+        padding: 2px 10px;
+        margin: 1px 0;
+    }
+    .rka-content-scope {
+        padding: 16px;
+    }
+}
