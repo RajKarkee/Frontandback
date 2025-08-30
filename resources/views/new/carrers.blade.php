@@ -234,7 +234,23 @@
             padding: 5rem 0;
             background: var(--light);
         }
+.benefit-card {
+    text-align: center;
+    padding: 1.5rem;
+}
 
+.benefit-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.benefit-icon svg {
+    width: 40px;   /* adjust size */
+    height: 40px;
+    color: var(--primary); /* if you want it colored like FontAwesome */
+}
         .openings-section h2 {
             font-size: 2.8rem;
             text-align: center;
@@ -1080,48 +1096,19 @@
                     <h2 class="gsap-animate">Why Choose Chartered Insights?</h2>
                     <p class="lead gsap-animate">We believe our people are our greatest asset. That's why we invest in creating an environment where talent thrives and careers flourish.</p>
                     <div class="row g-4">
-                        <div class="col-lg-4 col-md-6 gsap-animate">
+                        @foreach($carrer_benefits as $index => $benefit)
+                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
                             <div class="benefit-card">
-                                <i class="fas fa-graduation-cap"></i>
-                                <h3>Professional Growth</h3>
-                                <p>Continuous learning opportunities, professional certifications, and clear career progression paths to help you reach your potential.</p>
-                            </div>
+                                  <div class="benefit-icon">
+        {!! $benefit->icon !!}
+    </div>
+                            
+                                <h3>{{$benefit->title}}</h3>
+                                <p>{{$benefit->description}}</p>
                         </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.2">
-                            <div class="benefit-card">
-                                <i class="fas fa-users"></i>
-                                <h3>Collaborative Culture</h3>
-                                <p>Work with diverse, talented teams in an inclusive environment that values collaboration, innovation, and mutual respect.</p>
-                            </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.4">
-                            <div class="benefit-card">
-                                <i class="fas fa-heart"></i>
-                                <h3>Comprehensive Benefits</h3>
-                                <p>Competitive compensation, health insurance, retirement plans, and additional perks that support your well-being and financial security.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate">
-                            <div class="benefit-card">
-                                <i class="fas fa-book-open"></i>
-                                <h3>Learning & Development</h3>
-                                <p>Access to training programs, workshops, conferences, and certification support to keep your skills current and competitive.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.2">
-                            <div class="benefit-card">
-                                <i class="fas fa-balance-scale"></i>
-                                <h3>Work-Life Balance</h3>
-                                <p>Flexible working arrangements, paid time off, and a supportive environment that recognizes the importance of personal well-being.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.4">
-                            <div class="benefit-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <h3>Innovation Focus</h3>
-                                <p>Be part of a forward-thinking organization that embraces technology and innovation to deliver exceptional client service.</p>
-                            </div>
-                        </div>
+                        @endforeach
+                
                     </div>
                 </div>
             </section>
@@ -1151,56 +1138,64 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                             <div class="job-list">
-                                <div class="job-banner gsap-animate" data-department="audit">
+                                @foreach($job_openings as $index => $job)
+                                <div class="job-banner gsap-animate" data-department="{{ $job->category }}">
                                     <div class="job-info">
-                                        <h3>Senior Auditor</h3>
+                                        <h3>{{$job->title}}</h3>
+                                        @if($job->is_featured==1)
                                         <p class="featured">Featured</p>
-                                        <p>Audit & Assurance</p>
-                                        <p>Kathmandu</p>
-                                        <p>Full-time</p>
+                                        @endif
+                                        <p>{{$job->category}}</p>
+                                        <p>{{$job->location}}</p>
+                                        <p>{{$job->job_type}}</p>
+                                     
                                     </div>
                                     <div class="btn-container">
-                                        <button class="btn-primary-outline" data-bs-toggle="collapse" data-bs-target="#senior-auditor-details" aria-expanded="false" aria-controls="senior-auditor-details">View Details</button>
-                                        <button class="btn-primary-filled" data-bs-toggle="modal" data-bs-target="#apply-senior-auditor">Apply Now</button>
+                                        <button class="btn-primary-outline" data-bs-toggle="collapse" data-bs-target="#s{{ $job->id }}" aria-expanded="false" aria-controls="senior-auditor-details">View Details</button>
+                                        <button class="btn-primary-filled" data-bs-toggle="modal" data-bs-target="#applyModal"    data-job-id="{{ $job->id }}"
+        data-job-title="{{ $job->title }}"
+        data-job-department="{{ $job->category }}"
+        data-job-location="{{ $job->location }}"
+        data-job-type="{{ $job->job_type }}"
+        data-job-salary-min="{{ $job->salary_min }}"
+        data-job-salary-max="{{ $job->salary_max ?? 'N/A' }}">Apply Now</button>
                                     </div>
                                 </div>
-                                <div class="collapse" id="senior-auditor-details">
+                                <div class="collapse" id="s{{ $job->id }}">
+                                    
                                     <div class="job-details">
                                         <h4>Position Overview</h4>
-                                        <p>We are seeking an experienced Senior Auditor to join our audit team. The successful candidate will lead audit engagements, supervise junior staff, and ensure high-quality service delivery to our clients.</p>
+                                        <p>{{$job->overview}}</p>
                                         <h4>Key Responsibilities</h4>
-                                        <ul>
-                                            <li>Plan and execute audit engagements for various client types and sizes</li>
-                                            <li>Supervise and mentor junior audit staff</li>
-                                            <li>Review audit working papers and ensure quality standards</li>
-                                            <li>Interact with clients and address audit-related queries</li>
-                                            <li>Prepare comprehensive audit reports and management letters</li>
-                                            <li>Stay updated with auditing standards and regulations</li>
-                                        </ul>
-                                        <h4>Requirements</h4>
-                                        <ul>
-                                            <li>Bachelor's degree in Accounting, Finance, or related field</li>
-                                            <li>Minimum 3-5 years of audit experience</li>
-                                            <li>Professional certification (CA, ACCA, CPA) preferred</li>
-                                            <li>Strong analytical and problem-solving skills</li>
-                                            <li>Excellent communication and leadership abilities</li>
-                                            <li>Proficiency in audit software and MS Office</li>
-                                        </ul>
+                                          @foreach(explode("\n", trim($job->responsibilities)) as $item)
+        @if(!empty(trim($item)))
+            <li>{{ trim($item) }}</li>
+        @endif
+    @endforeach
+                                     <h4>Requirements</h4>
+                                      <ul>
+    @foreach(explode("\n", trim($job->requirements)) as $item)
+        @if(!empty(trim($item)))
+            <li>{{ trim($item) }}</li>
+        @endif
+    @endforeach
+</ul>
                                         <h4>What We Offer</h4>
-                                        <ul>
-                                            <li>Competitive salary package</li>
-                                            <li>Performance-based bonuses</li>
-                                            <li>Professional development opportunities</li>
-                                            <li>Health and life insurance</li>
-                                            <li>Flexible working arrangements</li>
-                                        </ul>
+                                   <ul>
+    @foreach(explode("\n", trim($job->benefits)) as $item)
+        @if(!empty(trim($item)))
+            <li>{{ trim($item) }}</li>
+        @endif
+    @endforeach
+</ul>
                                         <h4>Compensation</h4>
-                                        <p>NPR 80,000 - 120,000</p>
+                                        <p>NPR {{ $job->salary_min }} - {{$job->salary_max}}</p>
                                         <h4>Application Deadline</h4>
-                                        <p>September 30, 2025</p>
+                                        <p>{{$job->application_deadline}}</p>
                                     </div>
                                 </div>
-                                <div class="job-banner gsap-animate" data-department="business">
+                                @endforeach
+                                {{-- <div class="job-banner gsap-animate" data-department="business">
                                     <div class="job-info">
                                         <h3>Business Analyst</h3>
                                         <p class="featured">Featured</p>
@@ -1379,7 +1374,7 @@
                             </div>
                             <div class="text-center mt-4 gsap-animate">
                                 <a href="#apply-general" class="btn-primary-filled">Submit General Application</a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab"></div>
                         <div class="tab-pane fade" id="tax" role="tabpanel" aria-labelledby="tax-tab"></div>
@@ -1448,21 +1443,22 @@
 
             <!-- Application Modals -->
             <!-- Senior Auditor Modal -->
-            <div class="modal fade" id="apply-senior-auditor" tabindex="-1" aria-labelledby="apply-senior-auditor-label" aria-hidden="true">
+            <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModallabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="apply-senior-auditor-label">Apply for Senior Auditor</h5>
+                            <h5 class="modal-title" id="applyModallabel">Apply for position</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Department:</strong> Audit & Assurance</p>
-                            <p><strong>Location:</strong> Kathmandu</p>
-                            <p><strong>Type:</strong> Full-time</p>
-                            <p><strong>Salary:</strong> NPR 80,000 - 120,000</p>
+                            <p><strong>Department:</strong><span id="modalJobDepartment"></span></p>
+                            <p><strong>Location:</strong><span id="modalJobLocation"></span></p>
+                            <p><strong>Type:</strong><span id="modalJobType"></span></p>
+                            <p><strong>Salary:</strong> NPR<span id="modalJobMin"></span>-<span id="modalJobMax"></span></p>
                             <p class="mb-4">We're excited to learn more about you! Please fill out the form below and we'll review your application carefully.</p>
                             <form action="#" method="POST">
                                 @csrf
+                                <input type="hidden" id="modalJobId" name="job_id">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="first-name" class="form-label">First Name *</label>
@@ -1524,6 +1520,7 @@
 @section('scripts')
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <scrpt src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -1704,5 +1701,36 @@
                 }
             }
         });
+       $(document).ready(function(){
+    $('.btn-primary-filled[data-bs-target="#applyModal"]').on('click', function() {
+        var jobTitle = $(this).data('job-title');
+        var jobDepartment = $(this).data('job-department');
+        var jobLocation = $(this).data('job-location');
+        var jobType = $(this).data('job-type');
+        var jobSalaryMin = $(this).data('job-salary-min');
+        var jobSalaryMax = $(this).data('job-salary-max');
+        var jobId = $(this).data('job-id');
+
+        // Update modal content
+        $('#applyModallabel').text('Apply for ' + jobTitle);
+        $('#modalJobDepartment').text(jobDepartment);
+        $('#modalJobLocation').text(jobLocation);
+        $('#modalJobType').text(jobType);
+        $('#modalJobMin').text(jobSalaryMin);
+        $('#modalJobMax').text(jobSalaryMax);
+
+        // Optional: hidden input for job ID
+        if ($('#modalJobId').length === 0) {
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'modalJobId',
+                name: 'job_id',
+                value: jobId
+            }).appendTo('#applyModal form');
+        } else {
+            $('#modalJobId').val(jobId);
+        }
+    });
+});
     </script>
 @endsection
