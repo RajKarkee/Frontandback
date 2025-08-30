@@ -597,21 +597,6 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .hero-content {
-        margin-left: 10rem;
-        margin-top: 3.5rem;
-    }
-}
-
-@media (max-width: 992px) {
-    .hero-content {
-        margin-left: 5rem;
-        margin-top: 3rem;
-        width: 80%;
-    }
-}
-
 @media (max-width: 768px) {
     .hero-section,
     .hero-slide {
@@ -619,9 +604,7 @@
     }
     .hero-content {
         padding: 1.5rem;
-        margin-left: 2rem;
-        margin-top: 2.5rem;
-        width: 85%;
+        max-width: 95%;
     }
     .hero-content h1 {
         font-size: clamp(1.6rem, 4.5vw, 2.5rem);
@@ -690,9 +673,7 @@
     }
     .hero-content {
         padding: 1rem;
-        margin-left: 1rem;
-        margin-top: 2rem;
-        width: 90%;
+        max-width: 98%;
     }
     .hero-content h1 {
         font-size: clamp(1.4rem, 4vw, 2.2rem);

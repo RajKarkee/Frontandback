@@ -1,3 +1,4 @@
+
 @extends('new.layouts.sidebar')
 
 @section('styles')
@@ -14,7 +15,7 @@
 
 @section('content')
     <div class="rka-scope">
-        <main>
+        <main >
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-slider">
@@ -50,7 +51,7 @@
                     </div>
                 </div>
             </section>
-
+<div class="contanier">
             <!-- Key Statistics -->
             <section class="stats-section">
                 <div class="section-container">
@@ -214,6 +215,7 @@
                     <a href="#" class="btn-all gsap-animate">View All Industries</a>
                 </div>
             </section>
+            @include('new.layouts.contactusform')
 
             <!-- Call to Action -->
             <section class="cta-section">
@@ -228,11 +230,9 @@
                     </div>
                 </div>
             </section>
+            </div>
         </main>
     </div>
-    @include('new.layouts.contactusform')
-    @endsection
-    @section('scripts')
 
     <!-- jQuery (required for Slick Slider) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
