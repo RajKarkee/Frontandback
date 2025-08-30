@@ -404,9 +404,9 @@
             background: linear-gradient(180deg, var(--lighter), var(--white));
         }
 
-        .industries-section .section-container {
+        /* .industries-section .section-container {
             margin-left: 10px;
-        }
+        } */
 
         .industries-section h2 {
             font-size: 3rem;

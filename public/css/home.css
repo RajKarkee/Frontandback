@@ -42,11 +42,10 @@
 /* Hero Section */
 .hero-section {
     position: relative;
-    min-height: 95vh;
+    min-height: 90vh;
     overflow: hidden;
     background: none;
     margin-top: 0rem;
-    margin-bottom: 6rem;
     padding: 0;
     width: 100%;
 }
@@ -59,12 +58,12 @@
 .hero-slide {
     position: relative;
     width: 100%;
-    min-height: 95vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
+    min-height: 80vh;
+    display: flex !important;
     align-items: center;
     justify-content: center;
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-slide-1 {
@@ -101,7 +100,6 @@
     text-align: center;
     max-width: 900px;
     width: 90%;
-    margin: 4rem auto 0;
     padding: 2.5rem;
     color: var(--white);
     background: rgba(0, 33, 63, 0.15);
@@ -213,7 +211,7 @@
 
 /* Stats Section */
 .stats-section {
-    padding: 4rem 0;
+    padding: 2.4rem 0;
     background: linear-gradient(180deg, var(--light), var(--lighter));
     position: relative;
     width: 100%;

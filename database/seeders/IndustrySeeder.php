@@ -105,7 +105,7 @@ class IndustrySeeder extends Seeder
                     'Investment audits',
                     'Fintech advisory'
                 ],
-                'svg_icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1',
+                'svg_icon' => 'M3 10l9-7 9 7 M21 10v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6 M8 10v6M12 10v6M16 10v6 M7 21h10',
                 'category' => 'Financial',
                 'status' => 'active',
                 'sort_order' => 5,
