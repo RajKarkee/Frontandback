@@ -39,9 +39,9 @@ use App\Http\Controllers\Front\InsightsController as FrontInsightsController;
 use App\Http\Controllers\Front\AboutController as FrontAboutController;
 use App\Http\Controllers\Front\ContactController as FrontContactController;
 use App\Http\Controllers\Front\HomeController as FrontHomeController;
+use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
 //not finished
 use App\Http\Controllers\Front\EventController as FrontEventController;
-use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
 use App\Http\Controllers\Front\BlogController as FrontBlogController;
 use App\Http\Controllers\Front\CareerController as FrontCareerController;
 // Authentication Routes

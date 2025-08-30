@@ -3,7 +3,6 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/offices.css') }}">
     @include('new.layouts.links') 
-
 @endsection
 
 @section('content')
@@ -26,19 +25,20 @@
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Locations</h2>
                     <p class="lead gsap-animate">With offices strategically located across Nepal, we're always close to our clients, providing personalized service and local expertise.</p>
+                    
                     <div class="row g-4">
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate">
+                        @foreach($offices as $index => $office)
+                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}">
                             <div class="office-card">
-                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" class="office-image" alt="Kathmandu office">
+                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" class="office-image" alt="{{ $office->name }} office">
                                 <div class="content">
-                                    <span class="office-badge">Head Office</span>
-                                    <h3>Kathmandu Office</h3>
-                                    <p>Our flagship office in the heart of Nepal's capital serves as our headquarters and primary service center. This modern facility houses our executive team, specialized departments, and state-of-the-art meeting facilities.</p>
+                                    <span class="office-badge">{{ ucwords(str_replace('_', ' ', $office->type)) }}</span>
+                                    <h3>{{ $office->name }}</h3>
                                     <div class="details">
-                                        <p><i class="fas fa-map-marker-alt"></i> Chartered House, Durbar Marg, Kathmandu 44600, Nepal</p>
-                                        <p><i class="fas fa-phone"></i> +977-1-4234567</p>
-                                        <p><i class="fas fa-envelope"></i> kathmandu@charteredinsights.com</p>
-                                        <p><i class="fas fa-clock"></i> Sunday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> {{ $office->address }}</p>
+                                        <p><i class="fas fa-phone"></i> {{ $office->phone }}</p>
+                                        <p><i class="fas fa-envelope"></i> {{ $office->email }}</p>
+                                        <p><i class="fas fa-clock"></i> {{ $office->office_hours }}</p>
                                     </div>
                                     <div class="d-flex flex-wrap flex-lg-row justify-content-center gap-2">
                                         <a href="#directions" class="btn-office">Get Directions <i class="fas fa-map"></i></a>
@@ -47,46 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
-                            <div class="office-card">
-                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" class="office-image" alt="Pokhara office">
-                                <div class="content">
-                                    <span class="office-badge">Branch Office</span>
-                                    <h3>Pokhara Office</h3>
-                                    <p>Our Pokhara office provides comprehensive accounting and financial advisory services to businesses and individuals in the Gandaki region, ensuring local expertise with global standards.</p>
-                                    <div class="details">
-                                        <p><i class="fas fa-map-marker-alt"></i> Lake Side, Pokhara-6, Kaski, Nepal</p>
-                                        <p><i class="fas fa-phone"></i> +977-61-465432</p>
-                                        <p><i class="fas fa-envelope"></i> pokhara@charteredinsights.com</p>
-                                        <p><i class="fas fa-clock"></i> Sunday - Friday: 9:30 AM - 5:30 PM<br>Saturday: 10:00 AM - 3:00 PM</p>
-                                    </div>
-                                    <div class="d-flex flex-wrap flex-lg-row justify-content-center gap-2">
-                                        <a href="#directions" class="btn-office">Get Directions <i class="fas fa-map"></i></a>
-                                        <a href="#appointment" class="btn-office">Book Appointment <i class="fas fa-calendar-check"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
-                            <div class="office-card">
-                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" class="office-image" alt="Chitwan office">
-                                <div class="content">
-                                    <span class="office-badge">Branch Office</span>
-                                    <h3>Chitwan Office</h3>
-                                    <p>Our Bharatpur office provides comprehensive accounting and financial advisory services to businesses and individuals in the Bagmati region, ensuring local expertise with global standards.</p>
-                                    <div class="details">
-                                        <p><i class="fas fa-map-marker-alt"></i> Narayangarh-4, Bharatpur, Chitwan, Nepal</p>
-                                        <p><i class="fas fa-phone"></i> +977-56-526789</p>
-                                        <p><i class="fas fa-envelope"></i> chitwan@charteredinsights.com</p>
-                                        <p><i class="fas fa-clock"></i> Sunday - Friday: 9:00 AM - 5:00 PM<br>Saturday: Closed</p>
-                                    </div>
-                                    <div class="d-flex flex-wrap flex-lg-row justify-content-center gap-2">
-                                        <a href="#directions" class="btn-office">Get Directions <i class="fas fa-map"></i></a>
-                                        <a href="#appointment" class="btn-office">Book Appointment <i class="fas fa-calendar-check"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -97,26 +58,30 @@
                     <h2 class="gsap-animate">Getting to Our Offices</h2>
                     <p class="lead gsap-animate">Easy access and convenient transportation options to all our locations.</p>
                     <div class="row g-4">
-                        <div class="col-12 col-lg-6 card gsap-animate">
-                            <h3>Schedule Appointment</h3>
-                            <p>Book an appointment at any of our offices for personalized consultation and service.</p>
-                            <a href="#appointment" class="btn-office">Book Now <i class="fas fa-calendar-check"></i></a>
+                        <div class="col-12 col-lg-6 gsap-animate">
+                            <div class="card">
+                                <h3>Schedule Appointment</h3>
+                                <p>Book an appointment at any of our offices for personalized consultation and service.</p>
+                                <a href="#appointment" class="btn-office">Book Now <i class="fas fa-calendar-check"></i></a>
+                            </div>
                         </div>
-                        <div class="col-12 col-lg-6 card gsap-animate" data-delay="0.2">
-                            <h3>Parking & Transport</h3>
-                            <p><strong>Parking Information</strong></p>
-                            <ul>
-                                <li>Free parking available: 20 car parking slots</li>
-                                <li>Covered parking</li>
-                                <li>Security guard on duty</li>
-                                <li>Visitor parking passes available on request</li>
-                            </ul>
-                            <p><strong>Directions & Transport</strong></p>
-                            <ul>
-                                <li><strong>Public Transport Options:</strong></li>
-                                <li>Bus: Regular bus service from major areas</li>
-                                <li>Micro: Available from Ratna Park and other key locations</li>
-                            </ul>
+                        <div class="col-12 col-lg-6 gsap-animate" data-delay="0.2">
+                            <div class="card">
+                                <h3>Parking & Transport</h3>
+                                <p><strong>Parking Information</strong></p>
+                                <ul>
+                                    <li>Free parking available: 20 car parking slots</li>
+                                    <li>Covered parking</li>
+                                    <li>Security guard on duty</li>
+                                    <li>Visitor parking passes available on request</li>
+                                </ul>
+                                <p><strong>Directions & Transport</strong></p>
+                                <ul>
+                                    <li><strong>Public Transport Options:</strong></li>
+                                    <li>Bus: Regular bus service from major areas</li>
+                                    <li>Micro: Available from Ratna Park and other key locations</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,49 +93,23 @@
                     <h2 class="gsap-animate">Services Available at All Locations</h2>
                     <p class="lead gsap-animate">Each of our offices provides the complete range of our professional services, ensuring consistent quality and expertise regardless of location.</p>
                     <div class="row g-4">
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate">
+                        @foreach($services as $index => $service)
+                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.3 }}">
                             <div class="service-card">
-                                <i class="fas fa-file-alt"></i>
-                                <h3>Audit & Assurance</h3>
-                                <p>Independent audits, reviews, and assurance services that provide confidence in your financial reporting and compliance with regulatory requirements.</p>
-                            </div>
+                                <i class="{{ $service->icon }}"></i>
+                                <h3>{{$service->title}}</h3>
+                                <p>{{ Str::limit($service->description, 150) }}</p>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
-                            <div class="service-card">
-                                <i class="fas fa-calculator"></i>
-                                <h3>Tax Advisory</h3>
-                                <p>Strategic tax planning, compliance, and advisory services to optimize your tax position and ensure regulatory adherence across all jurisdictions.</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
-                            <div class="service-card">
-                                <i class="fas fa-shield-alt"></i>
-                                <h3>Risk Advisory</h3>
-                                <p>Comprehensive risk assessment, management strategies, and internal control solutions to protect and strengthen your organization against uncertainties.</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate">
-                            <div class="service-card">
-                                <i class="fas fa-chart-line"></i>
-                                <h3>Business Consulting</h3>
-                                <p>Strategic advisory services, process optimization, and growth planning to help your business reach its full potential in competitive markets.</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
-                            <div class="service-card">
-                                <i class="fas fa-book"></i>
-                                <h3>Financial Reporting</h3>
-                                <p>Professional financial statement preparation, analysis, and reporting services that meet international standards and regulatory requirements.</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
-                            <div class="service-card">
-                                <i class="fas fa-briefcase"></i>
-                                <h3>Corporate Advisory</h3>
-                                <p>Strategic corporate guidance, governance consulting, and transaction advisory to support your business objectives and stakeholder interests.</p>
-                            </div>
-                        </div>
+                        
                     </div>
+                    @endforeach
+                    <div class="text-center mt-4">
+                          <div class="btn-all-container gsap-animate">
+                    <a href="/services" class="btn-all">
+                        View All Services <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
                 </div>
             </section>
 
@@ -187,7 +126,7 @@
             </section>
         </main>
     </div>
-     @include('new.layouts.contactusform')
+    @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')
@@ -198,6 +137,7 @@
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <script>
         $(document).ready(function(){
             // Card Hover Animation
@@ -247,6 +187,16 @@
                     duration: 0.3,
                     ease: 'power2.out'
                 });
+            });
+
+            // Smooth scroll for navigation links
+            $(document).on("click", "a[href^='#']", function(e) {
+                e.preventDefault();
+                let target = $(this).attr("href");
+                if ($(target).length) {
+                    let offset = $(target).offset().top - 80;
+                    $("html, body").animate({ scrollTop: offset }, 800);
+                }
             });
         });
 
