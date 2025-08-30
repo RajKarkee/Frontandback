@@ -130,9 +130,9 @@
     transform: translateX(4px);
 }
 
-.rka-footer-scope .footer-links {
-    space-y: 0.75rem;
-}
+/* .rka-footer-scope .footer-links {
+   
+} */
 
 .rka-footer-scope .footer-links a {
     display: flex;
