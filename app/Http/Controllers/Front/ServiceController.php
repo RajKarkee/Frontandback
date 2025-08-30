@@ -25,6 +25,7 @@ class ServiceController extends Controller
         foreach ($services as $index => $service) {
             $delay = $index * 0.2;
             $servicesHtml .= "
+            
                 <div class='col-md-6 col-lg-4 gsap-animate' data-delay='{$delay}'>
                     <div class='service-card'>
                         <h3>{$service->title}</h3>

@@ -16,6 +16,7 @@
     color: var(--primary);
     line-height: 1.8;
     overflow-x: hidden;
+    width: 100%;
 }
 
 .rka-scope h1,
@@ -33,18 +34,18 @@
 .section-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 1rem;
+    width: 100%;
 }
 
 /* Hero Section */
 .hero-section {
     position: relative;
-
-    height: 90vh;
-    min-height: 600px;
+    min-height: 95vh;
     overflow: hidden;
-    background: var(--primary);
-    margin: 0;
+    background: none;
+    margin-top: 0rem;
+    margin-bottom: 6rem;
     padding: 0;
     width: 100%;
 }
@@ -57,7 +58,7 @@
 .hero-slide {
     position: relative;
     width: 100%;
-    height: 90vh;
+    min-height: 95vh;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -99,14 +100,12 @@
     text-align: center;
     max-width: 900px;
     width: 90%;
-    margin-left: 20rem;
-    margin-top: 5rem;
+    margin: 4rem auto 0;
     padding: 2.5rem;
     color: var(--white);
     background: rgba(0, 33, 63, 0.15);
     backdrop-filter: blur(8px);
     border-radius: 24px;
-
     box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
 }
 
@@ -433,8 +432,8 @@
 }
 
 /* .industries-section .section-container {
-    margin-left: 10px;
-} */
+            margin-left: 10px;
+        } */
 
 .industries-section h2 {
     font-size: 3rem;
@@ -461,9 +460,6 @@
     flex-direction: column;
     justify-content: center;
 }
-/* .industries-section .lead .row g-3 {
-    margin-left: -10px;
-} */
 
 .industry-item i {
     font-size: 2rem;
@@ -654,19 +650,65 @@
     }
 }
 
-@media (max-width: 576px) {
-    .hero-section {
-        height: 60vh;
-        min-height: 400px;
+@media (max-width: 1200px) {
+    .hero-content {
+        text-align: center;
+        max-width: 900px;
+        width: 90%;
+        margin-left: 15rem;
+        margin-top: 4rem;
+        padding: 2.5rem;
+        color: var(--white);
+        background: rgba(0, 33, 63, 0.15);
+        backdrop-filter: blur(8px);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-content {
+        margin-left: 5rem;
+        margin-top: 3rem;
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section,
+    .hero-slide {
+        min-height: 70vh;
     }
     .hero-content {
         padding: 1.5rem;
+        margin-left: 2rem;
+        margin-top: 2.5rem;
+        width: 85%;
     }
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: clamp(1.6rem, 4.5vw, 2.5rem);
     }
     .hero-content p {
-        font-size: 0.95rem;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section,
+    .hero-slide {
+        min-height: 60vh;
+    }
+    .hero-content {
+        padding: 1rem;
+        margin-left: 1rem;
+        margin-top: 2rem;
+        width: 90%;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+    }
+    .hero-content p {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
     }
     .btn-primary-filled,
     .btn-primary-outline {
@@ -714,4 +756,59 @@
     .section-container {
         padding: 0 16px;
     }
+}
+@media (max-width: 320px) {
+    .hero-section,
+    .hero-slide {
+        min-height: 50vh;
+    }
+    .hero-content {
+        padding: 0.8rem;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.2rem, 3.8vw, 1.8rem);
+    }
+    .hero-content p {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.4rem 1rem;
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        max-width: 180px;
+    }
+    .section-container {
+        padding: 0 0.3rem;
+    }
+}
+
+/* Loading button states */
+.btn-spinner {
+    display: none;
+}
+
+.btn-all:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Animation classes */
+.gsap-animate {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.gsap-animate.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Service items animation */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }

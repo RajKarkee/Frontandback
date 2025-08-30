@@ -1,4 +1,3 @@
-
 @extends('new.layouts.sidebar')
 
 @section('styles')

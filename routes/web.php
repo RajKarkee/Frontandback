@@ -60,6 +60,7 @@ Route::get('/blogs', [FrontBlogController::class, 'index'])->name('blogs');
 Route::get('/careers', [FrontCareerController::class, 'index'])->name('careers');
 Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
 Route::get('/', [FrontHomeController::class, 'home'])->name('home');
+Route::get('/industries/all', [FrontIndustryController::class, 'getAll'])->name('industries.all');
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
