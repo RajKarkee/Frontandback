@@ -1152,7 +1152,7 @@
                                     </div>
                                     <div class="btn-container">
                                         <button class="btn-primary-outline" data-bs-toggle="collapse" data-bs-target="#s{{ $job->id }}" aria-expanded="false" aria-controls="senior-auditor-details">View Details</button>
-                                        <button class="btn-primary-filled" data-bs-toggle="modal" data-bs-target="#applyModal"    data-job-id="{{ $job->id }}"
+                                        <button class="btn-primary-filled apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal"    data-job-id="{{ $job->id }}"
         data-job-title="{{ $job->title }}"
         data-job-department="{{ $job->category }}"
         data-job-location="{{ $job->location }}"
@@ -1456,51 +1456,51 @@
                             <p><strong>Type:</strong><span id="modalJobType"></span></p>
                             <p><strong>Salary:</strong> NPR<span id="modalJobMin"></span>-<span id="modalJobMax"></span></p>
                             <p class="mb-4">We're excited to learn more about you! Please fill out the form below and we'll review your application carefully.</p>
-                            <form action="#" method="POST">
+                            <form action="{{ route('application.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="modalJobId" name="job_id">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="first-name" class="form-label">First Name *</label>
-                                        <input type="text" class="form-control" id="first-name" required>
+                                        <input type="text" class="form-control" id="first-name" name="first_name" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="last-name" class="form-label">Last Name *</label>
-                                        <input type="text" class="form-control" id="last-name" required>
+                                        <input type="text" class="form-control" id="last-name" name="last_name" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email Address *</label>
-                                        <input type="email" class="form-control" id="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label">Phone Number *</label>
-                                        <input type="tel" class="form-control" id="phone" required>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
                                     </div>
                                     <div class="col-12">
                                         <label for="resume" class="form-label">Resume/CV *</label>
-                                        <input type="file" class="form-control" id="resume" accept=".pdf,.doc,.docx" required>
+                                        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
                                         <small class="text-muted">Accepted formats: PDF, DOC, DOCX (Max: 5MB)</small>
-                                    spouse
+                                    
                                     </div>
                                     <div class="col-12">
                                         <label for="cover-letter" class="form-label">Cover Letter</label>
-                                        <textarea class="form-control" id="cover-letter" rows="5" placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
+                                        <textarea class="form-control" id="cover-letter" rows="5" name="cover_letter" placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="portfolio" class="form-label">Portfolio URL</label>
-                                        <input type="url" class="form-control" id="portfolio" placeholder="https://your-portfolio.com">
+                                        <input type="url" class="form-control" id="portfolio" name="portfolio" placeholder="https://your-portfolio.com">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="linkedin" class="form-label">LinkedIn Profile</label>
-                                        <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                                        <input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="salary" class="form-label">Expected Salary (NPR)</label>
-                                        <input type="number" class="form-control" id="salary">
+                                        <input type="number" class="form-control" id="salary" name="expected_salary" placeholder="e.g., 60000">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="start-date" class="form-label">Available Start Date</label>
-                                        <input type="date" class="form-control" id="start-date">
+                                        <input type="date" class="form-control"  id="start-date" name="start_date">
                                     </div>
                                     <div class="col-12 text-center">
                                         <button type="submit" class="btn-primary-filled"><i class="fas fa-paper-plane"></i> Submit Application</button>
@@ -1520,7 +1520,7 @@
 @section('scripts')
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <scrpt src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -1702,20 +1702,22 @@
             }
         });
        $(document).ready(function(){
-    $('.btn-primary-filled[data-bs-target="#applyModal"]').on('click', function() {
-        var jobTitle = $(this).data('job-title');
-        var jobDepartment = $(this).data('job-department');
-        var jobLocation = $(this).data('job-location');
-        var jobType = $(this).data('job-type');
-        var jobSalaryMin = $(this).data('job-salary-min');
-        var jobSalaryMax = $(this).data('job-salary-max');
-        var jobId = $(this).data('job-id');
-
+    $(document).on('click','.apply-btn', function() {
+        const jobTitle = $(this).data('job-title');
+        const jobDepartment = $(this).data('job-department');
+        const jobLocation = $(this).data('job-location');
+        const jobType = $(this).data('job-type');
+        const jobSalaryMin = $(this).data('job-salary-min');
+        const jobSalaryMax = $(this).data('job-salary-max');
+        const jobId = $(this).data('job-id');
+   console.log('Button clicked:', {
+            jobTitle, jobDepartment, jobLocation, jobType, jobSalaryMin, jobSalaryMax, jobId
+        });
         // Update modal content
-        $('#applyModallabel').text('Apply for ' + jobTitle);
-        $('#modalJobDepartment').text(jobDepartment);
-        $('#modalJobLocation').text(jobLocation);
-        $('#modalJobType').text(jobType);
+        $('#applyModalLabel').text('Apply for ' + jobTitle);
+        $('#modalJobDepartment').text('' + jobDepartment);
+        $('#modalJobLocation').text('' + jobLocation);
+        $('#modalJobType').text('' + jobType);
         $('#modalJobMin').text(jobSalaryMin);
         $('#modalJobMax').text(jobSalaryMax);
 
@@ -1732,5 +1734,34 @@
         }
     });
 });
+ // Handle the actual button click for view/hide details
+    $(document).on('click', '.btn-primary-outline', function(e) {
+        e.preventDefault();
+        const button = $(this);
+        const targetId = button.attr('data-bs-target');
+        const collapseElement = $(targetId);
+        
+        // Manually toggle the collapse
+        if (collapseElement.hasClass('show')) {
+            collapseElement.collapse('hide');
+        } else {
+            collapseElement.collapse('show');
+        }
+    });
+
+    // When collapse is shown (details are revealed)
+    // $(document).on('shown.bs.collapse', '.collapse', function() {
+    //     const collapseId = $(this).attr('id');
+    //     const button = $(`[data-bs-target="#${collapseId}"]`);
+    //     button.text('Hide Details');
+    // });
+
+    // // When collapse is hidden (details are hidden)
+    // $(document).on('hidden.bs.collapse', '.collapse', function() {
+    //     const collapseId = $(this).attr('id');
+    //     const button = $(`[data-bs-target="#${collapseId}"]`);
+    //     button.text('View Details');
+    // });
+
     </script>
 @endsection

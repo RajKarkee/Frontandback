@@ -58,6 +58,7 @@ Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
 Route::get('/offices', [FrontOfficeController::class,'index'])->name('offices');
 Route::get('/blogs', [FrontBlogController::class, 'index'])->name('blogs');
 Route::get('/careers', [FrontCareerController::class, 'index'])->name('careers');
+Route::post('/carrers/apply',[FrontCareerController::class,'apply'])->name('application.store');
 Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
 Route::get('/', [FrontHomeController::class, 'home'])->name('home');
 Route::get('/industries/all', [FrontIndustryController::class, 'getAll'])->name('industries.all');
