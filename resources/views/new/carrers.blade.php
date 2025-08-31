@@ -4,7 +4,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts: Inter & Lora -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -34,7 +36,12 @@
             width: 100%;
         }
 
-        .rka-scope h1, .rka-scope h2, .rka-scope h3, .rka-scope h4, .rka-scope h5, .rka-scope h6 {
+        .rka-scope h1,
+        .rka-scope h2,
+        .rka-scope h3,
+        .rka-scope h4,
+        .rka-scope h5,
+        .rka-scope h6 {
             font-family: 'Lora', serif;
             font-weight: 700;
             color: var(--primary);
@@ -42,7 +49,8 @@
         }
 
         .section-container {
-            max-width: 1600px; /* Wider container */
+            max-width: 1600px;
+            /* Wider container */
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -91,11 +99,14 @@
             opacity: 0.9;
         }
 
-        .btn-primary-filled, .btn-primary-outline {
+        .btn-primary-filled,
+        .btn-primary-outline {
             font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* Smaller font size */
+            font-size: 1rem;
+            /* Smaller font size */
             font-weight: 600;
-            padding: 0.6rem 2.8rem; /* Smaller height, wider width */
+            padding: 0.6rem 2.8rem;
+            /* Smaller height, wider width */
             border-radius: 50px;
             transition: var(--transition);
             text-decoration: none;
@@ -106,7 +117,8 @@
             margin: 0.5rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 33, 63, 0.15); /* Subtle shadow */
+            box-shadow: 0 3px 10px rgba(0, 33, 63, 0.15);
+            /* Subtle shadow */
         }
 
         .btn-primary-filled {
@@ -134,13 +146,15 @@
             box-shadow: 0 6px 15px rgba(0, 33, 63, 0.15);
         }
 
-        .btn-primary-filled i, .btn-primary-outline i {
+        .btn-primary-filled i,
+        .btn-primary-outline i {
             font-size: 1rem;
             margin-left: 6px;
             transition: transform 0.3s;
         }
 
-        .btn-primary-filled:hover i, .btn-primary-outline:hover i {
+        .btn-primary-filled:hover i,
+        .btn-primary-outline:hover i {
             transform: translateX(3px);
         }
 
@@ -234,23 +248,27 @@
             padding: 5rem 0;
             background: var(--light);
         }
-.benefit-card {
-    text-align: center;
-    padding: 1.5rem;
-}
 
-.benefit-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+        .benefit-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
 
-.benefit-icon svg {
-    width: 40px;   /* adjust size */
-    height: 40px;
-    color: var(--primary); /* if you want it colored like FontAwesome */
-}
+        .benefit-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-icon svg {
+            width: 40px;
+            /* adjust size */
+            height: 40px;
+            color: var(--primary);
+            /* if you want it colored like FontAwesome */
+        }
+
         .openings-section h2 {
             font-size: 2.8rem;
             text-align: center;
@@ -370,10 +388,14 @@
             flex-shrink: 0;
         }
 
-        .job-banner .btn-primary-filled, .job-banner .btn-primary-outline {
-            padding: 0.5rem 2.5rem; /* Smaller height, wider width */
-            font-size: 0.95rem; /* Smaller font */
-            max-width: 180px; /* Wider buttons */
+        .job-banner .btn-primary-filled,
+        .job-banner .btn-primary-outline {
+            padding: 0.5rem 2.5rem;
+            /* Smaller height, wider width */
+            font-size: 0.95rem;
+            /* Smaller font */
+            max-width: 180px;
+            /* Wider buttons */
         }
 
         .job-details {
@@ -414,8 +436,10 @@
         }
 
         .view-more-container .btn-primary-filled {
-            max-width: 320px; /* Wider button */
-            padding: 0.6rem 2.8rem; /* Smaller height */
+            max-width: 320px;
+            /* Wider button */
+            padding: 0.6rem 2.8rem;
+            /* Smaller height */
             font-size: 1rem;
         }
 
@@ -496,13 +520,18 @@
         }
 
         .hr-contact-card {
-            background: var(--white); /* Removed gradient for cleaner look */
+            background: var(--white);
+            /* Removed gradient for cleaner look */
             border-radius: 16px;
-            padding: 4rem 3rem; /* Increased padding for spacious feel */
-            box-shadow: 0 4px 15px var(--shadow); /* Lighter shadow */
-            max-width: 1200px; /* Wide but centered */
+            padding: 4rem 3rem;
+            /* Increased padding for spacious feel */
+            box-shadow: 0 4px 15px var(--shadow);
+            /* Lighter shadow */
+            max-width: 1200px;
+            /* Wide but centered */
             margin: 0 auto;
-            text-align: center; /* Centered content */
+            text-align: center;
+            /* Centered content */
         }
 
         .hr-contact-card h3 {
@@ -533,7 +562,8 @@
             width: 50%;
         }
 
-        .hr-contact-card p, .hr-contact-card ul li {
+        .hr-contact-card p,
+        .hr-contact-card ul li {
             font-size: 1.1rem;
             color: var(--gray);
             margin-bottom: 1rem;
@@ -559,12 +589,16 @@
             margin-bottom: 2rem;
         }
 
-        .hr-contact-card .btn-primary-filled, .hr-contact-card .btn-primary-outline {
+        .hr-contact-card .btn-primary-filled,
+        .hr-contact-card .btn-primary-outline {
             width: 100%;
-            max-width: 320px; /* Wider buttons */
+            max-width: 320px;
+            /* Wider buttons */
             margin: 1rem auto;
-            padding: 0.6rem 2.8rem; /* Smaller height */
-            font-size: 1rem; /* Smaller font */
+            padding: 0.6rem 2.8rem;
+            /* Smaller height */
+            font-size: 1rem;
+            /* Smaller font */
             border-radius: 50px;
         }
 
@@ -633,9 +667,11 @@
 
         .modal-body .btn-primary-filled {
             width: 100%;
-            max-width: 300px; /* Wider button */
+            max-width: 300px;
+            /* Wider button */
             margin: 1rem auto 0;
-            padding: 0.6rem 2.8rem; /* Smaller height */
+            padding: 0.6rem 2.8rem;
+            /* Smaller height */
             font-size: 1rem;
         }
 
@@ -651,62 +687,84 @@
                 height: 80vh;
                 min-height: 500px;
             }
+
             .hero-content {
                 max-width: 700px;
                 padding: 2rem;
             }
+
             .hero-content h1 {
                 font-size: 3.5rem;
             }
+
             .hero-content p {
                 font-size: 1.2rem;
             }
-            .why-choose-section h2, .openings-section h2, .testimonials-section h2, .hr-contact-section h2 {
+
+            .why-choose-section h2,
+            .openings-section h2,
+            .testimonials-section h2,
+            .hr-contact-section h2 {
                 font-size: 2.5rem;
             }
+
             .benefit-card {
                 height: 280px;
                 padding: 1.8rem;
             }
+
             .benefit-card h3 {
                 font-size: 1.3rem;
             }
+
             .benefit-card p {
                 font-size: 0.9rem;
             }
+
             .job-banner {
                 padding: 1.2rem;
             }
+
             .job-banner h3 {
                 font-size: 1.3rem;
             }
+
             .job-banner p {
                 font-size: 0.9rem;
             }
-            .job-banner .btn-primary-filled, .job-banner .btn-primary-outline {
+
+            .job-banner .btn-primary-filled,
+            .job-banner .btn-primary-outline {
                 max-width: 160px;
                 padding: 0.4rem 2rem;
                 font-size: 0.9rem;
             }
+
             .testimonial-card {
                 height: 240px;
                 padding: 1.8rem;
             }
+
             .testimonial-card h4 {
                 font-size: 1.1rem;
             }
+
             .testimonial-card p {
                 font-size: 0.9rem;
             }
+
             .hr-contact-card {
                 padding: 2.5rem;
             }
+
             .hr-contact-card h3 {
                 font-size: 1.8rem;
             }
+
             .modal-title {
                 font-size: 1.6rem;
             }
+
             .view-more-container .btn-primary-filled {
                 max-width: 280px;
                 padding: 0.5rem 2.5rem;
@@ -719,124 +777,173 @@
                 height: 70vh;
                 min-height: 450px;
             }
+
             .hero-content {
                 padding: 1.8rem;
                 margin-top: 1.5rem;
             }
+
             .hero-content h1 {
                 font-size: 2.8rem;
             }
+
             .hero-content p {
                 font-size: 1.1rem;
             }
-            .btn-primary-filled, .btn-primary-outline {
+
+            .btn-primary-filled,
+            .btn-primary-outline {
                 padding: 0.5rem 2.5rem;
                 font-size: 0.9rem;
                 max-width: 200px;
             }
-            .btn-primary-filled i, .btn-primary-outline i {
+
+            .btn-primary-filled i,
+            .btn-primary-outline i {
                 font-size: 0.9rem;
                 margin-left: 5px;
             }
-            .why-choose-section, .openings-section, .testimonials-section, .hr-contact-section {
+
+            .why-choose-section,
+            .openings-section,
+            .testimonials-section,
+            .hr-contact-section {
                 padding: 4rem 0;
             }
-            .why-choose-section h2, .openings-section h2, .testimonials-section h2, .hr-contact-section h2 {
+
+            .why-choose-section h2,
+            .openings-section h2,
+            .testimonials-section h2,
+            .hr-contact-section h2 {
                 font-size: 2.2rem;
             }
-            .why-choose-section .lead, .openings-section .lead, .testimonials-section .lead, .hr-contact-section .lead {
+
+            .why-choose-section .lead,
+            .openings-section .lead,
+            .testimonials-section .lead,
+            .hr-contact-section .lead {
                 font-size: 1rem;
             }
+
             .benefit-card {
                 height: 260px;
                 padding: 1.5rem;
             }
+
             .benefit-card i {
                 font-size: 1.8rem;
             }
+
             .benefit-card h3 {
                 font-size: 1.2rem;
             }
+
             .benefit-card p {
                 font-size: 0.85rem;
             }
+
             .job-banner {
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 1rem;
             }
+
             .job-banner .job-info {
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
             .job-banner h3 {
                 font-size: 1.2rem;
             }
+
             .job-banner p {
                 font-size: 0.85rem;
             }
+
             .job-banner .btn-container {
                 flex-direction: column;
                 width: 100%;
             }
-            .job-banner .btn-primary-filled, .job-banner .btn-primary-outline {
+
+            .job-banner .btn-primary-filled,
+            .job-banner .btn-primary-outline {
                 max-width: 100%;
                 padding: 0.4rem 2rem;
                 font-size: 0.85rem;
             }
+
             .job-details {
                 padding: 1.5rem;
             }
+
             .job-details h4 {
                 font-size: 1.2rem;
             }
-            .job-details ul li, .job-details p {
+
+            .job-details ul li,
+            .job-details p {
                 font-size: 0.9rem;
             }
+
             .testimonial-card {
                 height: 220px;
                 padding: 1.5rem;
             }
+
             .testimonial-card h4 {
                 font-size: 1rem;
             }
+
             .testimonial-card p {
                 font-size: 0.85rem;
             }
+
             .hr-contact-card {
                 padding: 2rem;
             }
+
             .hr-contact-card h3 {
                 font-size: 1.6rem;
             }
-            .hr-contact-card p, .hr-contact-card ul li {
+
+            .hr-contact-card p,
+            .hr-contact-card ul li {
                 font-size: 1rem;
             }
-            .hr-contact-card .btn-primary-filled, .hr-contact-card .btn-primary-outline {
+
+            .hr-contact-card .btn-primary-filled,
+            .hr-contact-card .btn-primary-outline {
                 max-width: 280px;
                 padding: 0.5rem 2.5rem;
                 font-size: 0.95rem;
             }
+
             .modal-title {
                 font-size: 1.5rem;
             }
+
             .modal-body .form-label {
                 font-size: 0.9rem;
             }
+
             .modal-body .form-control {
                 font-size: 0.9rem;
                 padding: 0.6rem;
             }
+
             .modal-body .btn-primary-filled {
                 max-width: 260px;
                 padding: 0.5rem 2.5rem;
                 font-size: 0.95rem;
             }
+
             .view-more-container .btn-primary-filled {
                 max-width: 260px;
                 padding: 0.5rem 2.5rem;
                 font-size: 0.9rem;
             }
+
             .section-container {
                 padding: 0 1.2rem;
             }
@@ -847,110 +954,153 @@
                 height: 60vh;
                 min-height: 400px;
             }
+
             .hero-content {
                 padding: 1.5rem;
                 margin-top: 1.2rem;
             }
+
             .hero-content h1 {
                 font-size: 2rem;
             }
+
             .hero-content p {
                 font-size: 0.9rem;
             }
-            .btn-primary-filled, .btn-primary-outline {
+
+            .btn-primary-filled,
+            .btn-primary-outline {
                 padding: 0.4rem 2rem;
                 font-size: 0.85rem;
                 max-width: 180px;
             }
-            .btn-primary-filled i, .btn-primary-outline i {
+
+            .btn-primary-filled i,
+            .btn-primary-outline i {
                 font-size: 0.85rem;
                 margin-left: 4px;
             }
-            .why-choose-section h2, .openings-section h2, .testimonials-section h2, .hr-contact-section h2 {
+
+            .why-choose-section h2,
+            .openings-section h2,
+            .testimonials-section h2,
+            .hr-contact-section h2 {
                 font-size: 1.8rem;
             }
-            .why-choose-section .lead, .openings-section .lead, .testimonials-section .lead, .hr-contact-section .lead {
+
+            .why-choose-section .lead,
+            .openings-section .lead,
+            .testimonials-section .lead,
+            .hr-contact-section .lead {
                 font-size: 0.9rem;
             }
+
             .benefit-card {
                 height: 240px;
                 padding: 1.2rem;
             }
+
             .benefit-card i {
                 font-size: 1.6rem;
             }
+
             .benefit-card h3 {
                 font-size: 1.1rem;
             }
+
             .benefit-card p {
                 font-size: 0.8rem;
             }
+
             .job-banner {
                 padding: 1rem;
             }
+
             .job-banner h3 {
                 font-size: 1.1rem;
             }
+
             .job-banner p {
                 font-size: 0.8rem;
             }
-            .job-banner .btn-primary-filled, .job-banner .btn-primary-outline {
+
+            .job-banner .btn-primary-filled,
+            .job-banner .btn-primary-outline {
                 padding: 0.3rem 1.8rem;
                 font-size: 0.8rem;
             }
+
             .job-details {
                 padding: 1.2rem;
             }
+
             .job-details h4 {
                 font-size: 1.1rem;
             }
-            .job-details ul li, .job-details p {
+
+            .job-details ul li,
+            .job-details p {
                 font-size: 0.85rem;
             }
+
             .testimonial-card {
                 height: 200px;
                 padding: 1.2rem;
             }
+
             .testimonial-card h4 {
                 font-size: 0.95rem;
             }
+
             .testimonial-card p {
                 font-size: 0.8rem;
             }
+
             .hr-contact-card {
                 padding: 1.5rem;
             }
+
             .hr-contact-card h3 {
                 font-size: 1.4rem;
             }
-            .hr-contact-card p, .hr-contact-card ul li {
+
+            .hr-contact-card p,
+            .hr-contact-card ul li {
                 font-size: 0.9rem;
             }
-            .hr-contact-card .btn-primary-filled, .hr-contact-card .btn-primary-outline {
+
+            .hr-contact-card .btn-primary-filled,
+            .hr-contact-card .btn-primary-outline {
                 max-width: 260px;
                 padding: 0.4rem 2rem;
                 font-size: 0.9rem;
             }
+
             .modal-title {
                 font-size: 1.3rem;
             }
+
             .modal-body .form-label {
                 font-size: 0.85rem;
             }
+
             .modal-body .form-control {
                 font-size: 0.85rem;
                 padding: 0.5rem;
             }
+
             .modal-body .btn-primary-filled {
                 max-width: 240px;
                 padding: 0.4rem 2rem;
                 font-size: 0.9rem;
             }
+
             .view-more-container .btn-primary-filled {
                 max-width: 240px;
                 padding: 0.4rem 2rem;
                 font-size: 0.85rem;
             }
+
             .section-container {
                 padding: 0 1rem;
             }
@@ -961,113 +1111,160 @@
                 height: 50vh;
                 min-height: 350px;
             }
+
             .hero-content {
                 padding: 1rem;
                 margin-top: 1rem;
             }
+
             .hero-content h1 {
                 font-size: 1.8rem;
             }
+
             .hero-content p {
                 font-size: 0.85rem;
             }
-            .btn-primary-filled, .btn-primary-outline {
+
+            .btn-primary-filled,
+            .btn-primary-outline {
                 padding: 0.3rem 1.8rem;
                 font-size: 0.8rem;
                 max-width: 160px;
             }
-            .btn-primary-filled i, .btn-primary-outline i {
+
+            .btn-primary-filled i,
+            .btn-primary-outline i {
                 font-size: 0.8rem;
                 margin-left: 4px;
             }
-            .why-choose-section, .openings-section, .testimonials-section, .hr-contact-section {
+
+            .why-choose-section,
+            .openings-section,
+            .testimonials-section,
+            .hr-contact-section {
                 padding: 3rem 0;
             }
-            .why-choose-section h2, .openings-section h2, .testimonials-section h2, .hr-contact-section h2 {
+
+            .why-choose-section h2,
+            .openings-section h2,
+            .testimonials-section h2,
+            .hr-contact-section h2 {
                 font-size: 1.6rem;
             }
-            .why-choose-section .lead, .openings-section .lead, .testimonials-section .lead, .hr-contact-section .lead {
+
+            .why-choose-section .lead,
+            .openings-section .lead,
+            .testimonials-section .lead,
+            .hr-contact-section .lead {
                 font-size: 0.85rem;
             }
+
             .benefit-card {
                 height: 220px;
                 padding: 1rem;
             }
+
             .benefit-card i {
                 font-size: 1.4rem;
             }
+
             .benefit-card h3 {
                 font-size: 1rem;
             }
+
             .benefit-card p {
                 font-size: 0.75rem;
             }
+
             .job-banner {
                 padding: 0.8rem;
             }
+
             .job-banner h3 {
                 font-size: 1rem;
             }
+
             .job-banner p {
                 font-size: 0.75rem;
             }
-            .job-banner .btn-primary-filled, .job-banner .btn-primary-outline {
+
+            .job-banner .btn-primary-filled,
+            .job-banner .btn-primary-outline {
                 padding: 0.3rem 1.5rem;
                 font-size: 0.75rem;
             }
+
             .job-details {
                 padding: 1rem;
             }
+
             .job-details h4 {
                 font-size: 1rem;
             }
-            .job-details ul li, .job-details p {
+
+            .job-details ul li,
+            .job-details p {
                 font-size: 0.8rem;
             }
+
             .testimonial-card {
                 height: 180px;
                 padding: 1rem;
             }
+
             .testimonial-card h4 {
                 font-size: 0.9rem;
             }
+
             .testimonial-card p {
                 font-size: 0.75rem;
             }
+
             .hr-contact-card {
                 padding: 1.2rem;
             }
+
             .hr-contact-card h3 {
                 font-size: 1.3rem;
             }
-            .hr-contact-card p, .hr-contact-card ul li {
+
+            .hr-contact-card p,
+            .hr-contact-card ul li {
                 font-size: 0.85rem;
             }
-            .hr-contact-card .btn-primary-filled, .hr-contact-card .btn-primary-outline {
+
+            .hr-contact-card .btn-primary-filled,
+            .hr-contact-card .btn-primary-outline {
                 max-width: 240px;
                 padding: 0.3rem 1.8rem;
                 font-size: 0.85rem;
             }
+
             .modal-title {
                 font-size: 1.2rem;
             }
+
             .modal-body .form-label {
                 font-size: 0.8rem;
             }
+
             .modal-body .form-control {
                 font-size: 0.8rem;
                 padding: 0.4rem;
             }
+
             .modal-body .btn-primary-filled {
                 max-width: 220px;
                 padding: 0.3rem 1.8rem;
                 font-size: 0.85rem;
             }
+
             .view-more-container .btn-primary-filled {
                 max-width: 220px;
                 padding: 0.3rem 1.8rem;
                 font-size: 0.8rem;
             }
+
             .section-container {
                 padding: 0 0.8rem;
             }
@@ -1082,7 +1279,8 @@
             <section class="hero-section">
                 <div class="hero-content gsap-animate">
                     <h1>Join Our Team</h1>
-                    <p>Build your career with us and be part of a dynamic team committed to excellence and professional growth.</p>
+                    <p>Build your career with us and be part of a dynamic team committed to excellence and professional
+                        growth.</p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
                         <a href="#openings" class="btn-primary-filled"><i class="fas fa-briefcase"></i> View Openings</a>
                         <a href="#hr-contact" class="btn-primary-outline"><i class="fas fa-envelope"></i> Contact HR</a>
@@ -1094,21 +1292,22 @@
             <section class="why-choose-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Why Choose Chartered Insights?</h2>
-                    <p class="lead gsap-animate">We believe our people are our greatest asset. That's why we invest in creating an environment where talent thrives and careers flourish.</p>
+                    <p class="lead gsap-animate">We believe our people are our greatest asset. That's why we invest in
+                        creating an environment where talent thrives and careers flourish.</p>
                     <div class="row g-4">
-                        @foreach($carrer_benefits as $index => $benefit)
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
-                            <div class="benefit-card">
-                                  <div class="benefit-icon">
-        {!! $benefit->icon !!}
-    </div>
-                            
-                                <h3>{{$benefit->title}}</h3>
-                                <p>{{$benefit->description}}</p>
-                        </div>
-                        </div>
+                        @foreach ($carrer_benefits as $index => $benefit)
+                            <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
+                                <div class="benefit-card">
+                                    <div class="benefit-icon">
+                                        {!! $benefit->icon !!}
+                                    </div>
+
+                                    <h3>{{ $benefit->title }}</h3>
+                                    <p>{{ $benefit->description }}</p>
+                                </div>
+                            </div>
                         @endforeach
-                
+
                     </div>
                 </div>
             </section>
@@ -1117,83 +1316,92 @@
             <section class="openings-section" id="openings">
                 <div class="section-container">
                     <h2 class="gsap-animate">Current Openings</h2>
-                    <p class="lead gsap-animate">Explore exciting career opportunities across our various departments and locations.</p>
+                    <p class="lead gsap-animate">Explore exciting career opportunities across our various departments and
+                        locations.</p>
                     <ul class="nav nav-tabs mb-4" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All Positions</a>
+                            <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab"
+                                aria-controls="all" aria-selected="true">All Positions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="audit-tab" data-bs-toggle="tab" href="#audit" role="tab" aria-controls="audit" aria-selected="false">Audit & Assurance</a>
+                            <a class="nav-link" id="audit-tab" data-bs-toggle="tab" href="#audit" role="tab"
+                                aria-controls="audit" aria-selected="false">Audit & Assurance</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tax-tab" data-bs-toggle="tab" href="#tax" role="tab" aria-controls="tax" aria-selected="false">Tax Advisory</a>
+                            <a class="nav-link" id="tax-tab" data-bs-toggle="tab" href="#tax" role="tab"
+                                aria-controls="tax" aria-selected="false">Tax Advisory</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="business-tab" data-bs-toggle="tab" href="#business" role="tab" aria-controls="business" aria-selected="false">Business Advisory</a>
+                            <a class="nav-link" id="business-tab" data-bs-toggle="tab" href="#business" role="tab"
+                                aria-controls="business" aria-selected="false">Business Advisory</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="support-tab" data-bs-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false">Support & Admin</a>
+                            <a class="nav-link" id="support-tab" data-bs-toggle="tab" href="#support" role="tab"
+                                aria-controls="support" aria-selected="false">Support & Admin</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                             <div class="job-list">
-                                @foreach($job_openings as $index => $job)
-                                <div class="job-banner gsap-animate" data-department="{{ $job->category }}">
-                                    <div class="job-info">
-                                        <h3>{{$job->title}}</h3>
-                                        @if($job->is_featured==1)
-                                        <p class="featured">Featured</p>
-                                        @endif
-                                        <p>{{$job->category}}</p>
-                                        <p>{{$job->location}}</p>
-                                        <p>{{$job->job_type}}</p>
-                                     
+                                @foreach ($job_openings as $index => $job)
+                                    <div class="job-banner gsap-animate" data-department="{{ $job->category }}">
+                                        <div class="job-info">
+                                            <h3>{{ $job->title }}</h3>
+                                            @if ($job->is_featured == 1)
+                                                <p class="featured">Featured</p>
+                                            @endif
+                                            <p>{{ $job->category }}</p>
+                                            <p>{{ $job->location }}</p>
+                                            <p>{{ $job->job_type }}</p>
+
+                                        </div>
+                                        <div class="btn-container">
+                                            <button class="btn-primary-outline" data-bs-toggle="collapse"
+                                                data-bs-target="#s{{ $job->id }}" aria-expanded="false"
+                                                aria-controls="senior-auditor-details">View Details</button>
+                                            <button class="btn-primary-filled apply-btn" data-bs-toggle="modal"
+                                                data-bs-target="#applyModal" data-job-id="{{ $job->id }}"
+                                                data-job-title="{{ $job->title }}"
+                                                data-job-department="{{ $job->category }}"
+                                                data-job-location="{{ $job->location }}"
+                                                data-job-type="{{ $job->job_type }}"
+                                                data-job-salary-min="{{ $job->salary_min }}"
+                                                data-job-salary-max="{{ $job->salary_max ?? 'N/A' }}">Apply Now</button>
+                                        </div>
                                     </div>
-                                    <div class="btn-container">
-                                        <button class="btn-primary-outline" data-bs-toggle="collapse" data-bs-target="#s{{ $job->id }}" aria-expanded="false" aria-controls="senior-auditor-details">View Details</button>
-                                        <button class="btn-primary-filled apply-btn" data-bs-toggle="modal" data-bs-target="#applyModal"    data-job-id="{{ $job->id }}"
-        data-job-title="{{ $job->title }}"
-        data-job-department="{{ $job->category }}"
-        data-job-location="{{ $job->location }}"
-        data-job-type="{{ $job->job_type }}"
-        data-job-salary-min="{{ $job->salary_min }}"
-        data-job-salary-max="{{ $job->salary_max ?? 'N/A' }}">Apply Now</button>
+                                    <div class="collapse" id="s{{ $job->id }}">
+
+                                        <div class="job-details">
+                                            <h4>Position Overview</h4>
+                                            <p>{{ $job->overview }}</p>
+                                            <h4>Key Responsibilities</h4>
+                                            @foreach (explode("\n", trim($job->responsibilities)) as $item)
+                                                @if (!empty(trim($item)))
+                                                    <li>{{ trim($item) }}</li>
+                                                @endif
+                                            @endforeach
+                                            <h4>Requirements</h4>
+                                            <ul>
+                                                @foreach (explode("\n", trim($job->requirements)) as $item)
+                                                    @if (!empty(trim($item)))
+                                                        <li>{{ trim($item) }}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                            <h4>What We Offer</h4>
+                                            <ul>
+                                                @foreach (explode("\n", trim($job->benefits)) as $item)
+                                                    @if (!empty(trim($item)))
+                                                        <li>{{ trim($item) }}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                            <h4>Compensation</h4>
+                                            <p>NPR {{ $job->salary_min }} - {{ $job->salary_max }}</p>
+                                            <h4>Application Deadline</h4>
+                                            <p>{{ $job->application_deadline }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="collapse" id="s{{ $job->id }}">
-                                    
-                                    <div class="job-details">
-                                        <h4>Position Overview</h4>
-                                        <p>{{$job->overview}}</p>
-                                        <h4>Key Responsibilities</h4>
-                                          @foreach(explode("\n", trim($job->responsibilities)) as $item)
-        @if(!empty(trim($item)))
-            <li>{{ trim($item) }}</li>
-        @endif
-    @endforeach
-                                     <h4>Requirements</h4>
-                                      <ul>
-    @foreach(explode("\n", trim($job->requirements)) as $item)
-        @if(!empty(trim($item)))
-            <li>{{ trim($item) }}</li>
-        @endif
-    @endforeach
-</ul>
-                                        <h4>What We Offer</h4>
-                                   <ul>
-    @foreach(explode("\n", trim($job->benefits)) as $item)
-        @if(!empty(trim($item)))
-            <li>{{ trim($item) }}</li>
-        @endif
-    @endforeach
-</ul>
-                                        <h4>Compensation</h4>
-                                        <p>NPR {{ $job->salary_min }} - {{$job->salary_max}}</p>
-                                        <h4>Application Deadline</h4>
-                                        <p>{{$job->application_deadline}}</p>
-                                    </div>
-                                </div>
                                 @endforeach
                                 {{-- <div class="job-banner gsap-animate" data-department="business">
                                     <div class="job-info">
@@ -1375,42 +1583,102 @@
                             <div class="text-center mt-4 gsap-animate">
                                 <a href="#apply-general" class="btn-primary-filled">Submit General Application</a>
                             </div> --}}
+                            </div>
+                            <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
+                                <div class="job-list">
+                                    @foreach ($job_openings as $index => $job)
+                                        @if ($job->category == 'audit')
+                                            <div class="job-banner gsap-animate" data-department="{{ $job->category }}">
+                                                <div class="job-info">
+                                                    <h3>{{ $job->title }}</h3>
+                                                    @if ($job->is_featured == 1)
+                                                        <p class="featured">Featured</p>
+                                                    @endif
+                                                    <p>{{ $job->category }}</p>
+                                                    <p>{{ $job->location }}</p>
+                                                    <p>{{ $job->job_type }}</p>
+
+                                                </div>
+                                                <div class="btn-container">
+                                                    <button class="btn-primary-outline" data-bs-toggle="collapse"
+                                                        data-bs-target="#s{{ $job->id }}" aria-expanded="false"
+                                                        aria-controls="senior-auditor-details">View Details</button>
+                                                    <button class="btn-primary-filled apply-btn" data-bs-toggle="modal"
+                                                        data-bs-target="#applyModal" data-job-id="{{ $job->id }}"
+                                                        data-job-title="{{ $job->title }}"
+                                                        data-job-department="{{ $job->category }}"
+                                                        data-job-location="{{ $job->location }}"
+                                                        data-job-type="{{ $job->job_type }}"
+                                                        data-job-salary-min="{{ $job->salary_min }}"
+                                                        data-job-salary-max="{{ $job->salary_max ?? 'N/A' }}">Apply
+                                                        Now</button>
+                                                </div>
+                                            </div>
+                                            <div class="collapse" id="s{{ $job->id }}">
+
+                                                <div class="job-details">
+                                                    <h4>Position Overview</h4>
+                                                    <p>{{ $job->overview }}</p>
+                                                    <h4>Key Responsibilities</h4>
+                                                    @foreach (explode("\n", trim($job->responsibilities)) as $item)
+                                                        @if (!empty(trim($item)))
+                                                            <li>{{ trim($item) }}</li>
+                                                        @endif
+                                                    @endforeach
+                                                    <h4>Requirements</h4>
+                                                    <ul>
+                                                        @foreach (explode("\n", trim($job->requirements)) as $item)
+                                                            @if (!empty(trim($item)))
+                                                                <li>{{ trim($item) }}</li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                    <h4>What We Offer</h4>
+                                                    <ul>
+                                                        @foreach (explode("\n", trim($job->benefits)) as $item)
+                                                            @if (!empty(trim($item)))
+                                                                <li>{{ trim($item) }}</li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                    <h4>Compensation</h4>
+                                                    <p>NPR {{ $job->salary_min }} - {{ $job->salary_max }}</p>
+                                                    <h4>Application Deadline</h4>
+                                                    <p>{{ $job->application_deadline }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tax" role="tabpanel" aria-labelledby="tax-tab"></div>
+                            <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
+                            </div>
+                            <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab">
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab"></div>
-                        <div class="tab-pane fade" id="tax" role="tabpanel" aria-labelledby="tax-tab"></div>
-                        <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab"></div>
-                        <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab"></div>
                     </div>
-                </div>
             </section>
 
             <!-- Testimonials Section -->
             <section class="testimonials-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">What Our Team Says</h2>
-                    <p class="lead gsap-animate">Hear from our team members about their experience working at Chartered Insights.</p>
+                    <p class="lead gsap-animate">Hear from our team members about their experience working at Chartered
+                        Insights.</p>
                     <div class="row g-4">
-                        <div class="col-lg-4 col-md-6 gsap-animate">
-                            <div class="testimonial-card">
-                                <p>"The professional development opportunities here are exceptional. I've grown from a junior auditor to a senior position in just three years, with constant support and mentorship."</p>
-                                <h4>Priya Sharma</h4>
-                                <p class="role">Senior Auditor, 3 years with company</p>
+                        @foreach ($carrer_testimonials as $index => $data)
+                            <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
+                                <div class="testimonial-card">
+                                    <p>{{ $data->testimonial }}</p>
+                                    <h4>{{ $data->employee_name }}</h4>
+                                    <p class="role">{{ $data->position }}, {{ $data->years_with_company }} years with
+                                        company</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.2">
-                            <div class="testimonial-card">
-                                <p>"The collaborative culture and diverse client portfolio make every day interesting. I'm constantly learning and applying new skills in different industries."</p>
-                                <h4>Rajesh Thapa</h4>
-                                <p class="role">Tax Consultant, 2 years with company</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 gsap-animate" data-delay="0.4">
-                            <div class="testimonial-card">
-                                <p>"The work-life balance and supportive management make this a great place to build a career. The benefits package is comprehensive and the team is like family."</p>
-                                <h4>Sunita Karki</h4>
-                                <p class="role">Business Analyst, 4 years with company</p>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </section>
@@ -1419,21 +1687,27 @@
             <section class="hr-contact-section" id="hr-contact">
                 <div class="section-container">
                     <h2 class="gsap-animate">Questions About Career Opportunities?</h2>
-                    <p class="lead gsap-animate">Our HR team is here to help answer your questions about career opportunities, application process, and what it's like to work at Chartered Insights.</p>
+                    <p class="lead gsap-animate">Our HR team is here to help answer your questions about career
+                        opportunities, application process, and what it's like to work at Chartered Insights.</p>
                     <div class="row g-4">
                         <div class="col-12 gsap-animate">
                             <div class="hr-contact-card">
                                 <h3>HR Department</h3>
-                                <p><strong>Email:</strong> <a href="mailto:careers@charteredinsights.com" class="text-secondary">careers@charteredinsights.com</a></p>
-                                <p><strong>Phone:</strong> <a href="tel:+97714234567" class="text-secondary">+977-1-4234567 (Ext. 101)</a></p>
+                                <p><strong>Email:</strong> <a href="mailto:careers@charteredinsights.com"
+                                        class="text-secondary">careers@charteredinsights.com</a></p>
+                                <p><strong>Phone:</strong> <a href="tel:+97714234567"
+                                        class="text-secondary">+977-1-4234567 (Ext. 101)</a></p>
                                 <h3>Office Hours</h3>
                                 <ul>
                                     <li><strong>Sunday - Friday:</strong> 9:00 AM - 6:00 PM</li>
                                     <li><strong>Saturday:</strong> 10:00 AM - 4:00 PM</li>
                                 </ul>
                                 <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                    <a href="#apply-general" class="btn-primary-filled"><i class="fas fa-envelope"></i> Contact HR Team</a>
-                                    <a href="https://linkedin.com/company/charteredinsights" target="_blank" class="btn-primary-outline"><i class="fab fa-linkedin-in"></i> Follow Us on LinkedIn</a>
+                                    <a href="#apply-general" class="btn-primary-filled"><i class="fas fa-envelope"></i>
+                                        Contact HR Team</a>
+                                    <a href="https://linkedin.com/company/charteredinsights" target="_blank"
+                                        class="btn-primary-outline"><i class="fab fa-linkedin-in"></i> Follow Us on
+                                        LinkedIn</a>
                                 </div>
                             </div>
                         </div>
@@ -1443,67 +1717,82 @@
 
             <!-- Application Modals -->
             <!-- Senior Auditor Modal -->
-            <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModallabel" aria-hidden="true">
+            <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModallabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="applyModallabel">Apply for position</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <p><strong>Department:</strong><span id="modalJobDepartment"></span></p>
                             <p><strong>Location:</strong><span id="modalJobLocation"></span></p>
                             <p><strong>Type:</strong><span id="modalJobType"></span></p>
-                            <p><strong>Salary:</strong> NPR<span id="modalJobMin"></span>-<span id="modalJobMax"></span></p>
-                            <p class="mb-4">We're excited to learn more about you! Please fill out the form below and we'll review your application carefully.</p>
-                            <form action="{{ route('application.store')}}" method="POST" enctype="multipart/form-data">
+                            <p><strong>Salary:</strong> NPR<span id="modalJobMin"></span>-<span id="modalJobMax"></span>
+                            </p>
+                            <p class="mb-4">We're excited to learn more about you! Please fill out the form below and
+                                we'll review your application carefully.</p>
+                            <form action="{{ route('application.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="modalJobId" name="job_id">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="first-name" class="form-label">First Name *</label>
-                                        <input type="text" class="form-control" id="first-name" name="first_name" required>
+                                        <input type="text" class="form-control" id="first-name" name="first_name"
+                                            required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="last-name" class="form-label">Last Name *</label>
-                                        <input type="text" class="form-control" id="last-name" name="last_name" required>
+                                        <input type="text" class="form-control" id="last-name" name="last_name"
+                                            required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email Address *</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label">Phone Number *</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                            required>
                                     </div>
                                     <div class="col-12">
                                         <label for="resume" class="form-label">Resume/CV *</label>
-                                        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                                        <input type="file" class="form-control" id="resume" name="resume"
+                                            accept=".pdf,.doc,.docx" required>
                                         <small class="text-muted">Accepted formats: PDF, DOC, DOCX (Max: 5MB)</small>
-                                    
+
                                     </div>
                                     <div class="col-12">
                                         <label for="cover-letter" class="form-label">Cover Letter</label>
-                                        <textarea class="form-control" id="cover-letter" rows="5" name="cover_letter" placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
+                                        <textarea class="form-control" id="cover-letter" rows="5" name="cover_letter"
+                                            placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="portfolio" class="form-label">Portfolio URL</label>
-                                        <input type="url" class="form-control" id="portfolio" name="portfolio" placeholder="https://your-portfolio.com">
+                                        <input type="url" class="form-control" id="portfolio" name="portfolio"
+                                            placeholder="https://your-portfolio.com">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="linkedin" class="form-label">LinkedIn Profile</label>
-                                        <input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                                        <input type="url" class="form-control" id="linkedin" name="linkedin"
+                                            placeholder="https://linkedin.com/in/yourprofile">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="salary" class="form-label">Expected Salary (NPR)</label>
-                                        <input type="number" class="form-control" id="salary" name="expected_salary" placeholder="e.g., 60000">
+                                        <input type="number" class="form-control" id="salary" name="expected_salary"
+                                            placeholder="e.g., 60000">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="start-date" class="form-label">Available Start Date</label>
-                                        <input type="date" class="form-control"  id="start-date" name="start_date">
+                                        <input type="date" class="form-control" id="start-date" name="start_date">
                                     </div>
                                     <div class="col-12 text-center">
-                                        <button type="submit" class="btn-primary-filled"><i class="fas fa-paper-plane"></i> Submit Application</button>
+                                        <button type="submit" class="btn-primary-filled"><i
+                                                class="fas fa-paper-plane"></i> Submit Application</button>
                                     </div>
                                 </div>
                             </form>
@@ -1514,7 +1803,7 @@
             <!-- Other modals would follow similar structure -->
         </main>
     </div>
-     @include('new.layouts.contactusform')
+    @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')
@@ -1526,65 +1815,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
         // GSAP Animations
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             gsap.registerPlugin(ScrollTrigger);
 
             // General reveal animations
             gsap.utils.toArray('.gsap-animate').forEach((el) => {
                 const delay = parseFloat(el.getAttribute('data-delay')) || 0;
-                gsap.fromTo(el,
-                    { opacity: 0, y: 40 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        delay,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: el,
-                            start: 'top 85%',
-                            once: true,
-                            invalidateOnRefresh: true
-                        }
+                gsap.fromTo(el, {
+                    opacity: 0,
+                    y: 40
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        once: true,
+                        invalidateOnRefresh: true
                     }
-                );
+                });
             });
 
             // Button fade-in animations
             gsap.utils.toArray('.btn-primary-filled, .btn-primary-outline').forEach((btn) => {
-                gsap.fromTo(btn,
-                    { opacity: 0, scale: 0.9 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.8,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: btn,
-                            start: 'top 90%',
-                            once: true
-                        }
+                gsap.fromTo(btn, {
+                    opacity: 0,
+                    scale: 0.9
+                }, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: btn,
+                        start: 'top 90%',
+                        once: true
                     }
-                );
+                });
             });
 
             // Recalc positions after images affect layout
             ScrollTrigger.refresh();
         });
 
+        function updateViewMoreButton(contanier, button) {
+            if (!button) return;
+            const hiddenJobs = contanier.querySelectorAll('.job-banner.hidden-job');
+            button.style.display = hiddenJobs.length ? 'block' : 'none';
+        }
+
         // Tab Filtering
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const jobBanners = document.querySelectorAll('.job-banner');
             const jobDetails = document.querySelectorAll('.collapse');
             const allTabPane = document.querySelector('#all .job-list');
-            const viewMoreBtn = document.querySelector('#view-more-than-btn');
+            const viewMoreBtn = document.querySelector('#view-more-btn');
 
             // Initialize "All Positions" tab
             updateViewMoreButton(allTabPane, viewMoreBtn);
 
             // Tab click handler
             document.querySelectorAll('.nav-tabs .nav-link').forEach(tab => {
-                tab.addEventListener('click', function () {
+                tab.addEventListener('click', function() {
                     const department = this.getAttribute('href').substring(1);
                     const targetPane = document.querySelector(`#${department}`);
                     const container = document.createElement('div');
@@ -1593,7 +1888,7 @@
 
                     // Clear all tab panes
                     document.querySelectorAll('.tab-pane').forEach(pane => {
-                        pane.innerHTML = '';
+
                         pane.classList.remove('show', 'active');
                     });
 
@@ -1602,7 +1897,8 @@
                         const bannerDepartment = banner.getAttribute('data-department');
                         if (department === 'all' || bannerDepartment === department) {
                             const bannerClone = banner.cloneNode(true);
-                            if (department === 'all' && visibleCount >= 3 && !banner.classList.contains('hidden-job')) {
+                            if (department === 'all' && visibleCount >= 3 && !banner
+                                .classList.contains('hidden-job')) {
                                 bannerClone.classList.add('hidden-job');
                             } else if (department !== 'all' && visibleCount >= 3) {
                                 bannerClone.classList.add('hidden-job');
@@ -1611,7 +1907,9 @@
                             visibleCount++;
 
                             // Append corresponding job details
-                            const detailsId = bannerClone.querySelector('[data-bs-toggle="collapse"]').getAttribute('data-bs-target').substring(1);
+                            const detailsId = bannerClone.querySelector(
+                                '[data-bs-toggle="collapse"]').getAttribute(
+                                'data-bs-target').substring(1);
                             const detailsClone = jobDetails[index].cloneNode(true);
                             container.appendChild(detailsClone);
                         }
@@ -1621,35 +1919,39 @@
                     if (visibleCount > 3) {
                         const viewMoreDiv = document.createElement('div');
                         viewMoreDiv.className = 'view-more-container gsap-animate';
-                        viewMoreDiv.innerHTML = '<button class="btn-primary-filled" onclick="toggleViewMore(this)">View More</button>';
+                        viewMoreDiv.innerHTML =
+                            '<button class="btn-primary-filled" onclick="toggleViewMore(this)">View More</button>';
                         container.appendChild(viewMoreDiv);
                     }
 
                     // Add general application button
                     const generalAppDiv = document.createElement('div');
                     generalAppDiv.className = 'text-center mt-4 gsap-animate';
-                    generalAppDiv.innerHTML = '<a href="#apply-general" class="btn-primary-filled">Submit General Application</a>';
+                    generalAppDiv.innerHTML =
+                        '<a href="#apply-general" class="btn-primary-filled">Submit General Application</a>';
                     container.appendChild(generalAppDiv);
 
                     targetPane.appendChild(container);
                     targetPane.classList.add('show', 'active');
 
                     // Reapply GSAP animations for visible jobs
-                    gsap.utils.toArray(container.querySelectorAll('.job-banner:not(.hidden-job)')).forEach((el, i) => {
-                        gsap.fromTo(el,
-                            { opacity: 0, y: 20 },
-                            {
+                    gsap.utils.toArray(container.querySelectorAll('.job-banner:not(.hidden-job)'))
+                        .forEach((el, i) => {
+                            gsap.fromTo(el, {
+                                opacity: 0,
+                                y: 20
+                            }, {
                                 opacity: 1,
                                 y: 0,
                                 duration: 0.8,
                                 delay: i * 0.1,
                                 ease: 'power3.out'
-                            }
-                        );
-                    });
+                            });
+                        });
 
                     // Update View More button state
-                    const newViewMoreBtn = container.querySelector('.view-more-container .btn-primary-filled');
+                    const newViewMoreBtn = container.querySelector(
+                        '.view-more-container .btn-primary-filled');
                     if (newViewMoreBtn) {
                         updateViewMoreButton(container, newViewMoreBtn);
                     }
@@ -1657,7 +1959,7 @@
             });
 
             // View More/View Less Toggle
-            window.toggleViewMore = function (button) {
+            window.toggleViewMore = function(button) {
                 const jobList = button.closest('.job-list');
                 const hiddenJobs = jobList.querySelectorAll('.job-banner.hidden-job');
                 const hiddenDetails = jobList.querySelectorAll('.job-banner.hidden-job + .collapse');
@@ -1677,17 +1979,18 @@
                 button.textContent = isShowingMore ? 'View Less' : 'View More';
 
                 // Reapply GSAP animations for newly visible jobs
-                gsap.utils.toArray(jobList.querySelectorAll('.job-banner:not(.hidden-job)')).forEach((el, i) => {
-                    gsap.fromTo(el,
-                        { opacity: 0, y: 20 },
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.8,
-                            delay: i * 0.1,
-                            ease: 'power3.out'
-                        }
-                    );
+                gsap.utils.toArray(jobList.querySelectorAll('.job-banner:not(.hidden-job)')).forEach((el,
+                    i) => {
+                    gsap.fromTo(el, {
+                        opacity: 0,
+                        y: 20
+                    }, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        ease: 'power3.out'
+                    });
                 });
             };
 
@@ -1701,67 +2004,72 @@
                 }
             }
         });
-       $(document).ready(function(){
-    $(document).on('click','.apply-btn', function() {
-        const jobTitle = $(this).data('job-title');
-        const jobDepartment = $(this).data('job-department');
-        const jobLocation = $(this).data('job-location');
-        const jobType = $(this).data('job-type');
-        const jobSalaryMin = $(this).data('job-salary-min');
-        const jobSalaryMax = $(this).data('job-salary-max');
-        const jobId = $(this).data('job-id');
-   console.log('Button clicked:', {
-            jobTitle, jobDepartment, jobLocation, jobType, jobSalaryMin, jobSalaryMax, jobId
+        $(document).ready(function() {
+            $(document).on('click', '.apply-btn', function() {
+                const jobTitle = $(this).data('job-title');
+                const jobDepartment = $(this).data('job-department');
+                const jobLocation = $(this).data('job-location');
+                const jobType = $(this).data('job-type');
+                const jobSalaryMin = $(this).data('job-salary-min');
+                const jobSalaryMax = $(this).data('job-salary-max');
+                const jobId = $(this).data('job-id');
+                console.log('Button clicked:', {
+                    jobTitle,
+                    jobDepartment,
+                    jobLocation,
+                    jobType,
+                    jobSalaryMin,
+                    jobSalaryMax,
+                    jobId
+                });
+                // Update modal content
+                $('#applyModalLabel').text('Apply for ' + jobTitle);
+                $('#modalJobDepartment').text('' + jobDepartment);
+                $('#modalJobLocation').text('' + jobLocation);
+                $('#modalJobType').text('' + jobType);
+                $('#modalJobMin').text(jobSalaryMin);
+                $('#modalJobMax').text(jobSalaryMax);
+
+                // Optional: hidden input for job ID
+                if ($('#modalJobId').length === 0) {
+                    $('<input>').attr({
+                        type: 'hidden',
+                        id: 'modalJobId',
+                        name: 'job_id',
+                        value: jobId
+                    }).appendTo('#applyModal form');
+                } else {
+                    $('#modalJobId').val(jobId);
+                }
+            });
         });
-        // Update modal content
-        $('#applyModalLabel').text('Apply for ' + jobTitle);
-        $('#modalJobDepartment').text('' + jobDepartment);
-        $('#modalJobLocation').text('' + jobLocation);
-        $('#modalJobType').text('' + jobType);
-        $('#modalJobMin').text(jobSalaryMin);
-        $('#modalJobMax').text(jobSalaryMax);
+        // Handle the actual button click for view/hide details
+        $(document).on('click', '.btn-primary-outline', function(e) {
+            e.preventDefault();
+            const button = $(this);
+            const targetId = button.attr('data-bs-target');
+            const collapseElement = $(targetId);
 
-        // Optional: hidden input for job ID
-        if ($('#modalJobId').length === 0) {
-            $('<input>').attr({
-                type: 'hidden',
-                id: 'modalJobId',
-                name: 'job_id',
-                value: jobId
-            }).appendTo('#applyModal form');
-        } else {
-            $('#modalJobId').val(jobId);
-        }
-    });
-});
- // Handle the actual button click for view/hide details
-    $(document).on('click', '.btn-primary-outline', function(e) {
-        e.preventDefault();
-        const button = $(this);
-        const targetId = button.attr('data-bs-target');
-        const collapseElement = $(targetId);
-        
-        // Manually toggle the collapse
-        if (collapseElement.hasClass('show')) {
-            collapseElement.collapse('hide');
-        } else {
-            collapseElement.collapse('show');
-        }
-    });
+            // Manually toggle the collapse
+            if (collapseElement.hasClass('show')) {
+                collapseElement.collapse('hide');
+            } else {
+                collapseElement.collapse('show');
+            }
+        });
 
-    // When collapse is shown (details are revealed)
-    // $(document).on('shown.bs.collapse', '.collapse', function() {
-    //     const collapseId = $(this).attr('id');
-    //     const button = $(`[data-bs-target="#${collapseId}"]`);
-    //     button.text('Hide Details');
-    // });
+        // When collapse is shown (details are revealed)
+        // $(document).on('shown.bs.collapse', '.collapse', function() {
+        //     const collapseId = $(this).attr('id');
+        //     const button = $(`[data-bs-target="#${collapseId}"]`);
+        //     button.text('Hide Details');
+        // });
 
-    // // When collapse is hidden (details are hidden)
-    // $(document).on('hidden.bs.collapse', '.collapse', function() {
-    //     const collapseId = $(this).attr('id');
-    //     const button = $(`[data-bs-target="#${collapseId}"]`);
-    //     button.text('View Details');
-    // });
-
+        // // When collapse is hidden (details are hidden)
+        // $(document).on('hidden.bs.collapse', '.collapse', function() {
+        //     const collapseId = $(this).attr('id');
+        //     const button = $(`[data-bs-target="#${collapseId}"]`);
+        //     button.text('View Details');
+        // });
     </script>
 @endsection
