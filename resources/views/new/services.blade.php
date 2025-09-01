@@ -52,11 +52,11 @@
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Core Services</h2>
                     <p class="lead gsap-animate">Explore our comprehensive service offerings and discover how we can support your business goals.</p>
-                    
+
                     <!-- FIXED: Added missing servicesGrid container -->
-                    
+
                         <div class="row g-4" id="servicesGrid">
-                           
+
                             @foreach($services->take(6) as $index=>$service)
                             <div class="col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}">
                                 <div class="service-card">
@@ -66,10 +66,10 @@
                                 </div>
                             </div>
                             @endforeach
-                          
+
                         </div>
                     </div>
-                    
+
                     @if($services->count() > 6)
                     <div class="text-center mt-4">
                         <a href="javascript:void(0)" id="viewAllBtn" class="btn-all gsap-animate">
@@ -88,7 +88,7 @@
             <section class="service-details-section" id="service-details">
                 <div class="section-container">
                     <h2 class="gsap-animate">Service Details</h2>
-                    
+
                     <!-- FIXED: Added missing serviceDetails container -->
                     <div id="serviceDetails">
                         <div class="row g-4">
@@ -123,7 +123,7 @@
             </section>
 
             <!-- Industry Expertise Section -->
-            <section class="industries-section" style="margin-left:57px;">
+            <section class="industries-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Industry Expertise</h2>
                     <p class="lead gsap-animate">Specialized knowledge across key sectors, bringing industry-specific insights to every engagement.</p>
@@ -159,7 +159,7 @@
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
+
     <script>
         // Initialize Slick Slider
         $(document).ready(function(){
@@ -179,7 +179,7 @@
             // Animate hero content on slide change
             $('.hero-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
                 const nextContent = $(slick.$slides[nextSlide]).find('.hero-content');
-                gsap.fromTo(nextContent, 
+                gsap.fromTo(nextContent,
                     { opacity: 0, y: 50 },
                     { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
                 );
@@ -250,7 +250,7 @@
             // View All Button Handler
             $('#viewAllBtn').on('click', function(){
                 if(allServicesLoaded) return;
-                
+
                 const $btn = $(this);
                 const $btnText = $btn.find('.btn-text');
                 const $btnSpinner = $btn.find('.btn-spinner');
@@ -269,18 +269,18 @@
                         if(response.services_html){
                             $('#servicesGrid').html(response.services_html);
                         }
-                        
+
                         // Update service details
                         if(response.details_html){
                             $('#serviceDetails').html(response.details_html);
                         }
-                        
+
                         // Animate new elements
                         setTimeout(() => {
                             animateElements();
                             ScrollTrigger.refresh();
                         }, 100);
-                        
+
                         // Update button states
                         $btn.hide();
                         $('#showLessBtn').show();
@@ -304,7 +304,7 @@
                 // Restore original content
                 $('#servicesGrid').html(originalServiceHtml);
                 $('#serviceDetails').html(originalDetailHtml);
-                
+
                 // Update button states
                 $(this).hide();
                 $('#viewAllBtn').show();
