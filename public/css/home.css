@@ -482,6 +482,20 @@
     margin: 0 auto 2rem;
     text-align: center;
 }
+.industries-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.industries-icon svg {
+    width: 40px;
+    /* adjust size */
+    height: 40px;
+    color: var(--primary);
+    /* if you want it colored like FontAwesome */
+}
 
 .industry-item {
     background: linear-gradient(135deg, var(--white), var(--light));

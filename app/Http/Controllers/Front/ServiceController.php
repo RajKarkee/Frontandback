@@ -13,7 +13,8 @@ class ServiceController extends Controller
     public function index(){
         $services = Service::where('status', 'active')->orderBy('sort_order','asc')->get();
         $industries = DB::table('industries')->select('name', 'svg_icon')->where('status', 'active')->orderBy('sort_order', 'asc')->paginate(6);
-        return view('new.services', compact('services','industries'));
+                $jumbotrons=DB::table('jumbotrons')->where('page_slug','services')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.services', compact('services','industries','jumbotrons'));
     }
     public function getAll(Request $request){
         if ($request->ajax()) {
