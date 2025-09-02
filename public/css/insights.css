@@ -523,6 +523,11 @@
     .section-container {
         max-width: 1400px;
     }
+       .articles-section,
+    .recent-articles-section {
+        padding: 5rem 0;
+        margin-left:-5rem;
+    }
 }
 
 @media (max-width: 991px) {
