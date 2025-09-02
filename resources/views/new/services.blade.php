@@ -14,36 +14,21 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-slider">
-                    <div class="hero-slide hero-slide-1">
-                        <div class="hero-content gsap-animate">
-                            <h1>Our Professional Services</h1>
-                            <p>Comprehensive audit, tax, and advisory services tailored to meet your business needs and drive growth.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3">
-                                <a href="#services" class="btn-primary-filled">Explore Services <i class="fas fa-arrow-right"></i></a>
-                                <a href="#contact" class="btn-primary-outline">Contact Us <i class="fas fa-arrow-right"></i></a>
+                    @foreach ($jumbotrons as $index => $jumbotron)
+                        <div class="hero-slide hero-slide-{{ $index + 1 }}">
+                            <div class="hero-content gsap-animate">
+                                <h1>{{ $jumbotron->title }}</h1>
+                                <p>{{ $jumbotron->subtitle }}</p>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <a href="#services" class="btn-primary-filled">Explore Services <i
+                                            class="fas fa-arrow-right"></i></a>
+                                    <a href="/contact" class="btn-primary-outline">Contact Us <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="hero-slide hero-slide-2">
-                        <div class="hero-content gsap-animate">
-                            <h1>Driving Business Success</h1>
-                            <p>Expert solutions in audit, tax, and consulting to empower your organization's growth and compliance.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3">
-                                <a href="#services" class="btn-primary-filled">Our Expertise <i class="fas fa-arrow-right"></i></a>
-                                <a href="#contact" class="btn-primary-outline">Get in Touch <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-slide hero-slide-3">
-                        <div class="hero-content gsap-animate">
-                            <h1>Strategic Financial Solutions</h1>
-                            <p>Partner with us for tailored advisory and reporting services that ensure sustainable success.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3">
-                                <a href="#services" class="btn-primary-filled">Learn More <i class="fas fa-arrow-right"></i></a>
-                                <a href="#contact" class="btn-primary-outline">Reach Out <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </section>
 
@@ -51,101 +36,107 @@
             <section class="services-section" id="services">
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Core Services</h2>
-                    <p class="lead gsap-animate">Explore our comprehensive service offerings and discover how we can support your business goals.</p>
+                    <p class="lead gsap-animate">Explore our comprehensive service offerings and discover how we can support
+                        your business goals.</p>
 
-                    <!-- FIXED: Added missing servicesGrid container -->
 
-                        <div class="row g-4" id="servicesGrid">
 
-                            @foreach($services->take(6) as $index=>$service)
+                    <div class="row g-4" id="servicesGrid">
+
+                        @foreach ($services->take(6) as $index => $service)
                             <div class="col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}">
                                 <div class="service-card">
-                                    <h3>{{$service->title}}</h3>
-                                    <p>{{$service->description}}</p>
-                                    <a href="#service-{{ $service->id }}" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                                    <h3>{{ $service->title }}</h3>
+                                    <p>{{ $service->description }}</p>
+                                    <a href="#service-{{ $service->id }}" class="learn-more">Learn More <i
+                                            class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
-                            @endforeach
+                        @endforeach
 
-                        </div>
                     </div>
+                </div>
 
-                    @if($services->count() > 6)
+                @if ($services->count() > 6)
                     <div class="text-center mt-4">
                         <a href="javascript:void(0)" id="viewAllBtn" class="btn-all gsap-animate">
                             <span class="btn-text">View All Services</span>
-                            <span class="btn-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Loading...</span>
+                            <span class="btn-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i>
+                                Loading...</span>
                         </a>
                         <a href="javascript:void(0)" id="showLessBtn" class="btn-all gsap-animate" style="display:none;">
                             <span class="btn-text">Show Less</span> <i class="fas fa-arrow-up"></i>
                         </a>
                     </div>
-                    @endif
-                </div>
-            </section>
+                @endif
+    </div>
+    </section>
 
-            <!-- Service Details Section -->
-            <section class="service-details-section" id="service-details">
-                <div class="section-container">
-                    <h2 class="gsap-animate">Service Details</h2>
+    <!-- Service Details Section -->
+    <section class="service-details-section" id="service-details">
+        <div class="section-container">
+            <h2 class="gsap-animate">Service Details</h2>
 
-                    <!-- FIXED: Added missing serviceDetails container -->
-                    <div id="serviceDetails">
-                        <div class="row g-4">
-                            @foreach($services->take(6) as $index=>$service)
-                            <div class="col-12 gsap-animate" id="service-{{ $service->id }}" data-delay="{{ $index * 0.15 }}">
-                                <div class="detail-card">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-6 detail-content">
-                                            <h3>{{$service->title}}</h3>
-                                            <p>{{$service->content}}</p>
-                                            @if(is_array($service->sub_services))
-                                                @foreach($service->sub_services as $sub => $items)
-                                                <h4>{{$sub}}</h4>
+            <!-- FIXED: Added missing serviceDetails container -->
+            <div id="serviceDetails">
+                <div class="row g-4">
+                    @foreach ($services->take(6) as $index => $service)
+                        <div class="col-12 gsap-animate" id="service-{{ $service->id }}" data-delay="{{ $index * 0.15 }}">
+                            <div class="detail-card">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 detail-content">
+                                        <h3>{{ $service->title }}</h3>
+                                        <p>{{ $service->content }}</p>
+                                        @if (is_array($service->sub_services))
+                                            @foreach ($service->sub_services as $sub => $items)
+                                                <h4>{{ $sub }}</h4>
                                                 <ul>
-                                                    @foreach($items as $item)
-                                                    <li>{{$item}}</li>
+                                                    @foreach ($items as $item)
+                                                        <li>{{ $item }}</li>
                                                     @endforeach
                                                 </ul>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <img src="{{ Storage::url($service->featured_image) }}" alt="{{ $service->title }}">
-                                        </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{{ Storage::url($service->featured_image) }}"
+                                            alt="{{ $service->title }}">
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Industry Expertise Section -->
-            <section class="industries-section">
-                <div class="section-container">
-                    <h2 class="gsap-animate">Industry Expertise</h2>
-                    <p class="lead gsap-animate">Specialized knowledge across key sectors, bringing industry-specific insights to every engagement.</p>
-                    <div class="row g-3">
-                        @foreach($industries as $index=>$industry)
-                        <div class="col-6 col-md-4 col-lg-2 gsap-animate">
-                            <div class="industry-item">
-                                <svg class="w-8 h-8 text-fresh-teal mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $industry->svg_icon }}" />
-                                </svg>
-                                <ul class="no-bullets">
-                                    <li>{{ $industry->name }}</li>
-                                </ul>
-                            </div>
+    <!-- Industry Expertise Section -->
+    <section class="industries-section">
+        <div class="section-container">
+            <h2 class="gsap-animate">Industry Expertise</h2>
+            <p class="lead gsap-animate">Specialized knowledge across key sectors, bringing industry-specific insights to
+                every engagement.</p>
+            <div class="row g-3">
+                @foreach ($industries as $index => $industry)
+                    <div class="col-6 col-md-4 col-lg-2 gsap-animate">
+                        <div class="industry-item">
+                            <svg class="w-8 h-8 text-fresh-teal mx-auto mb-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="{{ $industry->svg_icon }}" />
+                            </svg>
+                            <ul class="no-bullets">
+                                <li>{{ $industry->name }}</li>
+                            </ul>
                         </div>
-                        @endforeach
                     </div>
-                    <a href="/industries" class="btn-all gsap-animate">View All Industries</a>
-                </div>
-            </section>
-        </main>
-    </div>
+                @endforeach
+            </div>
+            <a href="/industries" class="btn-all gsap-animate">View All Industries</a>
+        </div>
+    </section>
+    </main>
     @include('new.layouts.contactusform')
 @endsection
 
@@ -162,7 +153,7 @@
 
     <script>
         // Initialize Slick Slider
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.hero-slider').slick({
                 dots: false,
                 infinite: true,
@@ -177,12 +168,17 @@
             });
 
             // Animate hero content on slide change
-            $('.hero-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            $('.hero-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
                 const nextContent = $(slick.$slides[nextSlide]).find('.hero-content');
-                gsap.fromTo(nextContent,
-                    { opacity: 0, y: 50 },
-                    { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
-                );
+                gsap.fromTo(nextContent, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'power3.out'
+                });
             });
         });
 
@@ -190,48 +186,48 @@
         function animateElements() {
             gsap.utils.toArray('.gsap-animate:not(.animated)').forEach((el) => {
                 const delay = parseFloat(el.getAttribute('data-delay')) || 0;
-                gsap.fromTo(el,
-                    { opacity: 0, y: 40 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.2,
-                        delay,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: el,
-                            start: 'top 85%',
-                            once: true
-                        }
+                gsap.fromTo(el, {
+                    opacity: 0,
+                    y: 40
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    delay,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        once: true
                     }
-                );
+                });
                 el.classList.add("animated");
             });
         }
 
         // Initialize GSAP Animations
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             gsap.registerPlugin(ScrollTrigger);
 
             // Initial page load animations
             gsap.utils.toArray('.gsap-animate').forEach((el) => {
                 const delay = parseFloat(el.getAttribute('data-delay')) || 0;
-                gsap.fromTo(el,
-                    { opacity: 0, y: 40 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.2,
-                        delay,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: el,
-                            start: 'top 85%',
-                            once: true,
-                            invalidateOnRefresh: true
-                        }
+                gsap.fromTo(el, {
+                    opacity: 0,
+                    y: 40
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    delay,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        once: true,
+                        invalidateOnRefresh: true
                     }
-                );
+                });
             });
 
             ScrollTrigger.refresh();
@@ -242,14 +238,14 @@
         let originalServiceHtml = '';
         let originalDetailHtml = '';
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Store original content for "Show Less" functionality
             originalServiceHtml = $('#servicesGrid').html();
             originalDetailHtml = $('#serviceDetails').html();
 
             // View All Button Handler
-            $('#viewAllBtn').on('click', function(){
-                if(allServicesLoaded) return;
+            $('#viewAllBtn').on('click', function() {
+                if (allServicesLoaded) return;
 
                 const $btn = $(this);
                 const $btnText = $btn.find('.btn-text');
@@ -264,14 +260,14 @@
                     url: "{{ route('services.all') }}",
                     method: 'GET',
                     dataType: 'json',
-                    success: function(response){
+                    success: function(response) {
                         // Update services grid
-                        if(response.services_html){
+                        if (response.services_html) {
                             $('#servicesGrid').html(response.services_html);
                         }
 
                         // Update service details
-                        if(response.details_html){
+                        if (response.details_html) {
                             $('#serviceDetails').html(response.details_html);
                         }
 
@@ -286,11 +282,11 @@
                         $('#showLessBtn').show();
                         allServicesLoaded = true;
                     },
-                    error: function(xhr, status, error){
+                    error: function(xhr, status, error) {
                         console.error('Error loading all services:', error);
                         alert('Failed to load all services. Please try again later.');
                     },
-                    complete: function(){
+                    complete: function() {
                         // Hide loading state
                         $btnText.show();
                         $btnSpinner.hide();
@@ -300,7 +296,7 @@
             });
 
             // Show Less Button Handler
-            $('#showLessBtn').on('click', function(){
+            $('#showLessBtn').on('click', function() {
                 // Restore original content
                 $('#servicesGrid').html(originalServiceHtml);
                 $('#serviceDetails').html(originalDetailHtml);
@@ -328,7 +324,9 @@
                 let target = $(this).attr("href");
                 if ($(target).length) {
                     let offset = $(target).offset().top - 80;
-                    $("html, body").animate({ scrollTop: offset }, 800);
+                    $("html, body").animate({
+                        scrollTop: offset
+                    }, 800);
                 }
             });
         });

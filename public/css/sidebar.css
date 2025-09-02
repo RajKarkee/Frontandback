@@ -193,18 +193,6 @@
     height: calc(100vh - 80px);
     z-index: 1000;
     box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
-    overflow-y: auto;
-    resize: none; /* Disable CSS resizing */
-    overflow: hidden; /* Prevent overflow that might show a resize handle */
-    user-select: none; /* Prevent text selection that might interfere */
-    -webkit-user-drag: none; /* Prevent dragging in WebKit browsers */
-    pointer-events: auto; /* Allow interaction but prevent unintended dragging */
-}
-
-.rka-sidebar-scope .sidebar::after,
-.rka-sidebar-scope .sidebar::before {
-    content: none !important; /* Remove pseudo-elements that might be used for resize handles */
-    display: none !important;
 }
 
 .rka-sidebar-scope .sidebar.active {
@@ -411,7 +399,8 @@
         display: block;
     }
 
-    body, html {
+    body,
+    html {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -518,7 +507,3 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-
-.resize-handle, .draggable-arrow {
-    display: none !important;
-}
