@@ -37,7 +37,7 @@
 }
 
 .section-container {
-    max-width: 1600px; /* Wider container */
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -45,8 +45,7 @@
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 90vh;
-    min-height: 600px;
+    min-height: 80vh;
     overflow: hidden;
     background: linear-gradient(
             135deg,
@@ -67,7 +66,7 @@
     text-align: center;
     max-width: 900px;
     width: 90%;
-    margin: 4rem auto 0;
+    margin: 2rem auto;
     padding: 2.5rem;
     color: var(--white);
     background: rgba(0, 33, 63, 0.15);
@@ -75,6 +74,7 @@
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
 }
+
 @media (max-width: 767px) {
     .hero-content {
         margin-left: 0 !important;
@@ -111,9 +111,9 @@
 .btn-primary-filled,
 .btn-primary-outline {
     font-family: "Inter", sans-serif;
-    font-size: 1rem; /* Smaller font size */
+    font-size: 1rem;
     font-weight: 600;
-    padding: 0.6rem 2.8rem; /* Smaller height, wider width */
+    padding: 0.6rem 2.8rem;
     border-radius: 50px;
     transition: var(--transition);
     text-decoration: none;
@@ -124,7 +124,7 @@
     margin: 0.5rem;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 33, 63, 0.15); /* Subtle shadow */
+    box-shadow: 0 3px 10px rgba(0, 33, 63, 0.15);
 }
 
 .btn-primary-filled {
@@ -376,9 +376,9 @@
 
 .job-banner .btn-primary-filled,
 .job-banner .btn-primary-outline {
-    padding: 0.5rem 2.5rem; /* Smaller height, wider width */
-    font-size: 0.95rem; /* Smaller font */
-    max-width: 180px; /* Wider buttons */
+    padding: 0.5rem 2.5rem;
+    font-size: 0.95rem;
+    max-width: 180px;
 }
 
 .job-details {
@@ -419,8 +419,8 @@
 }
 
 .view-more-container .btn-primary-filled {
-    max-width: 320px; /* Wider button */
-    padding: 0.6rem 2.8rem; /* Smaller height */
+    max-width: 320px;
+    padding: 0.6rem 2.8rem;
     font-size: 1rem;
 }
 
@@ -501,13 +501,13 @@
 }
 
 .hr-contact-card {
-    background: var(--white); /* Removed gradient for cleaner look */
+    background: var(--white);
     border-radius: 16px;
-    padding: 4rem 3rem; /* Increased padding for spacious feel */
-    box-shadow: 0 4px 15px var(--shadow); /* Lighter shadow */
-    max-width: 1200px; /* Wide but centered */
+    padding: 4rem 3rem;
+    box-shadow: 0 4px 15px var(--shadow);
+    max-width: 1200px;
     margin: 0 auto;
-    text-align: center; /* Centered content */
+    text-align: center;
 }
 
 .hr-contact-card h3 {
@@ -568,10 +568,10 @@
 .hr-contact-card .btn-primary-filled,
 .hr-contact-card .btn-primary-outline {
     width: 100%;
-    max-width: 320px; /* Wider buttons */
+    max-width: 320px;
     margin: 1rem auto;
-    padding: 0.6rem 2.8rem; /* Smaller height */
-    font-size: 1rem; /* Smaller font */
+    padding: 0.6rem 2.8rem;
+    font-size: 1rem;
     border-radius: 50px;
 }
 
@@ -640,9 +640,9 @@
 
 .modal-body .btn-primary-filled {
     width: 100%;
-    max-width: 300px; /* Wider button */
+    max-width: 300px;
     margin: 1rem auto 0;
-    padding: 0.6rem 2.8rem; /* Smaller height */
+    padding: 0.6rem 2.8rem;
     font-size: 1rem;
 }
 
@@ -655,8 +655,7 @@
 
 @media (max-width: 991px) {
     .hero-section {
-        height: 80vh;
-        min-height: 500px;
+        min-height: 75vh;
     }
     .hero-content {
         max-width: 700px;
@@ -727,8 +726,7 @@
 
 @media (max-width: 767px) {
     .hero-section {
-        height: 70vh;
-        min-height: 450px;
+        min-height: 70vh;
     }
     .hero-content {
         padding: 1.8rem;
@@ -819,13 +817,13 @@
     }
     .testimonial-card {
         height: 220px;
-        padding: 1.5rem;
+        padding: 1.8rem;
     }
     .testimonial-card h4 {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     .testimonial-card p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     .hr-contact-card {
         padding: 2rem;
@@ -868,18 +866,15 @@
     }
 }
 
-
-
 @media (max-width: 576px) {
- 
-
+    .hero-section {
+        min-height: 60vh;
+    }
     .hero-content {
-        position: absolute;
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
+        margin: 0 auto;
         padding: 1rem;
-        width: 80%;
+        width: 90%;
         max-width: none;
     }
     .hero-content h1 {
@@ -888,31 +883,14 @@
     .hero-content p {
         font-size: clamp(0.75rem, 2.2vw, 0.9rem);
     }
-
-    .hero-section {
-        height: 50vh;
-        min-height: 400px;
-    }
     .btn-primary-filled,
-    .btn-primary-outline,
-  
-    .btn-all {
+    .btn-primary-outline {
         padding: 0.6rem 1.8rem;
         font-size: clamp(0.7rem, 2vw, 0.85rem);
-        min-width: 140px;
         width: 100%;
-        max-width: 200px;   
-      
+        max-width: 200px;
+        margin: 0.5rem auto;
     }
-     .btn-primary-filled,
-    .btn-primary-outline {
-        margin-left:7rem !important;
-    }
-
-    .hero-content p {
-        font-size: 0.9rem;
-    }
- 
     .why-choose-section h2,
     .openings-section h2,
     .testimonials-section h2,
@@ -1015,8 +993,7 @@
 
 @media (max-width: 400px) {
     .hero-section {
-        height: 50vh;
-        min-height: 350px;
+        min-height: 50vh;
     }
     .hero-content {
         padding: 1rem;

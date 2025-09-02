@@ -39,7 +39,7 @@
         /* Blog Hero Section */
         .blog-hero-section {
             position: relative;
-            height: 95vh;
+            height: 80vh;
             min-height: 550px;
             overflow: hidden;
             background: linear-gradient(
