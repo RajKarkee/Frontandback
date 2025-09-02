@@ -18,6 +18,7 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-slider">
+
                     @foreach ($jumbotrons as $index => $jumbotron)
                         <div class="hero-slide hero-slide-{{ $index + 1 }}">
                             <div class="hero-content gsap-animate">
@@ -29,6 +30,7 @@
                                     <a href="{{ $jumbotron->button_link }}" class="btn-primary-outline">Learn More <i
                                             class="fas fa-arrow-right"></i></a>
                                 </div>
+
                             </div>
                         </div>
                     @endforeach

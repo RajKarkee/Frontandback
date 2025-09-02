@@ -354,6 +354,7 @@
     }
     .blog-hero-content {
         padding: 1.5rem;
+        margin-top: 12rem;
     }
     .blog-hero-content h1 {
         font-size: 2.2rem;
@@ -398,6 +399,9 @@
         padding: 0.5rem 1.3rem;
         font-size: 0.8rem;
         max-width: 260px;
+    }
+    .btn-cta-filled {
+        margin-left:6rem;
     }
     .section-container {
         padding: 0 12px;

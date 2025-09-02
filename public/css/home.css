@@ -533,10 +533,12 @@
 .cta-section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
-    padding: 4rem 0;
+    padding: 5rem 0;
     text-align: center;
     position: relative;
     width: 100%;
+    
+    
 }
 
 .cta-section::before {
@@ -545,6 +547,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    margin: 0;
     height: 100%;
     background: radial-gradient(
         circle,
@@ -562,7 +565,7 @@
 
 .cta-section p {
     font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto 2rem;
     opacity: 0.9;
 }
