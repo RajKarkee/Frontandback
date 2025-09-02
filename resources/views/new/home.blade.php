@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </section>
-<div class="contanier">
+<div class="container">
             <!-- Key Statistics -->
             <section class="stats-section">
                 <div class="section-container">

@@ -16,6 +16,8 @@
     color: var(--primary);
     line-height: 1.8;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .rka-scope h1,
@@ -46,11 +48,6 @@
     margin: 0;
     padding: 0;
     width: 100%;
-}
-
-.hero-slider {
-    width: 100%;
-    height: 100%;
 }
 
 .hero-slide {
@@ -85,11 +82,11 @@
     backdrop-filter: blur(8px);
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
+    position: relative;
 }
 
 .hero-content h1 {
-    font-size: 4.5rem;
-    margin-top: 5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     margin-bottom: 1.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--white), var(--accent));
@@ -99,7 +96,7 @@
 }
 
 .hero-content p {
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
     font-weight: 400;
     margin-bottom: 2.5rem;
     opacity: 0.9;
@@ -108,7 +105,7 @@
 .btn-primary-filled,
 .btn-primary-outline {
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     font-weight: 600;
     padding: 0.8rem 2.5rem;
     border-radius: 50px;
@@ -157,57 +154,23 @@
     transform: translateX(4px);
 }
 
-.slick-dots {
-    position: absolute;
-    bottom: 40px;
-    display: flex !important;
-    gap: 12px;
-    justify-content: center;
-}
-
-.slick-dots li button {
-    width: 12px;
-    height: 12px;
-    background: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0;
-}
-
-.slick-dots li button::before {
-    content: none !important;
-}
-
-.slick-dots li button:hover {
-    background: rgba(255, 255, 255, 0.8) !important;
-    transform: scale(1.2);
-}
-
-.slick-dots li.slick-active button {
-    background: var(--accent) !important;
-    transform: scale(1.4);
-}
-
 /* Featured and Recent Articles Sections */
 .articles-section,
 .recent-articles-section {
     padding: 7rem 0;
-    margin-right: 4.8rem;
     background: linear-gradient(180deg, var(--white), var(--lighter));
 }
 
 .articles-section h2,
 .recent-articles-section h2 {
-    font-size: 3rem;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     text-align: center;
     margin-bottom: 1.8rem;
 }
 
 .articles-section .lead,
 .recent-articles-section .lead {
-    font-size: 1.3rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
     color: var(--gray);
     max-width: 1000px;
     margin: 0 auto 3.5rem;
@@ -274,7 +237,7 @@
 }
 
 .article-card .title-overlay h3 {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 3vw, 1.6rem);
     margin: 0;
 }
 
@@ -305,7 +268,7 @@
     padding: 0.25rem 0.75rem;
     background: var(--accent);
     color: var(--white);
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
     border-radius: 9999px;
     margin-bottom: 0.5rem;
     width: fit-content;
@@ -317,7 +280,7 @@
 }
 
 .article-card h3 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
     color: var(--white);
     margin-bottom: 0.5rem;
     transition: var(--transition);
@@ -329,7 +292,7 @@
 }
 
 .article-card p {
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
     color: var(--white);
     margin-bottom: 0;
 }
@@ -370,25 +333,25 @@
     padding: 0.25rem 0.75rem;
     background: var(--accent);
     color: var(--white);
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
     border-radius: 9999px;
     margin-bottom: 1rem;
 }
 
 .article-overlay-content h3 {
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 4vw, 2rem);
     color: var(--primary);
     margin-bottom: 0.5rem;
 }
 
 .article-overlay-content .lead {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     color: var(--gray);
     margin-bottom: 1rem;
 }
 
 .article-overlay-content .meta {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
     color: var(--gray);
     margin-bottom: 1.5rem;
     display: flex;
@@ -397,7 +360,7 @@
 }
 
 .article-overlay-content .content {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     color: var(--primary);
     margin-bottom: 2rem;
     line-height: 1.6;
@@ -412,7 +375,7 @@
     padding: 0.25rem 0.75rem;
     background: var(--lighter);
     color: var(--primary);
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
     border-radius: 9999px;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
@@ -430,7 +393,7 @@
 
 .btn-share {
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     font-weight: 600;
     padding: 0.8rem 2rem;
     border-radius: 50px;
@@ -454,7 +417,7 @@
 }
 
 .article-overlay-content .back-link {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     color: var(--primary);
     text-decoration: none;
     margin-bottom: 2rem;
@@ -475,12 +438,12 @@
 }
 
 .article-overlay-content .toc h4 {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     margin-bottom: 0.5rem;
 }
 
 .article-overlay-content .toc p {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
     color: var(--gray);
 }
 
@@ -516,7 +479,7 @@
 
 .btn-all {
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     font-weight: 600;
     padding: 0.8rem 2rem;
     border-radius: 50px;
@@ -567,48 +530,70 @@
         height: 80vh;
         min-height: 500px;
     }
+    .hero-slide {
+        height: 80vh;
+    }
+    .hero-content {
+        margin: 0 auto;
+        padding: 1.5rem;
+        width: 90%;
+        position: relative;
+        top: 0;
+    }
     .hero-content h1 {
-        font-size: 3.5rem;
+        font-size: clamp(1.8rem, 5vw, 3rem);
     }
     .hero-content p {
-        font-size: 1.2rem;
+        font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline,
+    .btn-all,
+    .btn-share {
+        padding: 0.7rem 2rem;
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+    }
+    .articles-section,
+    .recent-articles-section {
+        padding: 5rem 0;
+        margin-right: 0;
     }
     .articles-section h2,
     .recent-articles-section h2 {
-        font-size: 2.6rem;
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    }
+    .articles-section .lead,
+    .recent-articles-section .lead {
+        font-size: clamp(0.85rem, 2.2vw, 1.05rem);
     }
     .article-card .image-container {
         height: 300px;
     }
     .article-card .title-overlay h3 {
-        font-size: 1.4rem;
+        font-size: clamp(1.2rem, 2.8vw, 1.4rem);
     }
     .article-card .content-overlay h3 {
-        font-size: 1.6rem;
+        font-size: clamp(1.4rem, 3vw, 1.6rem);
     }
     .article-card .category,
     .article-card p {
-        font-size: 0.95rem;
-    }
-    .btn-all,
-    .btn-share {
-        padding: 0.7rem 2rem;
-        font-size: 0.95rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
     }
     .article-overlay-content {
-        padding: 2rem;
+        padding: 1.5rem;
+        margin: 1.5rem auto;
     }
     .article-overlay-content h3 {
-        font-size: 1.8rem;
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem);
     }
     .article-overlay-content .lead,
     .article-overlay-content .content {
-        font-size: 1rem;
+        font-size: clamp(0.85rem, 2.2vw, 1rem);
     }
     .article-overlay-content .meta,
     .article-overlay-content .toc p,
     .article-overlay-content .tag {
-        font-size: 0.9rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
     }
 }
 
@@ -617,26 +602,42 @@
         height: 70vh;
         min-height: 450px;
     }
+    .hero-slide {
+        height: 70vh;
+    }
     .hero-content {
-        padding: 2rem;
+        margin: 0 auto;
+        padding: 1.5rem;
+        width: 90%;
+        position: relative;
+        top: 0;
     }
     .hero-content h1 {
-        font-size: 2.8rem;
+        font-size: clamp(1.6rem, 4.5vw, 2.5rem);
     }
     .hero-content p {
-        font-size: 1.1rem;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline,
+    .btn-all,
+    .btn-share {
+        padding: 0.6rem 1.8rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
+        min-width: 160px;
     }
     .articles-section,
     .recent-articles-section {
-        padding: 4.5rem 0;
+        padding: 4rem 0;
+        margin-right: 0;
     }
     .articles-section h2,
     .recent-articles-section h2 {
-        font-size: 2.3rem;
+        font-size: clamp(1.5rem, 3.2vw, 2rem);
     }
     .articles-section .lead,
     .recent-articles-section .lead {
-        font-size: 1rem;
+        font-size: clamp(0.8rem, 2.2vw, 0.95rem);
     }
     .article-card .image-container {
         height: 280px;
@@ -651,95 +652,116 @@
         opacity: 0;
     }
     .article-card .title-overlay h3 {
-        font-size: 1.2rem;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
     }
     .article-card .content-overlay h3 {
-        font-size: 1.4rem;
+        font-size: clamp(1.2rem, 2.8vw, 1.4rem);
     }
     .article-card .category,
     .article-card p {
-        font-size: 0.9rem;
-    }
-    .btn-all,
-    .btn-share {
-        padding: 0.7rem 2rem;
-        font-size: 0.95rem;
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
     }
     .article-overlay-content {
         padding: 1.5rem;
+        margin: 1.5rem auto;
     }
     .article-overlay-content h3 {
-        font-size: 1.6rem;
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
     }
     .article-overlay-content .lead,
     .article-overlay-content .content {
-        font-size: 0.95rem;
+        font-size: clamp(0.8rem, 2.2vw, 0.95rem);
     }
     .article-overlay-content .meta,
     .article-overlay-content .toc p,
     .article-overlay-content .tag {
-        font-size: 0.85rem;
+        font-size: clamp(0.7rem, 1.8vw, 0.85rem);
     }
 }
 
 @media (max-width: 576px) {
     .hero-section {
-        height: 60vh;
+        height: 50vh;
         min-height: 400px;
+        position: relative;
+    }
+    .hero-slide {
+        height: 100vh;
     }
     .hero-content {
-        padding: 1.5rem;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem;
+        width: 80%;
+        max-width: none;
     }
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: clamp(1.4rem, 4vw, 2rem);
     }
     .hero-content p {
-        font-size: 0.95rem;
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline,
+    .btn-all,
+    .btn-share {
+        padding: 0.6rem 1.8rem;
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        width: 100%;
+        max-width: 280px;
+    }
+    .articles-section,
+    .recent-articles-section {
+        padding: 3rem 0;
+        margin-right: 0;
     }
     .articles-section h2,
     .recent-articles-section h2 {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 3.2vw, 1.8rem);
     }
     .articles-section .lead,
     .recent-articles-section .lead {
-        font-size: 0.95rem;
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
     }
     .article-card .image-container {
         height: 260px;
     }
     .article-card .title-overlay h3 {
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 2.2vw, 1.1rem);
     }
     .article-card .content-overlay h3 {
-        font-size: 1.3rem;
+        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     }
     .article-card .category,
     .article-card p {
-        font-size: 0.9rem;
-    }
-    .btn-all,
-    .btn-share {
-        padding: 0.6rem 1.8rem;
-        font-size: 0.9rem;
-        width: 100%;
-        max-width: 280px;
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
     }
     .article-overlay-content {
-        padding: 1.25rem;
+        padding: 1rem;
+        margin: 1rem auto;
     }
     .article-overlay-content h3 {
-        font-size: 1.5rem;
+        font-size: clamp(1.1rem, 2.8vw, 1.5rem);
     }
     .article-overlay-content .lead,
     .article-overlay-content .content {
-        font-size: 0.9rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
     }
     .article-overlay-content .meta,
     .article-overlay-content .toc p,
     .article-overlay-content .tag {
-        font-size: 0.85rem;
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+    }
+    .article-overlay-close {
+        width: 32px;
+        height: 32px;
+    }
+    .article-overlay-close i {
+        font-size: 1.2rem;
     }
     .section-container {
-        padding: 0 16px;
+        padding: 0 12px;
     }
 }

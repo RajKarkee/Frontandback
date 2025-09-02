@@ -101,7 +101,6 @@
                 <span>Insights</span>
             </a>
             <div class="separator-bar"></div>
-
             <a href="/about" class="text-item" data-tooltip="About"
                 data-image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
                 data-description="Learn about our mission, values, and commitment to excellence. At Chartered Insights, we strive to deliver unparalleled financial and consulting services, fostering trust and driving success for our clients.">
@@ -138,7 +137,7 @@
             }, {
                 y: 0,
                 opacity: 1,
-                duration: 0.2,
+                duration: 0.4,
                 ease: 'power3.out'
             });
         }
@@ -151,26 +150,62 @@
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
             const previewPanel = document.getElementById('page-preview');
+            const isMobile = window.innerWidth <= 1024;
+
             sidebar.classList.toggle('active');
-            if (mainContent) {
-                mainContent.classList.toggle('active', sidebar.classList.contains('active'));
-            }
-            gsap.to(sidebar, {
-                x: sidebar.classList.contains('active') ? 0 : '-100%',
-                duration: 0.2,
-                ease: 'power3.out'
-            });
-            gsap.to(previewPanel, {
-                left: sidebar.classList.contains('active') ? 480 : 80,
-                duration: 0.2,
-                ease: 'power3.out'
-            });
-            const event = new CustomEvent('sidebarToggle', {
-                detail: {
-                    isActive: sidebar.classList.contains('active')
+            const isActive = sidebar.classList.contains('active');
+
+            if (isMobile) {
+                gsap.set(sidebar, { x: isActive ? '-100%' : '-100%', width: '50%', opacity: 0 });
+                gsap.to(sidebar, {
+                    x: isActive ? '0%' : '-100%',
+                    opacity: isActive ? 1 : 0,
+                    duration: 0.6,
+                    ease: 'power2.inOut',
+                    onStart: () => {
+                        if (!isActive) sidebar.style.visibility = 'hidden';
+                    },
+                    onComplete: () => {
+                        if (isActive) sidebar.style.visibility = 'visible';
+                    }
+                });
+                gsap.set(previewPanel, { visibility: 'hidden' });
+                if (mainContent) {
+                    mainContent.classList.toggle('active', isActive);
+                    gsap.to(mainContent, {
+                        filter: isActive ? 'blur(2px)' : 'blur(0px)',
+                        duration: 0.4,
+                        ease: 'power2.inOut'
+                    });
+                    gsap.set(mainContent, { marginLeft: '0' });
                 }
-            });
-            window.dispatchEvent(event);
+            } else {
+                gsap.to(sidebar, {
+                    x: isActive ? '0%' : '0%',
+                    width: isActive ? '40%' : '80px',
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                });
+                gsap.to(previewPanel, {
+                    left: isActive ? 480 : 80,
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                });
+                if (mainContent) {
+                    mainContent.classList.toggle('active', isActive);
+                    gsap.to(mainContent, {
+                        marginLeft: isActive ? '480px' : '80px',
+                        filter: 'blur(0px)',
+                        duration: 0.6,
+                        ease: 'power2.inOut'
+                    });
+                }
+            }
+
+            window.dispatchEvent(new CustomEvent('sidebarToggle', {
+                detail: { isActive }
+            }));
         }
 
         function adjustPreviewPanel() {
@@ -184,7 +219,7 @@
 
             sidebarLinks.forEach(link => {
                 link.addEventListener('mouseenter', () => {
-                    if (link.getAttribute('href') === currentPath) {
+                    if (link.getAttribute('href') === currentPath || window.innerWidth <= 1024) {
                         return;
                     }
                     previewTitle.textContent = link.getAttribute('data-tooltip');
@@ -205,6 +240,7 @@
                 });
 
                 link.addEventListener('mouseleave', () => {
+                    if (window.innerWidth <= 1024) return;
                     gsap.to(previewPanel, {
                         opacity: 0,
                         x: 20,
@@ -225,37 +261,43 @@
                 const sidebar = document.getElementById('sidebar');
                 const mainContent = document.getElementById('main-content');
                 const previewPanel = document.getElementById('page-preview');
-                if (window.innerWidth > 1024) {
+                const isMobile = window.innerWidth <= 1024;
+
+                if (!isMobile) {
                     sidebar.classList.remove('active');
-                    gsap.set(sidebar, {
-                        x: 0
-                    });
-                    gsap.set(previewPanel, {
-                        left: 80
-                    });
+                    gsap.set(sidebar, { x: '0%', width: '80px', opacity: 1, visibility: 'visible' });
+                    gsap.set(previewPanel, { left: 80, visibility: 'visible' });
                     if (mainContent) {
                         mainContent.classList.remove('active');
-                        mainContent.style.marginLeft = '80px';
+                        gsap.set(mainContent, { marginLeft: '80px', filter: 'blur(0px)' });
                     }
                 } else {
                     sidebar.classList.remove('active');
-                    gsap.set(sidebar, {
-                        x: '-100%'
-                    });
-                    gsap.set(previewPanel, {
-                        left: 80
-                    });
+                    gsap.set(sidebar, { x: '-100%', width: '50%', opacity: 0, visibility: 'hidden' });
+                    gsap.set(previewPanel, { visibility: 'hidden' });
                     if (mainContent) {
                         mainContent.classList.remove('active');
-                        mainContent.style.marginLeft = '0';
+                        gsap.set(mainContent, { marginLeft: '0', filter: 'blur(0px)' });
                     }
                 }
+
                 window.dispatchEvent(new CustomEvent('sidebarToggle', {
-                    detail: {
-                        isActive: sidebar.classList.contains('active')
-                    }
+                    detail: { isActive: sidebar.classList.contains('active') }
                 }));
             }, 100);
+        }
+
+        function handleOutsideClick(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.getElementById('menu-btn');
+            const isMobile = window.innerWidth <= 1024;
+
+            if (isMobile && sidebar.classList.contains('active')) {
+                // Check if the click is outside the sidebar and menu button
+                if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                    toggleMenu();
+                }
+            }
         }
 
         window.addEventListener('resize', resizeHandler);
@@ -269,11 +311,11 @@
                 duration: 0.5,
                 ease: 'power3.out'
             });
+            // Add click event listener for outside clicks
+            document.addEventListener('click', handleOutsideClick);
         });
     </script>
     @yield('scripts')
-
-
 </body>
 
 </html>

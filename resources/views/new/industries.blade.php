@@ -85,7 +85,8 @@
                 <p class="lead gsap-animate">
                     Stay informed with our latest industry analysis and expert commentary on sector-specific trends and challenges.
                 </p>
-                <div class="row g-4">
+                
+                <div class="row g-4 mx-0">
                     <div class="col-12 col-md-6 col-lg-4 gsap-animate">
                         <div class="insight-card">
                             <div class="image-container">

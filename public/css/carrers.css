@@ -868,32 +868,51 @@
     }
 }
 
+
+
 @media (max-width: 576px) {
-    .hero-section {
-        height: 60vh;
-        min-height: 400px;
-    }
+ 
+
     .hero-content {
-        padding: 1.5rem;
-        margin-top: 1.2rem;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem;
+        width: 80%;
+        max-width: none;
     }
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: clamp(1.4rem, 4vw, 2rem);
     }
+    .hero-content p {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    }
+
+    .hero-section {
+        height: 50vh;
+        min-height: 400px;
+    }
+    .btn-primary-filled,
+    .btn-primary-outline,
+  
+    .btn-all {
+        padding: 0.6rem 1.8rem;
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        min-width: 140px;
+        width: 100%;
+        max-width: 200px;   
+      
+    }
+     .btn-primary-filled,
+    .btn-primary-outline {
+        margin-left:7rem !important;
+    }
+
     .hero-content p {
         font-size: 0.9rem;
     }
-    .btn-primary-filled,
-    .btn-primary-outline {
-        padding: 0.4rem 2rem;
-        font-size: 0.85rem;
-        max-width: 180px;
-    }
-    .btn-primary-filled i,
-    .btn-primary-outline i {
-        font-size: 0.85rem;
-        margin-left: 4px;
-    }
+ 
     .why-choose-section h2,
     .openings-section h2,
     .testimonials-section h2,
