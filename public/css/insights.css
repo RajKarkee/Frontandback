@@ -41,7 +41,7 @@
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 90vh;
+    height:70vh;
     min-height: 600px;
     overflow: hidden;
     background: var(--primary);
