@@ -185,7 +185,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, width 0.6s ease-in-out;
     position: fixed;
     top: 80px;
     left: 0;
@@ -194,14 +194,26 @@
     z-index: 1000;
     box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
     overflow-y: auto;
+    resize: none; /* Disable CSS resizing */
+    overflow: hidden; /* Prevent overflow that might show a resize handle */
+    user-select: none; /* Prevent text selection that might interfere */
+    -webkit-user-drag: none; /* Prevent dragging in WebKit browsers */
+    pointer-events: auto; /* Allow interaction but prevent unintended dragging */
+}
+
+.rka-sidebar-scope .sidebar::after,
+.rka-sidebar-scope .sidebar::before {
+    content: none !important; /* Remove pseudo-elements that might be used for resize handles */
+    display: none !important;
 }
 
 .rka-sidebar-scope .sidebar.active {
     transform: translateX(0);
-    width: 50%;
-    max-width: none;
+    width: 40%;
+    max-width: 480px; /* Fixed max width when active */
     visibility: visible;
     opacity: 1;
+    resize: none; /* Ensure no resizing */
 }
 
 .rka-sidebar-scope .sidebar a {
@@ -348,12 +360,16 @@
 @media (min-width: 1025px) {
     .rka-sidebar-scope .sidebar {
         transform: translateX(0);
-        width: 80px;
+        width: 80px; /* Fixed width in desktop view */
+        resize: none; /* Explicitly disable resizing */
+        overflow: hidden; /* Prevent resize handles */
     }
 
     .rka-sidebar-scope .sidebar.active {
         width: 40%;
-        max-width: 480px;
+        max-width: 480px; /* Fixed width when active */
+        resize: none; /* Ensure no resizing */
+        overflow: hidden; /* Prevent resize handles */
     }
 
     .rka-scope .menu-btn {
@@ -500,4 +516,9 @@
 .service-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+.resize-handle, .draggable-arrow {
+    display: none !important;
 }

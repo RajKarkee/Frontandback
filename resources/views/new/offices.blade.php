@@ -119,7 +119,7 @@
                     <h2 class="gsap-animate">Visit Us Today</h2>
                     <p class="gsap-animate">Whether you need a quick consultation or comprehensive business advisory services, our team is ready to help. Visit any of our offices or contact us to schedule an appointment.</p>
                     <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate" data-delay="0.2">
-                        <a href="#contact" class="btn-cta-filled">Schedule a Consultation <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn-cta-filled" "style=>Schedule a Consultation <i class="fas fa-arrow-right"></i></a>
                         <a href="#services" class="btn-cta-outline">Explore Our Services <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
