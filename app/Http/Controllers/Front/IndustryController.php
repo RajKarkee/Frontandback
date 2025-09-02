@@ -13,7 +13,7 @@ class IndustryController extends Controller
     public function index(){
         $industries = DB::table('industries')->where('status', 'active')->orderBy('sort_order', 'asc')->get();
         $industryExperties=DB::table('industry_expertises')->where('status', 'active')->orderBy('sort_order', 'asc')->paginate(4);
-
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','industries')->where('is_active',1)->orderBy('sort_order','asc')->get();
         return view('new.industries', compact('industries','industryExperties'));
     }
     public function getAll(Request $request){
