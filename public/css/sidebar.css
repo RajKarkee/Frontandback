@@ -193,7 +193,6 @@
     height: calc(100vh - 80px);
     z-index: 1000;
     box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
-    overflow-y: auto;
 }
 
 .rka-sidebar-scope .sidebar.active {
@@ -395,7 +394,8 @@
         display: block;
     }
 
-    body, html {
+    body,
+    html {
         margin: 0;
         padding: 0;
         width: 100%;
