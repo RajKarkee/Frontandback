@@ -39,7 +39,7 @@
                     <p class="lead gsap-animate">Explore our comprehensive service offerings and discover how we can support
                         your business goals.</p>
 
-                    <!-- FIXED: Added missing servicesGrid container -->
+
 
                     <div class="row g-4" id="servicesGrid">
 
@@ -137,7 +137,6 @@
         </div>
     </section>
     </main>
-    </div>
     @include('new.layouts.contactusform')
 @endsection
 
