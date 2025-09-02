@@ -10,6 +10,7 @@ class EventController extends Controller
 {
     public function index(){
         $events=DB::table('events')->where('status', 'active')->get();
-        return view('new.event', compact('events'));
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','events')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.event', compact('events','jumbotrons'));
     }
 }

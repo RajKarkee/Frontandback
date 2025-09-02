@@ -10,10 +10,14 @@
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Blog Hero Section -->
             <section class="blog-hero-section">
-                <div class="blog-hero-content gsap-animate">
-                    <h1>Blog Articles</h1>
-                    <p>Read our latest blog posts covering industry trends, regulatory updates, and business insights.</p>
-                </div>
+                @if ($jumbotrons->isNotEmpty())
+                    @foreach ($jumbotrons as $jumbotron)
+                        <div class="blog-hero-content gsap-animate">
+                            <h1>{{ $jumbotron->title }}</h1>
+                            <p>{{ $jumbotron->subtitle }}</p>
+                        </div>
+                    @endforeach
+                @endif
             </section>
 
             <!-- Blog Articles Section -->
@@ -26,7 +30,8 @@
                             <div class="blog-card">
                                 <div class="content">
                                     <h3>Navigating Tax Reforms in 2025</h3>
-                                    <p>Explore the latest tax regulatory changes and how they impact your business strategy.</p>
+                                    <p>Explore the latest tax regulatory changes and how they impact your business strategy.
+                                    </p>
                                     <a href="#read-more" class="btn-blog">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -57,14 +62,17 @@
             <section class="contribute-section" id="contribute">
                 <div class="section-container">
                     <h2 class="gsap-animate">Share Your Expertise</h2>
-                    <p class="lead gsap-animate">Are you an industry expert with valuable insights to share? We welcome guest contributions from accounting professionals, business leaders, and industry specialists. Join our community of thought leaders and help shape the conversation.</p>
+                    <p class="lead gsap-animate">Are you an industry expert with valuable insights to share? We welcome
+                        guest contributions from accounting professionals, business leaders, and industry specialists. Join
+                        our community of thought leaders and help shape the conversation.</p>
                     <div class="row g-4">
                         <div class="col-12 col-md-6 col-lg-4 gsap-animate">
                             <div class="contribute-card">
                                 <div class="content">
                                     <h3>Write for Us</h3>
                                     <p>Share your expertise through guest articles and thought leadership pieces.</p>
-                                    <a href="#contact" class="btn-contribute">Submit Article <i class="fas fa-arrow-right"></i></a>
+                                    <a href="#contact" class="btn-contribute">Submit Article <i
+                                            class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +81,8 @@
                                 <div class="content">
                                     <h3>Expert Interviews</h3>
                                     <p>Participate in interviews and panel discussions on industry topics.</p>
-                                    <a href="#contact" class="btn-contribute">Join Discussion <i class="fas fa-arrow-right"></i></a>
+                                    <a href="#contact" class="btn-contribute">Join Discussion <i
+                                            class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +91,8 @@
                                 <div class="content">
                                     <h3>Case Studies</h3>
                                     <p>Contribute real-world case studies and success stories from your experience.</p>
-                                    <a href="#contact" class="btn-contribute">Share Story <i class="fas fa-arrow-right"></i></a>
+                                    <a href="#contact" class="btn-contribute">Share Story <i
+                                            class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +104,8 @@
             <section class="cta-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Get in Touch</h2>
-                    <p class="lead gsap-animate">Ready to contribute or learn more? Contact us to join our community of thought leaders.</p>
+                    <p class="lead gsap-animate">Ready to contribute or learn more? Contact us to join our community of
+                        thought leaders.</p>
                     <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate" data-delay="0.2">
                         <a href="#contact" class="btn-cta-filled">Contact Us <i class="fas fa-arrow-right"></i></a>
                     </div>
@@ -102,7 +113,7 @@
             </section>
         </main>
     </div>
-     @include('new.layouts.contactusform')
+    @include('new.layouts.contactusform')
 @endsection
 
 @section('scripts')
@@ -114,7 +125,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Card Hover Animation
             $('.blog-card, .contribute-card').on('mouseenter', function() {
                 gsap.to(this, {
@@ -149,7 +160,7 @@
         });
 
         // GSAP Animations
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             gsap.registerPlugin(ScrollTrigger);
 
             // Hero Parallax
@@ -167,22 +178,22 @@
             // Section and Card Reveal
             gsap.utils.toArray('.gsap-animate').forEach((el, index) => {
                 const delay = parseFloat(el.getAttribute('data-delay')) || (index * 0.1);
-                gsap.fromTo(el,
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        delay,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: el,
-                            start: 'top 80%',
-                            once: true,
-                            invalidateOnRefresh: true
-                        }
+                gsap.fromTo(el, {
+                    opacity: 0,
+                    y: 30
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 80%',
+                        once: true,
+                        invalidateOnRefresh: true
                     }
-                );
+                });
             });
         });
     </script>

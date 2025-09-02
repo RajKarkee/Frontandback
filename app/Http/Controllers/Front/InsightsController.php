@@ -20,6 +20,7 @@ class InsightsController extends Controller
         ->where('is_active', '1')
         ->orderBy('published_at', 'desc')
         ->get();
-        return view('new.insights',compact('insights', 'insightLatest'));
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','insights')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.insights',compact('insights', 'insightLatest','jumbotrons'));
     }
 }

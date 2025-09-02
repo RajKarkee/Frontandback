@@ -1277,15 +1277,20 @@
         <main>
             <!-- Hero Section -->
             <section class="hero-section">
-                <div class="hero-content gsap-animate">
-                    <h1>Join Our Team</h1>
-                    <p>Build your career with us and be part of a dynamic team committed to excellence and professional
-                        growth.</p>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a href="#openings" class="btn-primary-filled"><i class="fas fa-briefcase"></i> View Openings</a>
-                        <a href="#hr-contact" class="btn-primary-outline"><i class="fas fa-envelope"></i> Contact HR</a>
-                    </div>
-                </div>
+                @if ($jumbotrons->isNotEmpty())
+                    @foreach ($jumbotrons as $jumbotron)
+                        <div class="hero-content gsap-animate">
+                            <h1>{{ $jumbotron->title }}</h1>
+                            <p>{{ $jumbotron->subtitle }}</p>
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <a href="{{ $jumbotron->button_link }}" class="btn-primary-filled"><i
+                                        class="fas fa-briefcase"></i> {{ $jumbotron->button_text }}</a>
+                                <a href="/contact" class="btn-primary-outline"><i class="fas fa-envelope"></i> Contact
+                                    HR</a>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </section>
 
             <!-- Why Choose Section -->

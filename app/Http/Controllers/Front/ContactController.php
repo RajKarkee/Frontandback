@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\ContactInformation;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -16,7 +17,8 @@ class ContactController extends Controller
     public function index()
     {
         $contactInfo = ContactInformation::getActive();
-        return view('new.contact', compact('contactInfo'));
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','contact')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.contact', compact('contactInfo','jumbotrons'));
     }
 
     public function store(Request $request)

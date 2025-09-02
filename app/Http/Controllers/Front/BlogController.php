@@ -11,6 +11,9 @@ class BlogController extends Controller
     public function index()
     {
         $blogs=DB::table('blogs')->where('status','active')->get();
-        return view('new.blogs',compact('blogs'));
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','blogs')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.blogs',compact('blogs','jumbotrons'));
+   
+
     }
 }

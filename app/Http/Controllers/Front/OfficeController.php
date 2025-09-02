@@ -12,7 +12,8 @@ class OfficeController extends Controller
     {
         $services = DB::table('services')->where('status', 'active')->orderBy('sort_order','asc')->paginate(6);
         $offices = DB::table('offices')->where('status', 'active')->get();
-        return view('new.offices', compact('offices','services'));
+        $jumbotrons=DB::table('jumbotrons')->where('page_slug','offices')->where('is_active',1)->orderBy('sort_order','asc')->get();
+        return view('new.offices', compact('offices','services','jumbotrons'));
         
     }
 }
