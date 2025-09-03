@@ -50,7 +50,6 @@ body, html {
     box-sizing: border-box;
 }
 
-/* Hero Section */
 .hero-section {
     position: relative;
     min-height: 80vh;
@@ -234,7 +233,6 @@ body, html {
     transform: scale(1.4);
 }
 
-/* Industry Expertise Section */
 .industries-section {
     padding: 4rem 0;
     background: linear-gradient(180deg, var(--lighter), var(--white));
@@ -268,13 +266,14 @@ body, html {
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 8px 25px var(--shadow);
-    min-height: 280px;
+    height: 360px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: var(--transition);
     flex: 1 1 300px;
     max-width: 400px;
+    box-sizing: border-box;
 }
 
 .industry-card:hover {
@@ -284,7 +283,8 @@ body, html {
 
 .industry-card h3 {
     font-size: clamp(1.5rem, 3vw, 1.8rem);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
 }
 
 .industry-card ul {
@@ -292,6 +292,8 @@ body, html {
     padding: 0;
     margin: 0;
     flex-grow: 1;
+    overflow: auto;
+    max-height: 180px;
 }
 
 .industry-card ul li {
@@ -319,7 +321,8 @@ body, html {
 .industry-card .service-icon {
     font-size: clamp(2rem, 5vw, 2.5rem);
     color: var(--secondary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
     transition: var(--transition);
 }
 
@@ -328,28 +331,27 @@ body, html {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-top: 1rem;
     color: var(--secondary);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
-    line-height: 1; /* Ensures consistent text/icon alignment */
+    flex-shrink: 0;
 }
 
 .industry-card .learn-more i {
-    font-size: 0.9em;
+    font-size: 0.95rem;
+    margin-left: 10px;
+    padding-top: 10px;
     transition: transform 0.3s;
-    line-height: inherit; /* Matches the text's line height */
-    display: inline-flex;
-    align-items: center; /* Ensures the icon is vertically centered */
 }
 
 .industry-card .learn-more:hover {
     color: var(--accent);
+    transform: translateX(8px);
 }
 
 .industry-card .learn-more:hover i {
-    transform: translateX(4px);
+    transform: translateX(6px);
 }
 
 .industry-card:hover i,
@@ -359,21 +361,20 @@ body, html {
 }
 
 .learn-more,
-.industry-card a {       
+.industry-card a {
     display: inline-flex;
-    align-items: center; 
-    gap: 5px;            
-    text-decoration: none; 
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
 }
 
 .learn-more i,
 .industry-card a i {
-    vertical-align: middle; 
-    font-size: 1em;      
-    transition: transform 0.3s; 
+    vertical-align: middle;
+    font-size: 1em;
+    transition: transform 0.3s;
 }
 
-/* Industry Insights Section */
 .insights-section {
     padding: 4rem 0;
     background: linear-gradient(180deg, var(--white), var(--lighter));
@@ -524,7 +525,6 @@ body, html {
     margin-bottom: 0;
 }
 
-/* Why Choose Section */
 .why-choose-section {
     padding: 4rem 0;
     background: linear-gradient(180deg, var(--white), var(--lighter));
@@ -595,7 +595,6 @@ body, html {
     color: var(--gray);
 }
 
-/* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
@@ -653,7 +652,6 @@ body, html {
     cursor: not-allowed;
 }
 
-
 .gsap-animate {
     opacity: 0;
     transform: translateY(40px);
@@ -663,8 +661,6 @@ body, html {
     opacity: 1;
     transform: translateY(0);
 }
-
-
 
 @media (min-width: 1200px) {
     .section-container {
@@ -782,9 +778,12 @@ body, html {
         font-size: clamp(0.85rem, 2.2vw, 0.95rem);
     }
     .industry-card {
-        min-height: 300px;
-        flex: 1 1 100%;
+        height: 320px;
         max-width: 100%;
+        flex: 1 1 100%;
+    }
+    .industry-card ul {
+        max-height: 160px;
     }
     .industry-card h3 {
         font-size: clamp(1.4rem, 2.8vw, 1.6rem);
@@ -878,10 +877,6 @@ body, html {
         padding: 0.5rem 1.2rem;
         max-width: 200px;
     }
-    .section-container {
-        padding: 0 0.5rem;
-        margin: 0 auto;
-    }
     .industries-section,
     .insights-section,
     .why-choose-section,
@@ -901,9 +896,12 @@ body, html {
         font-size: clamp(0.85rem, 2.2vw, 0.95rem);
     }
     .industry-card {
-        min-height: 260px;
-        flex: 1 1 100%;
+        height: 300px;
         max-width: 100%;
+        flex: 1 1 100%;
+    }
+    .industry-card ul {
+        max-height: 140px;
     }
     .industry-card h3 {
         font-size: clamp(1.3rem, 2.5vw, 1.5rem);
@@ -988,5 +986,13 @@ body, html {
     .section-container {
         padding: 0 0.3rem;
         margin: 0 auto;
+    }
+    .industry-card {
+        height: 280px;
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
+    .industry-card ul {
+        max-height: 120px;
     }
 }

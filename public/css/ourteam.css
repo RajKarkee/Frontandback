@@ -1,0 +1,457 @@
+:root {
+    --primary: #00213f;
+    --secondary: #0090d4;
+    --accent: #00b4f2;
+    --light: #f8fcff;
+    --lighter: #e8f0fc;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --shadow: rgba(0, 33, 63, 0.2);
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.rka-scope {
+    font-family: "Inter", sans-serif;
+    background: var(--light);
+    color: var(--gray);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.rka-scope main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.rka-scope h1,
+.rka-scope h2,
+.rka-scope h3,
+.rka-scope h4,
+.rka-scope h5,
+.rka-scope h6 {
+    font-family: "Lora", serif;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.2px;
+}
+
+.section-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 95vh;
+    overflow: hidden;
+    background: linear-gradient(
+            135deg,
+            rgba(0, 33, 63, 0.8),
+            rgba(0, 144, 212, 0.7)
+        ),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop")
+            center/cover;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, opacity;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.2),
+        transparent 70%
+    );
+    opacity: 0.4;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 900px;
+    width: 90%;
+    padding: 2.5rem;
+    color: var(--white);
+    background: rgba(0, 33, 63, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--white), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.btn-primary-filled,
+.btn-primary-outline {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.btn-primary-filled {
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary-filled:hover {
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 144, 212, 0.3);
+}
+
+.btn-primary-outline {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+}
+
+.btn-primary-outline:hover {
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 33, 63, 0.2);
+}
+
+.btn-primary-filled i,
+.btn-primary-outline i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.btn-primary-filled:hover i,
+.btn-primary-outline:hover i {
+    transform: translateX(4px);
+}
+
+/* Team Section */
+.team-section {
+    padding: clamp(2.5rem, 5vw, 5rem) 0;
+    background: var(--white);
+}
+
+.team-section h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.team-section .lead {
+    font-size: clamp(0.85rem, 2.5vw, 1.15rem);
+    font-weight: 400;
+    color: var(--gray);
+    max-width: clamp(600px, 80vw, 900px);
+    margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+    text-align: center;
+}
+
+.team-card {
+    background: var(--white);
+    border: 1px solid transparent;
+    border-image: linear-gradient(145deg, var(--lighter), var(--white)) 1;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px var(--shadow);
+    padding: clamp(0.9rem, 3vw, 2rem);
+    text-align: center;
+    min-height: clamp(270px, 40vw, 350px);
+    margin-bottom: clamp(0.8rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    will-change: transform, box-shadow;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 33, 63, 0.3);
+    background: linear-gradient(145deg, var(--lighter), var(--light));
+}
+
+.team-card img {
+    width: clamp(70px, 15vw, 120px);
+    height: clamp(70px, 15vw, 120px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto clamp(0.8rem, 2vw, 1.2rem);
+    transition: var(--transition);
+    border: 2px solid transparent;
+    will-change: transform, filter;
+}
+
+.team-card:hover img {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 33, 63, 0.2);
+}
+
+.team-card .content {
+    transition: var(--transition);
+}
+
+.team-card:hover .content {
+    transform: translateY(-5px);
+}
+
+.team-card h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    margin-bottom: clamp(0.5rem, 1.5vw, 0.8rem);
+    position: relative;
+    transition: var(--transition);
+}
+
+.team-card h3:hover {
+    color: var(--primary);
+}
+
+.team-card h3::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gray);
+    transition: width 0.3s ease;
+}
+
+.team-card h3:hover::after {
+    width: 80%;
+}
+
+.team-card .role {
+    font-size: clamp(0.85rem, 2vw, 1.25rem);
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: clamp(0.6rem, 1.5vw, 1rem);
+}
+
+.team-card p {
+    font-size: clamp(0.8rem, 2vw, 1.05rem);
+    color: var(--gray);
+    margin-bottom: clamp(0.8rem, 2vw, 1.2rem);
+    flex-grow: 1;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 1600px) {
+    .section-container {
+        max-width: 1400px;
+    }
+    .hero-content {
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: 80vh;
+    }
+    .hero-content {
+        width: 80%;
+        margin-left: 5rem;
+        margin-top: 3rem;
+    }
+    .team-section {
+        padding: clamp(2rem, 4vw, 3.5rem) 0;
+    }
+    .team-card {
+        min-height: clamp(250px, 38vw, 330px);
+        padding: clamp(0.8rem, 2.5vw, 1.6rem);
+        margin-bottom: clamp(0.7rem, 2.5vw, 1.5rem);
+    }
+    .row {
+        --bs-gutter-x: 1.5rem; /* g-7 equivalent */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 70vh;
+    }
+    .hero-content {
+        padding: 1.5rem;
+        margin-left: 2rem;
+        margin-top: 2.5rem;
+        width: 85%;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+    }
+    .hero-content p {
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.6rem 1.5rem;
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+        max-width: 220px;
+    }
+    .team-section {
+        padding: clamp(1.8rem, 3.5vw, 3rem) 0;
+    }
+    .team-card {
+        min-height: clamp(230px, 36vw, 310px);
+        padding: clamp(0.7rem, 2.2vw, 1.4rem);
+        margin-bottom: clamp(0.6rem, 2vw, 1.2rem);
+    }
+    .row {
+        --bs-gutter-x: 1.25rem; /* g-6 equivalent */
+    }
+    .section-container {
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 60vh;
+    }
+    .hero-content {
+        padding: 1rem;
+        margin-left: 1rem;
+        margin-top: 2rem;
+        width: 90%;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+    }
+    .hero-content p {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.5rem 1.2rem;
+        max-width: 200px;
+    }
+    .team-section {
+        padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+    }
+    .team-card {
+        min-height: clamp(210px, 34vw, 290px);
+        padding: clamp(0.6rem, 2vw, 1.1rem);
+        margin-bottom: clamp(0.5rem, 1.8vw, 1rem);
+    }
+    .row {
+        --bs-gutter-x: 1rem; /* g-5 equivalent */
+    }
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .section-container {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-section {
+        min-height: 60vh;
+    }
+    .hero-content {
+        padding: clamp(0.6rem, 2vw, 1rem);
+    }
+    .team-section {
+        padding: clamp(1.2rem, 2.5vw, 2rem) 0;
+    }
+    .team-card {
+        min-height: clamp(200px, 32vw, 270px);
+        padding: clamp(0.5rem, 1.8vw, 0.9rem);
+        margin-bottom: clamp(0.4rem, 1.5vw, 0.8rem);
+    }
+    .row {
+        --bs-gutter-x: 0.75rem; /* g-4 equivalent */
+    }
+    .section-container {
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero-section {
+        min-height: 50vh;
+    }
+    .hero-content {
+        padding: 0.8rem;
+        width: 90%;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.2rem, 3.8vw, 1.8rem);
+    }
+    .hero-content p {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+    }
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.4rem 1rem;
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        max-width: 180px;
+    }
+    .team-section {
+        padding: clamp(1rem, 2vw, 1.8rem) 0;
+    }
+    .team-section h2 {
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    }
+    .team-section .lead {
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+    }
+    .team-card {
+        min-height: clamp(190px, 30vw, 250px);
+        padding: clamp(0.4rem, 1.5vw, 0.8rem);
+        margin-bottom: clamp(0.3rem, 1.2vw, 0.6rem);
+    }
+    .row {
+        --bs-gutter-x: 0.5rem; /* g-3 equivalent */
+    }
+    .team-card img {
+        width: clamp(60px, 14vw, 70px);
+        height: clamp(60px, 14vw, 70px);
+    }
+    .team-card h3 {
+        font-size: clamp(1.2rem, 2.2vw, 1.3rem);
+    }
+    .team-card .role {
+        font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+    }
+    .team-card p {
+        font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    }
+    .section-container {
+        padding: 0 6px;
+    }
+}
