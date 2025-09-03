@@ -69,8 +69,8 @@
                                     <div class="service-card">
                                         <h3>{{ $service->title }}</h3>
                                         <p>{{ $service->description }}</p>
-                                        <a href="#" class="learn-more">Learn More <i
-                                                class="fas fa-arrow-right"></i></a>
+                                        <a href="{{ route('serviceDetails', $service->id) }}" class="learn-more">Learn More
+                                            <i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             @endforeach
@@ -146,9 +146,9 @@
                             <p>Join forces with Chartered Insights to unlock expert guidance and transformative solutions
                                 tailored to your needs.</p>
                             <div class="cta-buttons">
-                                <a href="#" class="btn-primary-filled">Get Started Now <i
+                                <a href="/contact" class="btn-primary-filled">Get Started Now <i
                                         class="fas fa-arrow-right"></i></a>
-                                <a href="#" class="btn-primary-outline">Discover Our Services <i
+                                <a href="/services" class="btn-primary-outline">Discover Our Services <i
                                         class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ class Insight extends Model
         'featured_image',
         'category',
         'category_slug',
+        'type',
         'author',
         'published_at',
         'status',
