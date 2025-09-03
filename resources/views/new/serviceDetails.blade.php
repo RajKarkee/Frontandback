@@ -16,7 +16,8 @@
                         <p class="lead">{{ $service->description }}</p>
                         <div class="d-flex flex-wrap justify-content-center gap-3">
                             <a href="/contact" class="btn-primary-filled">Get Started <i class="fas fa-arrow-right"></i></a>
-                            <a href="/services" class="btn-primary-outline">Back to Services <i class="fas fa-arrow-left"></i></a>
+                            <a href="/services" class="btn-primary-outline">Back to Services <i
+                                    class="fas fa-arrow-left"></i></a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 detail-content">
                                         <h2>Service Overview</h2>
-                                        <p>{{ $service->content ?? $service->description }}</p>
+                                        <p>{{ $service->content ?? $service->detailed_description }}</p>
                                         @if (isset($service->key_features) && is_array($service->key_features))
                                             <h3>Key Features</h3>
                                             <ul>
@@ -50,13 +51,11 @@
                                                 </ul>
                                             @endforeach
                                         @endif
-                                        <h3>Service Details</h3>
+                                        <h3>Service Features</h3>
                                         <ul class="no-bullets">
-                                            <li><strong>Category:</strong> {{ $service->category ?? 'N/A' }}</li>
-                                            <li><strong>Starting Price:</strong> {{ $service->starting_price ?? 'Contact for quote' }}</li>
-                                            <li><strong>Duration:</strong> {{ $service->duration ?? 'Varies' }}</li>
-                                            <li><strong>Created:</strong> {{ $service->created_at ?? 'N/A' }}</li>
-                                            <li><strong>Updated:</strong> {{ $service->updated_at ?? 'N/A' }}</li>
+                                            @foreach ($service->features as $index => $feature)
+                                                <li>{{ $feature }}</li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="col-lg-6">
@@ -78,7 +77,8 @@
                         <p>Contact us today to learn how {{ $service->title }} can drive your success.</p>
                         <div class="cta-buttons">
                             <a href="/contact" class="btn-primary-filled">Contact Us <i class="fas fa-arrow-right"></i></a>
-                            <a href="/services" class="btn-primary-outline">Explore More Services <i class="fas fa-arrow-right"></i></a>
+                            <a href="/services" class="btn-primary-outline">Explore More Services <i
+                                    class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

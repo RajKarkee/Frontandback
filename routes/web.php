@@ -377,6 +377,7 @@ Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
 
 
 //temp routes
+//singlepge routes
 
 Route::get('/industryDetails/{id}', [FrontIndustryController::class, 'show'])->name('industryDetails');
 Route::get('/serviceDetails/{id}', [FrontServiceController::class, 'show'])->name('serviceDetails');
