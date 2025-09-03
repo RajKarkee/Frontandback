@@ -62,9 +62,9 @@
                                             @endforeach
                                         </ul>
                                     @endif
-                                        <a href="{{ route('industryDetails', $industry->id) }}" class="learn-more">
-    Learn More <i class="fas fa-arrow-right"></i>
-</a>
+                                    <a href="{{ route('industryDetails', $industry->id) }}" class="learn-more">
+                                        Learn More <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -195,7 +195,7 @@
                         <a href="#contact" class="btn-cta-filled">
                             Schedule a Consultation <i class="fas fa-arrow-right"></i>
                         </a>
-                        <a href="#services" class="btn-cta-outline">
+                        <a href="/services" class="btn-cta-outline">
                             Explore Our Services <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
