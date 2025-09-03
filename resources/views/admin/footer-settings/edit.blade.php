@@ -48,6 +48,28 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="company_tagline" class="form-label">Company Tagline</label>
+                                <input type="text" class="form-control @error('company_tagline') is-invalid @enderror"
+                                    id="company_tagline" name="company_tagline"
+                                    value="{{ old('company_tagline', $footerSetting->company_tagline) }}"
+                                    placeholder="e.g., Chartered Accountants">
+                                @error('company_tagline')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="company_slogan" class="form-label">Company Slogan</label>
+                                <input type="text" class="form-control @error('company_slogan') is-invalid @enderror"
+                                    id="company_slogan" name="company_slogan"
+                                    value="{{ old('company_slogan', $footerSetting->company_slogan) }}"
+                                    placeholder="e.g., Empowering Wealth Creation">
+                                @error('company_slogan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="address" class="form-label">Company Address</label>
                                 <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="3"
                                     placeholder="Enter company address">{{ old('address', $footerSetting->address) }}</textarea>
@@ -107,8 +129,8 @@
                                     <i class="fab fa-facebook text-primary me-2"></i>Facebook
                                 </label>
                                 <input type="url"
-                                    class="form-control @error('social_links.facebook') is-invalid @enderror" id="facebook"
-                                    name="social_links[facebook]"
+                                    class="form-control @error('social_links.facebook') is-invalid @enderror"
+                                    id="facebook" name="social_links[facebook]"
                                     value="{{ old('social_links.facebook', $footerSetting->social_links['facebook'] ?? '') }}"
                                     placeholder="https://facebook.com/yourpage">
                                 @error('social_links.facebook')
@@ -121,8 +143,8 @@
                                     <i class="fab fa-twitter text-info me-2"></i>Twitter
                                 </label>
                                 <input type="url"
-                                    class="form-control @error('social_links.twitter') is-invalid @enderror" id="twitter"
-                                    name="social_links[twitter]"
+                                    class="form-control @error('social_links.twitter') is-invalid @enderror"
+                                    id="twitter" name="social_links[twitter]"
                                     value="{{ old('social_links.twitter', $footerSetting->social_links['twitter'] ?? '') }}"
                                     placeholder="https://twitter.com/yourprofile">
                                 @error('social_links.twitter')

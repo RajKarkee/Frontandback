@@ -34,11 +34,13 @@
                         <h1 class="text-white font-lora font-bold text-xl">
                             {{ $footerSetting ? $footerSetting->company_name : 'Roshan Kumar & Associates' }}
                         </h1>
-                        <p class="text-white/80 text-sm font-roboto">Chartered Accountants</p>
+                        <p class="text-white/80 text-sm font-roboto">
+                            {{ $footerSetting ? $footerSetting->company_tagline : 'Chartered Accountants' }}
+                        </p>
                     </div>
                 </div>
                 <div class="slogan text-white font-roboto text-sm font-medium hidden md:block">
-                    Empowering Wealth Creation
+                    {{ $footerSetting ? $footerSetting->company_slogan : 'Empowering Wealth Creation' }}
                 </div>
                 <div class="flex items-center space-x-3">
                     <div class="search-bar">

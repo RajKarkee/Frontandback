@@ -11,6 +11,8 @@ class FooterSetting extends Model
 
     protected $fillable = [
         'company_name',
+        'company_tagline',
+        'company_slogan',
         'address',
         'phone',
         'email',
@@ -32,7 +34,9 @@ class FooterSetting extends Model
     public static function getInstance()
     {
         return static::first() ?: static::create([
-            'company_name' => 'Chartered Insights',
+            'company_name' => 'Roshan Kumar & Associates',
+            'company_tagline' => 'Chartered Accountants',
+            'company_slogan' => 'Empowering Wealth Creation',
             'address' => 'Kathmandu, Nepal',
             'phone' => '+977-1-XXXXXXX',
             'email' => 'info@charteredinsights.com',

@@ -24,6 +24,8 @@ class FooterSettingAdminController extends Controller
     {
         $request->validate([
             'company_name' => 'required|string|max:255',
+            'company_tagline' => 'nullable|string|max:255',
+            'company_slogan' => 'nullable|string|max:255',
             'address' => 'nullable|string',
             'phone' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
@@ -61,6 +63,8 @@ class FooterSettingAdminController extends Controller
 
         $footerSetting->update([
             'company_name' => $request->company_name,
+            'company_tagline' => $request->company_tagline,
+            'company_slogan' => $request->company_slogan,
             'address' => $request->address,
             'phone' => $request->phone,
             'email' => $request->email,
