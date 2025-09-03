@@ -44,6 +44,10 @@ use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
 use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\BlogController as FrontBlogController;
 use App\Http\Controllers\Front\CareerController as FrontCareerController;
+
+
+
+
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -336,6 +340,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
 // Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
+Route::get('/ourteam', function () {
+    return view('new.ourteam');
+})->name('ourteam');
 
 // Route::get('/insights', [PageController::class, 'insights'])->name('insights');
 Route::get('/insights/category/{categorySlug}', [PageController::class, 'insightsByCategory'])->name('insights.category');
@@ -373,6 +380,9 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 Route::post('/newsletter/unsubscribe', [App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
 // Dynamic page routes (should be last)
+
+
+
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
 
 
@@ -381,4 +391,5 @@ Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
 
 Route::get('/industryDetails/{id}', [FrontIndustryController::class, 'show'])->name('industryDetails');
 Route::get('/serviceDetails/{id}', [FrontServiceController::class, 'show'])->name('serviceDetails');
+
 
