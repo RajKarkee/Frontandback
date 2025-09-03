@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Industry;
 
 
 class IndustryController extends Controller
@@ -57,19 +58,8 @@ class IndustryController extends Controller
     public function show($id)
 {
     
-    $industry = (object)[
-        'id' => $id,
-        'title' => ' ',
-        'description' => 'This is a static description for the industry.',
-        'content' => 'Static content about the industry goes here.',
-        'category' => 'Static Category',
-        'status' => 'active',
-        'created_at' => now(),
-        'updated_at' => now(),
-        'meta_title' => 'Static Meta Title',
-        'meta_description' => 'Static Meta Description',
-        'features' => json_encode(['Feature 1', 'Feature 2', 'Feature 3']),
-    ];
+    $industry = Industry::findorFail($id);
+
     return view('new.industryDetails', compact('industry'));
 }
 }
