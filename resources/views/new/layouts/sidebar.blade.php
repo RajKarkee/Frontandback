@@ -44,8 +44,20 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <div class="search-bar">
-                        <input type="text" placeholder="Search..." oninput="handleSearch(this.value)">
-                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search..." oninput="handleLiveSearch(this.value)"
+                            onkeypress="handleSearchKeyPress(event, this.value)" id="search-input"
+                            onfocus="showSearchDropdown()" onblur="hideSearchDropdown()">
+                        <i class="fas fa-search" onclick="performSearchFromIcon()"></i>
+
+                        <!-- Live Search Dropdown -->
+                        <div id="search-dropdown" class="search-dropdown" style="display: none;">
+                            <div id="search-dropdown-content">
+                                <div class="search-placeholder">
+                                    <i class="fas fa-search"></i>
+                                    <span>Start typing to search...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
                     <button id="menu-btn" class="menu-btn hidden text-white hover:bg-white/10 p-2 rounded"
@@ -59,7 +71,24 @@
             </div>
         </div>
         <div class="mobile-search" id="mobile-search">
-            <input type="text" placeholder="Search..." oninput="handleSearch(this.value)">
+            <div class="input-group">
+                <input type="text" placeholder="Search..." oninput="handleLiveSearch(this.value)"
+                    onkeypress="handleSearchKeyPress(event, this.value)" id="mobile-search-input"
+                    onfocus="showMobileSearchDropdown()" onblur="hideMobileSearchDropdown()">
+                <button class="btn btn-primary btn-sm" type="button" onclick="performMobileSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Live Search Dropdown -->
+            <div id="mobile-search-dropdown" class="mobile-search-dropdown" style="display: none;">
+                <div id="mobile-search-dropdown-content">
+                    <div class="search-placeholder">
+                        <i class="fas fa-search"></i>
+                        <span>Start typing to search...</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -211,6 +240,46 @@
         @stack('styles')
         @include('new.layouts.footer')
     </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">
+                        <i class="fas fa-search me-2"></i>Search Results
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-form mb-3">
+                        <div class="input-group">
+                            <input type="text" id="modal-search-input" class="form-control"
+                                placeholder="Search for services, industries, insights..."
+                                onkeypress="handleModalSearchKeyPress(event)">
+                            <button class="btn btn-primary" type="button" onclick="performModalSearch()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="search-loading" class="text-center py-4" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Searching...</p>
+                    </div>
+
+                    <div id="search-results-container">
+                        <div class="text-center py-4 text-muted">
+                            <i class="fas fa-search fa-2x mb-3"></i>
+                            <p>Enter a search term to find content</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -228,8 +297,385 @@
             });
         }
 
-        function handleSearch(query) {
-            console.log('Search query:', query);
+        function performSearchFromIcon() {
+            const searchInput = document.getElementById('search-input');
+            const query = searchInput.value.trim();
+            if (query.length >= 1) {
+                openSearchModal(query);
+            } else {
+                // Focus the input to show placeholder
+                searchInput.focus();
+            }
+        }
+
+        function handleSearchKeyPress(event, query) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                if (query.length >= 1) {
+                    hideAllSearchDropdowns();
+                    openSearchModal(query);
+                }
+            } else if (event.key === 'Escape') {
+                hideAllSearchDropdowns();
+                event.target.blur();
+            }
+        }
+
+        function openSearchModal(query = '') {
+            const modal = new bootstrap.Modal(document.getElementById('searchModal'));
+            const modalSearchInput = document.getElementById('modal-search-input');
+
+            if (query) {
+                modalSearchInput.value = query;
+                modal.show();
+                setTimeout(() => performModalSearch(), 300);
+            } else {
+                modal.show();
+                setTimeout(() => modalSearchInput.focus(), 300);
+            }
+        }
+
+        function handleModalSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                performModalSearch();
+            }
+        }
+
+        function performModalSearch() {
+            const query = document.getElementById('modal-search-input').value.trim();
+            const loadingDiv = document.getElementById('search-loading');
+            const resultsContainer = document.getElementById('search-results-container');
+
+            if (query.length < 1) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center py-4 text-muted">
+                        <i class="fas fa-search fa-2x mb-3"></i>
+                        <p>Enter a search term to find content</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Show loading
+            loadingDiv.style.display = 'block';
+            resultsContainer.innerHTML = '';
+
+            fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    loadingDiv.style.display = 'none';
+                    displayModalResults(data, query);
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    loadingDiv.style.display = 'none';
+                    resultsContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            An error occurred while searching. Please try again.
+                        </div>
+                    `;
+                });
+        }
+
+        function displayModalResults(data, query) {
+            const resultsContainer = document.getElementById('search-results-container');
+
+            if (!data.success || data.results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-search fa-2x text-muted mb-3"></i>
+                        <h5>No results found for "${query}"</h5>
+                        <p class="text-muted">Try different keywords or browse our categories below:</p>
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                            <a href="/services" class="btn btn-outline-primary btn-sm">Services</a>
+                            <a href="/industries" class="btn btn-outline-primary btn-sm">Industries</a>
+                            <a href="/insights" class="btn btn-outline-primary btn-sm">Insights</a>
+                            <a href="/blogs" class="btn btn-outline-primary btn-sm">Blogs</a>
+                            <a href="/events" class="btn btn-outline-primary btn-sm">Events</a>
+                            <a href="/careers" class="btn btn-outline-primary btn-sm">Careers</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group results by category
+            const groupedResults = {};
+            data.results.forEach(result => {
+                if (!groupedResults[result.category]) {
+                    groupedResults[result.category] = [];
+                }
+                groupedResults[result.category].push(result);
+            });
+
+            let html = `<div class="search-stats mb-3">
+                <small class="text-muted">Found ${data.total_results} results for "${query}"</small>
+            </div>`;
+
+            // Display results by category
+            Object.keys(groupedResults).forEach(category => {
+                const categoryResults = groupedResults[category];
+                const categoryIcon = getCategoryIcon(category);
+
+                html += `
+                    <div class="category-section mb-4">
+                        <h6 class="category-header">
+                            <i class="${categoryIcon} me-2"></i>${category}
+                            <span class="badge bg-primary ms-2">${categoryResults.length}</span>
+                        </h6>
+                        <div class="category-results">
+                `;
+
+                categoryResults.forEach(result => {
+                    html += `
+                        <div class="search-result-item">
+                            <div class="d-flex align-items-start">
+                                <i class="${result.icon} me-3 mt-1 text-primary"></i>
+                                <div class="flex-grow-1">
+                                    <a href="${result.url}" class="result-title h6 mb-1" data-bs-dismiss="modal">${result.title}</a>
+                                    <p class="result-description mb-0 small text-muted">${result.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsContainer.innerHTML = html;
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'Services': 'fas fa-file-invoice-dollar',
+                'Industries': 'fas fa-industry',
+                'Insights': 'fas fa-lightbulb',
+                'Blogs': 'fas fa-blog',
+                'Events': 'fas fa-calendar',
+                'Careers': 'fas fa-briefcase'
+            };
+            return icons[category] || 'fas fa-circle';
+        }
+
+        function performMobileSearch() {
+            const mobileSearchInput = document.getElementById('mobile-search-input');
+            const query = mobileSearchInput.value.trim();
+            if (query.length >= 1) {
+                openSearchModal(query);
+                // Hide mobile search
+                toggleSearch();
+            }
+        }
+
+        let searchTimeout;
+        let currentSearchQuery = '';
+
+        function handleLiveSearch(query) {
+            currentSearchQuery = query;
+
+            // Clear previous timeout
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+            }
+
+            if (query.length === 0) {
+                hideAllSearchDropdowns();
+                return;
+            }
+
+            if (query.length >= 1) {
+                // Show dropdown immediately
+                showSearchDropdown();
+                showMobileSearchDropdown();
+
+                // Add small delay for performance
+                searchTimeout = setTimeout(() => {
+                    performLiveSearch(query);
+                }, 150);
+            }
+        }
+
+        function performLiveSearch(query) {
+            const dropdownContent = document.getElementById('search-dropdown-content');
+            const mobileDropdownContent = document.getElementById('mobile-search-dropdown-content');
+
+            // Show loading
+            const loadingHtml = `
+                <div class="search-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Searching...</span>
+                </div>
+            `;
+
+            dropdownContent.innerHTML = loadingHtml;
+            mobileDropdownContent.innerHTML = loadingHtml;
+
+            fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Search response:', data);
+                    displayLiveResults(data, query);
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    const errorHtml = `
+                        <div class="search-error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Search error: ${error.message}</span>
+                        </div>
+                    `;
+                    dropdownContent.innerHTML = errorHtml;
+                    mobileDropdownContent.innerHTML = errorHtml;
+                });
+        }
+
+        function displayLiveResults(data, query) {
+            const dropdownContent = document.getElementById('search-dropdown-content');
+            const mobileDropdownContent = document.getElementById('mobile-search-dropdown-content');
+
+            if (!data.success || data.results.length === 0) {
+                const noResultsHtml = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <span>No results for "${query}"</span>
+                    </div>
+                `;
+                dropdownContent.innerHTML = noResultsHtml;
+                mobileDropdownContent.innerHTML = noResultsHtml;
+                return;
+            }
+
+            // Group results by category
+            const groupedResults = {};
+            data.results.forEach(result => {
+                if (!groupedResults[result.category]) {
+                    groupedResults[result.category] = [];
+                }
+                groupedResults[result.category].push(result);
+            });
+
+            let html = '';
+
+            // Display results by category with highlighted matching text
+            Object.keys(groupedResults).forEach(category => {
+                const categoryResults = groupedResults[category];
+                const categoryIcon = getCategoryIcon(category);
+
+                html += `
+                    <div class="dropdown-category">
+                        <div class="category-title">
+                            <i class="${categoryIcon}"></i>
+                            <span>${category}</span>
+                            <span class="result-count">${categoryResults.length}</span>
+                        </div>
+                        <div class="category-items">
+                `;
+
+                // Limit results per category for dropdown
+                const limitedResults = categoryResults.slice(0, 3);
+
+                limitedResults.forEach(result => {
+                    const highlightedTitle = highlightMatchingText(result.title, query);
+                    const highlightedDesc = highlightMatchingText(result.description, query);
+
+                    html += `
+                        <div class="dropdown-item" onclick="navigateToResult('${result.url}')">
+                            <div class="item-content">
+                                <div class="item-title">${highlightedTitle}</div>
+                                <div class="item-description">${highlightedDesc}</div>
+                            </div>
+                            <i class="${result.icon} item-icon"></i>
+                        </div>
+                    `;
+                });
+
+                if (categoryResults.length > 3) {
+                    html += `
+                        <div class="dropdown-item more-results" onclick="openSearchModal('${query}')">
+                            <div class="item-content">
+                                <div class="item-title">View all ${categoryResults.length} ${category.toLowerCase()} results</div>
+                            </div>
+                            <i class="fas fa-arrow-right item-icon"></i>
+                        </div>
+                    `;
+                }
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            dropdownContent.innerHTML = html;
+            mobileDropdownContent.innerHTML = html;
+        }
+
+        function highlightMatchingText(text, query) {
+            if (!text || !query) return text;
+
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        function navigateToResult(url) {
+            hideAllSearchDropdowns();
+            window.location.href = url;
+        }
+
+        function showSearchDropdown() {
+            const dropdown = document.getElementById('search-dropdown');
+            if (dropdown && currentSearchQuery.length >= 1) {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function hideSearchDropdown() {
+            setTimeout(() => {
+                const dropdown = document.getElementById('search-dropdown');
+                if (dropdown) {
+                    dropdown.style.display = 'none';
+                }
+            }, 200);
+        }
+
+        function showMobileSearchDropdown() {
+            const dropdown = document.getElementById('mobile-search-dropdown');
+            if (dropdown && currentSearchQuery.length >= 1) {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function hideMobileSearchDropdown() {
+            setTimeout(() => {
+                const dropdown = document.getElementById('mobile-search-dropdown');
+                if (dropdown) {
+                    dropdown.style.display = 'none';
+                }
+            }, 200);
+        }
+
+        function hideAllSearchDropdowns() {
+            const dropdown = document.getElementById('search-dropdown');
+            const mobileDropdown = document.getElementById('mobile-search-dropdown');
+
+            if (dropdown) dropdown.style.display = 'none';
+            if (mobileDropdown) mobileDropdown.style.display = 'none';
+        }
+
+        function hideSearchSuggestions() {
+            // Function to hide search suggestions if implemented
+            console.log('Hiding search suggestions');
         }
 
         function toggleMenu() {
@@ -473,7 +919,21 @@
             const menuBtn = document.getElementById('menu-btn');
             const previewPanel = document.getElementById('page-preview');
             const overlay = document.getElementById('overlay');
+            const searchDropdown = document.getElementById('search-dropdown');
+            const mobileSearchDropdown = document.getElementById('mobile-search-dropdown');
+            const searchInput = document.getElementById('search-input');
+            const mobileSearchInput = document.getElementById('mobile-search-input');
             const isMobile = window.innerWidth <= 1024;
+
+            // Handle search dropdown clicks
+            if (searchDropdown && !searchInput.contains(event.target) && !searchDropdown.contains(event.target)) {
+                hideSearchDropdown();
+            }
+
+            if (mobileSearchDropdown && !mobileSearchInput.contains(event.target) && !mobileSearchDropdown.contains(event
+                    .target)) {
+                hideMobileSearchDropdown();
+            }
 
             if (isMobile && sidebar.classList.contains('active')) {
                 if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
@@ -513,8 +973,354 @@
                 ease: 'power3.out'
             });
             document.addEventListener('click', handleOutsideClick);
+
+            // Add search shortcut (Ctrl+K or Cmd+K)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    openSearchModal();
+                }
+            });
+
+            // Add test function for debugging
+            window.testSearch = function(query) {
+                console.log('Testing search for:', query);
+                fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Search result:', data);
+                    })
+                    .catch(error => {
+                        console.error('Search error:', error);
+                    });
+            };
         });
     </script>
+
+    <style>
+        /* Live Search Dropdown Styles */
+        .search-dropdown,
+        .mobile-search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 5px;
+        }
+
+        .search-dropdown {
+            width: 100%;
+        }
+
+        .mobile-search-dropdown {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .search-placeholder,
+        .search-loading,
+        .search-error,
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .search-loading i {
+            margin-right: 8px;
+            color: #007bff;
+        }
+
+        .search-error i {
+            margin-right: 8px;
+            color: #dc3545;
+        }
+
+        .dropdown-category {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-category:last-child {
+            border-bottom: none;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px 8px 16px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .category-title i {
+            margin-right: 8px;
+            color: #007bff;
+            width: 16px;
+        }
+
+        .result-count {
+            margin-left: auto;
+            background: #007bff;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        .category-items {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f5f5f5;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item.more-results {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        .dropdown-item.more-results:hover {
+            background-color: #bbdefb;
+        }
+
+        .item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .item-icon {
+            margin-left: 12px;
+            color: #999;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-item:hover .item-icon {
+            color: #007bff;
+        }
+
+        /* Highlight matching text */
+        mark {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0 2px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+
+        /* Search bar positioning */
+        .search-bar {
+            position: relative;
+        }
+
+        .mobile-search {
+            position: relative;
+        }
+
+        /* Custom scrollbar for search results */
+        .search-dropdown::-webkit-scrollbar,
+        .mobile-search-dropdown::-webkit-scrollbar,
+        .category-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .search-dropdown::-webkit-scrollbar-track,
+        .mobile-search-dropdown::-webkit-scrollbar-track,
+        .category-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .search-dropdown::-webkit-scrollbar-thumb,
+        .mobile-search-dropdown::-webkit-scrollbar-thumb,
+        .category-items::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .search-dropdown::-webkit-scrollbar-thumb:hover,
+        .mobile-search-dropdown::-webkit-scrollbar-thumb:hover,
+        .category-items::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dropdown-item {
+                padding: 10px 12px;
+            }
+
+            .item-title {
+                font-size: 13px;
+            }
+
+            .item-description {
+                font-size: 11px;
+            }
+
+            .category-title {
+                padding: 10px 12px 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* Search Modal Styles */
+        .search-result-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s ease;
+            background: #f8f9fa;
+        }
+
+        .search-result-item:hover {
+            background: #e9ecef;
+            border-color: #007bff;
+            transform: translateX(4px);
+        }
+
+        .search-result-item .result-title {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+        }
+
+        .search-result-item .result-title:hover {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .search-result-item .result-description {
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .category-header {
+            color: #495057;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 12px;
+        }
+
+        .category-section {
+            border-left: 3px solid #007bff;
+            padding-left: 15px;
+            margin-left: 5px;
+        }
+
+        .category-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-stats {
+            padding: 8px 12px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            border-left: 4px solid #2196f3;
+        }
+
+        /* Custom scrollbar for category results */
+        .category-results::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .category-results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .category-results::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .category-results::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Modal enhancements */
+        .modal-dialog {
+            max-width: 600px;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .modal-dialog {
+                margin: 10px;
+                max-width: calc(100% - 20px);
+            }
+
+            .category-section {
+                border-left: 2px solid #007bff;
+                padding-left: 10px;
+                margin-left: 2px;
+            }
+        }
+    </style>
     @yield('scripts')
 </body>
 

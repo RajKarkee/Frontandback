@@ -40,10 +40,10 @@ use App\Http\Controllers\Front\AboutController as FrontAboutController;
 use App\Http\Controllers\Front\ContactController as FrontContactController;
 use App\Http\Controllers\Front\HomeController as FrontHomeController;
 use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
-//not finished
 use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\BlogController as FrontBlogController;
 use App\Http\Controllers\Front\CareerController as FrontCareerController;
+use App\Http\Controllers\Front\SearchController as FrontSearchController;
 
 
 
@@ -66,6 +66,10 @@ Route::post('/carrers/apply',[FrontCareerController::class,'apply'])->name('appl
 Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
 Route::get('/', [FrontHomeController::class, 'home'])->name('home');
 Route::get('/industries/all', [FrontIndustryController::class, 'getAll'])->name('industries.all');
+
+// Search Routes
+Route::get('/search', [FrontSearchController::class, 'searchPage'])->name('search.page');
+Route::get('/api/search', [FrontSearchController::class, 'search'])->name('search.api');
 
 
 
