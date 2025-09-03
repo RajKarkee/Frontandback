@@ -1,6 +1,14 @@
 @extends('new.layouts.sidebar')
 
 @section('styles')
+    <!-- SEO Meta Tags in Head -->
+    <title>Our Office Locations - Professional Accounting Services Across Nepal |
+        {{ env('APP_NAME', 'Charter Accountants') }}</title>
+    <meta name="description"
+        content="Visit our strategically located offices across Nepal for personalized accounting, audit, tax, and business advisory services. Find contact details, directions, and book appointments at our convenient locations.">
+    <meta name="keywords"
+        content="chartered accountants offices Nepal, accounting services locations, audit firm offices, tax consultation centers, business advisory locations, professional accounting Nepal, CA firm branches">
+
     <link rel="stylesheet" href="{{ asset('css/offices.css') }}">
     @include('new.layouts.links')
 @endsection
@@ -9,56 +17,80 @@
     <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Hero Section -->
-            <section class="hero-section">
+            <header class="hero-section">
                 @if ($jumbotrons->isNotEmpty())
                     @foreach ($jumbotrons as $jumbotron)
                         <div class="hero-content gsap-animate">
-                            <h1>{{ $jumbotron->title }}
-                            </h1>
+                            <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>
-                            <div class="d-flex flex-wrap flex-column flex-md-row justify-content-center gap-3">
-                                <a href="/contact" class="btn-primary-filled">Contact Us <i
-                                        class="fas fa-arrow-right"></i></a>
-                                <a href="{{ $jumbotron->button_link }}"
-                                    class="btn-primary-outline">{{ $jumbotron->button_text }}<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
+                            <nav class="d-flex flex-wrap flex-column flex-md-row justify-content-center gap-3"
+                                aria-label="Hero actions">
+                                <a href="/contact" class="btn-primary-filled" title="Contact our accounting team">Contact Us
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="{{ $jumbotron->button_link }}" class="btn-primary-outline"
+                                    title="{{ $jumbotron->button_text }}">{{ $jumbotron->button_text }}<i
+                                        class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            </nav>
                         </div>
                     @endforeach
                 @endif
-            </section>
+            </header>
 
             <!-- Locations Section -->
-            <section class="locations-section" id="locations">
+            <!-- Locations Section -->
+            <section class="locations-section" id="locations" aria-labelledby="locations-heading">
                 <div class="section-container">
-                    <h2 class="gsap-animate">Our Locations</h2>
+                    <h2 id="locations-heading" class="gsap-animate">Our Office Locations</h2>
                     <p class="lead gsap-animate">With offices strategically located across Nepal, we're always close to our
-                        clients, providing personalized service and local expertise.</p>
+                        clients, providing personalized accounting, audit, tax, and business advisory services with local
+                        expertise.</p>
 
-                    <div class="row g-4">
+                    <div class="row g-4" role="list" aria-label="Office locations">
                         @foreach ($offices as $index => $office)
-                            <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}">
-                                <div class="office-card">
-                                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop"
-                                        class="office-image" alt="{{ $office->name }} office">
+                            <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}"
+                                role="listitem">
+                                <article class="office-card" itemscope itemtype="https://schema.org/LocalBusiness">
+                                    @if ($office->image)
+                                        <img src="{{ asset('storage/' . $office->image) }}" class="office-image"
+                                            alt="{{ $office->name }} office building" itemprop="image"
+                                            loading="{{ $index < 3 ? 'eager' : 'lazy' }}">
+                                    @else
+                                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop"
+                                            class="office-image" alt="{{ $office->name }} office building"
+                                            loading="{{ $index < 3 ? 'eager' : 'lazy' }}">
+                                    @endif
                                     <div class="content">
-                                        <span
-                                            class="office-badge">{{ ucwords(str_replace('_', ' ', $office->type)) }}</span>
-                                        <h3>{{ $office->name }}</h3>
-                                        <div class="details">
-                                            <p><i class="fas fa-map-marker-alt"></i> {{ $office->address }}</p>
-                                            <p><i class="fas fa-phone"></i> {{ $office->phone }}</p>
-                                            <p><i class="fas fa-envelope"></i> {{ $office->email }}</p>
-                                            <p><i class="fas fa-clock"></i> {{ $office->office_hours }}</p>
+                                        <span class="office-badge"
+                                            itemprop="additionalType">{{ ucwords(str_replace('_', ' ', $office->type)) }}</span>
+                                        <h3 itemprop="name">{{ $office->name }}</h3>
+                                        <div class="details" itemprop="address" itemscope
+                                            itemtype="https://schema.org/PostalAddress">
+                                            <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                                <span itemprop="streetAddress">{{ $office->address }}</span>
+                                            </p>
+                                            <p><i class="fas fa-phone" aria-hidden="true"></i>
+                                                <a href="tel:{{ $office->phone }}"
+                                                    itemprop="telephone">{{ $office->phone }}</a>
+                                            </p>
+                                            <p><i class="fas fa-envelope" aria-hidden="true"></i>
+                                                <a href="mailto:{{ $office->email }}"
+                                                    itemprop="email">{{ $office->email }}</a>
+                                            </p>
+                                            <p><i class="fas fa-clock" aria-hidden="true"></i>
+                                                <time itemprop="openingHours">{{ $office->office_hours }}</time>
+                                            </p>
                                         </div>
-                                        <div class="d-flex flex-wrap flex-lg-row justify-content-center gap-2">
-                                            <a href="#directions" class="btn-office">Get Directions <i
-                                                    class="fas fa-map"></i></a>
-                                            <a href="#appointment" class="btn-office">Book Appointment <i
-                                                    class="fas fa-calendar-check"></i></a>
-                                        </div>
+                                        <nav class="d-flex flex-wrap flex-lg-row justify-content-center gap-2"
+                                            aria-label="Office actions">
+                                            <a href="#directions" class="btn-office"
+                                                title="Get directions to {{ $office->name }}">Get Directions <i
+                                                    class="fas fa-map" aria-hidden="true"></i></a>
+                                            <a href="#appointment" class="btn-office"
+                                                title="Book appointment at {{ $office->name }}">Book Appointment <i
+                                                    class="fas fa-calendar-check" aria-hidden="true"></i></a>
+                                        </nav>
                                     </div>
-                                </div>
+                                </article>
                             </div>
                         @endforeach
                     </div>
@@ -66,35 +98,43 @@
             </section>
 
             <!-- Access Section -->
-            <section class="access-section" id="access">
+            <section class="access-section" id="access" aria-labelledby="access-heading">
                 <div class="section-container">
-                    <h2 class="gsap-animate">Getting to Our Offices</h2>
-                    <p class="lead gsap-animate">Easy access and convenient transportation options to all our locations.</p>
+                    <h2 id="access-heading" class="gsap-animate">Getting to Our Offices</h2>
+                    <p class="lead gsap-animate">Easy access and convenient transportation options to all our locations
+                        across Nepal.</p>
                     <div class="row g-4">
                         <div class="col-12 col-lg-6 gsap-animate">
-                            <div class="card">
+                            <article class="card">
                                 <h3>Schedule Appointment</h3>
-                                <p>Book an appointment at any of our offices for personalized consultation and service.</p>
-                                <a href="#appointment" class="btn-office">Book Now <i class="fas fa-calendar-check"></i></a>
-                            </div>
+                                <p>Book an appointment at any of our offices for personalized consultation and professional
+                                    accounting services.</p>
+                                <a href="#appointment" class="btn-office" title="Schedule consultation appointment">Book
+                                    Now <i class="fas fa-calendar-check" aria-hidden="true"></i></a>
+                            </article>
                         </div>
                         <div class="col-12 col-lg-6 gsap-animate" data-delay="0.2">
-                            <div class="card">
+                            <article class="card">
                                 <h3>Parking & Transport</h3>
-                                <p><strong>Parking Information</strong></p>
-                                <ul>
-                                    <li>Free parking available: 20 car parking slots</li>
-                                    <li>Covered parking</li>
-                                    <li>Security guard on duty</li>
-                                    <li>Visitor parking passes available on request</li>
-                                </ul>
-                                <p><strong>Directions & Transport</strong></p>
-                                <ul>
-                                    <li><strong>Public Transport Options:</strong></li>
-                                    <li>Bus: Regular bus service from major areas</li>
-                                    <li>Micro: Available from Ratna Park and other key locations</li>
-                                </ul>
-                            </div>
+                                <div>
+                                    <h4>Parking Information</h4>
+                                    <ul>
+                                        <li>Free parking available: 20 car parking slots</li>
+                                        <li>Covered parking facility</li>
+                                        <li>Security guard on duty 24/7</li>
+                                        <li>Visitor parking passes available on request</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Directions & Transport</h4>
+                                    <ul>
+                                        <li><strong>Public Transport Options:</strong></li>
+                                        <li>Bus: Regular bus service from major areas of Kathmandu</li>
+                                        <li>Micro: Available from Ratna Park and other key locations</li>
+                                        <li>Taxi and ride-sharing services readily available</li>
+                                    </ul>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -125,6 +165,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
 
             <!-- CTA Section -->
@@ -134,7 +175,8 @@
                     <p class="gsap-animate">Whether you need a quick consultation or comprehensive business advisory
                         services, our team is ready to help. Visit any of our offices or contact us to schedule an
                         appointment.</p>
-                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate" data-delay="0.2">
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate"
+                        data-delay="0.2">
                         <a href="#contact" class="btn-cta-filled">Schedule a Consultation <i
                                 class="fas fa-arrow-right"></i></a>
                         <a href="#services" class="btn-cta-outline">Explore Our Services <i
