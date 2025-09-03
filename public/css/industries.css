@@ -333,12 +333,15 @@ body, html {
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
+    line-height: 1; /* Ensures consistent text/icon alignment */
 }
 
 .industry-card .learn-more i {
-    font-size: 0.9em; 
-    margin-left: 0;
+    font-size: 0.9em;
     transition: transform 0.3s;
+    line-height: inherit; /* Matches the text's line height */
+    display: inline-flex;
+    align-items: center; /* Ensures the icon is vertically centered */
 }
 
 .industry-card .learn-more:hover {
