@@ -382,6 +382,9 @@
     .section-container {
         max-width: 1400px;
     }
+    .why-choose-section,.leadership-section, .expertise-section, .values-section, .story-section {
+        padding-right: 6rem;
+    }
 }
 
 @media (max-width: 991px) {

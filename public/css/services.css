@@ -592,7 +592,6 @@ body, html {
     cursor: not-allowed;
 }
 
-/* Animation classes */
 .gsap-animate {
     opacity: 0;
     transform: translateY(40px);
@@ -603,12 +602,15 @@ body, html {
     transform: translateY(0);
 }
 
-/* Responsive Design */
+
 @media (min-width: 1400px) {
     .section-container {
         max-width: 1400px;
         padding: 0 1rem;
+          padding-right: 6rem;
     }
+
+   
 
     .navbar {
         padding: 1.2rem 2rem;

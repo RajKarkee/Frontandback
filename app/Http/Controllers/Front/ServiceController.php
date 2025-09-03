@@ -79,6 +79,13 @@ class ServiceController extends Controller
 
     return response()->json(['success' => false], 400);
     }
-    
+
+    //temp route for service details page
+    public function show($id)
+{
+    $service = Service::findOrFail($id);
+    return view('new.serviceDetails', compact('service'));
+}
+
 
 }

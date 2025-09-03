@@ -52,4 +52,24 @@ class IndustryController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Invalid request']);
     }
+
+
+    public function show($id)
+{
+    
+    $industry = (object)[
+        'id' => $id,
+        'title' => ' ',
+        'description' => 'This is a static description for the industry.',
+        'content' => 'Static content about the industry goes here.',
+        'category' => 'Static Category',
+        'status' => 'active',
+        'created_at' => now(),
+        'updated_at' => now(),
+        'meta_title' => 'Static Meta Title',
+        'meta_description' => 'Static Meta Description',
+        'features' => json_encode(['Feature 1', 'Feature 2', 'Feature 3']),
+    ];
+    return view('new.industryDetails', compact('industry'));
+}
 }

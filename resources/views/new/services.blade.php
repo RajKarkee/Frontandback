@@ -48,8 +48,9 @@
                                 <div class="service-card">
                                     <h3>{{ $service->title }}</h3>
                                     <p>{{ $service->description }}</p>
-                                    <a href="#service-{{ $service->id }}" class="learn-more">Learn More <i
-                                            class="fas fa-arrow-right"></i></a>
+                                 <a href="{{ route('serviceDetails', $service->id) }}" class="learn-more">
+    Learn More <i class="fas fa-arrow-right"></i>
+</a>
                                 </div>
                             </div>
                         @endforeach
@@ -318,17 +319,7 @@
                 }, 100);
             });
 
-            // Smooth scroll for Learn More links
-            $(document).on("click", "a.learn-more", function(e) {
-                e.preventDefault();
-                let target = $(this).attr("href");
-                if ($(target).length) {
-                    let offset = $(target).offset().top - 80;
-                    $("html, body").animate({
-                        scrollTop: offset
-                    }, 800);
-                }
-            });
+      
         });
     </script>
 @endsection
