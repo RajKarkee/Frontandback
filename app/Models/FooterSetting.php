@@ -57,22 +57,4 @@ class FooterSetting extends Model
             'copyright_text' => '© 2024 Chartered Insights. All rights reserved.',
         ]);
     }
-
-    /**
-     * Get social links with defaults
-     */
-    public function getSocialLinksAttribute($value)
-    {
-        $decoded = json_decode($value, true);
-        return $decoded ?: [];
-    }
-
-    /**
-     * Get quick links with defaults
-     */
-    public function getQuickLinksAttribute($value)
-    {
-        $decoded = json_decode($value, true);
-        return $decoded ?: [];
-    }
 }

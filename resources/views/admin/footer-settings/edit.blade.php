@@ -278,7 +278,8 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let quickLinkIndex = {{ $footerSetting->quick_links ? count($footerSetting->quick_links) : 0 }};
+            let quickLinkIndex =
+                {{ $footerSetting->quick_links && is_array($footerSetting->quick_links) ? count($footerSetting->quick_links) : 0 }};
 
             // Add Quick Link
             document.getElementById('add-quick-link').addEventListener('click', function() {

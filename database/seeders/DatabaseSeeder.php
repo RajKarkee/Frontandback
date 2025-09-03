@@ -63,6 +63,7 @@ class DatabaseSeeder extends Seeder
             CareerSeeder::class,
             OfficeSeeder::class,
             SettingsSeeder::class,
+            FooterSettingSeeder::class,
             IndustryExpertiseSeeder::class,
             CategorySeeder::class,
             TagSeeder::class,
