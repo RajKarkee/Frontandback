@@ -64,6 +64,8 @@ Route::get('/', [FrontHomeController::class, 'home'])->name('home');
 Route::get('/industries/all', [FrontIndustryController::class, 'getAll'])->name('industries.all');
 
 
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
@@ -372,3 +374,10 @@ Route::post('/newsletter/unsubscribe', [App\Http\Controllers\NewsletterControlle
 
 // Dynamic page routes (should be last)
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
+
+
+//temp routes
+
+Route::get('/industryDetails/{id}', [FrontIndustryController::class, 'show'])->name('industryDetails');
+Route::get('/serviceDetails/{id}', [FrontServiceController::class, 'show'])->name('serviceDetails');
+

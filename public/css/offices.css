@@ -397,6 +397,9 @@
     .section-container {
         max-width: 1320px;
     }
+    .locations-section, .services-section {
+        padding-right: 6rem;
+    }
 }
 
 @media (max-width: 991px) {

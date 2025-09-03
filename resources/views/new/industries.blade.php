@@ -36,8 +36,6 @@
                         We understand that every industry has its unique challenges, regulations, and opportunities. Our
                         specialized teams deliver targeted solutions that drive results.
                     </p>
-
-
                     <div class="row g-5" id="industriesGrid">
                         @foreach ($industries->take(9) as $index => $industry)
                             <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.1 }}">
@@ -64,12 +62,13 @@
                                             @endforeach
                                         </ul>
                                     @endif
+                                        <a href="{{ route('industryDetails', $industry->id) }}" class="learn-more">
+    Learn More <i class="fas fa-arrow-right"></i>
+</a>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-
-
                     @if ($industries->count() > 9)
                         <div class="text-center mt-4">
                             <a href="javascript:void(0)" id="viewAllBtn" class="btn-all gsap-animate">
@@ -94,7 +93,6 @@
                         Stay informed with our latest industry analysis and expert commentary on sector-specific trends and
                         challenges.
                     </p>
-
                     <div class="row g-4 mx-0">
                         <div class="col-12 col-md-6 col-lg-4 gsap-animate">
                             <div class="insight-card">

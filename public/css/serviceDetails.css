@@ -1,0 +1,627 @@
+:root {
+    --primary: #00213f;
+    --secondary: #0090d4;
+    --accent: #00b4f2;
+    --light: #f8fcff;
+    --lighter: #e8f0fc;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --shadow: rgba(0, 33, 63, 0.15);
+    --shadow-lg: rgba(0, 33, 63, 0.25);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.rka-scope {
+    font-family: "Inter", sans-serif;
+    background: var(--light);
+    color: var(--primary);
+    line-height: 1.8;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.rka-scope h1,
+.rka-scope h2,
+.rka-scope h3,
+.rka-scope h4,
+.rka-scope h5,
+.rka-scope h6 {
+    font-family: "Lora", serif;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.3px;
+}
+
+.section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Service Header Section */
+.service-header-section {
+    position: relative;
+    padding: 5rem 0 3rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-header-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+    opacity: 0.4;
+}
+
+.service-header-content {
+    text-align: center;
+    max-width: 900px;
+    width: 90%;
+    padding: 2rem;
+    color: var(--white);
+    background: rgba(0, 33, 63, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
+}
+
+.service-header-content h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--white), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.service-header-content p {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+/* Buttons */
+.btn-primary-filled,
+.btn-primary-outline {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.btn-primary-filled {
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary-filled:hover {
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 144, 212, 0.3);
+}
+
+.btn-primary-outline {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+}
+
+.btn-primary-outline:hover {
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 33, 63, 0.2);
+}
+
+.btn-primary-filled i,
+.btn-primary-outline i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.btn-primary-filled:hover i,
+.btn-primary-outline:hover i {
+    transform: translateX(4px);
+}
+
+/* Service Details Section */
+.service-details-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, var(--white), var(--lighter));
+    width: 100%;
+    margin: 0;
+}
+
+.service-details-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.service-details-section h3 {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    margin-bottom: 1.2rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.service-details-section h3:hover {
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+.service-details-section h3::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.service-details-section h3:hover::after {
+    width: 100%;
+}
+
+.detail-card {
+    background: linear-gradient(135deg, var(--white), var(--light));
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.detail-card img.service-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: var(--transition);
+}
+
+.detail-card img.service-image:hover {
+    transform: scale(1.03);
+}
+
+.detail-content {
+    max-width: 500px;
+    text-align: left;
+}
+
+.detail-content p {
+    color: var(--gray);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 1.5rem;
+}
+
+.detail-content h4 {
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    margin: 1.5rem 0 0.8rem;
+    color: var(--secondary);
+    position: relative;
+    display: inline-block;
+}
+
+.detail-content h4::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.detail-content:hover h4::after {
+    width: 100%;
+}
+
+.detail-content ul,
+.detail-content .no-bullets {
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.detail-content ul li {
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
+    color: var(--gray);
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.detail-content ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.detail-content .no-bullets li {
+    list-style: none;
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.cta-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+    opacity: 0.4;
+}
+
+.cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    color: var(--white);
+}
+
+.cta-section p {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Animation classes */
+.gsap-animate {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.gsap-animate.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (min-width: 1400px) {
+    .section-container {
+        max-width: 1400px;
+        padding: 0 1rem;
+    }
+
+    .service-header-content {
+        padding: 2.5rem;
+    }
+
+    .service-header-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .service-header-content p {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+    }
+
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.85rem 2rem;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .service-header-section {
+        padding: 4rem 0 2rem;
+    }
+
+    .service-header-content {
+        width: 100%;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .service-header-section {
+        padding: 3rem 0 2rem;
+    }
+
+    .service-header-content {
+        padding: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .service-header-content h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+
+    .service-header-content p {
+        font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+    }
+
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.7rem 1.5rem;
+        font-size: clamp(0.85rem, 2.3vw, 0.95rem);
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .service-details-section,
+    .cta-section {
+        padding: 3rem 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .service-details-section h2,
+    .cta-section h2 {
+        font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    }
+
+    .service-details-section h3 {
+        font-size: clamp(1.4rem, 2.8vw, 1.6rem);
+    }
+
+    .detail-content p,
+    .cta-section p {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .detail-content h4 {
+        font-size: clamp(1rem, 2.3vw, 1.3rem);
+    }
+
+    .detail-content ul li,
+    .detail-content .no-bullets li {
+        font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+    }
+
+    .detail-card img.service-image {
+        max-width: 450px;
+        margin-bottom: 1.5rem;
+    }
+
+    .detail-content {
+        max-width: 100%;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-header-section {
+        padding: 2.5rem 0 1.5rem;
+    }
+
+    .service-header-content {
+        padding: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .service-header-content h1 {
+        font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+    }
+
+    .service-header-content p {
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+    }
+
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.6rem 1.5rem;
+        font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+        max-width: 220px;
+    }
+
+    .service-details-section,
+    .cta-section {
+        padding: 2.5rem 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .service-details-section h2,
+    .cta-section h2 {
+        font-size: clamp(1.5rem, 3.2vw, 2rem);
+    }
+
+    .service-details-section h3 {
+        font-size: clamp(1.3rem, 2.5vw, 1.5rem);
+    }
+
+    .detail-content p,
+    .cta-section p {
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+    }
+
+    .detail-content h4 {
+        font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+    }
+
+    .detail-content ul li,
+    .detail-content .no-bullets li {
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+    }
+
+    .detail-card img.service-image {
+        max-width: 350px;
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .service-header-section {
+        padding: 2rem 0 1rem;
+    }
+
+    .service-header-content {
+        padding: 1rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .service-header-content h1 {
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+    }
+
+    .service-header-content p {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    }
+
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.5rem 1.2rem;
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+        max-width: 200px;
+    }
+
+    .service-details-section,
+    .cta-section {
+        padding: 2rem 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .service-details-section h2,
+    .cta-section h2 {
+        font-size: clamp(1.4rem, 3vw, 1.8rem);
+    }
+
+    .service-details-section h3 {
+        font-size: clamp(1.2rem, 2.3vw, 1.4rem);
+    }
+
+    .detail-content p,
+    .cta-section p {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+    }
+
+    .detail-content h4 {
+        font-size: clamp(0.8rem, 2vw, 1.1rem);
+    }
+
+    .detail-content ul li,
+    .detail-content .no-bullets li {
+        font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    }
+
+    .detail-card img.service-image {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 320px) {
+    .service-header-section {
+        padding: 1.5rem 0 0.8rem;
+    }
+
+    .service-header-content {
+        padding: 0.8rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .service-header-content h1 {
+        font-size: clamp(1.2rem, 3.8vw, 1.8rem);
+    }
+
+    .service-header-content p {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+    }
+
+    .btn-primary-filled,
+    .btn-primary-outline {
+        padding: 0.4rem 1rem;
+        font-size: clamp(0.7rem, 2vw, 0.8rem);
+        max-width: 180px;
+    }
+
+    .service-details-section,
+    .cta-section {
+        padding: 1.5rem 0;
+    }
+
+    .service-details-section h2,
+    .cta-section h2 {
+        font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+    }
+
+    .service-details-section h3 {
+        font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    }
+
+    .detail-content p,
+    .cta-section p {
+        font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+    }
+
+    .detail-content h4 {
+        font-size: clamp(0.75rem, 1.8vw, 1rem);
+    }
+
+    .detail-content ul li,
+    .detail-content .no-bullets li {
+        font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+    }
+
+    .detail-card img.service-image {
+        max-width: 280px;
+    }
+}

@@ -18,6 +18,7 @@
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .rka-scope h1,
@@ -34,6 +35,10 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Hero Section */
@@ -174,8 +179,12 @@
 .events-section,
 .past-events-section,
 .custom-training-section {
-    padding: 8rem 0;
+    padding: 1rem 0;
     background: linear-gradient(180deg, var(--white), var(--lighter));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .events-section h2,
@@ -238,6 +247,9 @@
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+    margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
 }
 
 .event-card {
@@ -252,6 +264,7 @@
     margin-bottom: 2rem;
     flex: 1 1 320px;
     max-width: 400px;
+    min-width: 320px;
 }
 
 .event-card:hover {
@@ -383,6 +396,8 @@
     justify-content: center;
     margin: 0 auto;
     gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
 }
 
 .custom-training-section .training-card {
@@ -396,6 +411,7 @@
     transform: scale(0.95) !important;
     flex: 1 1 320px;
     max-width: 400px;
+    min-width: 320px;
 }
 
 .custom-training-section .training-card:hover {
@@ -559,6 +575,11 @@
     .section-container {
         max-width: 1400px;
     }
+     .events-section,
+    .past-events-section,
+    .custom-training-section {
+        padding-right: 6rem;
+    }
 }
 
 @media (max-width: 991px) {
@@ -605,10 +626,20 @@
     .custom-training-section .lead {
         font-size: clamp(0.85rem, 2.2vw, 1.2rem);
     }
-    .event-card {
-        margin: 1rem auto;
-        flex: 1 1 100%;
+    .section-container {
+        padding: 0 12px;
+    }
+    .event-grid {
+        gap: 1.5rem;
         max-width: 100%;
+    }
+    .event-card {
+        flex: 1 1 100%;
+        max-width: 400px;
+        min-width: 280px;
+        margin: 1rem auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .event-card .event-image {
         height: 200px;
@@ -639,11 +670,17 @@
         font-size: clamp(0.8rem, 2vw, 0.95rem);
         max-width: 220px;
     }
+    .custom-training-section .row {
+        gap: 1.5rem;
+    }
     .custom-training-section .training-card {
         padding: 2rem;
-        margin: 1rem auto;
         flex: 1 1 100%;
-        max-width: 100%;
+        max-width: 400px;
+        min-width: 280px;
+        margin: 1rem auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .custom-training-section .training-card h3 {
         font-size: clamp(1.3rem, 2.8vw, 1.5rem);
@@ -665,12 +702,6 @@
     }
     .event-overlay-content .details i {
         font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-    }
-    .event-grid {
-        gap: 1.5rem;
-    }
-    .custom-training-section .row {
-        gap: 2rem;
     }
 }
 
@@ -718,10 +749,16 @@
     .custom-training-section .lead {
         font-size: clamp(0.8rem, 2.2vw, 1.1rem);
     }
+    .event-grid {
+        gap: 1.5rem;
+    }
     .event-card {
-        margin: 1rem auto;
         flex: 1 1 100%;
-        max-width: 100%;
+        max-width: 380px;
+        min-width: 280px;
+        margin: 1rem auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .event-card .event-image {
         height: 180px;
@@ -758,11 +795,17 @@
         align-items: center;
         border-radius: 12px;
     }
+    .custom-training-section .row {
+        gap: 1.5rem;
+    }
     .custom-training-section .training-card {
         padding: 1.8rem;
-        margin: 1rem auto;
         flex: 1 1 100%;
-        max-width: 100%;
+        max-width: 380px;
+        min-width: 280px;
+        margin: 1rem auto;
+        margin-left: auto;
+        margin-right: auto;
     }
     .custom-training-section .training-card h3 {
         font-size: clamp(1.2rem, 2.5vw, 1.4rem);
@@ -784,12 +827,6 @@
     }
     .event-overlay-content .details i {
         font-size: clamp(0.75rem, 2vw, 0.9rem);
-    }
-    .event-grid {
-        gap: 1.5rem;
-    }
-    .custom-training-section .row {
-        gap: 1.5rem;
     }
 }
 
@@ -839,12 +876,17 @@
     .custom-training-section .lead {
         font-size: clamp(0.75rem, 2.2vw, 0.95rem);
     }
+    .event-grid {
+        gap: 1rem;
+    }
     .event-card {
-        max-width: 380px;
+        flex: 1 1 100%;
+        max-width: 320px;
+        min-width: 280px;
         min-height: 400px;
         margin: 1rem auto;
-        flex: 1 1 100%;
-        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .event-card .event-image {
         height: 180px;
@@ -876,13 +918,18 @@
         max-width: 180px;
         width: 100%;
     }
+    .custom-training-section .row {
+        gap: 1rem;
+    }
     .custom-training-section .training-card {
         padding: 1.2rem;
+        flex: 1 1 100%;
         max-width: 320px;
+        min-width: 280px;
         min-height: 280px;
         margin: 1rem auto;
-        flex: 1 1 100%;
-        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .custom-training-section .training-card h3 {
         font-size: clamp(1rem, 2.2vw, 1.2rem);
@@ -907,11 +954,5 @@
     }
     .event-overlay-content .details i {
         font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-    }
-    .event-grid {
-        gap: 1.5rem;
-    }
-    .custom-training-section .row {
-        gap: 1rem;
     }
 }

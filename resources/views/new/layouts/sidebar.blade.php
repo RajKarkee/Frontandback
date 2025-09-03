@@ -265,25 +265,25 @@
             const isMobile = window.innerWidth <= 1024;
             let activeTimeline = null;
 
-            // Remove existing event listeners by replacing elements
+           
             sidebarLinks.forEach(link => {
                 const newLink = link.cloneNode(true);
                 link.parentNode.replaceChild(newLink, link);
             });
 
-            // Re-query updated links
+           
             const newSidebarLinks = document.querySelectorAll('.rka-sidebar-scope .sidebar a, .rka-sidebar-scope .sidebar .text-item');
 
             newSidebarLinks.forEach(link => {
                 link.addEventListener('mouseenter', () => {
                     if (isMobile || link.getAttribute('href') === currentPath) return;
 
-                    // Kill any active animation to prevent flicker
+                  
                     if (activeTimeline) {
                         activeTimeline.kill();
                     }
 
-                    // Create a new GSAP timeline
+                  
                     activeTimeline = gsap.timeline({
                         onStart: () => {
                             previewPanel.classList.add('active');
@@ -291,7 +291,7 @@
                         }
                     });
 
-                    // Update preview content
+                  
                     previewTitle.textContent = link.getAttribute('data-tooltip');
                     previewImage.src = link.getAttribute('data-image');
                     previewImage.alt = `${link.getAttribute('data-tooltip')} Preview`;
@@ -309,7 +309,7 @@
                         </div>
                     `).join('');
 
-                    // Animate preview and overlay with smoother transition
+                  
                     activeTimeline
                         .set(previewPanel, { x: 0, scaleX: 1 })
                         .fromTo(previewPanel, 
@@ -323,7 +323,7 @@
 
                 link.addEventListener('mouseleave', () => {
                     if (isMobile) return;
-                    // Don't immediately hide; wait for outside click
+                   
                 });
             });
         }
