@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Register view composers
         View::composer('partials.footer', FooterComposer::class);
+        View::composer('new.layouts.sidebar', \App\View\Composers\SidebarComposer::class);
     }
 }

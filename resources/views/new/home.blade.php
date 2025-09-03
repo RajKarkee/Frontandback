@@ -46,7 +46,7 @@
                             @foreach ($stats as $index => $stat)
                                 <div class="col-6 col-md-3">
                                     <div class="stat-item gsap-animate"data-delay="{{ $index * 0.2 }}">
-                                        <div class="stat-number" data-target="{{ $stat['value'] }}">0</div>
+                                        <div class="stat-number" data-target="{{ $stat['number'] }}">0</div>
                                         <div class="stat-label">{{ $stat['label'] }}</div>
                                     </div>
                                 </div>
