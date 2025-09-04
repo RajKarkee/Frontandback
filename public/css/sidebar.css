@@ -8,8 +8,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    font-family: 'Roboto', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
     color: var(--primary);
 }
 
@@ -21,7 +21,7 @@
     flex-grow: 1;
     text-align: center;
     font-style: italic;
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
     position: relative;
     display: inline-block;
 }
@@ -35,7 +35,7 @@
 }
 
 .rka-scope h1 {
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
     font-weight: 700;
     color: var(--white);
     letter-spacing: 0.5px;
@@ -88,7 +88,7 @@
     background: rgba(255, 255, 255, 0.2);
     color: var(--white);
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     transition: all 0.2s ease;
 }
 
@@ -149,7 +149,7 @@
     background: rgba(255, 255, 255, 0.2);
     color: var(--white);
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .rka-scope .mobile-search input:focus {
@@ -183,8 +183,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    font-family: 'Roboto', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
     color: var(--primary);
 }
 
@@ -304,7 +304,7 @@
     max-width: 900px;
     height: 89vh;
     background: var(--white);
-    border-radius: 16px;
+    /* border-radius: 16px; */
     border: 1px solid rgba(0, 43, 74, 0.1);
     box-shadow: 0 12px 40px var(--shadow-lg);
     opacity: 0;
@@ -332,7 +332,7 @@
     color: var(--primary);
     margin: 0;
     font-weight: 600;
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
 }
 
 .rka-sidebar-scope .page-preview img {
@@ -439,7 +439,7 @@
 }
 
 .rka-sidebar-scope .overlay {
-position: fixed;
+    position: fixed;
     top: 0; /* Changed to match page-preview */
     left: 0;
     width: 100vw;
@@ -554,21 +554,16 @@ position: fixed;
     }
 }
 
-
 @media (max-width: 576px) {
-   
     .rka-content-scope {
         padding: 0;
         margin-left: 0 !important;
-       
     }
 
-  
     .container-fluid {
         padding: 0;
     }
 
-    
     .section-container {
         padding: 0;
     }
@@ -581,25 +576,21 @@ position: fixed;
         padding: 1.5rem 0;
     }
 
-   
     .hero-content {
         margin: 0 auto;
         width: 100%;
         padding: 1rem;
     }
 
-  
     .rka-scope .header {
         padding: 0;
     }
 
-  
     footer {
         margin-bottom: 0;
         padding-bottom: 0;
     }
 
-  
     .rka-sidebar-scope .sidebar.active {
         width: 100%;
         max-width: none;
