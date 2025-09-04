@@ -42,17 +42,20 @@
                     <div class="row g-4">
                         @foreach ($carrer_benefits as $index => $benefit)
                             <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
-                                <div class="benefit-card text-center">
-                                    <div class="benefit-icon-wrapper mb-3">
-                                        <div class="benefit-icon mx-auto">
+                                <div class="benefit-card">
+                                    <div class="benefit-icon-wrapper">
+                                        <div class="benefit-icon">
                                             {!! $benefit->icon !!}
                                         </div>
                                     </div>
-                                    <h3 class="mb-3">{{ $benefit->title }}</h3>
-                                    <p>{{ $benefit->description }}</p>
+                                    <div class="benefit-content">
+                                        <h3>{{ $benefit->title }}</h3>
+                                        <p>{{ $benefit->description }}</p>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </section>
