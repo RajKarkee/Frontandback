@@ -9,6 +9,34 @@
     --shadow: rgba(0, 33, 63, 0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.benefit-card {
+    text-align: center;
+}
+
+.benefit-icon-wrapper {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.benefit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+.benefit-icon svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.benefit-card h3 {
+    margin-bottom: 1rem;
+}
 
 .rka-scope {
     font-family: "Inter", sans-serif;
@@ -74,30 +102,7 @@
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 33, 63, 0.2);
 }
-.benefit-card {
-    text-align: center;
-}
 
-.benefit-icon-wrapper {
-    margin-bottom: 1rem;
-}
-
-.benefit-icon {
-    display: inline-block;
-    width: 60px; /* Adjust as needed */
-    height: 60px; /* Adjust as needed */
-    margin: 0 auto;
-}
-
-.benefit-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.benefit-card h3 {
-    margin-bottom: 1rem;
-}
 @media (max-width: 767px) {
     .hero-content {
         margin-left: 0 !important;
