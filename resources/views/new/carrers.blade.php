@@ -10,7 +10,6 @@
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/carrers.css') }}">
-   
 @endsection
 
 @section('content')
@@ -43,17 +42,17 @@
                     <div class="row g-4">
                         @foreach ($carrer_benefits as $index => $benefit)
                             <div class="col-lg-4 col-md-6 gsap-animate" data-delay="{{ $index * 0.2 }}">
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        {!! $benefit->icon !!}
+                                <div class="benefit-card text-center">
+                                    <div class="benefit-icon-wrapper mb-3">
+                                        <div class="benefit-icon mx-auto">
+                                            {!! $benefit->icon !!}
+                                        </div>
                                     </div>
-
-                                    <h3>{{ $benefit->title }}</h3>
+                                    <h3 class="mb-3">{{ $benefit->title }}</h3>
                                     <p>{{ $benefit->description }}</p>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </section>

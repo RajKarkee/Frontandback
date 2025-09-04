@@ -1,4 +1,3 @@
-
 :root {
     --primary: #00213f;
     --secondary: #0090d4;
@@ -71,7 +70,8 @@
 }
 
 @keyframes wave {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.6;
         transform: scale(1);
     }
@@ -210,7 +210,29 @@
     overflow: hidden;
     position: relative;
 }
+.value-card {
+    text-align: center;
+}
 
+.value-icon-wrapper {
+    margin-bottom: 1rem;
+}
+
+.svg-icon-container {
+    display: inline-block;
+    width: 60px; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
+}
+
+.svg-icon-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.value-card h3 {
+    margin-bottom: 1rem;
+}
 .value-card,
 .reason-card {
     min-height: 320px;
@@ -382,7 +404,11 @@
     .section-container {
         max-width: 1400px;
     }
-    .why-choose-section,.leadership-section, .expertise-section, .values-section, .story-section {
+    .why-choose-section,
+    .leadership-section,
+    .expertise-section,
+    .values-section,
+    .story-section {
         padding-right: 6rem;
     }
 }
