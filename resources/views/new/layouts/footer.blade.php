@@ -59,15 +59,19 @@
                             @endif
                         </div>
                     </div>
-
+                    @php
+                        $services = DB::table('services')
+                            ->select('id', 'title')
+                            ->orderBy('sort_order', 'asc')
+                            ->limit(5)
+                            ->get();
+                    @endphp
                     <div class="gsap-animate">
                         <h3>Services</h3>
                         <div class="footer-links">
-                            <a href="/services">Audit & Assurance</a>
-                            <a href="/services">Tax Advisory</a>
-                            <a href="/services">Risk Advisory</a>
-                            <a href="/services">Business Consulting</a>
-                            <a href="/services">Financial Planning</a>
+                            @foreach ($services as $service)
+                                <a href="{{ route('serviceDetails', $service->id) }}">{{ $service->title }}</a>
+                            @endforeach
                         </div>
                     </div>
 
