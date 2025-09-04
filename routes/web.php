@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\JumbotronController;
 use App\Http\Controllers\Admin\ServiceProcessController;
 use App\Http\Controllers\Admin\HomeSettingAdminController;
 use App\Http\Controllers\Admin\FooterSettingAdminController;
+use App\Http\Controllers\Admin\NavigationSettingAdminController;
 use App\Http\Controllers\Admin\PostAdminController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\TagAdminController;
@@ -319,6 +320,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('footer-settings', [FooterSettingAdminController::class, 'index'])->name('footer-settings.index');
     Route::get('footer-settings/edit', [FooterSettingAdminController::class, 'edit'])->name('footer-settings.edit');
     Route::put('footer-settings', [FooterSettingAdminController::class, 'update'])->name('footer-settings.update');
+
+    // Navigation Settings Management Routes
+    Route::get('navigation-settings', [NavigationSettingAdminController::class, 'index'])->name('navigation-settings.index');
+    Route::get('navigation-settings/{navigationSetting}/edit', [NavigationSettingAdminController::class, 'edit'])->name('navigation-settings.edit');
+    Route::put('navigation-settings/{navigationSetting}', [NavigationSettingAdminController::class, 'update'])->name('navigation-settings.update');
 
     // About Page Management Routes
     Route::get('about', [AboutAdminController::class, 'index'])->name('about.index');

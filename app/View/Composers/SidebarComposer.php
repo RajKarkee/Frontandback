@@ -5,6 +5,7 @@ namespace App\View\Composers;
 use Illuminate\View\View;
 use App\Models\HomeSetting;
 use App\Models\FooterSetting;
+use App\Models\NavigationSetting;
 
 class SidebarComposer
 {
@@ -16,6 +17,7 @@ class SidebarComposer
         $view->with([
             'homeSetting' => HomeSetting::getInstance(),
             'footerSetting' => FooterSetting::getInstance(),
+            'navigationItems' => NavigationSetting::getSidebarNavigation(),
         ]);
     }
 }
