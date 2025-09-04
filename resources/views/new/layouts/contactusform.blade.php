@@ -1,8 +1,24 @@
+<!-- Toast Notification Container -->
+<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    <div id="success-toast" class="toast align-items-center text-white bg-success border-0" role="alert"
+        aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fas fa-check-circle me-2"></i>
+                <span id="toast-message">Message sent successfully! We'll get back to you within 24 hours.</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
 <!-- Contact Section (Form and Info Side by Side) -->
 <section class="contact-section" id="contact">
     <div class="section-container">
         <h2 class="gsap-animate">Get in Touch</h2>
-        <p class="lead gsap-animate">Ready to discuss your business needs? Fill out the form below and one of our experts
+        <p class="lead gsap-animate">Ready to discuss your business needs? Fill out the form below and one of our
+            experts
             will get back to you within 24 hours.</p>
         <div class="row g-4">
             <div class="col-lg-6 gsap-animate">
@@ -11,49 +27,94 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="first-name" class="form-label">First Name *</label>
-                            <input type="text" class="form-control" id="first-name" required>
+                            <input type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                name='first_name' id="first-name" value="{{ old('first_name') }}" required>
+                            @error('first_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="last-name" class="form-label">Last Name *</label>
-                            <input type="text" class="form-control" id="last-name" required>
+                            <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                name='last_name' id="last-name" value="{{ old('last_name') }}" required>
+                            @error('last_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="form-label">Email Address *</label>
-                            <input type="email" class="form-control" id="email" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                name='email' id="email" value="{{ old('email') }}" required>
+                            <div class="invalid-feedback" id="email-error">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="valid-feedback" id="email-success">Email format is valid!</div>
                         </div>
                         <div class="col-md-6">
                             <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone">
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                name='phone' id="phone" value="{{ old('phone') }}" placeholder="+977-XX-XXXXXXX">
+                            <div class="invalid-feedback" id="phone-error">
+                                @error('phone')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="valid-feedback" id="phone-success">Phone number format is valid!</div>
                         </div>
                         <div class="col-12">
                             <label for="company" class="form-label">Company/Organization</label>
-                            <input type="text" class="form-control" id="company">
+                            <input type="text" class="form-control @error('company') is-invalid @enderror"
+                                name='company' id="company" value="{{ old('company') }}">
+                            @error('company')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <label for="service" class="form-label">Service of Interest</label>
-                            <select class="form-select" id="service">
-                                <option selected disabled>Please select a service</option>
-                                <option value="audit">Audit & Assurance</option>
-                                <option value="tax">Tax Advisory</option>
-                                <option value="risk">Risk Advisory</option>
-                                <option value="consulting">Business Consulting</option>
-                                <option value="financial">Financial Reporting</option>
-                                <option value="corporate">Corporate Advisory</option>
+                            <select class="form-select @error('service') is-invalid @enderror" name='service'
+                                id="service">
+                                <option value="" disabled {{ old('service') ? '' : 'selected' }}>Please select a
+                                    service</option>
+                                <option value="audit" {{ old('service') == 'audit' ? 'selected' : '' }}>Audit &
+                                    Assurance</option>
+                                <option value="tax" {{ old('service') == 'tax' ? 'selected' : '' }}>Tax Advisory
+                                </option>
+                                <option value="risk" {{ old('service') == 'risk' ? 'selected' : '' }}>Risk Advisory
+                                </option>
+                                <option value="consulting" {{ old('service') == 'consulting' ? 'selected' : '' }}>
+                                    Business Consulting</option>
+                                <option value="financial" {{ old('service') == 'financial' ? 'selected' : '' }}>
+                                    Financial Reporting</option>
+                                <option value="corporate" {{ old('service') == 'corporate' ? 'selected' : '' }}>
+                                    Corporate Advisory</option>
                             </select>
+                            @error('service')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <label for="message" class="form-label">Message *</label>
-                            <textarea class="form-control" id="message" rows="5" required
-                                placeholder="Please describe your requirements or questions..."></textarea>
+                            <textarea class="form-control @error('message') is-invalid @enderror" name='message' id="message" rows="5"
+                                required placeholder="Please describe your requirements or questions...">{{ old('message') }}</textarea>
+                            @error('message')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="privacy" required>
+                                <input class="form-check-input @error('privacy_consent') is-invalid @enderror"
+                                    type="checkbox" name='privacy_consent' id="privacy" value="1"
+                                    {{ old('privacy_consent') ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="privacy">
                                     I agree to the processing of my personal data for the purpose of responding to my
                                     inquiry and acknowledge that I have read the <a href="#"
                                         class="text-accent">Privacy Policy</a>.
                                 </label>
+                                @error('privacy_consent')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 text-center">
@@ -67,7 +128,8 @@
                 <div class="contact-info-card mb-4">
                     <h3>Main Office - Biratnagar</h3>
                     <p><strong>Address:</strong> Main Road, Biratnagar-15, Morang, Nepal</p>
-                    <p><strong>Phone:</strong> <a href="tel:+97721123456" class="text-secondary">+977-21-123456</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+97721123456" class="text-secondary">+977-21-123456</a>
+                    </p>
                     <p><strong>Email:</strong> <a href="mailto:info@charteredinsights.com"
                             class="text-secondary">info@charteredinsights.com</a></p>
                 </div>
@@ -461,4 +523,313 @@
             font-size: 0.8rem;
         }
     }
+
+    /* Validation Feedback Styles */
+    .form-control.is-valid {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+    }
+
+    .form-control.is-invalid {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+    }
+
+    .valid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+        color: #28a745;
+    }
+
+    .invalid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+        color: #dc3545;
+    }
+
+    .form-control.is-valid~.valid-feedback {
+        display: block;
+    }
+
+    .form-control.is-invalid~.invalid-feedback {
+        display: block;
+    }
+
+    /* Toast Notification Styles */
+    .toast-container {
+        z-index: 9999 !important;
+    }
+
+    .toast {
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+    }
+
+    .toast-body {
+        padding: 12px 16px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+    .toast-body i {
+        font-size: 1.1em;
+    }
+
+    .toast.bg-success {
+        background: linear-gradient(135deg, #28a745, #20c997) !important;
+    }
+
+    .toast.bg-warning {
+        background: linear-gradient(135deg, #ffc107, #fd7e14) !important;
+        color: #212529 !important;
+    }
+
+    .toast.bg-danger {
+        background: linear-gradient(135deg, #dc3545, #e74c3c) !important;
+    }
+
+    .toast .btn-close-white {
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+    }
+
+    .toast .btn-close-white:hover {
+        opacity: 1;
+    }
+
+    /* Animation for toast */
+    .toast.showing {
+        animation: slideInRight 0.3s ease-out;
+    }
+
+    .toast.hide {
+        animation: slideOutRight 0.3s ease-in;
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.querySelector('.contact-form');
+        const successToast = document.getElementById('success-toast');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+
+        // Email validation function
+        function validateEmail(email) {
+            const emailRegex =
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+            return emailRegex.test(email);
+        }
+
+        // Phone validation function (supports multiple formats)
+        function validatePhone(phone) {
+            if (!phone.trim()) return true; // Phone is optional
+            // Enhanced phone validation supporting various Nepal and international formats
+            // Supports: +977-98XXXXXXXX, +977 98XXXXXXXX, 98XXXXXXXX, 977XXXXXXXXX, 01-XXXXXXX, etc.
+            const phoneRegex = /^(\+?977[-\s]?)?(\d{2}[-\s]?\d{7,8}|\d{9,10}|01[-\s]?\d{6,7})$/;
+            return phoneRegex.test(phone.replace(/\s+/g, ''));
+        }
+
+        // Real-time email validation
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                const email = this.value.trim();
+                const errorElement = document.getElementById('email-error');
+
+                if (email === '') {
+                    this.classList.remove('is-valid', 'is-invalid');
+                    return;
+                }
+
+                if (validateEmail(email)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                    this.classList.add('is-invalid');
+                    errorElement.textContent =
+                        'Please enter a valid email address (e.g., example@email.com)';
+                }
+            });
+
+            emailInput.addEventListener('blur', function() {
+                const email = this.value.trim();
+                if (email && !validateEmail(email)) {
+                    this.classList.add('is-invalid');
+                    document.getElementById('email-error').textContent =
+                        'Please enter a valid email address';
+                }
+            });
+        }
+
+        // Real-time phone validation
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                const phone = this.value.trim();
+                const errorElement = document.getElementById('phone-error');
+
+                if (phone === '') {
+                    this.classList.remove('is-valid', 'is-invalid');
+                    return;
+                }
+
+                if (validatePhone(phone)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                    this.classList.add('is-invalid');
+                    errorElement.textContent =
+                        'Please enter a valid phone number. Examples: +977-98XXXXXXXX, 98XXXXXXXX, or 01-XXXXXXX';
+                }
+            });
+
+            phoneInput.addEventListener('blur', function() {
+                const phone = this.value.trim();
+                if (phone && !validatePhone(phone)) {
+                    this.classList.add('is-invalid');
+                    document.getElementById('phone-error').textContent =
+                        'Please enter a valid phone number format (Nepal mobile, landline, or international)';
+                }
+            });
+        }
+
+        // Function to show toast
+        function showSuccessToast(message, bgClass = 'bg-success') {
+            const toastElement = document.getElementById('success-toast');
+            const messageElement = document.getElementById('toast-message');
+
+            // Update message and style
+            messageElement.textContent = message;
+            toastElement.className = `toast align-items-center text-white ${bgClass} border-0`;
+
+            // Initialize and show toast
+            const toast = new bootstrap.Toast(toastElement, {
+                autohide: true,
+                delay: 5000 // 5 seconds
+            });
+
+            toast.show();
+        }
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                let isValid = true;
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+
+                // Validate email
+                const email = emailInput.value.trim();
+                if (!validateEmail(email)) {
+                    emailInput.classList.add('is-invalid');
+                    document.getElementById('email-error').textContent =
+                        'Please enter a valid email address';
+                    isValid = false;
+                } else {
+                    emailInput.classList.remove('is-invalid');
+                    emailInput.classList.add('is-valid');
+                }
+
+                // Validate phone (if provided)
+                const phone = phoneInput.value.trim();
+                if (phone && !validatePhone(phone)) {
+                    phoneInput.classList.add('is-invalid');
+                    document.getElementById('phone-error').textContent =
+                        'Please enter a valid phone number format (Nepal mobile, landline, or international)';
+                    isValid = false;
+                } else if (phone) {
+                    phoneInput.classList.remove('is-invalid');
+                    phoneInput.classList.add('is-valid');
+                }
+
+                // If validation fails, prevent submission
+                if (!isValid) {
+                    e.preventDefault();
+                    showSuccessToast('Please correct the errors in the form before submitting.',
+                        'bg-warning');
+                    return;
+                }
+
+                // Show loading state
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                submitButton.disabled = true;
+
+                // Re-enable button after a delay (in case of redirect back)
+                setTimeout(() => {
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                }, 3000);
+            });
+        }
+
+        // Check for success message from server (for regular form submissions)
+        @if (session('success'))
+            showSuccessToast('{{ session('success') }}');
+        @endif
+
+        @if (session('error'))
+            showSuccessToast('{{ session('error') }}', 'bg-danger');
+        @endif
+
+        // Check for Laravel validation errors and show them in toast
+        @if ($errors->any())
+            let errorMessages = [];
+            @foreach ($errors->all() as $error)
+                errorMessages.push('{{ $error }}');
+            @endforeach
+
+            // Show first error in toast, rest will be visible in form fields
+            showSuccessToast(errorMessages[0], 'bg-danger');
+
+            // If there are multiple errors, show a summary after a delay
+            if (errorMessages.length > 1) {
+                setTimeout(() => {
+                    showSuccessToast(
+                        `Please check ${errorMessages.length} validation errors in the form.`,
+                        'bg-warning');
+                }, 3000);
+            }
+        @endif
+
+        // Show toast if form was submitted (check URL parameters)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('submitted') === 'true') {
+            showSuccessToast('Message sent successfully! We\'ll get back to you within 24 hours.');
+            // Remove the parameter from URL
+            urlParams.delete('submitted');
+            const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+            window.history.replaceState({}, '', newUrl);
+        }
+    });
+</script>

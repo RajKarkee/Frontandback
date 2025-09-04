@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BlogAdminController extends Controller
 {
@@ -27,14 +28,22 @@ class BlogAdminController extends Controller
             'slug' => 'nullable|string|max:255|unique:blogs',
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'featured_image' => 'nullable|string|max:255',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'status' => 'required|in:draft,published',
+            'status' => 'required|in:draft,published,inactive',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
+
+        // Handle file upload
+        if ($request->hasFile('featured_image')) {
+            $image = $request->file('featured_image');
+            $imageName = time() . '_' . Str::slug($data['title']) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('blogs', $imageName, 'public');
+            $data['featured_image'] = $imagePath;
+        }
 
         Blog::create($data);
 
@@ -59,14 +68,27 @@ class BlogAdminController extends Controller
             'slug' => 'nullable|string|max:255|unique:blogs,slug,' . $blog->id,
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'featured_image' => 'nullable|string|max:255',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'status' => 'required|in:draft,published',
+            'status' => 'required|in:draft,published,inactive',
         ]);
 
         $data = $request->all();
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
+
+        // Handle file upload
+        if ($request->hasFile('featured_image')) {
+            // Delete old image if exists
+            if ($blog->featured_image && Storage::disk('public')->exists($blog->featured_image)) {
+                Storage::disk('public')->delete($blog->featured_image);
+            }
+
+            $image = $request->file('featured_image');
+            $imageName = time() . '_' . Str::slug($data['title']) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('blogs', $imageName, 'public');
+            $data['featured_image'] = $imagePath;
+        }
 
         $blog->update($data);
 
@@ -76,6 +98,11 @@ class BlogAdminController extends Controller
 
     public function destroy(Blog $blog)
     {
+        // Delete associated image if exists
+        if ($blog->featured_image && Storage::disk('public')->exists($blog->featured_image)) {
+            Storage::disk('public')->delete($blog->featured_image);
+        }
+
         $blog->delete();
 
         return redirect()->route('admin.blogs.index')

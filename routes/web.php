@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\PostAdminController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\TagAdminController;
 use App\Http\Controllers\Admin\AuthorAdminController;
+use App\Http\Controllers\Admin\TeamAdminController;
 use App\Http\Controllers\AboutAdminController;
 use App\Http\Controllers\Front\ServiceController as FrontServiceController;
 use App\Http\Controllers\Front\IndustryController as FrontIndustryController;
@@ -43,7 +44,7 @@ use App\Http\Controllers\Front\OfficeController as FrontOfficeController;
 use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\BlogController as FrontBlogController;
 use App\Http\Controllers\Front\CareerController as FrontCareerController;
-use App\Http\Controllers\Front\SearchController as FrontSearchController;
+use App\Http\Controllers\Front\TeamController as FrontTeamController;
 
 
 
@@ -61,6 +62,7 @@ Route::get('/events',[FrontEventController::class,'index'])->name('events');
 Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
 Route::get('/offices', [FrontOfficeController::class,'index'])->name('offices');
 Route::get('/blogs', [FrontBlogController::class, 'index'])->name('blogs');
+Route::get('/blog/{slug}', [FrontBlogController::class, 'show'])->name('blog.detail');
 Route::get('/careers', [FrontCareerController::class, 'index'])->name('careers');
 Route::post('/carrers/apply',[FrontCareerController::class,'apply'])->name('application.store');
 Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
@@ -149,6 +151,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         'edit' => 'authors.edit',
         'update' => 'authors.update',
         'destroy' => 'authors.destroy',
+    ]);
+
+    // Team Management Routes
+    Route::resource('teams', TeamAdminController::class)->names([
+        'index' => 'teams.index',
+        'create' => 'teams.create',
+        'store' => 'teams.store',
+        'show' => 'teams.show',
+        'edit' => 'teams.edit',
+        'update' => 'teams.update',
+        'destroy' => 'teams.destroy',
     ]);
 
     Route::resource('events', EventAdminController::class)->names([
@@ -344,9 +357,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
 // Route::get('/industries', [IndustryController::class, 'index'])->name('industries');
 Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.show');
-Route::get('/ourteam', function () {
-    return view('new.ourteam');
-})->name('ourteam');
+Route::get('/ourteam', [FrontTeamController::class, 'index'])->name('ourteam');
 
 // Route::get('/insights', [PageController::class, 'insights'])->name('insights');
 Route::get('/insights/category/{categorySlug}', [PageController::class, 'insightsByCategory'])->name('insights.category');
@@ -372,7 +383,7 @@ Route::post('/apply', [JobApplicationController::class, 'store'])->name('careers
 // Blog routes
 // Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('/blogs/load-more', [BlogController::class, 'loadMore'])->name('blogs.load-more');
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+// Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/tag/{slug}', [BlogController::class, 'tag'])->name('blog.tag');
 

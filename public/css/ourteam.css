@@ -455,3 +455,43 @@
         padding: 0 6px;
     }
 }
+
+/* Social Links Styling */
+.team-card .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.team-card .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: var(--lighter);
+    color: var(--primary);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 14px;
+}
+
+.team-card .social-links a:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 576px) {
+    .team-card .social-links {
+        gap: 6px;
+    }
+
+    .team-card .social-links a {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}

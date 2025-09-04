@@ -26,34 +26,39 @@
                     <h2 class="gsap-animate">Latest Posts</h2>
                     <p class="lead gsap-animate">Stay informed with our expert insights and updates.</p>
                     <div class="row g-4">
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate">
-                            <div class="blog-card">
-                                <div class="content">
-                                    <h3>Navigating Tax Reforms in 2025</h3>
-                                    <p>Explore the latest tax regulatory changes and how they impact your business strategy.
+                        @forelse($blogs as $index => $blog)
+                            <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="{{ $index * 0.2 }}">
+                                <div class="blog-card">
+                                    @if ($blog->featured_image)
+                                        <div class="blog-image">
+                                            <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                                                alt="{{ $blog->title }}" class="img-fluid">
+                                        </div>
+                                    @endif
+                                    <div class="content">
+                                        <div class="blog-meta">
+                                            <span class="author">{{ $blog->author }}</span>
+                                            <span
+                                                class="date">{{ $blog->published_at ? $blog->published_at->format('M d, Y') : $blog->created_at->format('M d, Y') }}</span>
+                                        </div>
+                                        <h3>{{ $blog->title }}</h3>
+                                        <p>{{ $blog->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($blog->content), 150) }}
+                                        </p>
+                                        <a href="{{ route('blog.detail', $blog->slug) }}" class="btn-blog">Read More <i
+                                                class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12 text-center">
+                                <div class="no-blogs-message">
+                                    <i class="fas fa-blog fa-3x text-muted mb-3"></i>
+                                    <h3 class="text-muted">No Blog Posts Available</h3>
+                                    <p class="text-muted">We're working on bringing you amazing content. Check back soon!
                                     </p>
-                                    <a href="#read-more" class="btn-blog">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
-                            <div class="blog-card">
-                                <div class="content">
-                                    <h3>Technology Trends in Accounting</h3>
-                                    <p>Discover how AI and automation are transforming the accounting industry.</p>
-                                    <a href="#read-more" class="btn-blog">Read More <i class="fas fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
-                            <div class="blog-card">
-                                <div class="content">
-                                    <h3>Building a Resilient Business</h3>
-                                    <p>Learn strategies to strengthen your business against economic uncertainties.</p>
-                                    <a href="#read-more" class="btn-blog">Read More <i class="fas fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </section>
