@@ -45,6 +45,7 @@ use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\BlogController as FrontBlogController;
 use App\Http\Controllers\Front\CareerController as FrontCareerController;
 use App\Http\Controllers\Front\TeamController as FrontTeamController;
+use App\Http\Controllers\Front\SearchController as FrontSearchController;
 
 
 

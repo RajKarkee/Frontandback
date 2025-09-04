@@ -31,7 +31,7 @@ class SearchController extends Controller
 
             // Search Services
             try {
-                $services = Service::where('is_active', true)
+                $services = Service::where('status', 'active')
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('description', 'like', '%' . $query . '%');
@@ -44,7 +44,7 @@ class SearchController extends Controller
                         'type' => 'service',
                         'title' => $service->title,
                         'description' => substr(strip_tags($service->description ?? ''), 0, 100) . '...',
-                        'url' => '/services#service-' . $service->id,
+                        'url' => route('serviceDetails', $service->id),
                         'icon' => 'fas fa-file-invoice-dollar',
                         'category' => 'Services'
                     ];
@@ -55,7 +55,7 @@ class SearchController extends Controller
 
             // Search Industries
             try {
-                $industries = Industry::where('is_active', true)
+                $industries = Industry::where('status', 'active')
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('description', 'like', '%' . $query . '%');
@@ -68,7 +68,7 @@ class SearchController extends Controller
                         'type' => 'industry',
                         'title' => $industry->title,
                         'description' => substr(strip_tags($industry->description ?? ''), 0, 100) . '...',
-                        'url' => '/industries#industry-' . $industry->id,
+                        'url' => route('industryDetails', $industry->id),
                         'icon' => 'fas fa-industry',
                         'category' => 'Industries'
                     ];
@@ -79,7 +79,7 @@ class SearchController extends Controller
 
             // Search Insights
             try {
-                $insights = Insight::where('is_active', true)
+                $insights = Insight::where('is_active', 1)
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('content', 'like', '%' . $query . '%');
@@ -92,7 +92,7 @@ class SearchController extends Controller
                         'type' => 'insight',
                         'title' => $insight->title,
                         'description' => substr(strip_tags($insight->content ?? ''), 0, 100) . '...',
-                        'url' => '/insights#insight-' . $insight->id,
+                        'url' => route('insightDetails', $insight->id),
                         'icon' => 'fas fa-lightbulb',
                         'category' => 'Insights'
                     ];
@@ -103,7 +103,7 @@ class SearchController extends Controller
 
             // Search Blogs
             try {
-                $blogs = Blog::where('is_active', true)
+                $blogs = Blog::where('status', 'published')
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('content', 'like', '%' . $query . '%');
@@ -116,7 +116,7 @@ class SearchController extends Controller
                         'type' => 'blog',
                         'title' => $blog->title,
                         'description' => substr(strip_tags($blog->content ?? ''), 0, 100) . '...',
-                        'url' => '/blogs#blog-' . $blog->id,
+                        'url' => route('blog.detail', $blog->slug),
                         'icon' => 'fas fa-blog',
                         'category' => 'Blogs'
                     ];
@@ -127,7 +127,7 @@ class SearchController extends Controller
 
             // Search Events
             try {
-                $events = Event::where('is_active', true)
+                $events = Event::where('status', 'active')
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('description', 'like', '%' . $query . '%');
@@ -140,7 +140,7 @@ class SearchController extends Controller
                         'type' => 'event',
                         'title' => $event->title,
                         'description' => substr(strip_tags($event->description ?? ''), 0, 100) . '...',
-                        'url' => '/events#event-' . $event->id,
+                        'url' => route('eventDetails', $event->id),
                         'icon' => 'fas fa-calendar',
                         'category' => 'Events'
                     ];
@@ -151,7 +151,7 @@ class SearchController extends Controller
 
             // Search Careers
             try {
-                $careers = Career::where('is_active', true)
+                $careers = Career::where('status', 'active')
                     ->where(function($q) use ($query) {
                         $q->where('title', 'like', '%' . $query . '%')
                           ->orWhere('description', 'like', '%' . $query . '%');

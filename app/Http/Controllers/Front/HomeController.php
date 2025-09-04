@@ -19,7 +19,7 @@ class HomeController extends Controller
         $homeSetting = HomeSetting::getInstance();
         $services=DB::table('services')->where('status','active')->orderBy('sort_order','asc')->paginate(6);
         $why_choose_us=DB::table('about_why_choose_us')->where('is_active',1)->orderBy('sort_order','asc')->paginate(4);
-        $industries=DB::table('industries')->where('status','active')->where('is_featured',1)->orderBy('sort_order','asc')->paginate('4');
+        $industries=DB::table('industries')->where('status','active')->orderBy('sort_order','asc')->paginate('4');
         $jumbotrons=DB::table('jumbotrons')->where('page_slug','home')->where('is_active',1)->orderBy('sort_order','asc')->get();
         
         // Get the statistics JSON from database
