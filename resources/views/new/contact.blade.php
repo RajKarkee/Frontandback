@@ -163,7 +163,9 @@
                                 <i class="fas fa-calendar-alt"></i>
                                 <h3>Schedule Meeting</h3>
                                 <p>Book a face-to-face meeting at our office or arrange a virtual consultation.</p>
-                                <a href="#" class="btn-primary-filled">Schedule Now</a>
+                           
+<a href="{{ route('consultation') }}" class="btn-primary-filled">Schedule Now</a>
+
                             </div>
                         </div>
                     </div>
