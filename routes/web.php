@@ -401,6 +401,10 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.subm
 Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::post('/newsletter/unsubscribe', [App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
+Route::get('/consultation', function () {
+    return view('new.consultation');
+})->name('consultation');
+
 // Dynamic page routes (should be last)
 
 
