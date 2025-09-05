@@ -8,8 +8,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: "Roboto", sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    font-family: 'Roboto', sans-serif;
     color: var(--primary);
 }
 
@@ -21,7 +21,7 @@
     flex-grow: 1;
     text-align: center;
     font-style: italic;
-    font-family: "Lora", serif;
+    font-family: 'Lora', serif;
     position: relative;
     display: inline-block;
 }
@@ -31,11 +31,11 @@
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     margin-right: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .rka-scope h1 {
-    font-family: "Lora", serif;
+    font-family: 'Lora', serif;
     font-weight: 700;
     color: var(--white);
     letter-spacing: 0.5px;
@@ -63,6 +63,7 @@
     justify-content: space-between;
     width: 100%;
     max-width: 1400px;
+    gap: 16px;
 }
 
 .rka-scope .header .logo {
@@ -88,13 +89,16 @@
     background: rgba(255, 255, 255, 0.2);
     color: var(--white);
     font-size: 13px;
-    font-family: "Roboto", sans-serif;
-    transition: all 0.2s ease;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.2s ease, transform 0.2s ease;
 }
 
 .rka-scope .search-bar input:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px var(--shadow-lg);
+    transform: scale(1.02);
 }
 
 .rka-scope .search-bar input::placeholder {
@@ -109,11 +113,12 @@
     color: var(--white);
     font-size: 14px;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .rka-scope .search-bar i:hover {
-    color: var(--lighter);
+    color: var(--accent);
+    transform: scale(1.1);
 }
 
 .rka-scope .search-icon {
@@ -136,29 +141,62 @@
     top: 80px;
     left: 0;
     right: 0;
-    padding: 8px 16px;
-    background: var(--primary);
+    padding: 8px 12px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     z-index: 50;
+    box-shadow: 0 4px 16px var(--shadow-lg);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+.rka-scope .mobile-search.active {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .rka-scope .mobile-search input {
     width: 100%;
-    padding: 8px;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 8px 36px 8px 12px;
     border: none;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
     color: var(--white);
     font-size: 13px;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 3px 10px var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease, transform 0.2s ease;
 }
 
 .rka-scope .mobile-search input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.35));
+    box-shadow: 0 6px 16px var(--shadow-lg);
+    transform: scale(1.02);
 }
 
 .rka-scope .mobile-search input::placeholder {
     color: rgba(255, 255, 255, 0.7);
+}
+
+.rka-scope .mobile-search i {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--white);
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.rka-scope .mobile-search i:hover {
+    color: var(--accent);
+    transform: scale(1.1);
 }
 
 .rka-scope .menu-btn {
@@ -183,8 +221,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: "Roboto", sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    font-family: 'Roboto', sans-serif;
     color: var(--primary);
 }
 
@@ -304,7 +342,7 @@
     max-width: 900px;
     height: 89vh;
     background: var(--white);
-
+    border-radius: 16px;
     border: 1px solid rgba(0, 43, 74, 0.1);
     box-shadow: 0 12px 40px var(--shadow-lg);
     opacity: 0;
@@ -332,7 +370,7 @@
     color: var(--primary);
     margin: 0;
     font-weight: 600;
-    font-family: "Lora", serif;
+    font-family: 'Lora', serif;
 }
 
 .rka-sidebar-scope .page-preview img {
@@ -440,10 +478,10 @@
 
 .rka-sidebar-scope .overlay {
     position: fixed;
-    top: 0; /* Changed to match page-preview */
+    top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     z-index: 998;
     opacity: 0;
@@ -466,7 +504,30 @@
     margin-left: 480px;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1200px) {
+    .rka-scope .header {
+        padding: 0 32px;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 20px;
+        max-width: 400px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .slogan {
+        font-size: 14px;
+        max-width: 500px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .search-bar {
+        width: 280px;
+    }
+    .rka-scope .mobile-search {
+        display: none;
+    }
     .rka-sidebar-scope .sidebar {
         transform: translateX(0) !important;
         width: 80px;
@@ -480,12 +541,52 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1199px) and (min-width: 992px) {
+    .rka-scope .header {
+        padding: 0 24px;
+    }
+    .rka-scope .header-content {
+        gap: 12px;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 18px;
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .slogan {
+        font-size: 11px;
+        max-width: 350px;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.2;
+    }
+    .rka-scope .search-bar {
+        display: none;
+    }
+    .rka-scope .search-icon {
+        display: block;
+    }
+    .rka-scope .mobile-search {
+        padding: 8px 16px;
+    }
+    .rka-scope .mobile-search input {
+        font-size: 13px;
+        padding: 8px 36px 8px 12px;
+        border-radius: 16px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        box-shadow: 0 3px 10px var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .rka-scope .mobile-search i {
+        right: 24px;
+        font-size: 14px;
+    }
     .rka-sidebar-scope .sidebar {
         transform: translateX(-100%);
         width: 40%;
         max-width: 480px;
-        box-shadow: 6px 0 15px rgba(0, 59, 92, 0.15);
     }
     .rka-sidebar-scope .sidebar.active {
         transform: translateX(0);
@@ -500,74 +601,193 @@
     .rka-content-scope.active {
         margin-left: 0;
     }
-    .rka-scope .header {
-        padding: 0 16px;
-    }
-    .rka-scope .search-bar {
-        width: 200px;
-    }
     .rka-scope .menu-btn {
         display: block;
     }
-    .rka-sidebar-scope .page-preview .services-container {
-        grid-template-columns: 1fr;
-    }
-}
-@media (max-width: 991px) {
-    .rka-content-scope {
-        margin-left: 0 !important;
-        padding-top: 0;
-    }
-
-    .rka-sidebar-scope .sidebar {
-        width: 250px;
-        left: -250px;
-    }
-
-    .rka-sidebar-scope .sidebar.active {
-        left: 0;
-    }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) and (min-width: 768px) {
+    .rka-scope .header {
+        padding: 0 16px;
+    }
+    .rka-scope .header-content {
+        gap: 10px;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 16px;
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .slogan {
+        font-size: 10px;
+        max-width: 250px;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.2;
+    }
     .rka-scope .search-bar {
         display: none;
     }
     .rka-scope .search-icon {
         display: block;
     }
-    .rka-scope .header-content {
-        gap: 8px;
+    .rka-scope .mobile-search {
+        padding: 8px 12px;
     }
-    .rka-scope .header-content h1 {
-        font-size: 18px;
+    .rka-scope .mobile-search input {
+        font-size: 13px;
+        padding: 8px 36px 8px 12px;
+        border-radius: 16px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        box-shadow: 0 3px 10px var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .rka-scope .header-content p {
-        font-size: 12px;
+    .rka-scope .mobile-search i {
+        right: 24px;
+        font-size: 14px;
     }
-    .rka-sidebar-scope .page-preview .services-container {
-        grid-template-columns: 1fr;
+    .rka-sidebar-scope .sidebar {
+        width: 250px;
+        left: -250px;
     }
-    .rka-sidebar-scope .overlay {
-        width: 90vw;
-        height: 60vh;
+    .rka-sidebar-scope .sidebar.active {
+        left: 0;
+    }
+    .rka-content-scope {
+        margin-left: 0 !important;
+        padding-top: 0;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 767px) and (min-width: 576px) {
+    .rka-scope .header {
+        padding: 0 12px;
+    }
+    .rka-scope .header-content {
+        gap: 8px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 14px;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .slogan {
+        display: none;
+    }
+    .rka-scope .search-bar {
+        display: none;
+    }
+    .rka-scope .search-icon {
+        display: block;
+    }
+    .rka-scope .menu-btn {
+        display: block;
+    }
+    .rka-scope .mobile-search {
+        padding: 8px 12px;
+    }
+    .rka-scope .mobile-search input {
+        font-size: 13px;
+        padding: 8px 36px 8px 12px;
+        border-radius: 16px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        box-shadow: 0 3px 10px var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .rka-scope .mobile-search i {
+        right: 24px;
+        font-size: 14px;
+    }
+    .rka-sidebar-scope .page-preview,
+    .rka-sidebar-scope .overlay {
+        display: none;
+    }
+    .rka-content-scope {
+        margin-left: 0 !important;
+        padding-top: 0;
+    }
+    .rka-sidebar-scope .sidebar {
+        width: 250px;
+        left: -250px;
+    }
+    .rka-sidebar-scope .sidebar.active {
+        left: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .rka-scope .header {
+        padding: 0 8px;
+        height: 70px;
+    }
+    .rka-scope .header-content {
+        gap: 6px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .rka-scope .header-content h1 {
+        font-size: 12px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rka-scope .slogan {
+        display: none;
+    }
+    .rka-scope .search-bar {
+        display: none;
+    }
+    .rka-scope .search-icon {
+        display: block;
+    }
+    .rka-scope .menu-btn {
+        display: block;
+    }
+    .rka-scope .mobile-search {
+        padding: 8px 8px;
+    }
+    .rka-scope .mobile-search input {
+        font-size: 13px;
+        padding: 8px 36px 8px 12px;
+        border-radius: 16px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        box-shadow: 0 3px 10px var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .rka-scope .mobile-search i {
+        right: 20px;
+        font-size: 14px;
+    }
+    .rka-sidebar-scope .sidebar {
+        width: 100%;
+        max-width: none;
+        left: -100%;
+    }
+    .rka-sidebar-scope .sidebar.active {
+        left: 0;
+    }
+    .rka-sidebar-scope .page-preview,
+    .rka-sidebar-scope .overlay {
+        display: none;
+    }
     .rka-content-scope {
         padding: 0;
         margin-left: 0 !important;
+        margin-top: 70px;
     }
-
     .container-fluid {
         padding: 0;
     }
-
     .section-container {
         padding: 0;
     }
-
     .stats-section,
     .services-section,
     .why-choose-us,
@@ -575,24 +795,13 @@
     .cta-section {
         padding: 1.5rem 0;
     }
-
     .hero-content {
         margin: 0 auto;
         width: 100%;
         padding: 1rem;
     }
-
-    .rka-scope .header {
-        padding: 0;
-    }
-
     footer {
         margin-bottom: 0;
         padding-bottom: 0;
-    }
-
-    .rka-sidebar-scope .sidebar.active {
-        width: 100%;
-        max-width: none;
     }
 }

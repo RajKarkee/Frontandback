@@ -607,9 +607,9 @@
         max-width: 220px;
     }
     .btn-custom {
-        padding: 0.9rem 3rem;
-        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-        min-width: 180px;
+        padding: 0.9rem 4rem;
+        font-size: clamp(0.9rem, 2.2vw, 1rem);
+        min-width: 240px;
     }
     .events-section,
     .past-events-section,
@@ -730,9 +730,9 @@
         max-width: 200px;
     }
     .btn-custom {
-        padding: 0.9rem 3rem;
-        font-size: clamp(0.75rem, 2vw, 0.9rem);
-        min-width: 180px;
+        padding: 0.9rem 4rem;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        min-width: 240px;
     }
     .events-section,
     .past-events-section,
@@ -856,10 +856,10 @@
         width: 100%;
     }
     .btn-custom {
-        padding: 0.9rem 3rem;
-        font-size: clamp(0.7rem, 2vw, 0.85rem);
-        min-width: 50px;
-        width: 58%;
+        padding: 0.9rem 4rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
+        min-width: 260px;
+        width: 85%;
     }
     .events-section,
     .past-events-section,
