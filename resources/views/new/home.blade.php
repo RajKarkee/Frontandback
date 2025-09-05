@@ -83,7 +83,8 @@
                 <!-- Why Choose Us -->
                 <section class="why-choose-us">
                     <div class="section-container">
-                        <h2 class="gsap-animate">Why Choose Chartered Insights</h2>
+                        <h2 class="gsap-animate">Why Choose
+                            {{ $footerSetting ? $footerSetting->company_name : 'Charter Insights' }}</h2>
                         <p class="lead gsap-animate">Partner with us for unmatched expertise, innovative solutions, and a
                             dedication to your business success.</p>
                         <div class="row g-4 align-items-center">
@@ -143,7 +144,8 @@
                     <div class="section-container">
                         <div class="gsap-animate">
                             <h2>Elevate Your Business Today</h2>
-                            <p>Join forces with Chartered Insights to unlock expert guidance and transformative solutions
+                            <p>Join forces with {{ $footerSetting ? $footerSetting->company_name : 'Charter Insights' }} to
+                                unlock expert guidance and transformative solutions
                                 tailored to your needs.</p>
                             <div class="cta-buttons">
                                 <a href="/contact" class="btn-primary-filled">Get Started Now <i
