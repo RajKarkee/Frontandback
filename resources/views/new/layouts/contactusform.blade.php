@@ -145,7 +145,11 @@
                 <div class="contact-info-card">
                     <h3>Business Hours</h3>
                     <ul>
-                        @if ($contactInfo->business_hours)
+                        @if (
+                            $contactInfo &&
+                                isset($contactInfo->business_hours) &&
+                                !empty($contactInfo->business_hours) &&
+                                is_array($contactInfo->business_hours))
                             @foreach ($contactInfo->business_hours as $day => $hours)
                                 <li><strong>{{ $day }}:</strong> {{ $hours }}</li>
                             @endforeach
