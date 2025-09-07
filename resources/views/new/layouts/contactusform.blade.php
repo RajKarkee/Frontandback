@@ -151,12 +151,33 @@
                     </ul>
                     <h3>Follow Us</h3>
                     <div class="social-links">
-                        <a href="{{ $footerSetting ? $footerSetting->facebook : '#' }}" aria-label="Facebook"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a href="{{ $footerSetting ? $footerSetting->twitter : '#' }}" aria-label="Twitter"><i
-                                class="fab fa-twitter"></i></a>
-                        <a href="{{ $footerSetting ? $footerSetting->linkedin : '#' }}" aria-label="LinkedIn"><i
-                                class="fab fa-linkedin-in"></i></a>
+                        @if ($footerSetting->social_links && is_array($footerSetting->social_links))
+                            @if (!empty($footerSetting->social_links['linkedin']))
+                                <a href="{{ $footerSetting->social_links['linkedin'] }}" title="LinkedIn"
+                                    aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            @endif
+                            @if (!empty($footerSetting->social_links['twitter']))
+                                <a href="{{ $footerSetting->social_links['twitter'] }}" title="Twitter"
+                                    aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                            @endif
+                            @if (!empty($footerSetting->social_links['facebook']))
+                                <a href="{{ $footerSetting->social_links['facebook'] }}" title="Facebook"
+                                    aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            @endif
+                            @if (!empty($footerSetting->social_links['instagram']))
+                                <a href="{{ $footerSetting->social_links['instagram'] }}" title="Instagram"
+                                    aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                            @endif
+                        @else
+                            <a href="#" title="LinkedIn" aria-label="Follow us on LinkedIn"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a href="#" title="Twitter" aria-label="Follow us on Twitter"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#" title="Facebook" aria-label="Follow us on Facebook"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Instagram" aria-label="Follow us on Instagram"><i
+                                    class="fab fa-instagram"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>

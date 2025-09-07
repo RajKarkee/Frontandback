@@ -14,7 +14,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-       $teams=DB::table('teams')->get();
+          $teams = DB::table('about_team_members')->where('is_active', '1')->orderBy('sort_order','asc')->get();
         
         return view('new.ourteam', compact('teams'));
     }

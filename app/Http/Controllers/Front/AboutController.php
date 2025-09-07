@@ -14,7 +14,7 @@ class AboutController extends Controller
        $about = DB::table('abouts')->where('is_active', '1')->first();
     $about_core_values = DB::table('about_core_values')->where('is_active', '1')->orderBy('sort_order','asc')->get();
     $about_expertise_areas = DB::table('about_expertise_areas')->where('is_active', '1')->orderBy('sort_order','asc')->get();
-    $about_team_members = DB::table('about_team_members')->where('is_active', '1')->orderBy('sort_order','asc')->get();
+    $about_team_members = DB::table('about_team_members')->where('is_active', '1')->orderBy('sort_order','asc')->paginate(3);
     $about_why_choose_us = DB::table('about_why_choose_us')->where('is_active', '1')->orderBy('sort_order','asc')->get();
     return view('new.about', compact(
     'about',

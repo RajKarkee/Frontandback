@@ -12,9 +12,13 @@ class AboutTeamMember extends Model
     protected $fillable = [
         'about_id',
         'name',
+        'position',
         'role',
         'bio',
         'image',
+        'email',
+        'twitter_url',
+        'linkedin_url',
         'sort_order',
         'is_active',
     ];

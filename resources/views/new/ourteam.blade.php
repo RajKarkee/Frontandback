@@ -43,7 +43,7 @@
                                         <p class="role">{{ $team->position }}</p>
                                         <p>{{ $team->bio }}</p>
 
-                                        @if ($team->linkedin_url || $team->twitter_url || $team->facebook_url || $team->email)
+                                        @if ($team->linkedin_url || $team->twitter_url || $team->email)
                                             <div class="social-links mt-3">
                                                 @if ($team->email)
                                                     <a href="mailto:{{ $team->email }}" class="text-primary me-2"
@@ -63,12 +63,7 @@
                                                         <i class="fab fa-twitter"></i>
                                                     </a>
                                                 @endif
-                                                @if ($team->facebook_url)
-                                                    <a href="{{ $team->facebook_url }}" target="_blank"
-                                                        class="text-primary me-2" title="Facebook">
-                                                        <i class="fab fa-facebook-f"></i>
-                                                    </a>
-                                                @endif
+
                                             </div>
                                         @endif
                                     </div>

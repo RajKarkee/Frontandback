@@ -8,8 +8,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    font-family: 'Roboto', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
     color: var(--primary);
 }
 
@@ -21,7 +21,7 @@
     flex-grow: 1;
     text-align: center;
     font-style: italic;
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
     position: relative;
     display: inline-block;
 }
@@ -35,7 +35,7 @@
 }
 
 .rka-scope h1 {
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
     font-weight: 700;
     color: var(--white);
     letter-spacing: 0.5px;
@@ -89,7 +89,7 @@
     background: rgba(255, 255, 255, 0.2);
     color: var(--white);
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     box-shadow: 0 2px 8px var(--shadow);
     transition: all 0.2s ease, transform 0.2s ease;
 }
@@ -163,10 +163,14 @@
     padding: 8px 36px 8px 12px;
     border: none;
     border-radius: 16px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.25)
+    );
     color: var(--white);
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     box-shadow: 0 3px 10px var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.2s ease, transform 0.2s ease;
@@ -174,7 +178,11 @@
 
 .rka-scope .mobile-search input:focus {
     outline: none;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.35));
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.35)
+    );
     box-shadow: 0 6px 16px var(--shadow-lg);
     transform: scale(1.02);
 }
@@ -221,8 +229,8 @@
     --gray: #6c757d;
     --shadow: rgba(0, 43, 74, 0.15);
     --shadow-lg: rgba(0, 43, 74, 0.25);
-    --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    font-family: 'Roboto', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: "Roboto", sans-serif;
     color: var(--primary);
 }
 
@@ -342,7 +350,7 @@
     max-width: 900px;
     height: 89vh;
     background: var(--white);
-    border-radius: 16px;
+
     border: 1px solid rgba(0, 43, 74, 0.1);
     box-shadow: 0 12px 40px var(--shadow-lg);
     opacity: 0;
@@ -370,7 +378,7 @@
     color: var(--primary);
     margin: 0;
     font-weight: 600;
-    font-family: 'Lora', serif;
+    font-family: "Lora", serif;
 }
 
 .rka-sidebar-scope .page-preview img {
@@ -575,7 +583,11 @@
         font-size: 13px;
         padding: 8px 36px 8px 12px;
         border-radius: 16px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.25)
+        );
         box-shadow: 0 3px 10px var(--shadow-lg);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -640,7 +652,11 @@
         font-size: 13px;
         padding: 8px 36px 8px 12px;
         border-radius: 16px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.25)
+        );
         box-shadow: 0 3px 10px var(--shadow-lg);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -696,7 +712,11 @@
         font-size: 13px;
         padding: 8px 36px 8px 12px;
         border-radius: 16px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.25)
+        );
         box-shadow: 0 3px 10px var(--shadow-lg);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -757,7 +777,11 @@
         font-size: 13px;
         padding: 8px 36px 8px 12px;
         border-radius: 16px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25));
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.25)
+        );
         box-shadow: 0 3px 10px var(--shadow-lg);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }

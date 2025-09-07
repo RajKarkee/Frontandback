@@ -71,6 +71,7 @@ class TeamAdminController extends Controller
      */
     public function edit(Team $team)
     {
+        $team = Team::find($team->id);
         return view('admin.teams.edit', compact('team'));
     }
 
