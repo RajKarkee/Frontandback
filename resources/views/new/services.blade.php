@@ -15,7 +15,8 @@
             <section class="hero-section">
                 <div class="hero-slider">
                     @foreach ($jumbotrons as $index => $jumbotron)
-                        <div class="hero-slide hero-slide-{{ $index + 1 }}">
+                        <div class="hero-slide hero-slide-{{ $index + 1 }}"
+                            style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                             <div class="hero-content gsap-animate">
                                 <h1>{{ $jumbotron->title }}</h1>
                                 <p>{{ $jumbotron->subtitle }}</p>
@@ -48,9 +49,9 @@
                                 <div class="service-card">
                                     <h3>{{ $service->title }}</h3>
                                     <p>{{ $service->description }}</p>
-                                 <a href="{{ route('serviceDetails', $service->id) }}" class="learn-more">
-    Learn More <i class="fas fa-arrow-right"></i>
-</a>
+                                    <a href="{{ route('serviceDetails', $service->id) }}" class="learn-more">
+                                        Learn More <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -319,7 +320,7 @@
                 }, 100);
             });
 
-      
+
         });
     </script>
 @endsection

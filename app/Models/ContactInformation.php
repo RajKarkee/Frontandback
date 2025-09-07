@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class ContactInformation extends Model
 {
     use HasFactory;
@@ -60,4 +61,18 @@ class ContactInformation extends Model
     {
         return collect($this->social_media_links ?? []);
     }
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('contact_info');
+            Cache::remember('contact_info', 60 * 60 * 24, function () {
+                return ContactInformation::first();
+            });
+        });
+
+        static::deleted(function () {
+            Cache::forget('contact_info');
+        });
+    }
+
 }
