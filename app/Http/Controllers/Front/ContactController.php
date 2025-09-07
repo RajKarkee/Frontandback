@@ -18,8 +18,9 @@ class ContactController extends Controller
     {
         $contactInfo = ContactInformation::getActive();
         $jumbotrons=DB::table('jumbotrons')->where('page_slug','contact')->where('is_active',1)->orderBy('sort_order','asc')->get();
-     
-        return view('new.contact', compact('contactInfo','jumbotrons'));
+       $footer_setting = \App\Models\FooterSetting::getInstance();
+  
+        return view('new.contact', compact('contactInfo','jumbotrons','footer_setting'));
     }
 
     public function store(Request $request)

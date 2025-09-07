@@ -26,7 +26,7 @@
             </section>
 
             <!-- Contact Section (Form and Info Side by Side) -->
-            <section class="contact-section" id="contact">
+            {{-- <section class="contact-section" id="contact">
                 <div class="section-container">
                     <h2 class="gsap-animate">Get in Touch</h2>
                     <p class="lead gsap-animate">Ready to discuss your business needs? Fill out the form below and one of
@@ -116,21 +116,18 @@
                         </div>
                     </div>
                 </div>
-            </section>
-
+            </section> --}}
+            @include('new.layouts.contactusform')
             <!-- Location Section -->
             <section class="location-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Location</h2>
-                    <p class="lead gsap-animate">Visit our main office in Biratnagar or reach out to us for appointments at
-                        your convenience.</p>
+                    <p class="lead gsap-animate">{{ $contactInfo->title }}</p>
                     <div class="map-container gsap-animate">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.973465836073!2d87.27979731506276!3d26.45213998332637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef744e6d0b3e2b%3A0x5f3b9c4e4e4e4e4e!2sBiratnagar%2C%20Nepal!5e0!3m2!1sen!2snp!4v1698765432100!5m2!1sen!2snp"
-                            allowfullscreen loading="lazy"
-                            aria-label="Chartered Insights Main Office, Biratnagar, Nepal"></iframe>
+                        <iframe src="{{ $contactInfo->map_embed_url }}" allowfullscreen loading="lazy"
+                            aria-label="{{ $footer_setting->company_name }} Main Office, {{ $contactInfo->address }}"></iframe>
                     </div>
-                    <a href="https://www.google.com/maps/place/Biratnagar,+Nepal" target="_blank"
+                    <a href="{{ $contactInfo->google_maps_link }}" target="_blank"
                         class="btn-primary-filled gsap-animate">View on Google Maps</a>
                 </div>
             </section>
@@ -146,7 +143,7 @@
                                 <i class="fas fa-phone-alt"></i>
                                 <h3>Phone Consultation</h3>
                                 <p>Schedule a phone consultation to discuss your needs and get initial guidance.</p>
-                                <a href="tel:+97721123456" class="btn-primary-filled">Call Now</a>
+                                <a href="tel:{{ $contactInfo->phone }}" class="btn-primary-filled">Call Now</a>
                             </div>
                         </div>
                         <div class="col-md-4 gsap-animate" data-delay="0.2">

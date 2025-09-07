@@ -11,7 +11,8 @@ class ContactController extends Controller
     public function index()
     {
         $contactInfo = ContactInformation::getActive();
-        return view('contact', compact('contactInfo'));
+        $footer_setting = \App\Models\FooterSetting::getInstance();
+        return view('contact', compact('contactInfo', 'footer_setting'));
     }
 
     public function store(Request $request)

@@ -145,9 +145,15 @@
                 <div class="contact-info-card">
                     <h3>Business Hours</h3>
                     <ul>
-                        <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
-                        <li><strong>Saturday:</strong> 9:00 AM - 2:00 PM</li>
-                        <li><strong>Sunday:</strong> Closed</li>
+                        @if ($contactInfo->business_hours)
+                            @foreach ($contactInfo->business_hours as $day => $hours)
+                                <li><strong>{{ $day }}:</strong> {{ $hours }}</li>
+                            @endforeach
+                        @else
+                            <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
+                            <li><strong>Saturday:</strong> 9:00 AM - 2:00 PM</li>
+                            <li><strong>Sunday:</strong> Closed</li>
+                        @endif
                     </ul>
                     <h3>Follow Us</h3>
                     <div class="social-links">
