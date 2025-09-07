@@ -11,7 +11,8 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 @foreach ($jumbotrons as $index => $jumbotron)
-                    <div class="hero-slide hero-slide-{{ $index + 1 }}">
+                    <div class="hero-slide hero-slide-{{ $index + 1 }}"
+                        style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                         <div class="hero-content gsap-animate">
                             <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>

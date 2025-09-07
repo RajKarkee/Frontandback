@@ -9,9 +9,10 @@
     <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Hero Section -->
-            <section class="hero-section">
-                @if ($jumbotrons->isNotEmpty())
-                    @foreach ($jumbotrons as $jumbotron)
+            @if ($jumbotrons->isNotEmpty())
+                @foreach ($jumbotrons as $jumbotron)
+                    <section class="hero-section"
+                        style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                         <div class="hero-content gsap-animate">
                             <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>
@@ -23,9 +24,9 @@
                                         class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
-                    @endforeach
-                @endif
-            </section>
+                    </section>
+                @endforeach
+            @endif
 
             <!-- Events Section -->
             <section class="events-section" id="events">
