@@ -45,13 +45,13 @@ class ContactInformationAdminController extends Controller
             'social_media_links.youtube' => 'nullable|url',
 
             // Business hours
-            'business_hours.monday' => 'nullable|string',
-            'business_hours.tuesday' => 'nullable|string',
-            'business_hours.wednesday' => 'nullable|string',
-            'business_hours.thursday' => 'nullable|string',
-            'business_hours.friday' => 'nullable|string',
-            'business_hours.saturday' => 'nullable|string',
-            'business_hours.sunday' => 'nullable|string',
+            'business_hours.Monday' => 'nullable|string',
+            'business_hours.Tuesday' => 'nullable|string',
+            'business_hours.Wednesday' => 'nullable|string',
+            'business_hours.Thursday' => 'nullable|string',
+            'business_hours.Friday' => 'nullable|string',
+            'business_hours.Saturday' => 'nullable|string',
+            'business_hours.Sunday' => 'nullable|string',
         ]);
 
         // Handle checkbox
