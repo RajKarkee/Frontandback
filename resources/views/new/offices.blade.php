@@ -17,9 +17,10 @@
     <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Hero Section -->
-            <header class="hero-section">
-                @if ($jumbotrons->isNotEmpty())
-                    @foreach ($jumbotrons as $jumbotron)
+            @if ($jumbotrons->isNotEmpty())
+                @foreach ($jumbotrons as $jumbotron)
+                    <header class="hero-section"
+                        style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                         <div class="hero-content gsap-animate">
                             <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>
@@ -32,9 +33,9 @@
                                         class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </nav>
                         </div>
-                    @endforeach
-                @endif
-            </header>
+                    </header>
+                @endforeach
+            @endif
 
             <!-- Locations Section -->
             <!-- Locations Section -->

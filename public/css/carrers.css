@@ -109,12 +109,10 @@
     min-height: 80vh;
     overflow: hidden;
     background: linear-gradient(
-            135deg,
-            rgba(0, 33, 63, 0.8),
-            rgba(0, 144, 212, 0.7)
-        ),
-        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920&h=1080")
-            center/cover;
+        135deg,
+        rgba(0, 33, 63, 0.8),
+        rgba(0, 144, 212, 0.7)
+    );
     margin: 0;
     padding: 0;
     width: 100%;

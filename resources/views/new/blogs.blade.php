@@ -9,16 +9,17 @@
     <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Blog Hero Section -->
-            <section class="blog-hero-section">
-                @if ($jumbotrons->isNotEmpty())
-                    @foreach ($jumbotrons as $jumbotron)
+            @if ($jumbotrons->isNotEmpty())
+                @foreach ($jumbotrons as $jumbotron)
+                    <section class="blog-hero-section"
+                        style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                         <div class="blog-hero-content gsap-animate">
                             <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>
                         </div>
-                    @endforeach
-                @endif
-            </section>
+                    </section>
+                @endforeach
+            @endif
 
             <!-- Blog Articles Section -->
             <section class="blog-articles-section" id="blog-articles">

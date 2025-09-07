@@ -16,9 +16,10 @@
     <div class="rka-scope" id="main-content">
         <main>
             <!-- Hero Section -->
-            <section class="hero-section">
-                @if ($jumbotrons->isNotEmpty())
-                    @foreach ($jumbotrons as $jumbotron)
+            @if ($jumbotrons->isNotEmpty())
+                @foreach ($jumbotrons as $jumbotron)
+                    <section class="hero-section"
+                        style="background-image: url('{{ $jumbotron->background_image_url }}'); background-position: center; background-size: cover;">
                         <div class="hero-content gsap-animate">
                             <h1>{{ $jumbotron->title }}</h1>
                             <p>{{ $jumbotron->subtitle }}</p>
@@ -29,9 +30,9 @@
                                     HR</a>
                             </div>
                         </div>
-                    @endforeach
-                @endif
-            </section>
+                    </section>
+                @endforeach
+            @endif
 
             <!-- Why Choose Section -->
             <section class="why-choose-section">

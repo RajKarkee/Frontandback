@@ -8,21 +8,32 @@
     <div class="rka-scope" style="margin: 0; padding: 0; overflow-x: hidden;">
         <main style="margin: 0; padding: 0; width: 100vw;">
             <!-- Hero Section -->
-            <section class="about-hero-section">
-                <div class="about-hero-content gsap-animate">
-                    <h1>About Chartered Insights</h1>
-                    <p>Discover our journey, values, and commitment to delivering exceptional financial and business
-                        solutions.</p>
-                </div>
-            </section>
+            @if ($jumbotron->isNotEmpty())
+                @foreach ($jumbotron as $jumb)
+                    <section class="about-hero-section"
+                        style="background-image: url('{{ $jumb->background_image_url }}'); background-position: center; background-size: cover;">
+                        <div class="about-hero-content gsap-animate">
+                            <h1>{{ $jumb->title }}</h1>
+                            <p>{{ $jumb->subtitle }}</p>
+                        </div>
+                    </section>
+                @endforeach
+            @endif
+
 
             <!-- Our Story Section -->
             <section class="story-section" id="story">
                 <div class="section-container">
                     <h2 class="gsap-animate">{{ $about->our_story_title }}</h2>
                     <div class="story-content gsap-animate" data-delay="0.1">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
-                            alt="Professional team collaboration" class="story-image">
+                        @if (!empty($about->our_story_image))
+                            <img src="{{ asset('storage/' . $about->our_story_image) }}"
+                                alt="{{ $about->our_story_title ?? 'Professional team collaboration' }}"
+                                class="story-image">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
+                                alt="Professional team collaboration" class="story-image">
+                        @endif
                         <div class="story-text">
                             <p>{!! str_replace('.', '.</p><p>', trim($about->our_story_content, '. ')) !!}</p>
                         </div>
