@@ -12,7 +12,10 @@
         </div>
     </div>
 </div>
+@php
+    $footerSetting = \App\Models\FooterSetting::first();
 
+@endphp
 <!-- Contact Section (Form and Info Side by Side) -->
 <section class="contact-section" id="contact">
     <div class="section-container">
@@ -53,7 +56,7 @@
                             <div class="valid-feedback" id="email-success">Email format is valid!</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="phone" class="form-label">Phone Number</label>
+                            <label for="phone" class="form-label">Phone Number *</label>
                             <input type="tel" class="form-control @error('phone') is-invalid @enderror"
                                 name='phone' id="phone" value="{{ old('phone') }}" placeholder="+977-XX-XXXXXXX">
                             <div class="invalid-feedback" id="phone-error">
@@ -126,12 +129,18 @@
             </div>
             <div class="col-lg-6 gsap-animate" data-delay="0.2">
                 <div class="contact-info-card mb-4">
-                    <h3>Main Office - Biratnagar</h3>
-                    <p><strong>Address:</strong> Main Road, Biratnagar-15, Morang, Nepal</p>
-                    <p><strong>Phone:</strong> <a href="tel:+97721123456" class="text-secondary">+977-21-123456</a>
+                    <h3>Main Office -
+                        {{ $footerSetting? Str::of(str_replace(',', '', $footerSetting->address))->explode(' ')->first(): 'N/A' }}
+
+
+                    </h3>
+                    <p><strong>Address:</strong>{{ $footerSetting ? $footerSetting->address : 'N/A' }}</p>
+                    <p><strong>Phone:</strong> <a href="{{ 'tel:' . ($footerSetting ? $footerSetting->phone : '') }}"
+                            class="text-secondary">{{ $footerSetting ? $footerSetting->phone : 'N/A' }}</a>
                     </p>
-                    <p><strong>Email:</strong> <a href="mailto:info@charteredinsights.com"
-                            class="text-secondary">info@charteredinsights.com</a></p>
+                    <p><strong>Email:</strong> <a
+                            href="{{ 'mailto:' . ($footerSetting ? $footerSetting->email : '') }}"
+                            class="text-secondary">{{ $footerSetting ? $footerSetting->email : 'N/A' }}</a></p>
                 </div>
                 <div class="contact-info-card">
                     <h3>Business Hours</h3>
@@ -142,9 +151,12 @@
                     </ul>
                     <h3>Follow Us</h3>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ $footerSetting ? $footerSetting->facebook : '#' }}" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ $footerSetting ? $footerSetting->twitter : '#' }}" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="{{ $footerSetting ? $footerSetting->linkedin : '#' }}" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
