@@ -71,6 +71,10 @@ Route::get('/contact', [FrontContactController::class, 'index'])->name('contact'
 Route::get('/', [FrontHomeController::class, 'home'])->name('home');
 Route::get('/industries/all', [FrontIndustryController::class, 'getAll'])->name('industries.all');
 
+// Appointment Routes  
+Route::get('/consultation', function() { return view('new.consultation'); })->name('consultation');
+Route::post('/appointments', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
+
 // Search Routes
 Route::get('/search', [FrontSearchController::class, 'searchPage'])->name('search.page');
 Route::get('/api/search', [FrontSearchController::class, 'search'])->name('search.api');
@@ -226,6 +230,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         ->name('contact-information.settings');
     Route::post('contact-information/settings', [ContactInformationAdminController::class, 'saveSettings'])
         ->name('contact-information.settings.save');
+
+    // Appointment Management
+    Route::get('appointments', [App\Http\Controllers\AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('appointments/{appointment}', [App\Http\Controllers\AppointmentController::class, 'show'])->name('appointments.show');
+    Route::patch('appointments/{appointment}/status', [App\Http\Controllers\AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
 
     Route::resource('services', ServiceAdminController::class)->names([
         'index' => 'services.index',

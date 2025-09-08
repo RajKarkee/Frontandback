@@ -262,6 +262,18 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}"
+                href="{{ route('admin.appointments.index') }}">
+                <i class="fas fa-calendar-check"></i>
+                <span>Appointments</span>
+                @php $pendingAppointments = \App\Models\Appointment::where('status', 'pending')->count(); @endphp
+                <span class="badge bg-{{ $pendingAppointments > 0 ? 'warning' : 'secondary' }} ms-auto">
+                    {{ $pendingAppointments }}
+                </span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}"
                 href="{{ route('admin.contacts.index') }}">
                 <i class="fas fa-envelope"></i>
