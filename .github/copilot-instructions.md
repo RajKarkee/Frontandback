@@ -24,8 +24,7 @@
   - Use Vite: `npm run dev` (see `vite.config.js`)
 
 ## Project-Specific Patterns
-- Controllers are grouped by domain in `app/Http/Controllers/`.
-- Models are in `app/Models/` and use Eloquent ORM.
+- Controllers are grouped by domain in `app/Http/Controllphp
 - Blade templates are organized by page in `resources/views/`.
 - Route definitions are in `routes/web.php` (web) and `routes/console.php` (CLI).
 - Service providers are in `app/Providers/`.

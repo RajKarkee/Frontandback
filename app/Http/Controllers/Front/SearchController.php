@@ -12,6 +12,7 @@ use App\Models\Event;
 use App\Models\Career;
 use App\Models\Office;
 
+
 class SearchController extends Controller
 {
     public function search(Request $request)
