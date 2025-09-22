@@ -15,7 +15,8 @@ class IndustryController extends Controller
         $industries = DB::table('industries')->where('status', 'active')->orderBy('sort_order', 'asc')->get();
         $industryExperties=DB::table('industry_expertises')->where('status', 'active')->orderBy('sort_order', 'asc')->paginate(4);
         $jumbotrons=DB::table('jumbotrons')->where('page_slug','industries')->where('is_active',1)->orderBy('sort_order','asc')->get();
-        return view('new.industries', compact('industries','industryExperties','jumbotrons'));
+        $insights = DB::table('insights')->where('status', 'published')->orderBy('published_at', 'desc')->where('is_active', 1)->limit(3)->get();
+        return view('new.industries', compact('industries','industryExperties','jumbotrons','insights'));
     }
     public function getAll(Request $request){
         if($request->ajax()){
@@ -45,6 +46,9 @@ class IndustryController extends Controller
                     }
                     $industriesHtml .= '</ul>';
                 }
+                $industriesHtml .= '<a href="' . route('industryDetails', $industry->id) . '" class="learn-more">';
+                $industriesHtml .= 'Learn More <i class="fas fa-arrow-right"></i>';
+                $industriesHtml .= '</a>';
                 $industriesHtml .= '</div></div>';
         }
         return response()->json([
@@ -59,7 +63,8 @@ class IndustryController extends Controller
 {
     
     $industry = Industry::findorFail($id);
+    $nextindustry=Industry::where('id', '>', $industry->id)->orderBy('id', 'asc')->take(3)->get();
 
-    return view('new.industryDetails', compact('industry'));
+    return view('new.industryDetails', compact('industry', 'nextindustry'));
 }
 }

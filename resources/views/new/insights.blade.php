@@ -3,6 +3,73 @@
 @section('styles')
     @include('new.layouts.links')
     <link rel="stylesheet" href="{{ asset('css/insights.css') }}">
+    <style>
+        .social-share-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-share {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .social-share:hover {
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-share.facebook {
+            background: #1877f2;
+        }
+
+        .social-share.facebook:hover {
+            background: #166fe5;
+        }
+
+        .social-share.twitter {
+            background: #1da1f2;
+        }
+
+        .social-share.twitter:hover {
+            background: #0d8bd9;
+        }
+
+        .social-share.linkedin {
+            background: #0077b5;
+        }
+
+        .social-share.linkedin:hover {
+            background: #005885;
+        }
+
+        .social-share.whatsapp {
+            background: #25d366;
+        }
+
+        .social-share.whatsapp:hover {
+            background: #1ebe57;
+        }
+
+        .social-share.copy-link {
+            background: #6c757d;
+        }
+
+        .social-share.copy-link:hover {
+            background: #545b62;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -192,7 +259,25 @@
                         <strong>Related Tags</strong><br>
                     </div>
                     <div class="share">
-                        <a href="#" class="btn-share">Share this insight <i class="fas fa-share-alt"></i></a>
+                        <button class="btn-share" id="shareBtn">Share this insight <i
+                                class="fas fa-share-alt"></i></button>
+                        <div class="social-share-icons" id="socialShareIcons" style="display: none;">
+                            <a href="#" class="social-share facebook" data-platform="facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-share twitter" data-platform="twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-share linkedin" data-platform="linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-share whatsapp" data-platform="whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" class="social-share copy-link" data-platform="copy">
+                                <i class="fas fa-link"></i>
+                            </a>
+                        </div>
                     </div>
                     <a href="#articles" class="back-link">Back to Insights</a>
                     <div class="toc">
@@ -284,7 +369,85 @@
             document.querySelectorAll('.btn-share').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
-                    alert('Share functionality to be implemented (e.g., social media sharing).');
+                    const socialIcons = document.getElementById('socialShareIcons');
+                    if (socialIcons.style.display === 'none') {
+                        socialIcons.style.display = 'flex';
+                        gsap.fromTo(socialIcons, {
+                            opacity: 0,
+                            y: -10
+                        }, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
+                    } else {
+                        gsap.to(socialIcons, {
+                            opacity: 0,
+                            y: -10,
+                            duration: 0.3,
+                            ease: 'power2.in',
+                            onComplete: () => {
+                                socialIcons.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Social media sharing functionality
+            document.querySelectorAll('.social-share').forEach(shareBtn => {
+                shareBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const platform = this.dataset.platform;
+                    const overlay = document.querySelector('.article-overlay');
+                    const title = overlay.querySelector('h3').textContent;
+                    const description = overlay.querySelector('.lead').textContent;
+                    const url = encodeURIComponent(window.location.href);
+                    const encodedTitle = encodeURIComponent(title);
+                    const encodedDescription = encodeURIComponent(description);
+
+                    let shareUrl = '';
+
+                    switch (platform) {
+                        case 'facebook':
+                            shareUrl =
+                                `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodedTitle} - ${encodedDescription}`;
+                            break;
+                        case 'twitter':
+                            shareUrl =
+                                `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${url}`;
+                            break;
+                        case 'linkedin':
+                            shareUrl =
+                                `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${encodedTitle}&summary=${encodedDescription}`;
+                            break;
+                        case 'whatsapp':
+                            shareUrl =
+                                `https://wa.me/?text=${encodedTitle} - ${encodedDescription} ${url}`;
+                            break;
+                        case 'copy':
+                            // Copy link to clipboard
+                            navigator.clipboard.writeText(window.location.href).then(() => {
+                                // Show success message
+                                const originalIcon = this.innerHTML;
+                                this.innerHTML = '<i class="fas fa-check"></i>';
+                                this.style.background = '#28a745';
+                                setTimeout(() => {
+                                    this.innerHTML = originalIcon;
+                                    this.style.background = '';
+                                }, 2000);
+                            }).catch(() => {
+                                alert('Failed to copy link to clipboard');
+                            });
+                            return;
+                    }
+
+                    if (shareUrl) {
+                        window.open(shareUrl, '_blank',
+                            'width=600,height=400,scrollbars=yes,resizable=yes');
+                    }
                 });
             });
         });

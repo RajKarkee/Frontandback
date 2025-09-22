@@ -95,63 +95,73 @@
                         challenges.
                     </p>
                     <div class="row g-4 mx-0">
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate">
-                            <div class="insight-card">
-                                <div class="image-container">
-                                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop"
-                                        alt="Digital Health Revolution">
-                                    <div class="gradient-overlay"></div>
-                                    <div class="title-overlay">
-                                        <h3>Digital Health Revolution: Financial Implications</h3>
-                                    </div>
-                                    <div class="content-overlay">
-                                        <span class="category">Healthcare</span>
-                                        <h3>Digital Health Revolution: Financial Implications</h3>
-                                        <div class="date">January 12, 2024 • 6 min read</div>
-                                        <p>How telemedicine and digital health platforms are transforming healthcare finance
-                                            and what providers need to know.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
-                            <div class="insight-card">
-                                <div class="image-container">
-                                    <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=1200&auto=format&fit=crop"
-                                        alt="Industry 4.0">
-                                    <div class="gradient-overlay"></div>
-                                    <div class="title-overlay">
-                                        <h3>Industry 4.0: Cost Accounting for Smart Manufacturing</h3>
-                                    </div>
-                                    <div class="content-overlay">
-                                        <span class="category">Manufacturing</span>
-                                        <h3>Industry 4.0: Cost Accounting for Smart Manufacturing</h3>
-                                        <div class="date">January 8, 2024 • 7 min read</div>
-                                        <p>Understanding the financial impact of automation and IoT integration in modern
-                                            manufacturing operations.</p>
+                        @foreach ($insights as $index => $insight)
+                            <div class="col-12 col-md-6 col-lg-4 gsap-animate">
+                                <div class="insight-card">
+                                    <div class="image-container">
+                                        @if ($insight->featured_image)
+                                            <img src="{{ Storage::url($insight->featured_image) }}"
+                                                alt="{{ $insight->title ?? 'Insight Image' }}">
+                                        @else
+                                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1200&auto=format&fit=crop"
+                                                alt="{{ $insight->title ?? 'Default Insight Image' }}">
+                                        @endif
+                                        <div class="gradient-overlay"></div>
+                                        <div class="title-overlay">
+                                            <h3>{{ $insight->title ?? 'Default Insight Title' }}</h3>
+                                        </div>
+                                        <div class="content-overlay">
+                                            <span class="category">{{ $insight->category ?? 'Default Category' }}</span>
+                                            <h3>{{ $insight->title ?? 'Default Insight Title' }}</h3>
+                                            <div class="date">
+                                                {{ $insight->published_at ? \Carbon\Carbon::parse($insight->published_at)->format('F j, Y') : 'Unknown Date' }}
+                                                • {{ $insight->read_time ?? '0' }} min read</div>
+                                            <p>{{ $insight->description ?? 'Default Insight Description' }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
-                            <div class="insight-card">
-                                <div class="image-container">
-                                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1200&auto=format&fit=crop"
-                                        alt="Startup Valuations">
-                                    <div class="gradient-overlay"></div>
-                                    <div class="title-overlay">
-                                        <h3>Startup Valuations in Nepal's Tech Ecosystem</h3>
-                                    </div>
-                                    <div class="content-overlay">
-                                        <span class="category">Technology</span>
-                                        <h3>Startup Valuations in Nepal's Tech Ecosystem</h3>
-                                        <div class="date">January 5, 2024 • 8 min read</div>
-                                        <p>Analysis of valuation methodologies and financial planning strategies for Nepal's
-                                            growing tech startup scene.</p>
+                            {{-- <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.2">
+                                <div class="insight-card">
+                                    <div class="image-container">
+                                        <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=1200&auto=format&fit=crop"
+                                            alt="Industry 4.0">
+                                        <div class="gradient-overlay"></div>
+                                        <div class="title-overlay">
+                                            <h3>Industry 4.0: Cost Accounting for Smart Manufacturing</h3>
+                                        </div>
+                                        <div class="content-overlay">
+                                            <span class="category">Manufacturing</span>
+                                            <h3>Industry 4.0: Cost Accounting for Smart Manufacturing</h3>
+                                            <div class="date">January 8, 2024 • 7 min read</div>
+                                            <p>Understanding the financial impact of automation and IoT integration in
+                                                modern
+                                                manufacturing operations.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-12 col-md-6 col-lg-4 gsap-animate" data-delay="0.4">
+                                <div class="insight-card">
+                                    <div class="image-container">
+                                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1200&auto=format&fit=crop"
+                                            alt="Startup Valuations">
+                                        <div class="gradient-overlay"></div>
+                                        <div class="title-overlay">
+                                            <h3>Startup Valuations in Nepal's Tech Ecosystem</h3>
+                                        </div>
+                                        <div class="content-overlay">
+                                            <span class="category">Technology</span>
+                                            <h3>Startup Valuations in Nepal's Tech Ecosystem</h3>
+                                            <div class="date">January 5, 2024 • 8 min read</div>
+                                            <p>Analysis of valuation methodologies and financial planning strategies for
+                                                Nepal's
+                                                growing tech startup scene.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        @endforeach
                     </div>
                     <div class="btn-all-container gsap-animate">
                         <a href="/insights" class="btn-all">
@@ -191,8 +201,7 @@
                         Whether you're looking to optimize operations, ensure compliance, or drive growth, our
                         industry-specialized teams are ready to help you achieve your goals.
                     </p>
-                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate"
-                        data-delay="0.2">
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 gsap-animate" data-delay="0.2">
                         <a href="#contact" class="btn-cta-filled">
                             Schedule a Consultation <i class="fas fa-arrow-right"></i>
                         </a>
