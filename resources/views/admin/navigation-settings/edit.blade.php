@@ -36,6 +36,40 @@
                         <div class="card-header">
                             <h5 class="card-title mb-0">Navigation Information</h5>
                         </div>
+
+                        <!-- Quick Links Section -->
+                        <div class="mb-3">
+                            <label class="form-label">Quick Links (Services/Industries)</label>
+                            <div id="quick-links-list">
+                                @php
+                                    $quickLinks = old(
+                                        'quick_links',
+                                        $navigationSetting->quick_links
+                                            ? json_decode($navigationSetting->quick_links, true)
+                                            : [],
+                                    );
+                                @endphp
+                                @foreach ($quickLinks as $i => $link)
+                                    <div class="input-group mb-2 quick-link-item">
+                                        <input type="text" name="quick_links[{{ $i }}][icon]"
+                                            class="form-control me-2" placeholder="Icon (e.g. fas fa-link)"
+                                            value="{{ $link['icon'] ?? '' }}">
+                                        <input type="text" name="quick_links[{{ $i }}][title]"
+                                            class="form-control me-2" placeholder="Link Title"
+                                            value="{{ $link['title'] ?? '' }}" required>
+                                        <input type="text" name="quick_links[{{ $i }}][url]"
+                                            class="form-control me-2" placeholder="URL or Route"
+                                            value="{{ $link['url'] ?? '' }}" required>
+                                        <button type="button" class="btn btn-danger btn-remove-link"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button type="button" class="btn btn-success" id="add-quick-link"><i class="fas fa-plus"></i>
+                                Add Quick Link</button>
+                            <div class="form-text">Add links to services or industries. Users will see these as shortcuts.
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="page_title" class="form-label">Page Title</label>
@@ -180,6 +214,32 @@
     </div>
 
     <script>
+        // Quick Links dynamic add/remove
+        document.addEventListener('DOMContentLoaded', function() {
+            let quickLinksList = document.getElementById('quick-links-list');
+            let addQuickLinkBtn = document.getElementById('add-quick-link');
+            let linkIndex = quickLinksList.querySelectorAll('.quick-link-item').length;
+
+            addQuickLinkBtn.addEventListener('click', function() {
+                let div = document.createElement('div');
+                div.className = 'input-group mb-2 quick-link-item';
+                div.innerHTML = `
+                    <input type="text" name="quick_links[${linkIndex}][icon]" class="form-control me-2" placeholder="Icon (e.g. fas fa-link)">
+                    <input type="text" name="quick_links[${linkIndex}][title]" class="form-control me-2" placeholder="Link Title" required>
+                    <input type="text" name="quick_links[${linkIndex}][url]" class="form-control me-2" placeholder="URL or Route" required>
+                    <button type="button" class="btn btn-danger btn-remove-link"><i class="fas fa-trash"></i></button>
+                `;
+                quickLinksList.appendChild(div);
+                linkIndex++;
+            });
+
+            quickLinksList.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-remove-link')) {
+                    e.target.closest('.quick-link-item').remove();
+                }
+            });
+        });
+
         function updateIconPreview() {
             const iconClass = document.getElementById('icon_class').value;
             const iconPreview = document.getElementById('icon-preview');

@@ -73,6 +73,23 @@
                 </div>
             </div>
         </div>
+
+        {{-- Quick Links Section (if available) --}}
+        @if (isset($currentNavigationSetting) && !empty($currentNavigationSetting->quick_links))
+            <div class="sidebar-quick-links mt-4">
+                <h6 class="text-uppercase text-muted mb-2" style="font-size: 0.9rem; letter-spacing: 1px;">Quick Links
+                </h6>
+                <div class="d-flex flex-column gap-2">
+                    @foreach ($currentNavigationSetting->quick_links as $link)
+                        <a href="{{ $link['url'] }}" class="btn btn-outline-primary btn-sm text-start"
+                            style="white-space: normal;">
+                            <i class="{{ !empty($link['icon']) ? $link['icon'] : 'fas fa-link' }} me-1"></i>
+                            {{ $link['title'] }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
         <div class="mobile-search" id="mobile-search">
             <div class="input-group">
                 <input type="text" placeholder="Search..." oninput="handleLiveSearch(this.value)"
@@ -109,270 +126,307 @@
                 @php $homeNav = $navigationItems->where('page_slug', 'home')->first(); @endphp
                 <a href="{{ route($homeNav->route_name) }}" data-tooltip="{{ $homeNav->page_title }}"
                     data-image="{{ $homeNav->preview_image_url }}" data-description="{{ $homeNav->description }}"
-                data-tags="{{ $homeNav->tags }}" @else <a href="{{ route('home') }}" data-tooltip="Home"
-                    data-image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                    data-description="Welcome to Chartered Insights, your trusted partner for expert financial solutions. We provide comprehensive audit, tax, and consulting services tailored to drive your business forward. Our team of experienced professionals is dedicated to delivering strategic insights and sustainable growth for clients across various industries."
-                    data-tags="Finance,Consulting,Audit" @endif
-                    data-services='[
+                    data-tags="{{ $homeNav->tags }}"
+                    @if ($homeNav && $homeNav->quick_links) @php $links = json_decode($homeNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="{{ route('home') }}" data-tooltip="Home"
+                data-image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Welcome to Chartered Insights, your trusted partner for expert financial solutions. We provide comprehensive audit, tax, and consulting services tailored to drive your business forward. Our team of experienced professionals is dedicated to delivering strategic insights and sustainable growth for clients across various industries."
+                data-tags="Finance,Consulting,Audit" @endif
+                data-services='[
         {"title": "Financial Planning", "icon": "fas fa-chart-line"},
         {"title": "Investment Advice", "icon": "fas fa-piggy-bank"},
         {"title": "Risk Management", "icon": "fas fa-shield-alt"}
     ]'>
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
-                @if (isset($navigationItems) && $navigationItems->where('page_slug', 'services')->first())
-                    @php $servicesNav = $navigationItems->where('page_slug', 'services')->first(); @endphp
-                    <a href="{{ route($servicesNav->route_name) }}" data-tooltip="{{ $servicesNav->page_title }}"
-                        data-image="{{ $servicesNav->preview_image_url }}"
-                        data-description="{{ $servicesNav->description }}" data-tags="{{ $servicesNav->tags }}"
-                    @else <a href="/services" data-tooltip="Services"
-                        data-image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                        data-description="Explore our comprehensive audit, tax, and consulting services tailored to your needs. From financial reporting and compliance to strategic business consulting, we offer solutions that ensure regulatory adherence, optimize financial performance, and support long-term success."
-                        data-tags="Audit,Tax,Consulting" @endif
-                        data-services='[
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'services')->first())
+                @php $servicesNav = $navigationItems->where('page_slug', 'services')->first(); @endphp
+                <a href="{{ route($servicesNav->route_name) }}" data-tooltip="{{ $servicesNav->page_title }}"
+                    data-image="{{ $servicesNav->preview_image_url }}"
+                    data-description="{{ $servicesNav->description }}" data-tags="{{ $servicesNav->tags }}"
+                    @if ($servicesNav && $servicesNav->quick_links) @php $links = json_decode($servicesNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/services" data-tooltip="Services"
+                data-image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Explore our comprehensive audit, tax, and consulting services tailored to your needs. From financial reporting and compliance to strategic business consulting, we offer solutions that ensure regulatory adherence, optimize financial performance, and support long-term success."
+                data-tags="Audit,Tax,Consulting" @endif
+                data-services='[
         {"title": "Audit Services", "icon": "fas fa-book"},
         {"title": "Tax Consulting", "icon": "fas fa-calculator"},
         {"title": "Business Advisory", "icon": "fas fa-briefcase"}
     ]'>
-                        <i
-                            class="@if (isset($servicesNav)) {{ $servicesNav->icon_class }}@else fas fa-file-invoice-dollar @endif"></i>
-                        <span>
-                            @if (isset($servicesNav))
-                                {{ $servicesNav->page_title }}
-                            @else
-                                Services
-                            @endif
-                        </span>
-                    </a>
-                    @if (isset($navigationItems) && $navigationItems->where('page_slug', 'industries')->first())
-                        @php $industriesNav = $navigationItems->where('page_slug', 'industries')->first(); @endphp
-                        <a href="{{ route($industriesNav->route_name) }}"
-                            data-tooltip="{{ $industriesNav->page_title }}"
-                            data-image="{{ $industriesNav->preview_image_url }}"
-                            data-description="{{ $industriesNav->description }}"
-                        data-tags="{{ $industriesNav->tags }}" @else <a href="/industries"
-                            data-tooltip="Industries"
-                            data-image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                            data-description="Specialized expertise across diverse sectors to meet your unique challenges. Our industry-specific knowledge in healthcare, technology, manufacturing, and more ensures customized solutions that address your business's specific needs and goals."
-                            data-tags="Healthcare,Technology,Manufacturing" @endif
-                            data-services='[
+                <i
+                    class="@if (isset($servicesNav)) {{ $servicesNav->icon_class }}@else fas fa-file-invoice-dollar @endif"></i>
+                <span>
+                    @if (isset($servicesNav))
+                        {{ $servicesNav->page_title }}
+                    @else
+                        Services
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'industries')->first())
+                @php $industriesNav = $navigationItems->where('page_slug', 'industries')->first(); @endphp
+                <a href="{{ route($industriesNav->route_name) }}" data-tooltip="{{ $industriesNav->page_title }}"
+                    data-image="{{ $industriesNav->preview_image_url }}"
+                    data-description="{{ $industriesNav->description }}" data-tags="{{ $industriesNav->tags }}"
+                    @if ($industriesNav && $industriesNav->quick_links) @php $links = json_decode($industriesNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/industries" data-tooltip="Industries"
+                data-image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Specialized expertise across diverse sectors to meet your unique challenges. Our industry-specific knowledge in healthcare, technology, manufacturing, and more ensures customized solutions that address your business's specific needs and goals."
+                data-tags="Healthcare,Technology,Manufacturing" @endif
+                data-services='[
         {"title": "Healthcare", "icon": "fas fa-heartbeat"},
         {"title": "Technology", "icon": "fas fa-laptop-code"},
         {"title": "Manufacturing", "icon": "fas fa-industry"}
     ]'>
-                            <i
-                                class="@if (isset($industriesNav)) {{ $industriesNav->icon_class }}@else fas fa-industry @endif"></i>
-                            <span>
-                                @if (isset($industriesNav))
-                                    {{ $industriesNav->page_title }}
-                                @else
-                                    Industries
-                                @endif
-                            </span>
-                        </a>
-                        @if (isset($navigationItems) && $navigationItems->where('page_slug', 'events')->first())
-                            @php $eventsNav = $navigationItems->where('page_slug', 'events')->first(); @endphp
-                            <a href="{{ route($eventsNav->route_name) }}"
-                                data-tooltip="{{ $eventsNav->page_title }}"
-                                data-image="{{ $eventsNav->preview_image_url }}"
-                                data-description="{{ $eventsNav->description }}" data-tags="{{ $eventsNav->tags }}"
-                            @else <a href="/events" data-tooltip="Events"
-                                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                data-description="Join our upcoming events to connect and learn from industry experts. Our workshops, webinars, and networking sessions provide valuable insights and opportunities to collaborate with peers and professionals."
-                                data-tags="Workshops,Webinars,Networking" @endif
-                                data-services='[
+                <i
+                    class="@if (isset($industriesNav)) {{ $industriesNav->icon_class }}@else fas fa-industry @endif"></i>
+                <span>
+                    @if (isset($industriesNav))
+                        {{ $industriesNav->page_title }}
+                    @else
+                        Industries
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'events')->first())
+                @php $eventsNav = $navigationItems->where('page_slug', 'events')->first(); @endphp
+                <a href="{{ route($eventsNav->route_name) }}" data-tooltip="{{ $eventsNav->page_title }}"
+                    data-image="{{ $eventsNav->preview_image_url }}"
+                    data-description="{{ $eventsNav->description }}" data-tags="{{ $eventsNav->tags }}"
+                    @if ($eventsNav && $eventsNav->quick_links) @php $links = json_decode($eventsNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/events" data-tooltip="Events"
+                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Join our upcoming events to connect and learn from industry experts. Our workshops, webinars, and networking sessions provide valuable insights and opportunities to collaborate with peers and professionals."
+                data-tags="Workshops,Webinars,Networking" @endif
+                data-services='[
         {"title": "Workshops", "icon": "fas fa-chalkboard-teacher"},
         {"title": "Webinars", "icon": "fas fa-video"},
         {"title": "Networking", "icon": "fas fa-users"}
     ]'>
-                                <i
-                                    class="@if (isset($eventsNav)) {{ $eventsNav->icon_class }}@else fas fa-calendar @endif"></i>
-                                <span>
-                                    @if (isset($eventsNav))
-                                        {{ $eventsNav->page_title }}
-                                    @else
-                                        Events
-                                    @endif
-                                </span>
-                            </a>
-                            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'offices')->first())
-                                @php $officesNav = $navigationItems->where('page_slug', 'offices')->first(); @endphp
-                                <a href="{{ route($officesNav->route_name) }}"
-                                    data-tooltip="{{ $officesNav->page_title }}"
-                                    data-image="{{ $officesNav->preview_image_url }}"
-                                    data-description="{{ $officesNav->description }}"
-                                data-tags="{{ $officesNav->tags }}" @else <a href="/offices"
-                                    data-tooltip="Offices"
-                                    data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                    data-description="Discover our office locations and connect with our team near you. With multiple offices strategically located, we provide accessible, personalized support to meet your financial and consulting needs."
-                                    data-tags="Locations,Support,Consulting" @endif
-                                    data-services='[
+                <i
+                    class="@if (isset($eventsNav)) {{ $eventsNav->icon_class }}@else fas fa-calendar @endif"></i>
+                <span>
+                    @if (isset($eventsNav))
+                        {{ $eventsNav->page_title }}
+                    @else
+                        Events
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'offices')->first())
+                @php $officesNav = $navigationItems->where('page_slug', 'offices')->first(); @endphp
+                <a href="{{ route($officesNav->route_name) }}" data-tooltip="{{ $officesNav->page_title }}"
+                    data-image="{{ $officesNav->preview_image_url }}"
+                    data-description="{{ $officesNav->description }}" data-tags="{{ $officesNav->tags }}"
+                    @if ($officesNav && $officesNav->quick_links) @php $links = json_decode($officesNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/offices" data-tooltip="Offices"
+                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Discover our office locations and connect with our team near you. With multiple offices strategically located, we provide accessible, personalized support to meet your financial and consulting needs."
+                data-tags="Locations,Support,Consulting" @endif
+                data-services='[
         {"title": "Regional Support", "icon": "fas fa-map-marker-alt"},
         {"title": "Consulting Hubs", "icon": "fas fa-building"},
         {"title": "Client Services", "icon": "fas fa-headset"}
     ]'>
-                                    <i
-                                        class="@if (isset($officesNav)) {{ $officesNav->icon_class }}@else fas fa-building @endif"></i>
-                                    <span>
-                                        @if (isset($officesNav))
-                                            {{ $officesNav->page_title }}
-                                        @else
-                                            Offices
-                                        @endif
-                                    </span>
-                                </a>
-                                @if (isset($navigationItems) && $navigationItems->where('page_slug', 'blogs')->first())
-                                    @php $blogsNav = $navigationItems->where('page_slug', 'blogs')->first(); @endphp
-                                    <a href="{{ route($blogsNav->route_name) }}"
-                                        data-tooltip="{{ $blogsNav->page_title }}"
-                                        data-image="{{ $blogsNav->preview_image_url }}"
-                                        data-description="{{ $blogsNav->description }}"
-                                    data-tags="{{ $blogsNav->tags }}" @else <a href="/blogs"
-                                        data-tooltip="Blogs"
-                                        data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                        data-description="Read our latest articles on finance, tax, and business trends. Our blog offers in-depth analyses, practical tips, and expert perspectives to help you navigate the complexities of the financial world."
-                                        data-tags="Finance,Tax,Trends" @endif
-                                        data-services='[
+                <i
+                    class="@if (isset($officesNav)) {{ $officesNav->icon_class }}@else fas fa-building @endif"></i>
+                <span>
+                    @if (isset($officesNav))
+                        {{ $officesNav->page_title }}
+                    @else
+                        Offices
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'blogs')->first())
+                @php $blogsNav = $navigationItems->where('page_slug', 'blogs')->first(); @endphp
+                <a href="{{ route($blogsNav->route_name) }}" data-tooltip="{{ $blogsNav->page_title }}"
+                    data-image="{{ $blogsNav->preview_image_url }}" data-description="{{ $blogsNav->description }}"
+                    data-tags="{{ $blogsNav->tags }}"
+                    @if ($blogsNav && $blogsNav->quick_links) @php $links = json_decode($blogsNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/blogs" data-tooltip="Blogs"
+                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Read our latest articles on finance, tax, and business trends. Our blog offers in-depth analyses, practical tips, and expert perspectives to help you navigate the complexities of the financial world."
+                data-tags="Finance,Tax,Trends" @endif
+                data-services='[
         {"title": "Finance Tips", "icon": "fas fa-money-bill"},
         {"title": "Tax Updates", "icon": "fas fa-file-alt"},
         {"title": "Industry Trends", "icon": "fas fa-chart-bar"}
     ]'>
-                                        <i
-                                            class="@if (isset($blogsNav)) {{ $blogsNav->icon_class }}@else fas fa-blog @endif"></i>
-                                        <span>
-                                            @if (isset($blogsNav))
-                                                {{ $blogsNav->page_title }}
-                                            @else
-                                                Blogs
-                                            @endif
-                                        </span>
-                                    </a>
-                                    @if (isset($navigationItems) && $navigationItems->where('page_slug', 'insights')->first())
-                                        @php $insightsNav = $navigationItems->where('page_slug', 'insights')->first(); @endphp
-                                        <a href="{{ route($insightsNav->route_name) }}"
-                                            data-tooltip="{{ $insightsNav->page_title }}"
-                                            data-image="{{ $insightsNav->preview_image_url }}"
-                                            data-description="{{ $insightsNav->description }}"
-                                        data-tags="{{ $insightsNav->tags }}" @else <a href="/insights"
-                                            data-tooltip="Insights"
-                                            data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                            data-description="Stay informed with our latest industry insights and thought leadership. Our expert analyses cover emerging trends, regulatory updates, and strategic opportunities to keep your business ahead in a dynamic market."
-                                            data-tags="Insights,Trends,Leadership" @endif
-                                            data-services='[
+                <i
+                    class="@if (isset($blogsNav)) {{ $blogsNav->icon_class }}@else fas fa-blog @endif"></i>
+                <span>
+                    @if (isset($blogsNav))
+                        {{ $blogsNav->page_title }}
+                    @else
+                        Blogs
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'insights')->first())
+                @php $insightsNav = $navigationItems->where('page_slug', 'insights')->first(); @endphp
+                <a href="{{ route($insightsNav->route_name) }}" data-tooltip="{{ $insightsNav->page_title }}"
+                    data-image="{{ $insightsNav->preview_image_url }}"
+                data-description="{{ $insightsNav->description }}" data-tags="{{ $insightsNav->tags }}" @else <a
+                    href="/insights" data-tooltip="Insights"
+                    data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                    data-description="Stay informed with our latest industry insights and thought leadership. Our expert analyses cover emerging trends, regulatory updates, and strategic opportunities to keep your business ahead in a dynamic market."
+                    data-tags="Insights,Trends,Leadership"
+                    @if ($insightsNav && $insightsNav->quick_links) @php $links = json_decode($insightsNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+            @endif
+            data-services='[
         {"title": "Market Analysis", "icon": "fas fa-chart-pie"},
         {"title": "Regulatory Updates", "icon": "fas fa-gavel"},
         {"title": "Strategic Insights", "icon": "fas fa-lightbulb"}
     ]'>
-                                            <i
-                                                class="@if (isset($insightsNav)) {{ $insightsNav->icon_class }}@else fas fa-lightbulb @endif"></i>
-                                            <span>
-                                                @if (isset($insightsNav))
-                                                    {{ $insightsNav->page_title }}
-                                                @else
-                                                    Insights
-                                                @endif
-                                            </span>
-                                        </a>
-                                        <div class="separator-bar"></div>
-                                        @if (isset($navigationItems) && $navigationItems->where('page_slug', 'about')->first())
-                                            @php $aboutNav = $navigationItems->where('page_slug', 'about')->first(); @endphp
-                                            <a href="{{ route($aboutNav->route_name) }}" class="text-item"
-                                                data-tooltip="{{ $aboutNav->page_title }}"
-                                                data-image="{{ $aboutNav->preview_image_url }}"
-                                                data-description="{{ $aboutNav->description }}"
-                                            data-tags="{{ $aboutNav->tags }}" @else <a href="/about"
-                                                class="text-item" data-tooltip="About"
-                                                data-image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                                data-description="Learn about our mission, values, and commitment to excellence. At Chartered Insights, we strive to deliver unparalleled financial and consulting services, fostering trust and driving success for our clients."
-                                                data-tags="Mission,Values,Excellence" @endif
-                                                data-services='[
+            <i
+                class="@if (isset($insightsNav)) {{ $insightsNav->icon_class }}@else fas fa-lightbulb @endif"></i>
+            <span>
+                @if (isset($insightsNav))
+                    {{ $insightsNav->page_title }}
+                @else
+                    Insights
+                @endif
+            </span>
+            </a>
+            <div class="separator-bar"></div>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'about')->first())
+                @php $aboutNav = $navigationItems->where('page_slug', 'about')->first(); @endphp
+                <a href="{{ route($aboutNav->route_name) }}" class="text-item"
+                    data-tooltip="{{ $aboutNav->page_title }}" data-image="{{ $aboutNav->preview_image_url }}"
+                    data-description="{{ $aboutNav->description }}" data-tags="{{ $aboutNav->tags }}"
+                    @if ($aboutNav && $aboutNav->quick_links) @php $links = json_decode($aboutNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/about" class="text-item" data-tooltip="About"
+                data-image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Learn about our mission, values, and commitment to excellence. At Chartered Insights, we strive to deliver unparalleled financial and consulting services, fostering trust and driving success for our clients."
+                data-tags="Mission,Values,Excellence" @endif
+                data-services='[
         {"title": "Our Mission", "icon": "fas fa-bullseye"},
         {"title": "Our Values", "icon": "fas fa-handshake"},
         {"title": "Our Team", "icon": "fas fa-users"}
     ]'>
-                                                <span>
-                                                    @if (isset($aboutNav))
-                                                        {{ $aboutNav->page_title }}
-                                                    @else
-                                                        About
-                                                    @endif
-                                                </span>
-                                            </a>
-                                            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'ourteam')->first())
-                                                @php $teamNav = $navigationItems->where('page_slug', 'ourteam')->first(); @endphp
-                                                <a href="{{ route($teamNav->route_name) }}" class="text-item"
-                                                    data-tooltip="{{ $teamNav->page_title }}"
-                                                    data-image="{{ $teamNav->preview_image_url }}"
-                                                    data-description="{{ $teamNav->description }}"
-                                                data-tags="{{ $teamNav->tags }}" @else <a href="/ourteam"
-                                                    class="text-item" data-tooltip="ourteam"
-                                                    data-image="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                                    data-description="Meet our dedicated team of professionals at Roshan Kumar & Associates. Our experts in audit, tax, and consulting bring diverse expertise and a commitment to delivering exceptional results for our clients."
-                                                    data-tags="Team,Experts,Professionals" @endif
-                                                    data-services='[
+                <span>
+                    @if (isset($aboutNav))
+                        {{ $aboutNav->page_title }}
+                    @else
+                        About
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'ourteam')->first())
+                @php $teamNav = $navigationItems->where('page_slug', 'ourteam')->first(); @endphp
+                <a href="{{ route($teamNav->route_name) }}" class="text-item"
+                    data-tooltip="{{ $teamNav->page_title }}" data-image="{{ $teamNav->preview_image_url }}"
+                    data-description="{{ $teamNav->description }}" data-tags="{{ $teamNav->tags }}"
+                    @if ($teamNav && $teamNav->quick_links) @php $links = json_decode($teamNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/ourteam" class="text-item" data-tooltip="ourteam"
+                data-image="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Meet our dedicated team of professionals at Roshan Kumar & Associates. Our experts in audit, tax, and consulting bring diverse expertise and a commitment to delivering exceptional results for our clients."
+                data-tags="Team,Experts,Professionals" @endif
+                data-services='[
         {"title": "Audit Experts", "icon": "fas fa-book-open"},
         {"title": "Tax Specialists", "icon": "fas fa-calculator"},
         {"title": "Consulting Team", "icon": "fas fa-users-cog"}
     ]'>
-                                                    <span>
-                                                        @if (isset($teamNav))
-                                                            {{ $teamNav->page_title }}
-                                                        @else
-                                                            Teams
-                                                        @endif
-                                                    </span>
-                                                </a>
-                                                @if (isset($navigationItems) && $navigationItems->where('page_slug', 'careers')->first())
-                                                    @php $careersNav = $navigationItems->where('page_slug', 'careers')->first(); @endphp
-                                                    <a href="{{ route($careersNav->route_name) }}" class="text-item"
-                                                        data-tooltip="{{ $careersNav->page_title }}"
-                                                        data-image="{{ $careersNav->preview_image_url }}"
-                                                        data-description="{{ $careersNav->description }}"
-                                                    data-tags="{{ $careersNav->tags }}" @else <a href="/careers"
-                                                        class="text-item" data-tooltip="Careers"
-                                                        data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                                        data-description="Explore career opportunities to grow with Chartered Insights. Join our dynamic team of professionals dedicated to excellence in audit, tax, and advisory services, and advance your career with meaningful opportunities."
-                                                        data-tags="Careers,Opportunities,Professional" @endif
-                                                        data-services='[
+                <span>
+                    @if (isset($teamNav))
+                        {{ $teamNav->page_title }}
+                    @else
+                        Teams
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'careers')->first())
+                @php $careersNav = $navigationItems->where('page_slug', 'careers')->first(); @endphp
+                <a href="{{ route($careersNav->route_name) }}" class="text-item"
+                    data-tooltip="{{ $careersNav->page_title }}" data-image="{{ $careersNav->preview_image_url }}"
+                    data-description="{{ $careersNav->description }}" data-tags="{{ $careersNav->tags }}"
+                    @if ($careersNav && $careersNav->quick_links) @php $links = json_decode($careersNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/careers" class="text-item" data-tooltip="Careers"
+                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Explore career opportunities to grow with Chartered Insights. Join our dynamic team of professionals dedicated to excellence in audit, tax, and advisory services, and advance your career with meaningful opportunities."
+                data-tags="Careers,Opportunities,Professional" @endif
+                data-services='[
         {"title": "Job Openings", "icon": "fas fa-briefcase"},
         {"title": "Internships", "icon": "fas fa-graduation-cap"},
         {"title": "Professional Growth", "icon": "fas fa-chart-line"}
     ]'>
-                                                        <span>
-                                                            @if (isset($careersNav))
-                                                                {{ $careersNav->page_title }}
-                                                            @else
-                                                                Careers
-                                                            @endif
-                                                        </span>
-                                                    </a>
-                                                    @if (isset($navigationItems) && $navigationItems->where('page_slug', 'contact')->first())
-                                                        @php $contactNav = $navigationItems->where('page_slug', 'contact')->first(); @endphp
-                                                        <a href="{{ route($contactNav->route_name) }}"
-                                                            class="text-item"
-                                                            data-tooltip="{{ $contactNav->page_title }}"
-                                                            data-image="{{ $contactNav->preview_image_url }}"
-                                                            data-description="{{ $contactNav->description }}"
-                                                        data-tags="{{ $contactNav->tags }}" @else <a
-                                                            href="/contact" class="text-item"
-                                                            data-tooltip="Contact Us"
-                                                            data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
-                                                            data-description="Get in touch with our team for personalized support and inquiries. Whether you need assistance with audits, tax planning, or strategic consulting, our experts are here to help you succeed."
-                                                            data-tags="Support,Contact,Consulting" @endif
-                                                            data-services='[
+                <span>
+                    @if (isset($careersNav))
+                        {{ $careersNav->page_title }}
+                    @else
+                        Careers
+                    @endif
+                </span>
+            </a>
+            @if (isset($navigationItems) && $navigationItems->where('page_slug', 'contact')->first())
+                @php $contactNav = $navigationItems->where('page_slug', 'contact')->first(); @endphp
+                <a href="{{ route($contactNav->route_name) }}" class="text-item"
+                    data-tooltip="{{ $contactNav->page_title }}" data-image="{{ $contactNav->preview_image_url }}"
+                    data-description="{{ $contactNav->description }}" data-tags="{{ $contactNav->tags }}"
+                    @if ($contactNav && $contactNav->quick_links) @php $links = json_decode($contactNav->quick_links, true); @endphp @if (is_array($links) && !empty($links)) data-services='[@foreach ($links as $link){"title": "{{ $link['title'] ?? '' }}", "icon": "{{ $link['icon'] ?? 'fas fa-link' }}", "url": "{{ $link['url'] ?? '#' }}"}@if (!$loop->last), @endif
+                    @endforeach]'
+            @endif
+            @endif
+        @else
+            <a href="/contact" class="text-item" data-tooltip="Contact Us"
+                data-image="https://images.unsplash.com/photo-1516321310769-65e85b8e6351?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=300&h=120"
+                data-description="Get in touch with our team for personalized support and inquiries. Whether you need assistance with audits, tax planning, or strategic consulting, our experts are here to help you succeed."
+                data-tags="Support,Contact,Consulting" @endif
+                data-services='[
         {"title": "Support Desk", "icon": "fas fa-headset"},
         {"title": "Consulting Inquiries", "icon": "fas fa-envelope"},
         {"title": "Feedback", "icon": "fas fa-comment"}
     ]'>
-                                                            <span>
-                                                                @if (isset($contactNav))
-                                                                    {{ $contactNav->page_title }}
-                                                                @else
-                                                                    Contact Us
-                                                                @endif
-                                                            </span>
-                                                        </a>
+                <span>
+                    @if (isset($contactNav))
+                        {{ $contactNav->page_title }}
+                    @else
+                        Contact Us
+                    @endif
+                </span>
+            </a>
         </div>
     </div>
 
@@ -941,7 +995,8 @@
                         `<span class="tag"><i class="fas fa-tag"></i>${tag.trim()}</span>`).join('');
                     const services = JSON.parse(link.getAttribute('data-services') || '[]');
                     previewServices.innerHTML = services.map(service => `
-                        <div class="service-box">
+                            <div class="service-box" onclick="window.location.href='${service.url || '#'}'" style="cursor: pointer;">
+                           
                             <div class="service-info">
                                 <i class="${service.icon}"></i>
                                 <h4>${service.title}</h4>

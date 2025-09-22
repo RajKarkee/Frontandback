@@ -20,6 +20,7 @@ class NavigationSetting extends Model
         'metadata',
         'is_active',
         'sort_order',
+        'quick_links',
     ];
 
     protected $casts = [
@@ -27,6 +28,7 @@ class NavigationSetting extends Model
         'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'quick_links' => 'array',
     ];
 
     /**
@@ -101,4 +103,5 @@ class NavigationSetting extends Model
 
         return json_encode($defaultServices);
     }
+    
 }

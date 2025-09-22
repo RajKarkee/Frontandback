@@ -30,6 +30,9 @@ class NavigationSettingAdminController extends Controller
             'preview_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'tags' => 'nullable|string',
             'sort_order' => 'required|integer|min:0',
+            'quick_links' => 'nullable|array',
+            'quick_links.*.title' => 'required_with:quick_links|string|max:255',
+            'quick_links.*.url' => 'required_with:quick_links|string|max:255',
         ]);
 
         $data = $request->only([
@@ -41,9 +44,12 @@ class NavigationSettingAdminController extends Controller
             'sort_order',
             'is_active'
         ]);
-        
+
         // Convert is_active to boolean
         $data['is_active'] = (bool) $data['is_active'];
+
+        // Handle quick_links JSON
+        $data['quick_links'] = $request->filled('quick_links') ? json_encode(array_values($request->input('quick_links'))) : null;
 
         // Handle image upload
         if ($request->hasFile('preview_image')) {
