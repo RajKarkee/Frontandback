@@ -123,7 +123,7 @@
             <section class="location-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Location</h2>
-                    <p class="lead gsap-animate">{{ $contactInfo->title }}</p>
+                    <p class="lead gsap-animate">{{ $contactInfo->title ?? 'Contact info' }}</p>
                     <div class="map-container gsap-animate">
                         <iframe src="{{ $contactInfo->map_embed_url }}" allowfullscreen loading="lazy"
                             aria-label="{{ $footer_setting->company_name }} Main Office, {{ $contactInfo->address }}"></iframe>
