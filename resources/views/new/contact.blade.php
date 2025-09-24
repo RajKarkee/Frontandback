@@ -134,7 +134,7 @@
             </section>
 
             <!-- Other Ways to Reach Us Section -->
-            <section class="reach-us-section">
+            {{-- <section class="reach-us-section">
                 <div class="section-container">
                     <h2 class="gsap-animate">Other Ways to Reach Us</h2>
                     <p class="lead gsap-animate">Choose the communication method that works best for you.</p>
@@ -168,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
         </main>
     </div>
 @endsection
