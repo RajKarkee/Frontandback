@@ -34,6 +34,14 @@
     font-size: 0.9rem;
 }
 
+.rka-scope .slogan::after {
+    content: "\f10e";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-left: 8px;
+    font-size: 0.9rem;
+}
+
 .rka-scope h1 {
     font-family: "Lora", serif;
     font-weight: 700;
@@ -530,6 +538,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .rka-scope .search-bar {
         width: 280px;
     }
