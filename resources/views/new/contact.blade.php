@@ -124,12 +124,23 @@
                 <div class="section-container">
                     <h2 class="gsap-animate">Our Location</h2>
                     <p class="lead gsap-animate">{{ $contactInfo->title ?? 'Contact info' }}</p>
-                    <div class="map-container gsap-animate">
-                        <iframe src="{{ $contactInfo->map_embed_url }}" allowfullscreen loading="lazy"
-                            aria-label="{{ $footer_setting->company_name }} Main Office, {{ $contactInfo->address }}"></iframe>
-                    </div>
-                    <a href="{{ $contactInfo->google_maps_link }}" target="_blank"
-                        class="btn-primary-filled gsap-animate">View on Google Maps</a>
+                    @if (
+                        !empty($contactInfo) &&
+                            !empty($contactInfo->map_embed_url) &&
+                            !empty($contactInfo->google_maps_link) &&
+                            !empty($footer_setting->company_name) &&
+                            !empty($contactInfo->address))
+                        <div class="map-container gsap-animate">
+                            <iframe src="{{ $contactInfo->map_embed_url }}" allowfullscreen loading="lazy"
+                                aria-label="{{ $footer_setting->company_name }} Main Office, {{ $contactInfo->address }}"></iframe>
+                        </div>
+                        <a href="{{ $contactInfo->google_maps_link }}" target="_blank"
+                            class="btn-primary-filled gsap-animate">View on Google Maps</a>
+                    @else
+                        <div class="alert alert-warning gsap-animate" role="alert">
+                            Location information is currently unavailable. Please contact us for details.
+                        </div>
+                    @endif
                 </div>
             </section>
 
