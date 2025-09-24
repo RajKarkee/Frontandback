@@ -261,7 +261,7 @@
             </h6>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}"
                 href="{{ route('admin.appointments.index') }}">
                 <i class="fas fa-calendar-check"></i>
@@ -271,7 +271,7 @@
                     {{ $pendingAppointments }}
                 </span>
             </a>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}"
